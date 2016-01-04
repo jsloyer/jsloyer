@@ -3,8 +3,7 @@ build:
   steps:
     - arjen/hugo-build:
         version: "0.14"
-        theme: herring-cove
-        flags: --buildDrafts=true
+        theme: startbootstrap-clean-blog
 deploy:
   steps:
     - install-packages:
