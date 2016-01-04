@@ -27,6 +27,11 @@ copyright = "Code released under the Apache 2.0 license."
   url = "/"
   weight = -200
 [[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = -180
+[[menu.main]]
   name = "Archives"
   url = "/post/"
-  weight = -180
+  weight = -160
+
