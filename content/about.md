@@ -1,10 +1,11 @@
 +++
-date = "2016-01-04T10:43:05-05:00"
-draft = true
+date = "2016-01-04T13:14:32-05:00"
+draft = false
 title = "About"
 type = "about"
 
 +++
+
 ![Profile picture](/images/profile-150x150.jpg)
 
 Jeff Sloyer is a Developer Advocate at IBM, promoting IBM’s Platform as a Service (Paas), Bluemix. He’s a Node.JS developer most days, but tinkers in Java and Python. Sloyer is a hacker at heart who loves playing with new tech and cobbling together new demos and projects. He’s an avid traveler, flying around the world and speaking about Bluemix at conferences and events.
