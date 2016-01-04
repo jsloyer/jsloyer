@@ -1,3 +1,32 @@
 baseurl = "https://blog-test.jeffsloyer.io/"
 languageCode = "en-us"
 title = "Jeff Sloyer's Blog"
+canonifyurls = true
+paginate = 10
+theme = "startbootstrap-clean-blog"
+copyright = "Code released under the Apache 2.0 license."
+
+[author]
+  name = "Benoît Benedetti"
+
+[params]
+  DateForm = "Mon, Jan 2, 2006"
+  Description = "Jeff Sloyer's Blog"
+  Author = "Jeff Sloyer"
+  Ganalytics = "XX-00000000-0"
+
+[[params.social]]
+  title = "twitter"
+  url = "https://twitter.com/jsloyer"
+[[params.social]]
+  title = "github"
+  url = "https://github.com/jsloyer"
+
+[[menu.main]]
+  name = "home"
+  url = "/"
+  weight = -200
+[[menu.main]]
+  name = "Archives"
+  url = "/post/"
+  weight = -180
