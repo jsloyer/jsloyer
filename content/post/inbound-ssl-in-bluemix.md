@@ -75,4 +75,4 @@ var middleware = require("./middleware");
 ...
 app.use(middleware.transportSecurity());
 ```
-For more information check out <a href="https://www.ng.bluemix.net/docs/manageapps/secapps.html" target="_blank">https://www.ng.bluemix.net/docs/#overview/index-gentopic1.html#sec_plat</a>
+For more information check out [the Bluemix SSL docs](https://www.ng.bluemix.net/docs/manageapps/secapps.html).
