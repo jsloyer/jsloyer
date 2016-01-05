@@ -3,7 +3,7 @@ categories = ["Development", "node.js"]
 date = "2014-04-17T13:24:00-05:00"
 description = ""
 draft = false
-image = "/img/post-bg.jpg"
+image = "/images/kraken.jpg"
 tags = ["node.js", "kraken.js", "express", "bluemix", "development"]
 title = "Kraken.Js and Bluemix"
 aliases = [
@@ -12,7 +12,7 @@ aliases = [
 
 +++
 
-Kraken.JS is a new wonderful framework wrapper around Express for Node.JS.  It includes things such as pre-canned security settings, templating, and internationalization.  While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore. Kraken.JS is a new wonderful framework wrapper around Express for Node.JS.  It includes things such as pre-canned security settings, templating, and internationalization.
+Kraken.JS is a new wonderful framework wrapper around Express for Node.JS.  It includes things such as pre-canned security settings, templating, and internationalization.  While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore.
 
 While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore. With Kraken.JS it will drastically cut the number of lines down in your Node app.  I currently have an app right now where I am estimating if I converted it to Kraken.JS it would cut my code base by 33%. So let’s jump into Kraken.JS, the instructions below were based on [Kraken’s documentation](http://krakenjs.com/#gettingstarted").
 
