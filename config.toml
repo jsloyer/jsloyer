@@ -7,7 +7,7 @@ theme = "startbootstrap-clean-blog"
 copyright = "Code released under the Apache 2.0 license."
 
 [author]
-  name = "Benoît Benedetti"
+  name = "Jeff Sloyer"
 
 [params]
   DateForm = "Mon, Jan 2, 2006"
