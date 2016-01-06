@@ -4,7 +4,7 @@ date = "2014-04-17T13:24:00-05:00"
 description = ""
 draft = false
 image = "/images/kraken.jpg"
-tags = ["node.js", "kraken.js", "express", "bluemix", "development"]
+tags = ["node.js", "kraken.js", "express", "bluemix"]
 title = "Kraken.Js and Bluemix"
 aliases = [
     "2014/04/17/kraken-js-and-bluemix/"

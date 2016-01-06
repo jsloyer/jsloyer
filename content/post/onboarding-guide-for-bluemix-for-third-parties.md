@@ -4,7 +4,7 @@ date = "2014-11-19T21:42:10-05:00"
 description = ""
 draft = false
 image = "/images/guide.jpg"
-tags = ["bluemix", "development"]
+tags = ["bluemix"]
 title = "Onboarding Guide for Bluemix for Third Parties"
 aliases = [
     "2014/11/19/onboarding-guide-for-bluemix-for-third-parties/"

@@ -4,7 +4,7 @@ date = "2014-10-14T22:36:53-05:00"
 description = ""
 draft = false
 image = "/images/hiring.png"
-tags = ["bluemix", "cloudant", "javaee", "watson", "development"]
+tags = ["bluemix", "cloudant", "javaee", "watson"]
 title = "Building a Java EE app on IBM Bluemix Using Watson, Cloudant"
 aliases = [
     "2014/10/17/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/"

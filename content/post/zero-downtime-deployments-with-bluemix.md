@@ -4,7 +4,7 @@ date = "2014-08-18T22:10:32-05:00"
 description = ""
 draft = false
 image = "/images/unplug.jpg"
-tags = ["go", "golang", "templates", "themes", "development"]
+tags = ["go", "golang", "templates", "themes"]
 title = "Zero Downtime Deployments with Bluemix"
 aliases = [
     "2014/08/18/zero-downtime-deployments-with-bluemix/"
