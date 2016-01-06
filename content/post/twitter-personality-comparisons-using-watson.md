@@ -6,6 +6,9 @@ draft = false
 image = "/images/personality.jpg"
 tags = ["node.js", "watson", "cloudant", "devops", "twilio", "bluemix"]
 title = "Twitter Personality Comparisons Using Watson"
+alises = [
+    "2014/11/24/twitter-personality-comparisons-using-watson/"
+]
 
 +++
 

@@ -7,7 +7,7 @@ image = "/images/robots-blog-post-header1.jpg"
 tags = ["bluemix", "cloudant", "node.js", "iot", "raspberry pi"]
 title = "Control home devices with Bluemix Internet of Things"
 aliaes = [
-    "02/06/control-home-devices-with-bluemix-internet-of-things/"
+    "2015/02/06/control-home-devices-with-bluemix-internet-of-things/"
 ]
 
 +++
@@ -43,7 +43,7 @@ So some of our goals that we are going to accomplish are the following.
   * **Part 1** – Setup and wire together relays, outlets, and the Raspberry Pi
 
 
-  * [**Part 2**](https://jeffsloyer.io/2015/02/17/control-home-devices-with-bluemix-internet-of-things-part-2/) – Power on the Raspberry Pi, installed Raspbian (OS for the Pi), install and configure the lighting control software
+  * [**Part 2**](/post/control-home-devices-with-bluemix-internet-of-things-part-2/) – Power on the Raspberry Pi, installed Raspbian (OS for the Pi), install and configure the lighting control software
 
 
   * **Part 3** – Deploy a Bluemix app with the IoT, Twilio, and Cloudant services to interact with users and the Raspberry Pi (an example of the app is [http://lights.mybluemix.net/](http://lights.mybluemix.net/); please note this is not connected to my Raspberry Pi right now, so clicking the play button won’t do anything.)
@@ -155,10 +155,5 @@ Congratulations the hard part is over! Well, at least for me, since electrical s
 
 
 ## Parts in the Series
-
-
-
-
-
 
   * [Part 2](/post/control-home-devices-with-bluemix-internet-of-things-part-2/)
