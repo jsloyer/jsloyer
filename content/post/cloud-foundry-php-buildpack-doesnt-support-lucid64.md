@@ -6,6 +6,9 @@ draft = false
 image = "/images/fedup.jpg"
 tags = ["bluemix", "php", "buildpack"]
 title = "Common Deploy Errors with Community Buildpacks in Bluemix"
+aliases = [
+    "2015/07/29/cloud-foundry-php-buildpack-doesnt-support-lucid64/"
+]
 
 +++
 
