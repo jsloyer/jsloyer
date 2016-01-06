@@ -1,5 +1,5 @@
 +++
-categories = ["Development", "golang"]
+categories = ["Development", "Tutorial", "Sample Code"]
 date = "2014-08-18T22:10:32-05:00"
 description = ""
 draft = false

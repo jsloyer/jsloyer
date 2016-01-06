@@ -1,5 +1,5 @@
 +++
-categories = ["Development", "Sample Code", "Tutorial", "Video"]
+categories = ["Sample Code", "Tutorial", "Video"]
 date = "2014-10-14T22:36:53-05:00"
 description = ""
 draft = false
