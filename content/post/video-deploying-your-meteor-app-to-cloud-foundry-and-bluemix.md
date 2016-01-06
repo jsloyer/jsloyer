@@ -5,7 +5,7 @@ description = ""
 draft = false
 image = "/images/meteor.jpg"
 tags = ["bluemix", "meteor", "mongodb", "websockets"]
-title = "Deploying your Meteor app to Cloud Foundry and Bluemix"
+title = "(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix"
 aliases = [
     "2015/08/24/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/"
 ]
