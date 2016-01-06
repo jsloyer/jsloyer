@@ -6,6 +6,8 @@ paginate = 10
 theme = "startbootstrap-clean-blog"
 copyright = "Code released under the Apache 2.0 license."
 
+disqusShortname = "jeffsloyerio"
+
 [author]
   name = "Jeff Sloyer"
 
