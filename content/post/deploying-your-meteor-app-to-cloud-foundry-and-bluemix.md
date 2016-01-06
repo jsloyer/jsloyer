@@ -88,6 +88,6 @@ In the video below you can see when you choose a player and then click add 5 poi
 
 The work with the developer at the client last week has renewed my interest in Meteor and will have to dig into it more.
 
-If you prefer to watch a video of this as well, check out Video – [Deploying your Meteor app to Cloud Foundry and Bluemix](https://jeffsloyer.io/2015/08/24/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/).
+If you prefer to watch a video of this as well, check out Video – [Deploying your Meteor app to Cloud Foundry and Bluemix](/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/).
 
 I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](https://twitter.com/jsloyer target=).  There will also be a video forth coming as well.
