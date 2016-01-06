@@ -2,7 +2,7 @@
 categories = ["Sample Code", "Tutorial"]
 date = "2015-01-21T09:45:24-05:00"
 description = ""
-draft = true
+draft = false
 image = "/images/2015/06/1USIIGtkypiwhO6W4o8cwIw.jpeg"
 tags = ["watson", "bluemix", "node.js"]
 title = "How Watson and Bluemix see the State of the Union"
