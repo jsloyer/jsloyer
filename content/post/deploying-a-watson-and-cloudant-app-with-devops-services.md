@@ -43,7 +43,7 @@ So let’s get started.
   7. Click on Cloudant, click on Launch
 
 
-  8. In the top right click on Add a New Database, type in talent-manager
+  8. In the top right click on Add a New Database, type in `talent-manager`
 
 
   9. Click Replication on the left
@@ -114,7 +114,7 @@ So let’s get started.
 
 28. Click Request Build, (this should put a green check mark eventually), it will trigger a deploy
 
-29. Once the deploy is done on the right you can visit your app at appname.mybluemix.net
+29. Once the deploy is done on the right you can visit your app at `appname.mybluemix.net`
 
     (replacing appname with your app name)
 
