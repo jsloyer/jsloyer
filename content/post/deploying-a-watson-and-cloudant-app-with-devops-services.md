@@ -54,7 +54,7 @@ So let’s get started.
 
     [![replicate Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/replicate1.png)](/images/2015/06/replicate1.png)
 
-11. Type in your database name below, talent-manager, click Replicate
+11. Type in your database name below, `talent-manager`, click Replicate
 
 12. The password comes from Bluemix, switch back to Bluemix, click on Overview on the left,click on
 
