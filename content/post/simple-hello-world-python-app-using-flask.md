@@ -6,6 +6,9 @@ draft = false
 image = "/images/helloworld.png"
 tags = ["bluemix", "flask", "python"]
 title = "Simple Hello World Python App using Flask"
+aliases = [
+    "2015/03/30/simple-hello-world-python-app-using-flask/"
+]
 
 +++
 
