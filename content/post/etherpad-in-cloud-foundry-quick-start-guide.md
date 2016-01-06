@@ -1,8 +1,8 @@
 +++
-categories = ["Sample Code", "Tutorial"]
+categories = ["Sample Code", "Tutorial", "Video"]
 date = "2015-01-03T22:19:30-05:00"
 description = ""
-draft = true
+draft = false
 image = "/img/about-bg.jpg"
 tags = ["bluemix", "cloudfoundry", "etherpad", "mysql"]
 title = "Etherpad in Cloud Foundry – Quick Start Guide"
