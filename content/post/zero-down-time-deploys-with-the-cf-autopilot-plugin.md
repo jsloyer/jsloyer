@@ -6,6 +6,9 @@ draft = false
 image = "/images/unplug.jpg"
 tags = ["bluemix", "devops", "zero downtime", "cloudfoundry"]
 title = "Zero Downtime Deployment with the CF Autopilot Plugin"
+alises = [
+  "2015/06/19/zero-down-time-deploys-with-the-cf-autopilot-plugin/"
+]
 
 +++
 
