@@ -15,7 +15,7 @@ disqusShortname = "jeffsloyerio"
   DateForm = "Mon, Jan 2, 2006"
   Description = "Thoughts on Tech and other interests..."
   Author = "Jeff Sloyer"
-  Ganalytics = "XX-00000000-0"
+  Ganalytics = "UA-404795-24"
 
 [[params.social]]
   title = "twitter"
