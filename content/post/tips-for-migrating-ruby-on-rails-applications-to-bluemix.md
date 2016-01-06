@@ -6,6 +6,9 @@ draft = false
 image = "/images/migrate.jpg"
 tags = ["bluemix", "postgresql", "redis", "ror", "ruby", "ruby on rails"]
 title = "Tips for Migrating Ruby on Rails Applications to Bluemix"
+aliases = [
+    "2015/03/05/tips-for-migrating-ruby-on-rails-applications-to-bluemix/"
+]
 
 +++
 
