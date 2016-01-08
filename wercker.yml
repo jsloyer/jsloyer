@@ -1,4 +1,4 @@
-box: nodejs
+box: nodesource/node
 build:
   steps:
     - install-packages:
