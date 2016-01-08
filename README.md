@@ -7,8 +7,8 @@ Source for [my blog](http://jeffsloyer.io)
 * Grunt
 * npm
     * `fs`
-    * glob
-    * image-size
-    * yamljs
-* [Grunt image resizer](https://github.com/excellenteasy/grunt-image-resize)
-    * imagemagick
+    * `glob`
+    * `image-size`
+    * `yamljs`
+* [Grunt responsive images](https://github.com/andismith/grunt-responsive-images)
+    * GraphicsMagick
