@@ -3,6 +3,9 @@ build:
   steps:
     - install-packages:
         packages: imagemagick
+    - npm-install
+    - grunt:
+        tasks: processimages
     - arjen/hugo-build:
         version: "0.14"
         theme: startbootstrap-clean-blog
