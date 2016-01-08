@@ -1,9 +1,8 @@
-var grunt = require('grunt')
-  , fs = require('fs')
-  , glob = require('glob')
-  , sizeOf = require('image-size')
-  , YAML = require('yamljs')
-  ;
+var grunt = require('grunt'),
+    fs = require('fs'),
+    glob = require('glob'),
+    sizeOf = require('image-size'),
+    YAML = require('yamljs');
 
 grunt.loadNpmTasks('grunt-contrib-concat');
 grunt.loadNpmTasks('grunt-contrib-connect');
