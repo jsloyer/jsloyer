@@ -1,6 +1,8 @@
 box: debian
 build:
   steps:
+    - install-packages:
+        packages: imagemagick
     - arjen/hugo-build:
         version: "0.14"
         theme: startbootstrap-clean-blog
