@@ -4,3 +4,1767 @@
 #!#!#!#!# Do not edit below this line.
 # Generated automatically using `grunt imageinfo`
 
+static/images/large/2014/08/the-site-can-never-be-broken.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/01/devops-borat.jpg:
+    width: 347
+    height: 335
+    aspect: 1.035820895522388
+static/images/large/2015/01/mqlight.jpg:
+    width: 152
+    height: 172
+    aspect: 0.8837209302325582
+static/images/large/2015/01/sample_screenshot.png:
+    width: 850
+    height: 665
+    aspect: 1.2781954887218046
+static/images/large/2015/01/two-pizza.jpg:
+    width: 1000
+    height: 667
+    aspect: 1.4992503748125936
+static/images/large/2015/03/button.png:
+    width: 155
+    height: 32
+    aspect: 4.84375
+static/images/large/2015/06/2014-12-02-15.16.57.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/2015-02-16-11.31.19.jpg:
+    width: 768
+    height: 1024
+    aspect: 0.75
+static/images/large/2015/06/3178503206_278cd86c6d_b.jpg:
+    width: 1024
+    height: 679
+    aspect: 1.508100147275405
+static/images/large/2015/06/3178503206_e5d5c274f7_o.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/8568353810_30fa30c147_o.jpg:
+    width: 1024
+    height: 682
+    aspect: 1.501466275659824
+static/images/large/2015/06/about.jpg:
+    width: 440
+    height: 440
+    aspect: 1
+static/images/large/2015/06/add-service.png:
+    width: 1131
+    height: 755
+    aspect: 1.4980132450331125
+static/images/large/2015/06/addabuilder.png:
+    width: 300
+    height: 293
+    aspect: 1.023890784982935
+static/images/large/2015/06/addnewdb.png:
+    width: 600
+    height: 96
+    aspect: 6.25
+static/images/large/2015/06/addservice.png:
+    width: 300
+    height: 76
+    aspect: 3.9473684210526314
+static/images/large/2015/06/addserviceagain.png:
+    width: 846
+    height: 695
+    aspect: 1.2172661870503596
+static/images/large/2015/06/addstage.png:
+    width: 300
+    height: 242
+    aspect: 1.2396694214876034
+static/images/large/2015/06/advanced.png:
+    width: 300
+    height: 54
+    aspect: 5.555555555555555
+static/images/large/2015/06/antbuild.png:
+    width: 1024
+    height: 528
+    aspect: 1.9393939393939394
+static/images/large/2015/06/appname.png:
+    width: 783
+    height: 171
+    aspect: 4.578947368421052
+static/images/large/2015/06/apprunning.png:
+    width: 715
+    height: 306
+    aspect: 2.3366013071895426
+static/images/large/2015/06/apprunning1.jpg:
+    width: 1099
+    height: 311
+    aspect: 3.5337620578778135
+static/images/large/2015/06/bluemixcatalog.png:
+    width: 1024
+    height: 443
+    aspect: 2.311512415349887
+static/images/large/2015/06/buildanddeploy.png:
+    width: 300
+    height: 53
+    aspect: 5.660377358490566
+static/images/large/2015/06/builder.png:
+    width: 712
+    height: 586
+    aspect: 1.2150170648464165
+static/images/large/2015/06/builderdone.png:
+    width: 300
+    height: 228
+    aspect: 1.3157894736842106
+static/images/large/2015/06/buildfinished.png:
+    width: 852
+    height: 220
+    aspect: 3.8727272727272726
+static/images/large/2015/06/buildrunning.png:
+    width: 300
+    height: 195
+    aspect: 1.5384615384615385
+static/images/large/2015/06/button.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/buttonground.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/buttongroundrail.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/Capture.png:
+    width: 1024
+    height: 642
+    aspect: 1.5950155763239875
+static/images/large/2015/06/catalog.png:
+    width: 300
+    height: 99
+    aspect: 3.0303030303030303
+static/images/large/2015/06/catalog1.png:
+    width: 431
+    height: 143
+    aspect: 3.013986013986014
+static/images/large/2015/06/cloudant.png:
+    width: 1135
+    height: 272
+    aspect: 4.172794117647059
+static/images/large/2015/06/cloudantclick.png:
+    width: 783
+    height: 578
+    aspect: 1.3546712802768166
+static/images/large/2015/06/cloudantclick1.png:
+    width: 300
+    height: 221
+    aspect: 1.3574660633484164
+static/images/large/2015/06/cloudantcreate.png:
+    width: 360
+    height: 464
+    aspect: 0.7758620689655172
+static/images/large/2015/06/cloudantlaunch.png:
+    width: 1024
+    height: 351
+    aspect: 2.9173789173789175
+static/images/large/2015/06/cloudantlaunch1.png:
+    width: 300
+    height: 103
+    aspect: 2.912621359223301
+static/images/large/2015/06/cloudantrestage.png:
+    width: 852
+    height: 721
+    aspect: 1.1816920943134535
+static/images/large/2015/06/copydone.png:
+    width: 1024
+    height: 219
+    aspect: 4.675799086757991
+static/images/large/2015/06/createapp.png:
+    width: 228
+    height: 300
+    aspect: 0.76
+static/images/large/2015/06/credentialsshow.png:
+    width: 790
+    height: 694
+    aspect: 1.138328530259366
+static/images/large/2015/06/datagbases.png:
+    width: 236
+    height: 368
+    aspect: 0.6413043478260869
+static/images/large/2015/06/db.png:
+    width: 300
+    height: 150
+    aspect: 2
+static/images/large/2015/06/dbname.jpg:
+    width: 455
+    height: 559
+    aspect: 0.813953488372093
+static/images/large/2015/06/dbname.png:
+    width: 422
+    height: 209
+    aspect: 2.0191387559808613
+static/images/large/2015/06/deploy.png:
+    width: 695
+    height: 561
+    aspect: 1.2388591800356505
+static/images/large/2015/06/deploybefore.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/large/2015/06/done.png:
+    width: 300
+    height: 207
+    aspect: 1.4492753623188406
+static/images/large/2015/06/electrical-cord.jpg:
+    width: 1024
+    height: 764
+    aspect: 1.3403141361256545
+static/images/large/2015/06/electrical-outlet-garbage-disposal-4.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/large/2015/06/electrical-outlet-garbage-disposal-5.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/large/2015/06/enterpassword.png:
+    width: 611
+    height: 274
+    aspect: 2.22992700729927
+static/images/large/2015/06/existingproject.png:
+    width: 535
+    height: 543
+    aspect: 0.9852670349907919
+static/images/large/2015/06/feed.png:
+    width: 32
+    height: 32
+    aspect: 1
+static/images/large/2015/06/FH13MAR_SWIOUT_14.jpg:
+    width: 450
+    height: 355
+    aspect: 1.267605633802817
+static/images/large/2015/06/Figure5a.png:
+    width: 600
+    height: 211
+    aspect: 2.843601895734597
+static/images/large/2015/06/finishimport.png:
+    width: 773
+    height: 692
+    aspect: 1.1170520231213872
+static/images/large/2015/06/fork-project.png:
+    width: 475
+    height: 488
+    aspect: 0.9733606557377049
+static/images/large/2015/06/fork.png:
+    width: 300
+    height: 83
+    aspect: 3.6144578313253013
+static/images/large/2015/06/fork2.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/large/2015/06/gpio17.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/gpio18.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/ground.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/https.png:
+    width: 250
+    height: 250
+    aspect: 1
+static/images/large/2015/06/import.png:
+    width: 905
+    height: 652
+    aspect: 1.388036809815951
+static/images/large/2015/06/iotdevicesincrease.png:
+    width: 700
+    height: 270
+    aspect: 2.5925925925925926
+static/images/large/2015/06/jeff-and-blake-300x73.jpg:
+    width: 300
+    height: 73
+    aspect: 4.109589041095891
+static/images/large/2015/06/jeff-and-blake.jpg:
+    width: 696
+    height: 169
+    aspect: 4.118343195266272
+static/images/large/2015/06/jeff-and-ibm-design.jpg:
+    width: 735
+    height: 176
+    aspect: 4.176136363636363
+static/images/large/2015/06/led.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/liberty.png:
+    width: 1184
+    height: 677
+    aspect: 1.7488921713441654
+static/images/large/2015/06/liberty1.png:
+    width: 1184
+    height: 677
+    aspect: 1.7488921713441654
+static/images/large/2015/06/new-app.png:
+    width: 351
+    height: 460
+    aspect: 0.7630434782608696
+static/images/large/2015/06/node.png:
+    width: 269
+    height: 300
+    aspect: 0.8966666666666666
+static/images/large/2015/06/overviewbluemix.png:
+    width: 321
+    height: 469
+    aspect: 0.6844349680170576
+static/images/large/2015/06/password.png:
+    width: 613
+    height: 268
+    aspect: 2.287313432835821
+static/images/large/2015/06/password1.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/large/2015/06/password11.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/large/2015/06/personality-box.png:
+    width: 600
+    height: 354
+    aspect: 1.694915254237288
+static/images/large/2015/06/personalitysotu.jpg:
+    width: 461
+    height: 1024
+    aspect: 0.4501953125
+static/images/large/2015/06/pythoniotapp.png:
+    width: 671
+    height: 192
+    aspect: 3.4947916666666665
+static/images/large/2015/06/raspberry-pi-lights-wiring-diagram.png:
+    width: 889
+    height: 642
+    aspect: 1.384735202492212
+static/images/large/2015/06/raspberrypidiagram.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/replicate.png:
+    width: 846
+    height: 549
+    aspect: 1.540983606557377
+static/images/large/2015/06/replicate1.png:
+    width: 846
+    height: 549
+    aspect: 1.540983606557377
+static/images/large/2015/06/replication.png:
+    width: 223
+    height: 369
+    aspect: 0.6043360433604336
+static/images/large/2015/06/resistor.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/restage.jpg:
+    width: 1104
+    height: 524
+    aspect: 2.1068702290076335
+static/images/large/2015/06/restage.png:
+    width: 706
+    height: 567
+    aspect: 1.2451499118165785
+static/images/large/2015/06/robots-blog-post-header1.jpg:
+    width: 1024
+    height: 665
+    aspect: 1.5398496240601505
+static/images/large/2015/06/Ruby_on_Rails-logo.png:
+    width: 316
+    height: 376
+    aspect: 0.8404255319148937
+static/images/large/2015/06/showcreds.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/twilio.png:
+    width: 300
+    height: 137
+    aspect: 2.18978102189781
+static/images/large/2015/06/urlforapp.jpg:
+    width: 1099
+    height: 311
+    aspect: 3.5337620578778135
+static/images/large/2015/06/user-modeling.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/06/usermodeling.png:
+    width: 300
+    height: 115
+    aspect: 2.608695652173913
+static/images/large/2015/06/usermodeling2.png:
+    width: 224
+    height: 300
+    aspect: 0.7466666666666667
+static/images/large/2015/06/usermodelingapp.jpg:
+    width: 992
+    height: 699
+    aspect: 1.419170243204578
+static/images/large/2015/06/visualizationsotu.jpg:
+    width: 906
+    height: 854
+    aspect: 1.0608899297423888
+static/images/large/2015/06/watson-create.png:
+    width: 373
+    height: 468
+    aspect: 0.7970085470085471
+static/images/large/2015/06/watsonappcreate.jpg:
+    width: 351
+    height: 557
+    aspect: 0.63016157989228
+static/images/large/2015/06/watsonconnected.jpg:
+    width: 1107
+    height: 623
+    aspect: 1.7768860353130016
+static/images/large/2015/06/zero-downtime-graphics.001.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/large/2015/06/zero-downtime-graphics.002.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/large/2015/06/zero-downtime-graphics.003.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/large/2015/06/zero-downtime-graphics.004.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/large/2015/06/zero-downtime-graphics.005.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/large/2015/07/add-new-pipeline.jpg:
+    width: 1075
+    height: 463
+    aspect: 2.321814254859611
+static/images/large/2015/07/add-new-pipeline1.jpg:
+    width: 1075
+    height: 463
+    aspect: 2.321814254859611
+static/images/large/2015/07/analyze.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/07/choose-repo.png:
+    width: 810
+    height: 703
+    aspect: 1.1522048364153628
+static/images/large/2015/07/clear.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/07/clearsetup.jpg:
+    width: 802
+    height: 685
+    aspect: 1.1708029197080292
+static/images/large/2015/07/codesnip.jpg:
+    width: 853
+    height: 665
+    aspect: 1.2827067669172931
+static/images/large/2015/07/connectscm.png:
+    width: 826
+    height: 396
+    aspect: 2.085858585858586
+static/images/large/2015/07/customscript.jpg:
+    width: 1187
+    height: 818
+    aspect: 1.4511002444987775
+static/images/large/2015/07/deletepipeline.jpg:
+    width: 802
+    height: 685
+    aspect: 1.1708029197080292
+static/images/large/2015/07/enter-text.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/07/envars.jpg:
+    width: 1089
+    height: 540
+    aspect: 2.0166666666666666
+static/images/large/2015/07/envarssetup.jpg:
+    width: 1142
+    height: 614
+    aspect: 1.8599348534201954
+static/images/large/2015/07/krakenLogo.png:
+    width: 544
+    height: 544
+    aspect: 1
+static/images/large/2015/07/masterbranch.jpg:
+    width: 1145
+    height: 440
+    aspect: 2.602272727272727
+static/images/large/2015/07/meteor-logo.png:
+    width: 600
+    height: 142
+    aspect: 4.225352112676056
+static/images/large/2015/07/npminstall.jpg:
+    width: 793
+    height: 605
+    aspect: 1.3107438016528925
+static/images/large/2015/07/pdf-to-txt.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/07/personality-norway.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/2015/07/personality-virginia-tech.jpg:
+    width: 1158
+    height: 1232
+    aspect: 0.939935064935065
+static/images/large/2015/07/personality.jpg:
+    width: 1198
+    height: 1220
+    aspect: 0.9819672131147541
+static/images/large/box.png:
+    width: 720
+    height: 368
+    aspect: 1.9565217391304348
+static/images/large/devops.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/fedup.jpg:
+    width: 929
+    height: 622
+    aspect: 1.4935691318327975
+static/images/large/glasses.jpg:
+    width: 960
+    height: 627
+    aspect: 1.5311004784688995
+static/images/large/guide.jpg:
+    width: 1134
+    height: 759
+    aspect: 1.4940711462450593
+static/images/large/helloworld.png:
+    width: 512
+    height: 256
+    aspect: 2
+static/images/large/hiring.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/iot-pi.jpg:
+    width: 700
+    height: 484
+    aspect: 1.4462809917355373
+static/images/large/kraken.jpg:
+    width: 1047
+    height: 677
+    aspect: 1.5465288035450517
+static/images/large/meteor.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/migrate.jpg:
+    width: 1066
+    height: 785
+    aspect: 1.3579617834394904
+static/images/large/personality.jpg:
+    width: 845
+    height: 439
+    aspect: 1.9248291571753986
+static/images/large/robots-blog-post-header1.jpg:
+    width: 1024
+    height: 458
+    aspect: 2.2358078602620086
+static/images/large/secure.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/large/unplug.jpg:
+    width: 494
+    height: 192
+    aspect: 2.5729166666666665
+static/images/medium/2014/08/the-site-can-never-be-broken.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/01/devops-borat.jpg:
+    width: 347
+    height: 335
+    aspect: 1.035820895522388
+static/images/medium/2015/01/mqlight.jpg:
+    width: 152
+    height: 172
+    aspect: 0.8837209302325582
+static/images/medium/2015/01/sample_screenshot.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/01/two-pizza.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/03/button.png:
+    width: 155
+    height: 32
+    aspect: 4.84375
+static/images/medium/2015/06/2014-12-02-15.16.57.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/2015-02-16-11.31.19.jpg:
+    width: 768
+    height: 1024
+    aspect: 0.75
+static/images/medium/2015/06/3178503206_278cd86c6d_b.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/3178503206_e5d5c274f7_o.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/8568353810_30fa30c147_o.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/about.jpg:
+    width: 440
+    height: 440
+    aspect: 1
+static/images/medium/2015/06/add-service.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/addabuilder.png:
+    width: 300
+    height: 293
+    aspect: 1.023890784982935
+static/images/medium/2015/06/addnewdb.png:
+    width: 600
+    height: 96
+    aspect: 6.25
+static/images/medium/2015/06/addservice.png:
+    width: 300
+    height: 76
+    aspect: 3.9473684210526314
+static/images/medium/2015/06/addserviceagain.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/addstage.png:
+    width: 300
+    height: 242
+    aspect: 1.2396694214876034
+static/images/medium/2015/06/advanced.png:
+    width: 300
+    height: 54
+    aspect: 5.555555555555555
+static/images/medium/2015/06/antbuild.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/appname.png:
+    width: 783
+    height: 171
+    aspect: 4.578947368421052
+static/images/medium/2015/06/apprunning.png:
+    width: 715
+    height: 306
+    aspect: 2.3366013071895426
+static/images/medium/2015/06/apprunning1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/bluemixcatalog.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/buildanddeploy.png:
+    width: 300
+    height: 53
+    aspect: 5.660377358490566
+static/images/medium/2015/06/builder.png:
+    width: 712
+    height: 586
+    aspect: 1.2150170648464165
+static/images/medium/2015/06/builderdone.png:
+    width: 300
+    height: 228
+    aspect: 1.3157894736842106
+static/images/medium/2015/06/buildfinished.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/buildrunning.png:
+    width: 300
+    height: 195
+    aspect: 1.5384615384615385
+static/images/medium/2015/06/button.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/buttonground.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/buttongroundrail.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/Capture.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/catalog.png:
+    width: 300
+    height: 99
+    aspect: 3.0303030303030303
+static/images/medium/2015/06/catalog1.png:
+    width: 431
+    height: 143
+    aspect: 3.013986013986014
+static/images/medium/2015/06/cloudant.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/cloudantclick.png:
+    width: 783
+    height: 578
+    aspect: 1.3546712802768166
+static/images/medium/2015/06/cloudantclick1.png:
+    width: 300
+    height: 221
+    aspect: 1.3574660633484164
+static/images/medium/2015/06/cloudantcreate.png:
+    width: 360
+    height: 464
+    aspect: 0.7758620689655172
+static/images/medium/2015/06/cloudantlaunch.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/cloudantlaunch1.png:
+    width: 300
+    height: 103
+    aspect: 2.912621359223301
+static/images/medium/2015/06/cloudantrestage.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/copydone.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/createapp.png:
+    width: 228
+    height: 300
+    aspect: 0.76
+static/images/medium/2015/06/credentialsshow.png:
+    width: 790
+    height: 694
+    aspect: 1.138328530259366
+static/images/medium/2015/06/datagbases.png:
+    width: 236
+    height: 368
+    aspect: 0.6413043478260869
+static/images/medium/2015/06/db.png:
+    width: 300
+    height: 150
+    aspect: 2
+static/images/medium/2015/06/dbname.jpg:
+    width: 455
+    height: 559
+    aspect: 0.813953488372093
+static/images/medium/2015/06/dbname.png:
+    width: 422
+    height: 209
+    aspect: 2.0191387559808613
+static/images/medium/2015/06/deploy.png:
+    width: 695
+    height: 561
+    aspect: 1.2388591800356505
+static/images/medium/2015/06/deploybefore.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/medium/2015/06/done.png:
+    width: 300
+    height: 207
+    aspect: 1.4492753623188406
+static/images/medium/2015/06/electrical-cord.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/electrical-outlet-garbage-disposal-4.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/medium/2015/06/electrical-outlet-garbage-disposal-5.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/medium/2015/06/enterpassword.png:
+    width: 611
+    height: 274
+    aspect: 2.22992700729927
+static/images/medium/2015/06/existingproject.png:
+    width: 535
+    height: 543
+    aspect: 0.9852670349907919
+static/images/medium/2015/06/feed.png:
+    width: 32
+    height: 32
+    aspect: 1
+static/images/medium/2015/06/FH13MAR_SWIOUT_14.jpg:
+    width: 450
+    height: 355
+    aspect: 1.267605633802817
+static/images/medium/2015/06/Figure5a.png:
+    width: 600
+    height: 211
+    aspect: 2.843601895734597
+static/images/medium/2015/06/finishimport.png:
+    width: 773
+    height: 692
+    aspect: 1.1170520231213872
+static/images/medium/2015/06/fork-project.png:
+    width: 475
+    height: 488
+    aspect: 0.9733606557377049
+static/images/medium/2015/06/fork.png:
+    width: 300
+    height: 83
+    aspect: 3.6144578313253013
+static/images/medium/2015/06/fork2.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/medium/2015/06/gpio17.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/gpio18.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/ground.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/https.png:
+    width: 250
+    height: 250
+    aspect: 1
+static/images/medium/2015/06/import.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/iotdevicesincrease.png:
+    width: 700
+    height: 270
+    aspect: 2.5925925925925926
+static/images/medium/2015/06/jeff-and-blake-300x73.jpg:
+    width: 300
+    height: 73
+    aspect: 4.109589041095891
+static/images/medium/2015/06/jeff-and-blake.jpg:
+    width: 696
+    height: 169
+    aspect: 4.118343195266272
+static/images/medium/2015/06/jeff-and-ibm-design.jpg:
+    width: 735
+    height: 176
+    aspect: 4.176136363636363
+static/images/medium/2015/06/led.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/liberty.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/liberty1.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/new-app.png:
+    width: 351
+    height: 460
+    aspect: 0.7630434782608696
+static/images/medium/2015/06/node.png:
+    width: 269
+    height: 300
+    aspect: 0.8966666666666666
+static/images/medium/2015/06/overviewbluemix.png:
+    width: 321
+    height: 469
+    aspect: 0.6844349680170576
+static/images/medium/2015/06/password.png:
+    width: 613
+    height: 268
+    aspect: 2.287313432835821
+static/images/medium/2015/06/password1.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/medium/2015/06/password11.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/medium/2015/06/personality-box.png:
+    width: 600
+    height: 354
+    aspect: 1.694915254237288
+static/images/medium/2015/06/personalitysotu.jpg:
+    width: 461
+    height: 1024
+    aspect: 0.4501953125
+static/images/medium/2015/06/pythoniotapp.png:
+    width: 671
+    height: 192
+    aspect: 3.4947916666666665
+static/images/medium/2015/06/raspberry-pi-lights-wiring-diagram.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/raspberrypidiagram.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/replicate.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/replicate1.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/replication.png:
+    width: 223
+    height: 369
+    aspect: 0.6043360433604336
+static/images/medium/2015/06/resistor.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/restage.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/restage.png:
+    width: 706
+    height: 567
+    aspect: 1.2451499118165785
+static/images/medium/2015/06/robots-blog-post-header1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/Ruby_on_Rails-logo.png:
+    width: 316
+    height: 376
+    aspect: 0.8404255319148937
+static/images/medium/2015/06/showcreds.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/twilio.png:
+    width: 300
+    height: 137
+    aspect: 2.18978102189781
+static/images/medium/2015/06/urlforapp.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/user-modeling.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/usermodeling.png:
+    width: 300
+    height: 115
+    aspect: 2.608695652173913
+static/images/medium/2015/06/usermodeling2.png:
+    width: 224
+    height: 300
+    aspect: 0.7466666666666667
+static/images/medium/2015/06/usermodelingapp.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/visualizationsotu.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/watson-create.png:
+    width: 373
+    height: 468
+    aspect: 0.7970085470085471
+static/images/medium/2015/06/watsonappcreate.jpg:
+    width: 351
+    height: 557
+    aspect: 0.63016157989228
+static/images/medium/2015/06/watsonconnected.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/zero-downtime-graphics.001.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/zero-downtime-graphics.002.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/zero-downtime-graphics.003.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/zero-downtime-graphics.004.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/06/zero-downtime-graphics.005.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/add-new-pipeline.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/add-new-pipeline1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/analyze.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/choose-repo.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/clear.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/clearsetup.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/codesnip.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/connectscm.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/customscript.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/deletepipeline.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/enter-text.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/envars.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/envarssetup.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/krakenLogo.png:
+    width: 544
+    height: 544
+    aspect: 1
+static/images/medium/2015/07/masterbranch.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/meteor-logo.png:
+    width: 600
+    height: 142
+    aspect: 4.225352112676056
+static/images/medium/2015/07/npminstall.jpg:
+    width: 793
+    height: 605
+    aspect: 1.3107438016528925
+static/images/medium/2015/07/pdf-to-txt.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/personality-norway.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/personality-virginia-tech.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/2015/07/personality.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/box.png:
+    width: 720
+    height: 368
+    aspect: 1.9565217391304348
+static/images/medium/devops.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/fedup.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/glasses.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/guide.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/helloworld.png:
+    width: 512
+    height: 256
+    aspect: 2
+static/images/medium/hiring.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/iot-pi.jpg:
+    width: 700
+    height: 484
+    aspect: 1.4462809917355373
+static/images/medium/kraken.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/meteor.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/migrate.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/personality.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/robots-blog-post-header1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/secure.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/medium/unplug.jpg:
+    width: 494
+    height: 192
+    aspect: 2.5729166666666665
+static/images/thumbs/2014/08/the-site-can-never-be-broken.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/01/devops-borat.jpg:
+    width: 347
+    height: 335
+    aspect: 1.035820895522388
+static/images/thumbs/2015/01/mqlight.jpg:
+    width: 152
+    height: 172
+    aspect: 0.8837209302325582
+static/images/thumbs/2015/01/sample_screenshot.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/01/two-pizza.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/03/button.png:
+    width: 155
+    height: 32
+    aspect: 4.84375
+static/images/thumbs/2015/06/2014-12-02-15.16.57.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/2015-02-16-11.31.19.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/3178503206_278cd86c6d_b.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/3178503206_e5d5c274f7_o.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/8568353810_30fa30c147_o.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/about.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/add-service.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/addabuilder.png:
+    width: 300
+    height: 293
+    aspect: 1.023890784982935
+static/images/thumbs/2015/06/addnewdb.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/addservice.png:
+    width: 300
+    height: 76
+    aspect: 3.9473684210526314
+static/images/thumbs/2015/06/addserviceagain.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/addstage.png:
+    width: 300
+    height: 242
+    aspect: 1.2396694214876034
+static/images/thumbs/2015/06/advanced.png:
+    width: 300
+    height: 54
+    aspect: 5.555555555555555
+static/images/thumbs/2015/06/antbuild.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/appname.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/apprunning.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/apprunning1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/bluemixcatalog.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/buildanddeploy.png:
+    width: 300
+    height: 53
+    aspect: 5.660377358490566
+static/images/thumbs/2015/06/builder.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/builderdone.png:
+    width: 300
+    height: 228
+    aspect: 1.3157894736842106
+static/images/thumbs/2015/06/buildfinished.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/buildrunning.png:
+    width: 300
+    height: 195
+    aspect: 1.5384615384615385
+static/images/thumbs/2015/06/button.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/buttonground.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/buttongroundrail.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/Capture.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/catalog.png:
+    width: 300
+    height: 99
+    aspect: 3.0303030303030303
+static/images/thumbs/2015/06/catalog1.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/cloudant.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/cloudantclick.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/cloudantclick1.png:
+    width: 300
+    height: 221
+    aspect: 1.3574660633484164
+static/images/thumbs/2015/06/cloudantcreate.png:
+    width: 360
+    height: 464
+    aspect: 0.7758620689655172
+static/images/thumbs/2015/06/cloudantlaunch.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/cloudantlaunch1.png:
+    width: 300
+    height: 103
+    aspect: 2.912621359223301
+static/images/thumbs/2015/06/cloudantrestage.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/copydone.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/createapp.png:
+    width: 228
+    height: 300
+    aspect: 0.76
+static/images/thumbs/2015/06/credentialsshow.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/datagbases.png:
+    width: 236
+    height: 368
+    aspect: 0.6413043478260869
+static/images/thumbs/2015/06/db.png:
+    width: 300
+    height: 150
+    aspect: 2
+static/images/thumbs/2015/06/dbname.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/dbname.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/deploy.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/deploybefore.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/thumbs/2015/06/done.png:
+    width: 300
+    height: 207
+    aspect: 1.4492753623188406
+static/images/thumbs/2015/06/electrical-cord.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/electrical-outlet-garbage-disposal-4.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/thumbs/2015/06/electrical-outlet-garbage-disposal-5.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/thumbs/2015/06/enterpassword.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/existingproject.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/feed.png:
+    width: 32
+    height: 32
+    aspect: 1
+static/images/thumbs/2015/06/FH13MAR_SWIOUT_14.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/Figure5a.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/finishimport.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/fork-project.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/fork.png:
+    width: 300
+    height: 83
+    aspect: 3.6144578313253013
+static/images/thumbs/2015/06/fork2.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/thumbs/2015/06/gpio17.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/gpio18.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/ground.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/https.png:
+    width: 250
+    height: 250
+    aspect: 1
+static/images/thumbs/2015/06/import.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/iotdevicesincrease.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/jeff-and-blake-300x73.jpg:
+    width: 300
+    height: 73
+    aspect: 4.109589041095891
+static/images/thumbs/2015/06/jeff-and-blake.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/jeff-and-ibm-design.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/led.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/liberty.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/liberty1.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/new-app.png:
+    width: 351
+    height: 460
+    aspect: 0.7630434782608696
+static/images/thumbs/2015/06/node.png:
+    width: 269
+    height: 300
+    aspect: 0.8966666666666666
+static/images/thumbs/2015/06/overviewbluemix.png:
+    width: 321
+    height: 469
+    aspect: 0.6844349680170576
+static/images/thumbs/2015/06/password.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/password1.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/password11.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/personality-box.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/personalitysotu.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/pythoniotapp.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/raspberry-pi-lights-wiring-diagram.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/raspberrypidiagram.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/replicate.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/replicate1.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/replication.png:
+    width: 223
+    height: 369
+    aspect: 0.6043360433604336
+static/images/thumbs/2015/06/resistor.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/restage.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/restage.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/robots-blog-post-header1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/Ruby_on_Rails-logo.png:
+    width: 316
+    height: 376
+    aspect: 0.8404255319148937
+static/images/thumbs/2015/06/showcreds.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/twilio.png:
+    width: 300
+    height: 137
+    aspect: 2.18978102189781
+static/images/thumbs/2015/06/urlforapp.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/user-modeling.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/usermodeling.png:
+    width: 300
+    height: 115
+    aspect: 2.608695652173913
+static/images/thumbs/2015/06/usermodeling2.png:
+    width: 224
+    height: 300
+    aspect: 0.7466666666666667
+static/images/thumbs/2015/06/usermodelingapp.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/visualizationsotu.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/watson-create.png:
+    width: 373
+    height: 468
+    aspect: 0.7970085470085471
+static/images/thumbs/2015/06/watsonappcreate.jpg:
+    width: 351
+    height: 557
+    aspect: 0.63016157989228
+static/images/thumbs/2015/06/watsonconnected.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/zero-downtime-graphics.001.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/zero-downtime-graphics.002.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/zero-downtime-graphics.003.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/zero-downtime-graphics.004.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/06/zero-downtime-graphics.005.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/add-new-pipeline.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/add-new-pipeline1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/analyze.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/choose-repo.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/clear.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/clearsetup.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/codesnip.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/connectscm.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/customscript.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/deletepipeline.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/enter-text.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/envars.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/envarssetup.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/krakenLogo.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/masterbranch.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/meteor-logo.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/npminstall.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/pdf-to-txt.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/personality-norway.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/personality-virginia-tech.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/2015/07/personality.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/box.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/devops.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/fedup.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/glasses.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/guide.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/helloworld.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/hiring.png:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/iot-pi.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/kraken.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/meteor.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/migrate.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/personality.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/robots-blog-post-header1.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/secure.jpg:
+    width: 1
+    height: 1
+    aspect: 1
+static/images/thumbs/unplug.jpg:
+    width: 1
+    height: 1
+    aspect: 1

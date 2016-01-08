@@ -31,9 +31,9 @@ grunt.initConfig({
 
             files: [{
                 expand: true,
-                cwd: "static/images/",
+                cwd: "static/original-images/",
                 src: ["**/*.jpg", "**/*.png"],
-                dest: "static/img/thumbs/",
+                dest: "static/images/thumbs/",
                 extDot: "first"
             }]
         },
@@ -46,9 +46,9 @@ grunt.initConfig({
 
             files: [{
                 expand: true,
-                cwd: "static/images/",
+                cwd: "static/original-images/",
                 src: ["**/*.jpg", "**/*.png"],
-                dest: "static/img/medium/",
+                dest: "static/images/medium/",
                 extDot: "first"
             }]
         },
@@ -61,9 +61,9 @@ grunt.initConfig({
 
             files: [{
                 expand: true,
-                cwd: "static/images/",
+                cwd: "static/original-images/",
                 src: ["**/*.jpg", "**/*.png"],
-                dest: "static/img/large/",
+                dest: "static/images/large/",
                 extDot: "first"
             }]
         }
@@ -74,7 +74,7 @@ grunt.initConfig({
 grunt.registerTask('resize', ["image_resize:thumbs", "image_resize:medium", "image_resize:large"]);
 grunt.registerTask('imageinfo', function(){
     var done = this.async();
-    glob('files/**/*.{jpg,gif,png}', {}, function(err, files){
+    glob('static/images/**/*.{jpg,gif,png}', {}, function(err, files){
         var existingYml = fs.readFileSync("static/images.yml").toString();
         var a = existingYml.split("#!#!#!#!#");
         existingYml = a[0].trim();
