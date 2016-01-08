@@ -75,7 +75,7 @@ grunt.registerTask('resize', ["image_resize:thumbs", "image_resize:medium", "ima
 grunt.registerTask('imageinfo', function(){
     var done = this.async();
     glob('files/**/*.{jpg,gif,png}', {}, function(err, files){
-        var existingYml = fs.readFileSync("./_data/images.yml").toString();
+        var existingYml = fs.readFileSync("static/images.yml").toString();
         var a = existingYml.split("#!#!#!#!#");
         existingYml = a[0].trim();
 
@@ -94,7 +94,7 @@ grunt.registerTask('imageinfo', function(){
         var yamlHeading = "\n\n\n#!#!#!#!# Do not edit below this line.\n";
         yamlHeading += "# Generated automatically using `grunt imageinfo`\n\n";
 
-        fs.writeFileSync("./_data/images.yml", existingYml + yamlHeading + yamlString);
+        fs.writeFileSync("static/images.yml", existingYml + yamlHeading + yamlString);
         console.log('done');
         done();
     });

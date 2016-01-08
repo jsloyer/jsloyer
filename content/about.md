@@ -6,8 +6,6 @@ type = "about"
 
 +++
 
-![Profile picture](/images/profile-150x150.jpg)
-
 Jeff Sloyer is a Developer Advocate at IBM, promoting IBM’s Platform as a Service (Paas), Bluemix. He’s a Node.JS developer most days, but tinkers in Java and Python. Sloyer is a hacker at heart who loves playing with new tech and cobbling together new demos and projects. He’s an avid traveler, flying around the world and speaking about Bluemix at conferences and events.
 
 On a more personal note Jeff Sloyer loves really anything outside.  Some of his favorite activities include mountain biking, skiing, wake boarding, and hiking.
