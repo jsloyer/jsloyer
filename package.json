@@ -1,0 +1,14 @@
+{
+  "name": "blog",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsloyer/jsloyer.git"
+  },
+  "author": "Jeff Sloyer",
+  "dependencies": {
+    "glob": "^6.0.3",
+    "image-size": "^0.4.0",
+    "yamljs": "^0.2.4"
+  }
+}
