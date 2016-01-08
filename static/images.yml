@@ -1612,6 +1612,18 @@ static/images/box-thumb.png:
     width: 399
     height: 204
     aspect: 1.9558823529411764
+static/images/circle-into-square-large.png:
+    width: 1200
+    height: 1200
+    aspect: 1
+static/images/circle-into-square-medium.png:
+    width: 800
+    height: 800
+    aspect: 1
+static/images/circle-into-square-thumb.png:
+    width: 400
+    height: 400
+    aspect: 1
 static/images/devops-large.jpg:
     width: 1200
     height: 803
@@ -1624,6 +1636,18 @@ static/images/devops-thumb.jpg:
     width: 400
     height: 268
     aspect: 1.492537313432836
+static/images/easy-large.jpg:
+    width: 1200
+    height: 1200
+    aspect: 1
+static/images/easy-medium.jpg:
+    width: 800
+    height: 800
+    aspect: 1
+static/images/easy-thumb.jpg:
+    width: 400
+    height: 400
+    aspect: 1
 static/images/fedup-large.jpg:
     width: 1199
     height: 803
@@ -1780,3 +1804,15 @@ static/images/unplug-thumb.jpg:
     width: 399
     height: 155
     aspect: 2.574193548387097
+static/images/white-flag-large.jpg:
+    width: 1200
+    height: 900
+    aspect: 1.3333333333333333
+static/images/white-flag-medium.jpg:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/white-flag-thumb.jpg:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333
