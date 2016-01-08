@@ -17,8 +17,8 @@
     "grunt-contrib-sass": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "grunt-image-resize": "*",
     "grunt-jekyll": "*",
+    "grunt-responsive-images": "^0.1.7",
     "grunt-shell": "*",
     "image-size": "*",
     "yamljs": "*"

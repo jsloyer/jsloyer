@@ -2,7 +2,7 @@ box: nodesource/node
 build:
   steps:
     - install-packages:
-        packages: imagemagick
+        packages: graphicsmagick
     - npm-install
     - grunt:
         tasks: processimages

@@ -12,66 +12,37 @@ grunt.loadNpmTasks('grunt-contrib-jshint');
 grunt.loadNpmTasks('grunt-contrib-sass');
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-watch');
-grunt.loadNpmTasks('grunt-image-resize');
+grunt.loadNpmTasks('grunt-responsive-images');
 grunt.loadNpmTasks('grunt-jekyll');
 grunt.loadNpmTasks('grunt-shell');
 
 grunt.initConfig({
 
-    // ====================
-    // TASK: image_resize
-    // ====================
-    image_resize: {
-
-    thumbs: {
-            options: {
-                width: 400,
-                overwrite: false
-            },
-
-            files: [{
-                expand: true,
-                cwd: "static/original-images/",
-                src: ["**/*.jpg", "**/*.png"],
-                dest: "static/images/thumbs/",
-                extDot: "first"
+    responsive_images: {
+        myTask: {
+          options: {
+            sizes: [{
+              name: 'thumb',
+              width: 400
+            },{
+              name: 'medium',
+              width: 800
+            },{
+              name: "large",
+              width: 1200
             }]
-        },
-
-        medium: {
-            options: {
-                width: 800,
-                overwrite: false
-            },
-
-            files: [{
-                expand: true,
-                cwd: "static/original-images/",
-                src: ["**/*.jpg", "**/*.png"],
-                dest: "static/images/medium/",
-                extDot: "first"
-            }]
-        },
-
-    large: {
-            options: {
-                width: 1200,
-                overwrite: false
-            },
-
-            files: [{
-                expand: true,
-                cwd: "static/original-images/",
-                src: ["**/*.jpg", "**/*.png"],
-                dest: "static/images/large/",
-                extDot: "first"
-            }]
+          },
+          files: [{
+            expand: true,
+            src: ['**/*.{jpg,gif,png}'],
+            cwd: 'static/original-images',
+            dest: 'static/images'
+          }]
         }
-
     }
 });
 
-grunt.registerTask('resize', ["image_resize:thumbs", "image_resize:medium", "image_resize:large"]);
+grunt.registerTask('resize', ["responsive_images"]);
 grunt.registerTask('imageinfo', function(){
     var done = this.async();
     glob('static/images/**/*.{jpg,gif,png}', {}, function(err, files){
