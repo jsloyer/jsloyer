@@ -18,59 +18,6 @@ grunt.loadNpmTasks('grunt-shell');
 
 grunt.initConfig({
 
-
-
-    // ====================
-    // TASK: concat
-    // ====================
-    concat: {
-        dist: {
-            options: {
-                separator: ';'
-            },
-            src: [
-          'bower_components/jquery/dist/jquery.js',
-          'bower_components/packery/dist/packery.pkgd.js',
-          'bower_components/imagesloaded/imagesloaded.pkgd.js',
-          'bower_components/fluidbox/jquery.fluidbox.js',
-                '_js/site.js'
-            ],
-            dest: 'js/site.js'
-        }
-    },
-
-    // ===============
-    // TASK: CONNECT
-    // ===============
-    connect: {
-        dev: {
-            options: {
-                port: 4000,
-                base: "_site",
-                hostname: "127.0.0.1",
-                livereload: true
-            }
-        }
-    },
-
-
-    // ===============
-    // TASK: CONNECT
-    // ===============
-    copy: {
-        dist: {
-            files: [
-                { expand: true, src: ['bower_components/fontawesome/fonts/*'], dest: 'fonts/', flatten: true }
-            ]
-        },
-
-        jsdev: {
-            files: [
-                { expand: true, src: ['js/*'], dest: '_site/js/', flatten: true }
-            ]
-        }
-    },
-
     // ====================
     // TASK: image_resize
     // ====================
@@ -84,9 +31,9 @@ grunt.initConfig({
 
             files: [{
                 expand: true,
-                cwd: "files/originals/",
+                cwd: "static/images/",
                 src: ["**/*.jpg", "**/*.png"],
-                dest: "files/thumbs/",
+                dest: "static/img/thumbs/",
                 extDot: "first"
             }]
         },
@@ -99,9 +46,9 @@ grunt.initConfig({
 
             files: [{
                 expand: true,
-                cwd: "files/originals/",
+                cwd: "static/images/",
                 src: ["**/*.jpg", "**/*.png"],
-                dest: "files/medium/",
+                dest: "static/img/medium/",
                 extDot: "first"
             }]
         },
@@ -114,177 +61,15 @@ grunt.initConfig({
 
             files: [{
                 expand: true,
-                cwd: "files/originals/",
+                cwd: "static/images/",
                 src: ["**/*.jpg", "**/*.png"],
-                dest: "files/large/",
+                dest: "static/img/large/",
                 extDot: "first"
             }]
         }
 
-    },
-
-    // ====================
-    // TASK: jekyll
-    // ====================
-    jekyll: {
-        dev: {
-            options: {
-                config: "_config.yml",
-                drafts: true,
-                verbose: true,
-                raw: "exclude: [Gemfile, Gemfile.lock, bower.json, package.json, Gruntfile.js, node_modules, bower_components]"
-            }
-        },
-
-        prod: {
-            options: {
-                config: "_config.yml,_config_prod.yml",
-                verbose: true,
-                raw: "exclude: [Gemfile, Gemfile.lock, bower.json, package.json, Gruntfile.js, node_modules, bower_components]"
-            }
-        }
-    },
-
-
-    // ====================
-    // TASK: jshint
-    // ====================
-    jshint: {
-        dist: ['_js/*.js']
-    },
-
-
-    // ====================
-    // TASK: sass
-    // ====================
-    sass: {
-        dev: {
-            options: {
-                loadPath: '_sass'
-            },
-            files: {
-                '_site/css/main.css': '_sass/main.scss'
-            }
-        }
-    },
-
-
-    // ====================
-    // TASK: shell
-    // ====================
-    shell: {
-        deploy: {
-            command: "rm .jekyll-metadata; cd _site; git add -A; git commit -m 'Production build'; git push origin master;"
-        },
-
-        updatesite: {
-            command: "cd _site; git pull origin master;"
-        }
-    },
-
-
-    // ====================
-    // TASK: uglify
-    // ====================
-    uglify: {
-        dev: {
-            options: {
-                beautify: true
-            },
-
-            files: {
-                'js/site.min.js': ['js/site.js']
-            }
-        },
-
-        prod: {
-            files: {
-                'js/site.min.js': ['js/site.js']
-            },
-            mangle: {
-                except: ['jQuery']
-            }
-        }
-
-    },
-
-
-
-    // ====================
-    // TASK: watch
-    // ====================
-    watch: {
-        jekyll: {
-            files: [
-                './**/*.html',
-                './**/*.markdown',
-                './**/*.md',
-                './**/*.yml',
-
-                "!./node_modules/",
-                "!./_site/*",
-                "!./_site/**/*"
-            ],
-            tasks: ['jekyll:dev'],
-            options: {
-                livereload: true
-            }
-        },
-
-        js: {
-            files: ['_js/*.js'],
-            tasks: ['jshint:dist', 'concat:dist', 'uglify:dev', 'copy:jsdev'],
-            options: {
-                livereload: true
-            }
-        },
-
-        sass: {
-            files: ['./**/*.scss'],
-            tasks: ['sass:dev'],
-            options: {
-                livereload: true
-            }
-        }
     }
 });
-
-grunt.registerTask('default', [
-    'jshint:dist',
-    'concat:dist',
-    'uglify:dev',
-    'copy:dist',
-    'jekyll:dev',
-    'connect:dev',
-    'watch'
-]);
-
-grunt.registerTask('build', [
-    'jshint:dist',
-    'concat:dist',
-    'uglify:prod',
-    'copy:dist',
-    'processimages',
-    'jekyll:prod',
-]);
-
-grunt.registerTask('deploy', [
-    'shell:deploy'
-])
-
-grunt.registerTask('builddeploy', [
-    'build',
-    'deploy'
-]);
-
-grunt.registerTask('buildserve', [
-    'build',
-    'connect:dev:keepalive'
-]);
-
-grunt.registerTask('updatesite', ['shell:updatesite']);
-grunt.registerTask('serve', ['connect:dev:keepalive']);
-
 
 grunt.registerTask('resize', ["image_resize:thumbs", "image_resize:medium", "image_resize:large"]);
 grunt.registerTask('imageinfo', function(){
@@ -316,3 +101,5 @@ grunt.registerTask('imageinfo', function(){
 
 });
 grunt.registerTask('processimages', ['resize', 'imageinfo']);
+
+grunt.registerTask('default', ['processimages']);
