@@ -33,7 +33,7 @@ grunt.initConfig({
           },
           files: [{
             expand: true,
-            src: ['**/*.{jpg,gif,png}'],
+            src: ['**/*.{jpg,gif,png,jpeg}'],
             cwd: 'static/original-images',
             dest: 'static/images'
           }]

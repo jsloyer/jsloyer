@@ -3,7 +3,7 @@ categories = ["Tutorial", "Sample Code"]
 date = "2015-02-17T10:02:18-05:00"
 description = ""
 draft = false
-image = "/images/robots-blog-post-header1.jpg"
+image = "/original-images/robots-blog-post-header1.jpg"
 tags = ["bluemix", "cloudant", "node.js", "iot", "raspberry pi"]
 title = "Control home devices with Bluemix Internet of Things (Part 2)"
 aliases = [
@@ -74,11 +74,11 @@ I would highly recommend following the steps in [this page](https://docs.google.
 
 Below is a picture of my finished bread board with 16 channels.  I have included a wiring diagram as well.  Basically each GPIO port goes to the input side of the relay controller.  If you notice I have a couple left over LED’s on the bread board, this was done via the tutorial list above.
 
-[![2015 02 16 11.31.19 768x1024 Control home devices with Bluemix Internet of Things (Part 2)](/images/2015/06/2015-02-16-11.31.19.jpg)](/images/2015/06/2015-02-16-11.31.19.jpg)
+[![2015 02 16 11.31.19 768x1024 Control home devices with Bluemix Internet of Things (Part 2)](/images/2015/06/2015-02-16-11.31.19-medium.jpg)](/images/2015/06/2015-02-16-11.31.19-medium.jpg)
 
 What is going on above is each of the delays is plugged into a GPIO port and then plugged into the ground rail and connected by a resistor.  The particular resistor I am using is a 220 Ohm resistor.
 
-[![raspberry pi lights wiring diagram Control home devices with Bluemix Internet of Things (Part 2)](/images/2015/06/raspberry-pi-lights-wiring-diagram.png)](/images/2015/06/raspberry-pi-lights-wiring-diagram.png)
+[![raspberry pi lights wiring diagram Control home devices with Bluemix Internet of Things (Part 2)](/images/2015/06/raspberry-pi-lights-wiring-diagram-medium.png)](/images/2015/06/raspberry-pi-lights-wiring-diagram-medium.png)
 
 So let’s test some things out.  Let’s play a pre-loaded song.
 

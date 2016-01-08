@@ -3,7 +3,7 @@ categories = ["Video"]
 date = "2015-07-01T10:51:49-05:00"
 description = ""
 draft = false
-image = "/images/unplug.jpg"
+image = "/original-images/unplug.jpg"
 tags = ["bluemix", "devops", "zero downtime", "cloudfoundry"]
 title = "Zero Downtime Deployment with the CF Autopilot Plugin - Video"
 

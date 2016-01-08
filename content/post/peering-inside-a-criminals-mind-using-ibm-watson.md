@@ -3,7 +3,7 @@ categories = ["Sample Code", "Tutorial"]
 date = "2015-08-24T11:21:03-05:00"
 description = ""
 draft = false
-image = "/images/glasses.jpg"
+image = "/original-images/glasses.jpg"
 tags = ["bluemix", "node.js", "watson"]
 title = "Peering Inside a Criminal’s Mind using IBM Watson"
 aliases = [
@@ -30,7 +30,7 @@ There are two ways to try this out for yourself.  Let's go through both of them
 
   2. Click the button deploy.  The button will automagically deploy the Personality Insights starter app that we are going to use.  If you are interested in the code head over to [Github](https://github.com/IBM-Bluemix/personality-insights-nodejs).
 
-    [![Deploy to Bluemix](/images//2015/03/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/personality-insights-nodejs.git&cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd)
+    [![Deploy to Bluemix](/images//2015/03/button-medium.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/personality-insights-nodejs.git&cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd)
 
 
   3. Once you app is finished deploying click "View your app".  You will be taken to your app.
@@ -44,17 +44,17 @@ There are two ways to try this out for yourself.  Let's go through both of them
 
   6. Click on "Clear"
 
-    [![clear](/images//2015/07/clear-300x214.jpg)](/images/2015/07/clear.jpg)
+    [![clear](/images//2015/07/clear-300x214-medium.jpg)](/images/2015/07/clear-medium.jpg)
 
 
   7. Paste the text into the text box
 
-    [![enter-text](/images//2015/07/enter-text-300x209.jpg)](/images/2015/07/enter-text.jpg)
+    [![enter-text](/images//2015/07/enter-text-300x209-medium.jpg)](/images/2015/07/enter-text-medium.jpg)
 
 
   8. Click "Analyze"
 
-    [![analyze](/images//2015/07/analyze-300x198.jpg)](/images/2015/07/analyze.jpg)
+    [![analyze](/images//2015/07/analyze-300x198-medium.jpg)](/images/2015/07/analyze-medium.jpg)
 
 
 Watson will return us Dylann Roof's personality based on the manifesto in just a matter of seconds.
@@ -71,11 +71,11 @@ You consider helping others to guide a large part of what you do: you think it i
 
 Additionally Watson provides us a visualization as well.
 
-[![personality](/images//2015/07/personality-1006x1024.jpg)](/images/2015/07/personality.jpg)
+[![personality](/images//2015/07/personality-1006x1024-medium.jpg)](/images/2015/07/personality-medium.jpg)
 
 Let's next take a look at Anders Behring Breivik, who was responsible for the 2011 attacks in Norway.  His manifesto is available [here](https://info.publicintelligence.net/AndersBehringBreivikManifesto.pdf).  You will need to convert it to a `.txt` file. You can do this [here](http://www.zamzar.com/convert/pdf-to-txt/). It will email you a copy of the manifesto in a `.txt` file.
 
-[![pdf-to-txt](/images//2015/07/pdf-to-txt-300x103.jpg)](/images/2015/07/pdf-to-txt.jpg)
+[![pdf-to-txt](/images//2015/07/pdf-to-txt-300x103-medium.jpg)](/images/2015/07/pdf-to-txt-medium.jpg)
 
 So let's repeat the same steps as above.
 
@@ -96,9 +96,9 @@ You are motivated to seek out experiences that provide a strong feeling of prest
 You are relatively unconcerned with both taking pleasure in life and tradition. You prefer activities with a purpose greater than just personal enjoyment. And you care more about making your own path than following what others have done.  <cite> -- IBM Watson Analysis of Anders Behring Breivik's manifesto</cite></blockquote>
 
 
-[![personality-norway](/images//2015/07/personality-norway-1024x1024.jpg)](/images/2015/07/personality-norway.jpg)One last example.  I went to Virginia Tech and I was at the school when the [massacre happened there](http://www.cnn.com/2013/10/31/us/virginia-tech-shootings-fast-facts/).  This one hits quite close to home to me.  I was supposed to be in a classroom that fellow students were massacred but I overslept.  Let's take a look at Seung Hui Cho’s "Manifesto".  His manifesto is available [here](https://schoolshooters.info/sites/default/files/cho_manifesto_1.1.pdf).  You will need to convert it to a `.txt` file. You can do this [here](http://www.zamzar.com/convert/pdf-to-txt/). It will email you a copy of the manifesto in a `.txt` file.
+[![personality-norway](/images//2015/07/personality-norway-1024x1024-medium.jpg)](/images/2015/07/personality-norway-medium.jpg)One last example.  I went to Virginia Tech and I was at the school when the [massacre happened there](http://www.cnn.com/2013/10/31/us/virginia-tech-shootings-fast-facts/).  This one hits quite close to home to me.  I was supposed to be in a classroom that fellow students were massacred but I overslept.  Let's take a look at Seung Hui Cho’s "Manifesto".  His manifesto is available [here](https://schoolshooters.info/sites/default/files/cho_manifesto_1.1.pdf).  You will need to convert it to a `.txt` file. You can do this [here](http://www.zamzar.com/convert/pdf-to-txt/). It will email you a copy of the manifesto in a `.txt` file.
 
-[![pdf-to-txt](/images//2015/07/pdf-to-txt-300x103.jpg)](/images/2015/07/pdf-to-txt.jpg)
+[![pdf-to-txt](/images//2015/07/pdf-to-txt-300x103-medium.jpg)](/images/2015/07/pdf-to-txt-medium.jpg)
 
 So let's repeat the same steps as above.
 
@@ -118,7 +118,7 @@ More than most people, your choices are driven by a desire for modernity.
 You consider independence to guide a large part of what you do: you like to set your own goals to decide how to best achieve them. You are relatively unconcerned with tradition: you care more about making your own path than following what others have done. <cite> -- IBM Watson Analysis of Seung Hui Cho's manifesto</cite></blockquote>
 
 
-[![personality-virginia-tech](/images//2015/07/personality-virginia-tech-962x1024.jpg)](/images/2015/07/personality-virginia-tech.jpg)Let's do some analysis on all this data now.  It looks like all the shooter's from these massacres have the following in common.
+[![personality-virginia-tech](/images//2015/07/personality-virginia-tech-962x1024-medium.jpg)](/images/2015/07/personality-virginia-tech-medium.jpg)Let's do some analysis on all this data now.  It looks like all the shooter's from these massacres have the following in common.
 
 It looks like from the Charleston and Norway events both share the following traits and a high percentage of both of them.
 

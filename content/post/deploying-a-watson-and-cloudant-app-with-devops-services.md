@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2014-11-24T21:54:23-05:00"
 description = ""
 draft = false
-image = "/images/devops.jpg"
+image = "/original-images/devops.jpg"
 tags = ["bluemix", "javaee", "cloudant", "watson", "liberty"]
 title = "Deploying a Watson and Cloudant App with DevOps Services"
 aliases = [
@@ -52,7 +52,7 @@ So let’s get started.
   10. Click Remote Database, type in `https://jsloyer.cloudant.com/talent-manager`
 
 
-    [![replicate Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/replicate1.png)](/images/2015/06/replicate1.png)
+    [![replicate Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/replicate1-medium.png)](/images/2015/06/replicate1-medium.png)
 
 11. Type in your database name below, `talent-manager`, click Replicate
 
@@ -60,7 +60,7 @@ So let’s get started.
 
     Show Credentials for Cloudant, copy the long password inside of the quotes for the field password
 
-    [![password1 Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/password11.png)](/images/2015/06/password11.png)
+    [![password1 Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/password11-medium.png)](/images/2015/06/password11-medium.png)
 
 13. Switch back to the Cloudant tab, click Continue Replication
 
@@ -72,7 +72,7 @@ So let’s get started.
 
 17. Type in a name for your project, leave the rest of the information to their defaults and then click Save
 
-    [![fork project Deploying a Watson and Cloudant App with DevOps Services](https://developer.ibm.com/bluemix/wp-content/uploads/sites/20/2014/11/fork-project.png)](https://developer.ibm.com/bluemix/wp-content/uploads/sites/20/2014/11/fork-project.png)
+    [![fork project Deploying a Watson and Cloudant App with DevOps Services](https://developer.ibm.com/bluemix/wp-content/uploads/sites/20/2014/11/fork-project-medium.png)](https://developer.ibm.com/bluemix/wp-content/uploads/sites/20/2014/11/fork-project-medium.png)
 18. Edit `personafusion/manifest.yml`, change talent-manager (2 occurrences) to the name of your app
 
     (you can get this from the Bluemix tab you have open, its at the top of the page)
@@ -104,13 +104,13 @@ So let’s get started.
 
 25. Type in `personafusion` for Build Script Path, click Save
 
-    [![builder Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/builder.png)](/images/2015/06/builder.png)
+    [![builder Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/builder-medium.png)](/images/2015/06/builder-medium.png)
 
 26. Click add a stage
 
 27. Type in the name of your app (from step 17) in Application Name, click Save
 
-    [![deploy Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/deploy.png)](/images/2015/06/deploy.png)
+    [![deploy Deploying a Watson and Cloudant App with DevOps Services](/images/2015/06/deploy-medium.png)](/images/2015/06/deploy-medium.png)
 
 28. Click Request Build, (this should put a green check mark eventually), it will trigger a deploy
 

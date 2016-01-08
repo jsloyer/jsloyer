@@ -3,7 +3,7 @@ categories = ["Sample Code", "Tutorial", "Video"]
 date = "2015-02-06T09:49:21-05:00"
 description = ""
 draft = false
-image = "/images/robots-blog-post-header1.jpg"
+image = "/original-images/robots-blog-post-header1.jpg"
 tags = ["bluemix", "cloudant", "node.js", "iot", "raspberry pi"]
 title = "Control home devices with Bluemix Internet of Things"
 aliaes = [
@@ -14,7 +14,7 @@ aliaes = [
 
 The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020.  These devices make up something called the Internet of Things.  These devices can be controlled remotely and interconnected.
 
-![iotdevicesincrease Control home devices with Bluemix Internet of Things](/images/2015/06/iotdevicesincrease.png)
+![iotdevicesincrease Control home devices with Bluemix Internet of Things](/images/2015/06/iotdevicesincrease-medium.png)
 
 While a lot of these devices can be connected to the Internet, most of them are "dumb" devices right now.  To turn these "dumb" devices into smart devices you can use the [Internet of Things](http://internetofthings.ibmcloud.com) to connect them to the cloud.  Simple things such as a washing machine or a coffee pot can be connected to the Internet.  More practical systems can be connected also, such as a home automation system or a thermostat.  Going even further a mine could connect safety sensors to the Internet of Things as well.
 <!-- more -->
@@ -23,7 +23,7 @@ The Internet of Things allows for these devices to either be controlled or act a
 
 IBM Bluemix provides a platform for creating these apps that utilize all these sensors.  You can basically almost use any programming language you want, Bring Your Own Language (BYOL) and utilize services that do the heavy lifting for you.  This heavy lifting is the Internet of Things (IoT) service in Bluemix.  It implements that MQTT protocol and allows you to control and receive data from these devices.
 
-![robots blog post header1 1024x665 Control home devices with Bluemix Internet of Things](/images/2015/06/robots-blog-post-header1.jpg)
+![robots blog post header1 1024x665 Control home devices with Bluemix Internet of Things](/images/2015/06/robots-blog-post-header1-medium.jpg)
 
 Do you have a bunch of left over Christmas lights sitting around that will be collecting dust till next year? Until now Christmas lights are a once a year thing, that isn’t true anymore.  Time to get the dust off of your lights and use them for something fun! Enter Christmas Lights controlled by a Raspberry Pi via IoT in Bluemix!
 
@@ -127,11 +127,11 @@ Once you get all the items on the shopping list we need to start taking apart th
 
 Below is a wiring diagram that we need to complete.  You can do this multiple ways but below is a suggestion.
 
-![Capture 1024x642 Control home devices with Bluemix Internet of Things](/images/2015/06/Capture.png)
+![Capture 1024x642 Control home devices with Bluemix Internet of Things](/images/2015/06/Capture-medium.png)
 
 What we need to do is basically daisy chain all the "hot" wires together between each set of 4 gang double gang outlets.  We do this so we don’t overload a particular circuit.  So to do this we need to cut the end off of our cheap extension cord that has a plug on it, we need to then strip the wires, and then identity which wire is the hot/positive wire.  Below is a picture of a wire, the hot/positive wire will have dashes or stripes on it, the cold/neutral wire will NOT have any dashes or stripes:
 
-![electrical cord 1024x764 Control home devices with Bluemix Internet of Things](/images/2015/06/electrical-cord.jpg)
+![electrical cord 1024x764 Control home devices with Bluemix Internet of Things](/images/2015/06/electrical-cord-medium.jpg)
 
 We need to take the hot wire and put it into a wire nut.  We will then take some wire from our 50 feet, strip one of the ends and twist it into the wire nut.  This will get attached to positive input on the relay.  We need to repeat this for each channel.  In the picture below I have an additional wire going from the first wire nut to another wire nut because all the wires going to the relay wouldn’t fit into one wire nut.  We are just effectively connecting two wires together here.
 
@@ -139,17 +139,17 @@ The next step is running a wire from each channel on the relay to electrical out
 
 Before:
 
-![FH13MAR SWIOUT 14 Control home devices with Bluemix Internet of Things](/images/2015/06/FH13MAR_SWIOUT_14.jpg)
+![FH13MAR SWIOUT 14 Control home devices with Bluemix Internet of Things](/images/2015/06/FH13MAR_SWIOUT_14-medium.jpg)
 
-![electrical outlet garbage disposal 5 Control home devices with Bluemix Internet of Things](/images/2015/06/electrical-outlet-garbage-disposal-5.jpg)
+![electrical outlet garbage disposal 5 Control home devices with Bluemix Internet of Things](/images/2015/06/electrical-outlet-garbage-disposal-5-medium.jpg)
 
 After:
 
-![electrical outlet garbage disposal 4 Control home devices with Bluemix Internet of Things](/images/2015/06/electrical-outlet-garbage-disposal-4.jpg)
+![electrical outlet garbage disposal 4 Control home devices with Bluemix Internet of Things](/images/2015/06/electrical-outlet-garbage-disposal-4-medium.jpg)
 
 So next we need to connect our cold/negative wires to each of the outlets.  If you look at the wiring diagram (above) I have one cold/neutral wire going to the first outlet and each additional outlet is daisy chained to it.  This is just to complete the circuit.  Below is the finished product.  We basically have our outlets daisy chained together with our cold/neutral wires and then hold/positive wires have individual channels to the relay.
 
-![2014 12 02 15.16.57 Control home devices with Bluemix Internet of Things](/images/2015/06/2014-12-02-15.16.57.jpg)
+![2014 12 02 15.16.57 Control home devices with Bluemix Internet of Things](/images/2015/06/2014-12-02-15.16.57-medium.jpg)
 
 Congratulations the hard part is over! Well, at least for me, since electrical stuff isn’t my forte.
 

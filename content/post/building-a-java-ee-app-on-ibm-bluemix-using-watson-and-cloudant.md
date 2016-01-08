@@ -3,7 +3,7 @@ categories = ["Sample Code", "Tutorial", "Video"]
 date = "2014-10-14T22:36:53-05:00"
 description = ""
 draft = false
-image = "/images/hiring.png"
+image = "/original-images/hiring.png"
 tags = ["bluemix", "cloudant", "javaee", "watson"]
 title = "Building a Java EE app on IBM Bluemix Using Watson, Cloudant"
 aliases = [
@@ -61,17 +61,17 @@ Ok once we have all that setup we can start creating our app.
 
 First we need to sign into Bluemix, so open your browser and head on over to [Bluemix](http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd).  We need to login.  Up at the top lets go ahead and click on Catalog.
 
-[![catalog 300x99 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/catalog-medium.png)](/images/2015/06/catalog-medium.png)
+[![catalog 300x99 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/catalog-medium-medium.png)](/images/2015/06/catalog-medium-medium.png)
 
 Scroll down a little and click on Liberty
 
-[![liberty 1024x585 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/liberty-medium.png)](/images/2015/06/liberty-medium.png)
+[![liberty 1024x585 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/liberty-medium-medium.png)](/images/2015/06/liberty-medium-medium.png)
 
 On the right hand side we need to give our app a name.  Please note that this name must be unique.  Also remember this name as we will need it later…
 
 Click create.
 
-[![new app Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/new-app-medium.png)](/images/2015/06/new-app-medium.png)
+[![new app Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/new-app-medium-medium.png)](/images/2015/06/new-app-medium-medium.png)
 
 Bluemix will start deploying our app and Bluemix will start our app.
 
@@ -79,63 +79,63 @@ So next we need to add Cloudant and Watson to our app!
 
 So do you that make sure you are in the dashboard and have your app open like the screencap below.  We will then click the "Add A Service" button.
 
-[![add service 1024x683 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/add-service-medium.png)](/images/2015/06/add-service-medium.png)
+[![add service 1024x683 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/add-service-medium-medium.png)](/images/2015/06/add-service-medium-medium.png)
 
 First let’s add Watson.  Scroll down until you find the "User Modeling" Service.  Go ahead and click that.
 
-[![user modeling 1024x342 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/user-modeling-medium.png)](/images/2015/06/user-modeling-medium.png)
+[![user modeling 1024x342 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/user-modeling-medium-medium.png)](/images/2015/06/user-modeling-medium-medium.png)
 
 Again, all we have to do is click "Create" on the right hand side.
 
-[![watson create Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/watson-create-medium.png)](/images/2015/06/watson-create-medium.png)
+[![watson create Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/watson-create-medium-medium.png)](/images/2015/06/watson-create-medium-medium.png)
 
 Bluemix is going to ask us if we want to restage our app, we should click the "OK" button.  What Bluemix is asking us here is since we made a change to our app, the app needs to be restarted to bind in Watson.
 
-[![restage Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/restage-medium.png)](/images/2015/06/restage-medium.png)
+[![restage Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/restage-medium-medium.png)](/images/2015/06/restage-medium-medium.png)
 
 Next, let’s click "Add A Service" again.
 
-[![addserviceagain Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/addserviceagain-medium.png)](/images/2015/06/addserviceagain-medium.png)
+[![addserviceagain Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/addserviceagain-medium-medium.png)](/images/2015/06/addserviceagain-medium-medium.png)
 This time scroll down to the bottom and choose "Cloudant".
 
-[![cloudant 1024x245 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudant-medium.png)](/images/2015/06/cloudant-medium.png)
+[![cloudant 1024x245 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudant-medium-medium.png)](/images/2015/06/cloudant-medium-medium.png)
 
 Then click "Create" on the right hand side.
 
-[![cloudantcreate Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantcreate-medium.png)](/images/2015/06/cloudantcreate-medium.png)
+[![cloudantcreate Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantcreate-medium-medium.png)](/images/2015/06/cloudantcreate-medium-medium.png)
 
 It is going to ask us to restage our app again, go ahead and click "OK".
 
-[![cloudantrestage Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantrestage-medium.png)](/images/2015/06/cloudantrestage-medium.png)
+[![cloudantrestage Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantrestage-medium-medium.png)](/images/2015/06/cloudantrestage-medium-medium.png)
 
 Now we have all our services added.  Let’s go ahead and start getting some data imported.
 
 On the dashboard for the app let’s go ahead and click on Cloudant.
 
-[![cloudantclick Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantclick-medium.png)](/images/2015/06/cloudantclick-medium.png)
+[![cloudantclick Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantclick-medium-medium.png)](/images/2015/06/cloudantclick-medium-medium.png)
 
 Next, go ahead and click on "Launch".  What this is going to do is Single Sign us onto our Cloudant account for us.
 
-[![cloudantlaunch 1024x351 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantlaunch-medium.png)](/images/2015/06/cloudantlaunch-medium.png)
+[![cloudantlaunch 1024x351 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/cloudantlaunch-medium-medium.png)](/images/2015/06/cloudantlaunch-medium-medium.png)
 
 So let’s pause and explain what Cloudant is.  Cloudant is a No-SQL database that is based on CouchDB.  The big difference between a relationship database and No-SQL database is illustrated below.  In the relationship database you have to have multiple tables to represent the data and have to use SQL and JOIN statements to get data from both tables.  In a No-SQL database which is commonly referred to as a document store database you stores JSON documents/data (as illustrated on the left below).
 
-[![Figure5a Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/Figure5a-medium.png)](/images/2015/06/Figure5a-medium.png)
+[![Figure5a Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/Figure5a-medium-medium.png)](/images/2015/06/Figure5a-medium-medium.png)
 
 So back to the demo….
 
 We need to copy some existing data in instead of trying to create it ourselves.  In CouchDB this is called a replication.  It’s just basically making a bunch of API calls for us and copying data.
 
 So let’s go ahead and click  "Add New Database" in the top left.
-[![addnewdb Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/addnewdb-medium.png)](/images/2015/06/addnewdb-medium.png)
+[![addnewdb Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/addnewdb-medium-medium.png)](/images/2015/06/addnewdb-medium-medium.png)
 
 Let’s choose a name for our database, lets use "talent-manager".  You can choose something else but remember it for later…
 
-[![dbname Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/dbname-medium.png)](/images/2015/06/dbname-medium.png)
+[![dbname Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/dbname-medium-medium.png)](/images/2015/06/dbname-medium-medium.png)
 
 On the left click replication.
 
-[![replication Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/replication-medium.png)](/images/2015/06/replication-medium.png)
+[![replication Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/replication-medium-medium.png)](/images/2015/06/replication-medium-medium.png)
 
 Here are 4 really important steps…
 
@@ -154,48 +154,48 @@ Here are 4 really important steps…
   4. Click Replicate
 
 
-[![replicate Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/replicate-medium.png)](/images/2015/06/replicate-medium.png)
+[![replicate Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/replicate-medium-medium.png)](/images/2015/06/replicate-medium-medium.png)
 
 It is going to ask us for a password.
 
-[![password Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/password-medium.png)](/images/2015/06/password-medium.png)
+[![password Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/password-medium-medium.png)](/images/2015/06/password-medium-medium.png)
 
 We can get this password from Bluemix.  So let’s switch back to our Bluemix tab in the browser. Then click the "Overview" link on the left.
 
-[![overviewbluemix Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/overviewbluemix-medium.png)](/images/2015/06/overviewbluemix-medium.png)
+[![overviewbluemix Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/overviewbluemix-medium-medium.png)](/images/2015/06/overviewbluemix-medium-medium.png)
 
 To get the password for Cloudant click "Show Credentials" on the Cloudant tile.
 
-[![credentialsshow Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/credentialsshow-medium.png)](/images/2015/06/credentialsshow-medium.png)
+[![credentialsshow Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/credentialsshow-medium-medium.png)](/images/2015/06/credentialsshow-medium-medium.png)
 
 Double click the long gorpy password as show in the screenshot below.  Right click to copy or Control+C on Windows or Command+C on Mac to copy.
 
-[![password1 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/password1-medium.png)](/images/2015/06/password1-medium.png)
+[![password1 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/password1-medium-medium.png)](/images/2015/06/password1-medium-medium.png)
 
 Let’s switch back to our Cloudant tab.  We paste the paste in (step 1), and then click "Continue Replication" (step 2).
 
-[![enterpassword Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/enterpassword-medium.png)](/images/2015/06/enterpassword-medium.png)
+[![enterpassword Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/enterpassword-medium-medium.png)](/images/2015/06/enterpassword-medium-medium.png)
 
 The copy has started, let’s go ahead and click "Databases" on the top left.
 
-[![datagbases Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/datagbases-medium.png)](/images/2015/06/datagbases-medium.png)
+[![datagbases Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/datagbases-medium-medium.png)](/images/2015/06/datagbases-medium-medium.png)
 
 If the replication was successfull it should show 117 documents for the talent-manager DB, is the number is lower, refresh the page, the copy hasn’t finished yet.
 
-[![copydone 1024x219 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/copydone-medium.png)](/images/2015/06/copydone-medium.png)
+[![copydone 1024x219 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/copydone-medium-medium.png)](/images/2015/06/copydone-medium-medium.png)
 Ok now onto the code, let’s launch Eclipse.
 
 In Eclipse, right click on the project’s area on the left.
 
-[![import Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/import-medium.png)](/images/2015/06/import-medium.png)
+[![import Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/import-medium-medium.png)](/images/2015/06/import-medium-medium.png)
 
 Under General click existing project into workspace and click next
 
-[![existingproject Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/existingproject-medium.png)](/images/2015/06/existingproject-medium.png)
+[![existingproject Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/existingproject-medium-medium.png)](/images/2015/06/existingproject-medium-medium.png)
 
 Next we want to find our project we downloaded from github.  We need to browse to the directory where it is.  Once you find the talent-manager folder, go one more level down into that into a folder called personafusion (as shown below). Click finish.
 
-[![finishimport Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/finishimport-medium.png)](/images/2015/06/finishimport-medium.png)
+[![finishimport Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/finishimport-medium-medium.png)](/images/2015/06/finishimport-medium-medium.png)
 
 Next, we need to make a couple code edits…
 
@@ -230,11 +230,11 @@ After:
 
 Ok, so the app is basically done, we need to build our war file now, on the left side in Eclipse, open build.xml.  On the right hand side right click build [default] and then "Run As" and then "Ant Build".  This will generate our WAR file for us that we will deploy.
 
-[![antbuild 1024x528 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/antbuild-medium.png)](/images/2015/06/antbuild-medium.png)
+[![antbuild 1024x528 Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/antbuild-medium-medium.png)](/images/2015/06/antbuild-medium-medium.png)
 
 In the bottom it should say "BUILD SUCESSFULL".
 
-[![buildfinished Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/buildfinished-medium.png)](/images/2015/06/buildfinished-medium.png)
+[![buildfinished Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/buildfinished-medium-medium.png)](/images/2015/06/buildfinished-medium-medium.png)
 
 The next and last step involves deploy your app to bluemix.  This step requires the Cloud Foundry CLI to be installed (if you haven’t done this yet scroll back up the pre-req’s section above).
 
@@ -263,7 +263,7 @@ There are two important lines in here, host and name. These values need to be un
 
 This value comes from Bluemix, lets open the Bluemix dashboard in our web browser again.  In the screenshot below we can just copy the name of the app and paste this into the `manifest.yml` file.  So don’t copy my apps name exactly as it won’t work, it needs to be your app’s unique name.
 
-[![appname Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/appname-medium.png)](/images/2015/06/appname-medium.png)
+[![appname Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/appname-medium-medium.png)](/images/2015/06/appname-medium-medium.png)
 
 Now the final step we need to cd (change directory) in our command prompt or terminal to where the `manifest.yml` and webStarterApp.war are located.  For me its located at /Users/jsloyer/Downloads/talent-manager-master/personafusion.
 
@@ -275,7 +275,7 @@ Now the final step we need to cd (change directory) in our command prompt or ter
 
 The cf push command pushes our app to Bluemix, a bunch of text will fly bay saying its deploying and eventually it will say the app is starting and then it is up and running.  Bluemix will give you a URL you can access your app at.
 
-[![apprunning Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/apprunning-medium.png)](/images/2015/06/apprunning-medium.png)
+[![apprunning Building a Java EE app on IBM Bluemix Using Watson and Cloudant ](/images/2015/06/apprunning-medium-medium.png)](/images/2015/06/apprunning-medium-medium.png)
 
 Voila!!!!  We created a Java web app using Cloudant and Watson on IBM Bluemix!
 

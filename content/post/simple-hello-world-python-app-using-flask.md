@@ -3,7 +3,7 @@ categories = ["Video", "Tutorial", "Sample Code"]
 date = "2015-03-30T10:17:51-05:00"
 description = ""
 draft = false
-image = "/images/helloworld.png"
+image = "/original-images/helloworld.png"
 tags = ["bluemix", "flask", "python"]
 title = "Simple Hello World Python App using Flask"
 aliases = [
@@ -35,13 +35,13 @@ In this tutorial we are going to go through two steps to deploy the app.  One i
 
   3. Click the button below (this will deploy the app for you).
 
-    [![button Simple Hello World Python App using Flask](/images/2015/03/button.png)](https://bluemix.net/deploy?repository=https%3A%2F%2Fgithub.com%2FIBM-Bluemix%2Fpython-hello-world-flask.git&cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp)
+    [![button Simple Hello World Python App using Flask](/images/2015/03/button-medium.png)](https://bluemix.net/deploy?repository=https%3A%2F%2Fgithub.com%2FIBM-Bluemix%2Fpython-hello-world-flask.git&cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp)
 
 
   4. You will come to a page that has a button called “Login”.  Go ahead and click that.
 
 
-  5. Next you will be taken to a page that asks you to create an alias.  If my email address was jeff.davis251@gmail.com I would use jeffdavis251.  Hint it doesn’t like periods ![icon smile Simple Hello World Python App using Flask](/images/2015/03/icon_smile.gif)
+  5. Next you will be taken to a page that asks you to create an alias.  If my email address was jeff.davis251@gmail.com I would use jeffdavis251.  Hint it doesn’t like periods ![icon smile Simple Hello World Python App using Flask](/images/2015/03/icon_smile-medium.gif)
 
 
   6. Click Create.
@@ -51,14 +51,14 @@ In this tutorial we are going to go through two steps to deploy the app.  One i
 
 
   8. Now everything is basically setup, it will take us to a page that looks like what is below, just click the “Deploy” button.
-[![deploybutton1 1024x541 Simple Hello World Python App using Flask](/images/2015/03/deploybutton1-1024x541.png)](/images/2015/03/deploybutton1.png)
+[![deploybutton1 1024x541 Simple Hello World Python App using Flask](/images/2015/03/deploybutton1-1024x541-medium.png)](/images/2015/03/deploybutton1-medium.png)
 
 
   9. Grab a cup of coffee or take a bathroom break, well a quick one!  It will only take a minute or two to deploy the app.
 
 
   10. In a hot second you should be taken to a page that looks like what is below.  To view your hello world app just click the button “View your App”.
-[![deploy done 1024x544 Simple Hello World Python App using Flask](/images/2015/03/deploy-done-1024x544.png)](/images/2015/03/deploy-done.png)
+[![deploy done 1024x544 Simple Hello World Python App using Flask](/images/2015/03/deploy-done-1024x544-medium.png)](/images/2015/03/deploy-done-medium.png)
 
 
 Thats it for the quick and easy steps.  Let’s go through the more advanced steps where you can modify the code and upload the app from your own machine.
