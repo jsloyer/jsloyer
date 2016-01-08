@@ -290,27 +290,12 @@ For a video walkthrough of this demo please visit [http://ibm.biz/talent-manager
 
 This app was developed over the course of 48 hours at an internal hackathon. The developers and designers that worked on this are the following.
 
-
-
-
   * Eva XIAOHUI LUO
-
-
   * MICHAEL J. YOUNG
-
-
   * SEAN J. WELLECK
-
-
   * BRIAN T. HAN
-
-
   * MICHAEL POPLAVSKI
-
-
   * ALAN XIA
-
-
   * Jeff Sloyer
 
 
