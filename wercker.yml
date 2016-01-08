@@ -1,4 +1,4 @@
-box: debian
+box: nodesource/trusty
 build:
   steps:
     - install-packages:
