@@ -33,7 +33,11 @@ disqusShortname = "jeffsloyerio"
   url = "/about/"
   weight = -180
 [[menu.main]]
+  name = "Speaking"
+  url = "/speaking/"
+  weight = -160
+[[menu.main]]
   name = "Archives"
   url = "/post/"
-  weight = -160
+  weight = -140
 
