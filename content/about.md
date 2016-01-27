@@ -14,7 +14,7 @@ Jeff is also a home brewer, just a word of caution here, he is still learning…
 
 Additionally, Jeff is a foodie.  He loves traveling and eating new food and experiencing different cultures.  Additionally, the travel bug has bitten Jeff hard.  He loves to travel to new places and spends a decent amount of time on airplanes.  He even loves traveling so much he enjoys going through security.  Weird I know right???  One day he hopes to get his own G5.
 
-Lastly, Jeff is a big believer in the 2nd amendment and is an marksman.
+Lastly, Jeff is a big believer in the 2nd amendment and is a marksman.
 
 Links:
 
