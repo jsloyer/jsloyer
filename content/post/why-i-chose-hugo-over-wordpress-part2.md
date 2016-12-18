@@ -28,7 +28,7 @@ hugo new site jsloyer
 
 With Hugo you you can use themes, I am using a modified version of [StartBootstrap Clean Blog](https://github.com/humboldtux/startbootstrap-clean-blog).
 
-I embedded the theme into my [Github project](https://github.com/jsloyer/jsloyer/tree/master/themes/startbootstrap-clean-blog).
+I embedded the theme into my [GitHub project](https://github.com/jsloyer/jsloyer/tree/master/themes/startbootstrap-clean-blog).
 
 Once you embed the theme you need to tell Hugo to use the theme.
 
@@ -38,9 +38,9 @@ You do this in [config.toml](https://github.com/jsloyer/jsloyer/blob/master/conf
 theme = "startbootstrap-clean-blog"
 ```
 
-Speaking of git you need to setup a Github project, the name is really important... If you are publishing the Hugo site under your own Github org, ie your username, the git project needs to match that.  For me my Github username is `jsloyer` so my git project name is `jsloyer` as well.  The reason for this is how Github pages works in picking up the build and publishing for a Github pages site.
+Speaking of git you need to setup a GitHub project, the name is really important... If you are publishing the Hugo site under your own GitHub org, ie your username, the git project needs to match that.  For me my GitHub username is `jsloyer` so my git project name is `jsloyer` as well.  The reason for this is how GitHub pages works in picking up the build and publishing for a GitHub pages site.
 
-You will be doing all of your work on the `master` branch.  Think of the `master` branch as you would with any of piece of software, the `master` branch is the raw code, in this case just markdown.  There is another special magic branch called `gh-pages` that we will go through later that makes your repo into a Github pages site.
+You will be doing all of your work on the `master` branch.  Think of the `master` branch as you would with any of piece of software, the `master` branch is the raw code, in this case just markdown.  There is another special magic branch called `gh-pages` that we will go through later that makes your repo into a GitHub pages site.
 
 ### Creating a post
 
@@ -87,11 +87,11 @@ git commit -m "my awesome post"
 git push origin master
 ```
 
-At this point you think you might be done but you aren't you need to setup Github Pages and a pipeline...
+At this point you think you might be done but you aren't you need to setup GitHub Pages and a pipeline...
 
-I chose [Wercker](http://wercker.com) as my CI engine for this.  It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to Github.
+I chose [Wercker](http://wercker.com) as my CI engine for this.  It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to GitHub.
 
-Before we get into the pipeline we need to setup the git project as a Github pages site.
+Before we get into the pipeline we need to setup the git project as a GitHub pages site.
 
 Goto the settings page for your project, for me its `https://github.com/jsloyer/jsloyer/settings`.
 
@@ -101,7 +101,7 @@ Click "Launch automatic page generator", see below.  Go through the wizard, it r
 
 [![automatic page generator](/images/gh-pages-generation-medium.jpg)](/images/gh-pages-generation-medium.jpg)
 
-Once you have this setup it might take a little bit but your site will be avvailable.  For example my site without the custom domain name is `http://jsloyer.github.io/jsloyer`.  Replace your github username with mine and you will be able to access the default site.
+Once you have this setup it might take a little bit but your site will be available.  For example my site without the custom domain name is `http://jsloyer.github.io/jsloyer`.  Replace your GitHub username with mine and you will be able to access the default site.
 
 **Note:**  If you want to use a custom domain name I'll include the instructions below, for example my site is hosted on `www.jeffsloyer.io`.
 
@@ -251,24 +251,24 @@ grunt.registerTask('default', ['processimages']);
 
 ```
 
-Check in the above files to Github, the files are the following.
+Check in the above files to GitHub, the files are the following.
 - `wercker.yml`
 - `Gruntfile.js`
 - `package.json`
 
-The next step is getting a token from Github.  To generate a token goto https://github.com/settings/tokens.
+The next step is getting a token from GitHub.  To generate a token goto https://github.com/settings/tokens.
 
-You will want a token with the following permissions.  **Note once you generate the token copy it because Github won't display it to you again...**
+You will want a token with the following permissions.  **Note once you generate the token copy it because GitHub won't display it to you again...**
 
-[![github token](/images/github-token-medium.jpg)](/images/github-token-medium.jpg)
+[![GitHub token](/images/GitHub-token-medium.jpg)](/images/GitHub-token-medium.jpg)
 
-Next we need to goto [Wercker](https://wercker.com) and login with our Github credentials.  Once you have logged in click "Create" at the top and choose application or just click [here](https://app.wercker.com/applications/create).  You will need to choose your your repo and I chose to make my pipeline private, it is up to you.  Once you have finished that you need enter in yout Gitub token so Wercker and deploy your built Hugo site back to Github.
+Next we need to goto [Wercker](https://wercker.com) and login with our GitHub credentials.  Once you have logged in click "Create" at the top and choose application or just click [here](https://app.wercker.com/applications/create).  You will need to choose your your repo and I chose to make my pipeline private, it is up to you.  Once you have finished that you need enter in yout Gitub token so Wercker and deploy your built Hugo site back to GitHub.
 
-Next we need to edit the pipeline to deploy to Github.  To do this click on the workflows tab.  For example my link is https://app.wercker.com/jsloyer/jsloyer/workflows.
+Next we need to edit the pipeline to deploy to GitHub.  To do this click on the workflows tab.  For example my link is https://app.wercker.com/jsloyer/jsloyer/workflows.
 
-Under pipeline there should already be one called `build`.  Click on `build`.  Scroll down to "Ignore Branches", type in `gh-pages`.  We are ignoring the `gh-pages` branch as we don't ever want to build that, we just build master.  Click "Update".  Go back in your browser.  We need to add another pipeline called `GithubPages`.  We need to set an environment variable called `GIT_TOKEN`, paste in your Github token from earlier, click "Protected".  Don't worry Wercker won't expose this to the public.  For the name enter in `GithubPages`.  For "YML Pipeline name" enter in `deploy`.  Save this and you are now finished.
+Under pipeline there should already be one called `build`.  Click on `build`.  Scroll down to "Ignore Branches", type in `gh-pages`.  We are ignoring the `gh-pages` branch as we don't ever want to build that, we just build master.  Click "Update".  Go back in your browser.  We need to add another pipeline called `GitHubPages`.  We need to set an environment variable called `GIT_TOKEN`, paste in your GitHub token from earlier, click "Protected".  Don't worry Wercker won't expose this to the public.  For the name enter in `GitHubPages`.  For "YML Pipeline name" enter in `deploy`.  Save this and you are now finished.
 
-To trigger a build check in a file into the master branch, the pipeline should execute and deploy your site back to Github Pages.  If it doesn't post a comment below and I will help you through it.
+To trigger a build check in a file into the master branch, the pipeline should execute and deploy your site back to GitHub Pages.  If it doesn't post a comment below and I will help you through it.
 
 ### Advanced Stuff
 Below I am going to go through some advanced stuff that you probably want...
@@ -276,9 +276,9 @@ Below I am going to go through some advanced stuff that you probably want...
 #### Custom Domain Name
 For my site my site is available at `www.jeffsloyer.io`.  To do this you need to have the domain name in your `config.toml`, mine is [available here](https://github.com/jsloyer/jsloyer/blob/master/config.toml#L1).  Additionally you need your domain name in your `wercker.yml` as well, mine is posted above.
 
-Lastly you need a CNAME entry with your registrar to point to Github.  For more information go [here](https://help.github.com/articles/setting-up-a-www-subdomain/).  The CNAME record should point to `your-username.github.io`.  For example my site `www.jeffsloyer.io` has a CNAME record that points to `jsloyer.github.io`.  It migh take a bit for DNS to update, depends on how long of a TTL you have...
+Lastly you need a CNAME entry with your registrar to point to GitHub.  For more information go [here](https://help.github.com/articles/setting-up-a-www-subdomain/).  The CNAME record should point to `your-username.GitHub.io`.  For example my site `www.jeffsloyer.io` has a CNAME record that points to `jsloyer.GitHub.io`.  It migh take a bit for DNS to update, depends on how long of a TTL you have...
 
-Follow the instructions [here](https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-github-pages-site/) to add the domain name to the Github project as well.
+Follow the instructions [here](https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-GitHub-pages-site/) to add the domain name to the GitHub project as well.
 
 ### Add-ons
 Hugo has a lot of addons, some are even built right in.  For example Google Analytics and Disqus.
