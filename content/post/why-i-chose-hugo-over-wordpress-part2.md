@@ -89,7 +89,7 @@ git push origin master
 
 At this point you think you might be done but you aren't you need to setup Github Pages and a pipeline...
 
-I chose [Werkcer](http://wercker.com) as my CI engine for this.  It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to Github.
+I chose [Wercker](http://wercker.com) as my CI engine for this.  It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to Github.
 
 Before we get into the pipeline we need to setup the git project as a Github pages site.
 
