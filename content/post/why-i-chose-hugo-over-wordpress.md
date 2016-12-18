@@ -49,6 +49,6 @@ Additionally, with Hugo I am storing my site on [Github](http://github.com/jsloy
 
 ## Migrating the site
 
-In my [next post](/post/why-i-chose-hugo-over-wordpress/ I will go through how I migrated my site from Wordpress to Hugo.  Hope this has been informative and hopefully interesting.  Please leave some comments below!
+In my [next post](/post/why-i-chose-hugo-over-wordpress/) I will go through how I migrated my site from Wordpress to Hugo.  Hope this has been informative and hopefully interesting.  Please leave some comments below!
 
 Also please follow me on Twitter at [@jsloyer](http://twitter.com/jsloyer) and follow me on [Youtube](https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng)!

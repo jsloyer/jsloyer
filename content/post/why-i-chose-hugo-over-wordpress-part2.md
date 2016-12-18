@@ -2,7 +2,7 @@
 categories = ["Other"]
 date = "2016-12-18T14:11:14-05:00"
 description = ""
-draft = true
+draft = false
 image = "/original-images/migrate.jpg"
 tags = ["wordpress", "migrate"]
 title = "Why I Chose Hugo over Wordpress - Part 2"
