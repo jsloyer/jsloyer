@@ -51,14 +51,14 @@ In this tutorial we are going to go through two steps to deploy the app.  One i
 
 
   8. Now everything is basically setup, it will take us to a page that looks like what is below, just click the “Deploy” button.
-[![deploybutton1 1024x541 Simple Hello World Python App using Flask](/images/2015/03/deploybutton1-1024x541-medium.png)](/images/2015/03/deploybutton1-medium.png)
+[![deploybutton1 1024x541 Simple Hello World Python App using Flask](/images/2015/03/deploybutton1-medium.png)](/images/2015/03/deploybutton1-medium.png)
 
 
   9. Grab a cup of coffee or take a bathroom break, well a quick one!  It will only take a minute or two to deploy the app.
 
 
   10. In a hot second you should be taken to a page that looks like what is below.  To view your hello world app just click the button “View your App”.
-[![deploy done 1024x544 Simple Hello World Python App using Flask](/images/2015/03/deploy-done-1024x544-medium.png)](/images/2015/03/deploy-done-medium.png)
+[![deploy done 1024x544 Simple Hello World Python App using Flask](/images/2015/03/deploy-done-medium.png)](/images/2015/03/deploy-done-medium.png)
 
 
 Thats it for the quick and easy steps.  Let’s go through the more advanced steps where you can modify the code and upload the app from your own machine.

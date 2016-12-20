@@ -68,7 +68,7 @@ That’s it.   You should have some output like the following. With Bluemix and
 
 Personality with percentages:
 
-![personalitysotu 461x1024 How Watson and Bluemix see the State of the Union](/images/2015/06/personalitysotu-461x1024-medium.jpg)
+![personalitysotu 461x1024 How Watson and Bluemix see the State of the Union](/images/2015/06/personalitysotu-medium.jpg)
 
 Personality Visualization:
 
