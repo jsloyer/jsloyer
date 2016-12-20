@@ -119,17 +119,17 @@ You will be then brought to a screen that ask you to setup your pipeline.
 
 First, we need to remove the test pipeline, lets click on "Delete". If you had unit tests you could run them here, for example `grunt`.
 
-[![deletepipeline](/images/2015/07/deletepipeline-300x256-medium.jpg)](/images/2015/07/deletepipeline-medium.jpg)
+[![deletepipeline](/images/2015/07/deletepipeline-medium.jpg)](/images/2015/07/deletepipeline-medium.jpg)
 
 
 
 Next since this example is a Node.Js project, we want to make sure the node modules are correct, we want to run `npm install` here.  We need to clear out the initial starter setup commands that have been highlighed below.
 
-[![clearsetup](/images/2015/07/clearsetup-300x256-medium.jpg)](/images/2015/07/clearsetup-medium.jpg)
+[![clearsetup](/images/2015/07/clearsetup-medium.jpg)](/images/2015/07/clearsetup-medium.jpg)
 
 It should look like the following now.
 
-[![npminstall](/images/2015/07/npminstall-300x229-medium.jpg)](/images/2015/07/npminstall-medium.jpg)
+[![npminstall](/images/2015/07/npminstall-medium.jpg)](/images/2015/07/npminstall-medium.jpg)
 
 Note, if you are using a different language you would want to run the appropriate dependency installer here, for example for Java `mvn install`.
 
@@ -137,7 +137,7 @@ Lastly, click "Save and goto dashboard".
 
 Click on "Project settings" in the top right, then click on "Environment variables".  You will be brought to a screen like the following.
 
-[![envars](/images/2015/07/envars-300x149-medium.jpg)](/images/2015/07/envars-medium.jpg)
+[![envars](/images/2015/07/envars-medium.jpg)](/images/2015/07/envars-medium.jpg)
 
 You need to setup a couple environment variables to make this work.
 
@@ -153,15 +153,15 @@ You need to setup a couple environment variables to make this work.
 
 Below is a screen shot of things setup.
 
-[![envarssetup](/images/2015/07/envarssetup-300x161-medium.jpg)](/images/2015/07/envarssetup-medium.jpg)
+[![envarssetup](/images/2015/07/envarssetup-medium.jpg)](/images/2015/07/envarssetup-medium.jpg)
 
 Next, click deployment on the left and type in "master" without the quotes for the branch name and click "Save pipeline settings".
 
-[![masterbranch](/images/2015/07/masterbranch-300x115-medium.jpg)](/images/2015/07/masterbranch-medium.jpg)
+[![masterbranch](/images/2015/07/masterbranch-medium.jpg)](/images/2015/07/masterbranch-medium.jpg)
 
 Click "Custom Script".
 
-[![customscript](/images/2015/07/customscript-300x207-medium.jpg)](/images/2015/07/customscript-medium.jpg)
+[![customscript](/images/2015/07/customscript-medium.jpg)](/images/2015/07/customscript-medium.jpg)
 
 Paste in the following code, replace `myapp` with the name of your app.
 Note: This requires your app to have a `manifest.yml`
@@ -170,7 +170,7 @@ Note: This requires your app to have a `manifest.yml`
 
 It should look like the following.
 
-[![codesnip](/images/2015/07/codesnip-300x234-medium.jpg)](/images/2015/07/codesnip-medium.jpg)
+[![codesnip](/images/2015/07/codesnip-medium.jpg)](/images/2015/07/codesnip-medium.jpg)
 
 Click "Create".
 
