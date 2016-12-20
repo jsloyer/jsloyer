@@ -103,7 +103,7 @@ Secondly make sure you have signed up for a Codeship account, to do this head [
 
 Once you are signed in click "Setup new Project", it will bring you a screen like below.
 
-[![connectscm](/images/2015/07/connectscm-300x144-medium.png)](/images/2015/07/connectscm-medium.png)
+[![connectscm](/images/2015/07/connectscm-medium.png)](/images/2015/07/connectscm-medium.png)
 
 
 
@@ -111,7 +111,7 @@ Click on the button on the left.   If you signed up with your Github account it
 
 Once you have done this you will get a screen like below.  Codeship will show you all the projects you have access to.
 
-[![choose repo](/images/2015/07/choose-repo-300x260-medium.png)](/images/2015/07/choose-repo-medium.png)
+[![choose repo](/images/2015/07/choose-repo-medium.png)](/images/2015/07/choose-repo-medium.png)
 
 Click on the repo you would like to use.
 

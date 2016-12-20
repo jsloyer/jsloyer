@@ -44,17 +44,17 @@ There are two ways to try this out for yourself.  Let's go through both of them
 
   6. Click on "Clear"
 
-    [![clear](/images//2015/07/clear-300x214-medium.jpg)](/images/2015/07/clear-medium.jpg)
+    [![clear](/images//2015/07/clear-medium.jpg)](/images/2015/07/clear-medium.jpg)
 
 
   7. Paste the text into the text box
 
-    [![enter-text](/images//2015/07/enter-text-300x209-medium.jpg)](/images/2015/07/enter-text-medium.jpg)
+    [![enter-text](/images//2015/07/enter-text-medium.jpg)](/images/2015/07/enter-text-medium.jpg)
 
 
   8. Click "Analyze"
 
-    [![analyze](/images//2015/07/analyze-300x198-medium.jpg)](/images/2015/07/analyze-medium.jpg)
+    [![analyze](/images//2015/07/analyze-medium.jpg)](/images/2015/07/analyze-medium.jpg)
 
 
 Watson will return us Dylann Roof's personality based on the manifesto in just a matter of seconds.
@@ -75,7 +75,7 @@ Additionally Watson provides us a visualization as well.
 
 Let's next take a look at Anders Behring Breivik, who was responsible for the 2011 attacks in Norway.  His manifesto is available [here](https://info.publicintelligence.net/AndersBehringBreivikManifesto.pdf).  You will need to convert it to a `.txt` file. You can do this [here](http://www.zamzar.com/convert/pdf-to-txt/). It will email you a copy of the manifesto in a `.txt` file.
 
-[![pdf-to-txt](/images//2015/07/pdf-to-txt-300x103-medium.jpg)](/images/2015/07/pdf-to-txt-medium.jpg)
+[![pdf-to-txt](/images//2015/07/pdf-to-txt-medium.jpg)](/images/2015/07/pdf-to-txt-medium.jpg)
 
 So let's repeat the same steps as above.
 
@@ -98,7 +98,7 @@ You are relatively unconcerned with both taking pleasure in life and tradition. 
 
 [![personality-norway](/images//2015/07/personality-norway-1024x1024-medium.jpg)](/images/2015/07/personality-norway-medium.jpg)One last example.  I went to Virginia Tech and I was at the school when the [massacre happened there](http://www.cnn.com/2013/10/31/us/virginia-tech-shootings-fast-facts/).  This one hits quite close to home to me.  I was supposed to be in a classroom that fellow students were massacred but I overslept.  Let's take a look at Seung Hui Cho’s "Manifesto".  His manifesto is available [here](https://schoolshooters.info/sites/default/files/cho_manifesto_1.1.pdf).  You will need to convert it to a `.txt` file. You can do this [here](http://www.zamzar.com/convert/pdf-to-txt/). It will email you a copy of the manifesto in a `.txt` file.
 
-[![pdf-to-txt](/images//2015/07/pdf-to-txt-300x103-medium.jpg)](/images/2015/07/pdf-to-txt-medium.jpg)
+[![pdf-to-txt](/images//2015/07/pdf-to-txt-medium.jpg)](/images/2015/07/pdf-to-txt-medium.jpg)
 
 So let's repeat the same steps as above.
 
