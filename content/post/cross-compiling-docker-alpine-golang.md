@@ -43,7 +43,7 @@ builddocker:
 
 To make the above work you need two Docker files.  They are below...
 
-**Note the following is assuming your depencies are already downloaded, I do this with a make task, `make deps`
+**Note** the following is assuming your depencies are already downloaded, I do this with a make task, `make deps`.
 
 ```
 .PHONY: deps
