@@ -2,7 +2,7 @@
 categories = ["Docker"]
 date = "2016-12-19T14:11:14-05:00"
 description = ""
-draft = true
+draft = false
 image = "/original-images/alpine.jpg"
 tags = ["docker", "golang", "go"]
 title = "Cross Compiling Golang with a Docker Alpine Container"
