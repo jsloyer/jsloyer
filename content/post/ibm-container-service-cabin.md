@@ -2,8 +2,8 @@
 categories = ["Tutorial"]
 date = "2017-03-29T09:45:24-05:00"
 description = ""
-draft = true
-image = "/original-images/2015/06/1USIIGtkypiwhO6W4o8cwIw.jpeg"
+draft = false
+image = "/original-images/cabin.jpg"
 tags = ["containers", "bluemix", "kubernetes"]
 title = "Using Cabin with the IBM Bluemix Container Service"
 
@@ -142,4 +142,4 @@ Cabin is pretty cool, you can exec into containers and view logs and almost do a
 Thats it, you are configured to connect to your Kubernetes cluster on the IBM Bluemix Containers Service.  Please leave any comments or feedback below.  If you are a Windows user I would love some comments on the steps to get this working :).
 
 ## Known Issues
- - tiller seems busted which deploys apps into the cluster.  For more info check out [this GitHub issue](https://github.com/skippbox/cabin-issues/issues/24).
+ - Tiller seems busted which deploys apps into the cluster.  For more info check out [this GitHub issue](https://github.com/skippbox/cabin-issues/issues/24).
