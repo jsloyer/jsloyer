@@ -143,3 +143,6 @@ Thats it, you are configured to connect to your Kubernetes cluster on the IBM Bl
 
 ## Known Issues
  - Tiller seems busted which deploys apps into the cluster.  For more info check out [this GitHub issue](https://github.com/skippbox/cabin-issues/issues/24).
+
+## Feedback
+Please reach out to us on Slack at https://ibm-container-service.slack.com.
