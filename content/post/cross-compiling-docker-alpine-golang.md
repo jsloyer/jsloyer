@@ -2,7 +2,7 @@
 categories = ["Docker"]
 date = "2016-12-19T14:11:14-05:00"
 description = ""
-draft = true
+draft = false
 image = "/original-images/alpine.jpg"
 tags = ["docker", "golang", "go"]
 title = "Cross Compiling Golang with a Docker Alpine Container"
@@ -43,7 +43,7 @@ builddocker:
 
 To make the above work you need two Docker files.  They are below...
 
-**Note the following is assuming your depencies are already downloaded, I do this with a make task, `make deps`
+**Note** the following is assuming your depencies are already downloaded, I do this with a make task, `make deps`.
 
 ```
 .PHONY: deps
