@@ -7,6 +7,7 @@ theme = "startbootstrap-clean-blog"
 copyright = "Code released under the Apache 2.0 license."
 
 disqusShortname = "jeffsloyerio"
+googleAnalytics = "UA-404795-24"
 
 [author]
   name = "Jeff Sloyer"
@@ -15,7 +16,6 @@ disqusShortname = "jeffsloyerio"
   DateForm = "Mon, Jan 2, 2006"
   Description = "Thoughts on Tech and other interests..."
   Author = "Jeff Sloyer"
-  Ganalytics = "UA-404795-24"
 
 [[params.social]]
   title = "twitter"
@@ -40,4 +40,3 @@ disqusShortname = "jeffsloyerio"
   name = "Archives"
   url = "/post/"
   weight = -140
-
