@@ -62,7 +62,12 @@ Crashplan are you serious???  I can only backup at speeds at 1-3Mbps????  This i
 
 ## My new backup strategy
 
-Fast forward to my current backup strategy.  I couldn't be happier now, I have an old Macmini with an external 4TB drive that I let my Macbook Pro use TimeMachine and backup to.  This is nice if I have complete failure of my primary machine.  With this I can completely restore my primary machine in about an hour.  Additionally this is nice as well as when you get a new Mac to replace your current one you can restore from a TimeMachine backup and having the backup locally you can be up and running on a new Macbook in a couple hours.
+Fast forward to my current backup strategy.  I couldn't be happier now, I have an old Macmini with an external 4TB drive that I let my Macbook Pro use TimeMachine and backup to. I use the Western Digital 4TB external drive, see below for a link to Amazon.
+
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=tf_til&ad_type=product_link&tracking_id=jsloyer-20&marketplace=amazon&region=US&placement=B0713WPGLL&asins=B0713WPGLL&linkId=5eb8ed962882d6af667696f1a97adc95&show_border=false&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff">
+    </iframe>
+
+This is nice if I have complete failure of my primary machine.  With this I can completely restore my primary machine in about an hour.  Additionally this is nice as well as when you get a new Mac to replace your current one you can restore from a TimeMachine backup and having the backup locally you can be up and running on a new Macbook in a couple hours.
 
 Besides backing up locally I now Backup to Backblaze with all 3 of my machines.  My primary machine (Macbook Pro) backs up to my Mac Mini and then Backblaze then backs up the Mac Mini as well.  This is quite nice as if I have a drive failure where my Time Machine backup resides I can restore it.
 
