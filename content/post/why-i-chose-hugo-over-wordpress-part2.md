@@ -89,7 +89,7 @@ git push origin master
 
 At this point you think you might be done but you aren't you need to setup GitHub Pages and a pipeline...
 
-I chose [Wercker](http://wercker.com) as my CI engine for this.  It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to GitHub.
+I chose [Wercker](http://wercker.com) as my continuous delivery (CD) engine for this.  It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to GitHub.
 
 Before we get into the pipeline we need to setup the git project as a GitHub pages site.
 
@@ -296,5 +296,3 @@ disqusShortname = "xxxx"
 Pretty simple...  For a full list of add-ons goto `https://gohugo.io/extras`.
 
 Also please follow me on Twitter at [@jsloyer](http://twitter.com/jsloyer) and follow me on [Youtube](https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng)!
-
-
