@@ -79,7 +79,7 @@ These instructions have been adapted from the following sites.
   * [http://lightshowpi.org/play-music](http://lightshowpi.org/play-music)
 
 
-The first step is getting a Raspberry Pi, I highly recommend getting the [CanaKit on Amazon](http://www.amazon.com/CanaKit-Raspberry-Ultimate-Starter-Components/dp/B00G1PNG54/).  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.
+The first step is getting a Raspberry Pi, I highly recommend getting the [CanaKit on Amazon](http://amzn.to/2DqnxTG).  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.
 
 The first step is deciding how many individual light channels you want—you can do up to 48 actually, but for this post we will doing 16 channels.  What that means is 16 individual strands of lights that can be controlled.  So let’s make a shopping list.
 
@@ -97,7 +97,7 @@ Shopping List:
   * 2 bags of assorted wire nuts
 
 
-  * 2 relays (1 relay per each 8 light channels, available [on Amazon](http://www.amazon.com/gp/product/B006J4G45G/))
+  * 2 relays (1 relay per each 8 light channels, available [on Amazon](http://amzn.to/2zascGd))
 
 
   * 1 powerstrip
