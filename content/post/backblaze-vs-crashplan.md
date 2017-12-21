@@ -2,7 +2,7 @@
 categories = ["Backup"]
 date = "2017-12-06T14:11:14-05:00"
 description = ""
-draft = true
+draft = false
 image = "/original-images/alpine.jpg"
 tags = ["backup"]
 title = "Backblaze vs Crashplan"
@@ -80,8 +80,8 @@ Based on the quite cheap price and speed of Backblaze I have been incredibly hap
 
 If you want to sign up for Backblaze please use the link below!
 
-[Sign up for Backblaze](https://www.backblaze.com/blog/crashplan-alternative-backup-solution/)
+[Sign up for Backblaze](https://www.backblaze.com/cloud-backup.html#af9pku)
 
-Additionally Backblaze published a [blog post](https://www.backblaze.com/blog/crashplan-alternative-backup-solution/) themselves on switching as well.  I would encourage you to give that a read as well.
+Additionally Backblaze published a [blog post](https://www.backblaze.com/blog/crashplan-alternative-backup-solution/#af9pku) themselves on switching as well.  I would encourage you to give that a read as well.
 
 Please follow me on Twitter at [@jsloyer](http://twitter.com/jsloyer) and follow me on [Youtube](https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng)!
