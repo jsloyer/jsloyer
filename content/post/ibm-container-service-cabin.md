@@ -125,7 +125,7 @@ If everything worked you have something outputted that starts with `ey`.  It if 
 
 you can then use that in app for your token
 
-Open up the Cabin app on your phone, if you havent downloaded it you can download it from Google Play or the App Store by searching for `cabin kubernetes`.
+Open up the Cabin app on your phone, if you haven't downloaded it you can download it from Google Play or the App Store by searching for `cabin kubernetes`.
 
 Open the app enter the `Master URL` from a couple steps above in the URL field, make sure you have `https://` and the port after the IP address.
 

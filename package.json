@@ -8,6 +8,7 @@
   "author": "Jeff Sloyer",
   "dependencies": {
     "glob": "*",
+    "graphicsmagick": "0.0.1",
     "grunt": "*",
     "grunt-cli": "*",
     "grunt-contrib-concat": "*",

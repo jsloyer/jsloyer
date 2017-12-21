@@ -6,7 +6,9 @@ type = "about"
 
 +++
 
-Jeff Sloyer is a Developer Advocate at IBM, promoting IBM’s Platform as a Service (Paas), Bluemix. He’s a Node.JS developer most days, but tinkers in Java and Python. Sloyer is a hacker at heart who loves playing with new tech and cobbling together new demos and projects. He’s an avid traveler, flying around the world and speaking about Bluemix at conferences and events.
+Jeff Sloyer is currently the core dev lead for IBM Cloud Containers Service.  He currently leads multiple squads of develovers that builds IBM's managed Kubernetes service.
+
+Jeff's previous role at IBM was a Developer Advocate.  He promoted IBM’s Platform as a Service (Paas), Bluemix. He’s a Node.JS developer most days, but tinkers in Java and Python. Sloyer is a hacker at heart who loves playing with new tech and cobbling together new demos and projects. He’s an avid traveler, flying around the world and speaking about Bluemix at conferences and events.
 
 On a more personal note Jeff Sloyer loves really anything outside.  Some of his favorite activities include mountain biking, skiing, wake boarding, and hiking.
 
