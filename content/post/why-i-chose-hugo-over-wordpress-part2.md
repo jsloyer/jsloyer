@@ -75,7 +75,7 @@ title = "Why I Chose Hugo over Wordpress"
 +++
 ```
 
-You can set some various pieces of information for a post.  For my paricular theme each post has a Jumbotron image, that is set via the `image` attribute.  More on images later...  You can also set tags as well as the title of the post.  The most interesting bit here is the `draft = false` line.  This is what I was referring to above in controlling when a post gets published.  Once you feel like your post is ready just change it to `draft = true`.
+You can set some various pieces of information for a post.  For my particular theme each post has a Jumbotron image, that is set via the `image` attribute.  More on images later...  You can also set tags as well as the title of the post.  The most interesting bit here is the `draft = false` line.  This is what I was referring to above in controlling when a post gets published.  Once you feel like your post is ready just change it to `draft = true`.
 
 
 ### Publishing
