@@ -85,40 +85,40 @@ The first step is deciding how many individual light channels you want—you can
 
 Shopping List:
 
-  * 8 two gang outlets
+  * 8 [two gang outlets](http://amzn.to/2Dz8Exu)
 
 
-  * 2 4 gang blue plastic outlet boxes
+  * 2 [4 gang blue plastic outlet boxes](http://amzn.to/2Cgggcg)
 
 
-  * 50 feet of 12 gauge electrical wire
+  * [50 feet of 12 gauge electrical wire](http://amzn.to/2CdMxjX)
 
 
-  * 2 bags of assorted wire nuts
+  * [2 bags of assorted wire nuts](http://amzn.to/2CeBJ5h)
 
 
   * 2 relays (1 relay per each 8 light channels, available [on Amazon](http://amzn.to/2zascGd))
 
 
-  * 1 powerstrip
+  * 1 [powerstrip](http://amzn.to/2CoEwIA)
 
 
-  * 2 electrical extension cords
+  * [2 electrical extension cords](http://amzn.to/2Ce3lHD)
 
 
-  * 16 strands of Christmas lights
+  * [16 strands of Christmas lights](http://amzn.to/2DCMgn3)
 
 
 Tools Required:
 
 
-  * Wire Stripper
+  * [Wire Stripper](http://amzn.to/2CdiA3J)
 
 
-  * Screw Drivers (phillips and flat)
+  * [Screw Drivers, phillips and flat](http://amzn.to/2DA7tOs)
 
 
-  * Multimeter (optional)
+  * [Multimeter -optional](http://amzn.to/2BW09fB)
 
 
 My brother ([@esloyer](https://twitter.com/esloyer)) helped me wire this whole thing up and came up with an adapted wiring schema based off the sites above, thanks bro!
