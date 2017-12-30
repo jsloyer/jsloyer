@@ -42,7 +42,7 @@ There is two parts to setting this up.  If we take a look at the architecture d
 
   2. Wait for an email to arrive, it should only take a couple minutes.  There should be a link in the email that says “Click here to complete your registration”, click that.  Sign in with the username and password you created from step 1.
 
-  3. Obtain a Raspberry Pi, a bread board, wires, a LED, and a button  (your best bet is getting a starter kit such as the [Canakit](http://www.canakit.com/))
+  3. Obtain a Raspberry Pi, a bread board, wires, a LED, and a button  (your best bet is getting a starter kit such as the [Canakit](http://amzn.to/2CrDvNj))
 
   4. Place an LED in the breadboard (place the shorter side to the left)![led IoT Python app with a Raspberry Pi and Bluemix](/images/2015/06/led-medium.png)
 
