@@ -79,46 +79,46 @@ These instructions have been adapted from the following sites.
   * [http://lightshowpi.org/play-music](http://lightshowpi.org/play-music)
 
 
-The first step is getting a Raspberry Pi, I highly recommend getting the [CanaKit on Amazon](http://amzn.to/2DqnxTG).  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.
+The first step is getting a Raspberry Pi, I highly recommend getting the [CanaKit on Amazon](http://amzn.to/2C63713).  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.
 
 The first step is deciding how many individual light channels you want—you can do up to 48 actually, but for this post we will doing 16 channels.  What that means is 16 individual strands of lights that can be controlled.  So let’s make a shopping list.
 
 Shopping List:
 
-  * 8 [two gang outlets](http://amzn.to/2Dz8Exu)
+  * 8 [two gang outlets](http://amzn.to/2CamxBW)
 
 
-  * 2 [4 gang blue plastic outlet boxes](http://amzn.to/2Cgggcg)
+  * 2 [4 gang blue plastic outlet boxes](http://amzn.to/2DLctzJ)
 
 
-  * [50 feet of 12 gauge electrical wire](http://amzn.to/2CdMxjX)
+  * [50 feet of 12 gauge electrical wire](http://amzn.to/2zYuQyW)
 
 
-  * [2 bags of assorted wire nuts](http://amzn.to/2CeBJ5h)
+  * [2 bags of assorted wire nuts](http://amzn.to/2CCI8UP)
 
 
-  * 2 relays (1 relay per each 8 light channels, available [on Amazon](http://amzn.to/2zascGd))
+  * 2 relays (1 relay per each 8 light channels, available [on Amazon](http://amzn.to/2C7lx1E))
 
 
-  * 1 [powerstrip](http://amzn.to/2CoEwIA)
+  * 1 [powerstrip](http://amzn.to/2DLo6qF)
 
 
-  * [2 electrical extension cords](http://amzn.to/2Ce3lHD)
+  * [2 electrical extension cords](http://amzn.to/2Cv8WsJ)
 
 
-  * [16 strands of Christmas lights](http://amzn.to/2DCMgn3)
+  * [16 strands of Christmas lights](http://amzn.to/2CzX99O)
 
 
 Tools Required:
 
 
-  * [Wire Stripper](http://amzn.to/2CdiA3J)
+  * [Wire Stripper](http://amzn.to/2EsJH8e)
 
 
-  * [Screw Drivers, phillips and flat](http://amzn.to/2DA7tOs)
+  * [Screw Drivers, phillips and flat](http://amzn.to/2CBl8Wi)
 
 
-  * [Multimeter -optional](http://amzn.to/2BW09fB)
+  * [Multimeter -optional](http://amzn.to/2CapKBL)
 
 
 My brother ([@esloyer](https://twitter.com/esloyer)) helped me wire this whole thing up and came up with an adapted wiring schema based off the sites above, thanks bro!

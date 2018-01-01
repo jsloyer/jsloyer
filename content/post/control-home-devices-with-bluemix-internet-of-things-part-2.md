@@ -26,7 +26,7 @@ So without delay let’s jump into the next part.
 ## Install software on the Raspberry Pi
 
 
-The first step of getting your Raspberry Pi setup is installing Raspbian.  If you have the [Canakit](http://amzn.to/2CrDvNj) its pretty easy, just plug in the wifi dongle and insert the SD card and plug in power.  If you don’t have the [Canakit](http://amzn.to/2CrDvNj)  follow the instructions from [here](http://www.raspberrypi.org/help/noobs-setup).  Once you get Raspbian installed open up a terminal.
+The first step of getting your Raspberry Pi setup is installing Raspbian.  If you have the [Canakit](http://amzn.to/2C63713) its pretty easy, just plug in the wifi dongle and insert the SD card and plug in power.  If you don’t have the [Canakit](http://amzn.to/2C63713)  follow the instructions from [here](http://www.raspberrypi.org/help/noobs-setup).  Once you get Raspbian installed open up a terminal.
 
 Next, we will need to update Raspbian to the latest.  To do this run the following.
 
@@ -68,7 +68,7 @@ sudo reboot
 ## Wire up the Raspberry Pi’s breadboard
 
 
-Once we have rebooted we need to connect the bread board to the Raspberry Pi and connect the bread board to the relays.  This took some tinkering to figure out the GPIO ports but below I have posted a picture of mybread board on how it was constructed.   For me I set everything up with 8 channels first and using LED’s provided in the [Canakit](http://amzn.to/2CrDvNj) to make sure everything was working then I moved over to the real relays.  So let’s do that.
+Once we have rebooted we need to connect the bread board to the Raspberry Pi and connect the bread board to the relays.  This took some tinkering to figure out the GPIO ports but below I have posted a picture of mybread board on how it was constructed.   For me I set everything up with 8 channels first and using LED’s provided in the [Canakit](http://amzn.to/2C63713) to make sure everything was working then I moved over to the real relays.  So let’s do that.
 
 I would highly recommend following the steps in [this page](https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI) on getting your bread board working.
 
