@@ -4,7 +4,7 @@ date = "2018-04-04T13:24:00-05:00"
 description = ""
 draft = false
 image = "/original-images/secure.jpg"
-tags = ["att"]
+tags = ["att", "unifi", "ubiquiti"]
 title = "ATT Uverse Modem Bypass - UniFi USG"
 
 +++
