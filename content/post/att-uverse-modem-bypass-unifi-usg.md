@@ -10,7 +10,7 @@ title = "ATT Uverse Modem Bypass - UniFi USG"
 +++
 
 # Background
-Ever since I have switched over to Ubiquti's Unifi setup for my home I have been searching for a way to eliminate AT&T's
+Ever since I have switched over to Ubiquiti's Unifi setup for my home I have been searching for a way to eliminate AT&T's
 residential gateway from my setup.  I have AT&T Fiber and I detest AT&T's residential gateway.  I won't go into the reasons now but just
 know the list is almost endless.  It would be great if AT&T just allowed you not to use that if you have a router of your own.  I would love
 to see AT&T allow residential fiber customers on their PON network to bypass the ONT but that might be too much to ask.  I will gladly take
@@ -323,7 +323,7 @@ Make sure to special attention to the config above.  You only need to copy down 
 I would highly encourage you to use the above file as a starting point and modify it as you see fit if you have any other information referencing `eth0`.
 
 # Speed Test Results
-Below are a couple speed tests I captured after.  My speeds roughly stayed the same which is amazing as I have seen some instructions that greatly reduce the speed with a bridge running on the USG.
+Below are a couple speed tests I captured after.  My speeds roughly stayed the same which is amazing as I have seen some instructions that greatly reduce the speed with a bridge running on the USG.  I did notice the ping times went down a couple milliseconds, I will take that any day, things feel a lot more snappier now!!!
 
 ## Speed tests
 
