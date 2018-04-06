@@ -322,6 +322,18 @@ Make sure to special attention to the config above.  You only need to copy down 
 
 I would highly encourage you to use the above file as a starting point and modify it as you see fit if you have any other information referencing `eth0`.
 
+# Speed Test Results
+Below are a couple speed tests I captured after.  My speeds roughly stayed the same which is amazing as I have seen some instructions that greatly reduce the speed with a bridge running on the USG.
+
+## Speed tests
+
+### AT&T
+![att speed test](http://www.speedtest.net/result/7204894482.png)
+
+
+### Celito Fiber
+![celito fiber speed test](http://www.speedtest.net/result/7204900004.png)
+
 # Credits
 Again I don't want to detract from the amazing work that was done at [https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/](https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/).
 
