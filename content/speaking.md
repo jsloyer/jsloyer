@@ -7,7 +7,9 @@ title = "Speaking Engagements"
 +++
 
 ## Past Events
-
+* [Kubecon 2018 - Europe](https://youtu.be/V4IG9xEI_X0)
+    * May 2018
+    * Copenhagen, Denmark
 * [All Things Open 2017](https://allthingsopen.org/talk/extreme-chatops-using-kubernetes-and-watson/)
     * September 2017
     * Raleigh, NC, USA
