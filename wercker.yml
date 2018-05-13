@@ -7,7 +7,7 @@ build:
     - grunt:
         tasks: processimages
     - arjen/hugo-build:
-        version: "0.19"
+        version: "0.40.3"
         theme: startbootstrap-clean-blog
 deploy:
   steps:
