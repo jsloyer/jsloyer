@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2019-02-11T13:24:00-05:00"
 description = "Setup a multi-vlan network with sonos and the Unifi USG with Sonos Speakers"
 draft = true
-image = "/original-images/secure.jpg"
+image = "/original-images/wall.jpg"
 tags = ["sonos", "usg", "firewall", "unifi", "ubiquiti"]
 title = "Firewall Ports for the Unifi USG and Sonos Speakers"
 
