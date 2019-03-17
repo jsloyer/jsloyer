@@ -7,6 +7,9 @@ title = "Speaking Engagements"
 +++
 
 ## Past Events
+* [Trilug - Linux Meetup](https://trilug.org/2019/02/26/march-14-kubernetes-from-the-trenches/)
+    * March 2019
+    * Raleigh, NC
 * [Kubecon 2018 - Europe](https://www.youtube.com/watch?v=ZzFjPqCibMc&feature=youtu.be)
     * May 2018
     * Copenhagen, Denmark
