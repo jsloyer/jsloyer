@@ -25,7 +25,7 @@ The next step is creating a single firewall rule.  The rule that needs to be cre
 
 This firewall rule should be created in the LAN_IN category.
 
-[![usg screenshot from unifi](/images/usg-apple-airplay-1.jpg)](/images/usg-apple-airplay-1.jpg)
+[![usg screenshot from unifi](/images/usg-apple-airplay-1-medium.jpg)](/images/usg-apple-airplay-1-medium.jpg)
 
 **Note:**  As with other allow rules this rule MUST go before your deny rules.
 
