@@ -1,4 +1,4 @@
-box: debian
+box: nodesource/node
 build:
   steps:
     - install-packages:
