@@ -7,7 +7,6 @@
   },
   "author": "Jeff Sloyer",
   "dependencies": {
-    "chalk": "^2.0.0",
     "glob": "*",
     "graphicsmagick": "0.0.1",
     "grunt": "*",
