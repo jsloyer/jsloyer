@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2020-08-30T23:24:00-05:00"
 description = "Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay"
 draft = false
-image = "/original-images/wall.jpg"
+image = "/original-images/2020/sound_mixer.jpg"
 tags = ["apple", "udm", "firewall", "unifi", "ubiquiti", "airplay"]
 title = "Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay"
 
