@@ -21,7 +21,7 @@
         <div class="col-lg-8 col-md-10">
           {{ partial "ads-leaderboard-top.html" .}}
 
-          {{ range first 4 (where .Data.Pages "Type" "post") }}
+          {{ range first 4 (where .Site.RegularPages "Section" "post") }}
               {{ .Render "summary"}}
           {{ end }}
           <!-- Pager -->
