@@ -1,4 +1,4 @@
-box: nodesource/node
+box: node:latest
 build:
   steps:
     - install-packages:
