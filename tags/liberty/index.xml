@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>liberty on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/liberty/</link>
+    <description>Recent content in liberty on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 24 Nov 2014 21:54:23 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/liberty/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Deploying a Watson and Cloudant App with DevOps Services</title>
+      <link>http://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</link>
+      <pubDate>Mon, 24 Nov 2014 21:54:23 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</guid>
+      <description>Backed by popular demand this is a continuation of the post Building a Java EE app on IBM Bluemix Using Watson and Cloudant.
+This post will detail how to build and deploy the app using IBM DevOps Services.
+There is a bit of magic behind this, its called &amp;ldquo;The Deploy to Bluemix Button&amp;rdquo;&amp;hellip;
+Clicking the magic button below will setup the app using IBM DevOps services and deploy the whole application for you.</description>
+    </item>
+    
+  </channel>
+</rss>

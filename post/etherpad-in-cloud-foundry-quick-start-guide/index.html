@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Etherpad in Cloud Foundry – Quick Start Guide -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///img/about-bg.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Etherpad in Cloud Foundry – Quick Start Guide</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Sat, Jan 3, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/video" >Video</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/cloudfoundry" >cloudfoundry</a> <a href="http://www.jeffsloyer.io/tags/etherpad" >etherpad</a> <a href="http://www.jeffsloyer.io/tags/mysql" >mysql</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>Etherpad Lite is an awesome online collaboration platform.  Multiple open source projects use it for collaboration.  One of the most notable ones is the Openstack Project <a href="https://etherpad.openstack.org/">Openstack Etherpad</a>. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry. No worries, here is one!</p>
+<h3 id="loginregister-for-bluemix">Login/Register for Bluemix</h3>
+<p>The first step is creating a Node.js app in Bluemix.  Let’s login to Bluemix, open a web browser and visit <a href="http://bluemix.net/">Bluemix</a> and click LOG IN.  If you don’t have an account click, SIGN UP.  Since Etherpad-Lite is built using Node.js, we want to start with an empty Node.js app in Bluemix.  We will do this from the command line.</p>
+<p>If you already have the CLI command line executable, you can skip this step.  If you don’t have it, follow the steps from the <a href="https://www.ng.bluemix.net/docs/#cli/index.html#cli">Bluemix docs</a> on how to install the command line for your platform and how to set it up.  Once you get things setup you should be able to run <code>cf s</code> and get the following output:</p>
+<pre><code>[01:30 PM] jsloyer@jeffs-mbp [blah]&gt;cf s
+cf domains Getting domains in org jbsloyer@us.ibm.com as ...
+name status
+mybluemix.net shared
+</code></pre>
+<p>Your output will be slightly different (this is ok).  This was just a check to make sure things are setup correctly.  If you are getting an auth error or error that you aren’t pointing to Cloud Foundry, refer back to the docs, reply to this post, or post a question to <a href="http://stackoverflow.com/questions/tagged/bluemix">Stackoverflow</a> for help.</p>
+<h3 id="upload-etherpad-lite-code-to-bluemix">Upload Etherpad-Lite Code to Bluemix</h3>
+<p>OK, next we need to upload the Etherpad-Lite code to Bluemix. The version of Etherpad-Lite is a forked version of the Etherpad code that has made things easy for us with Cloud Foundry. So head on over to the <a href="https://github.com/cloudfoundry-community/etherpad-lite-cf/releases">releases page</a> for <code>etherpad-lite-cf</code>.  Choose the latest, as of this writing it was version 1.4.1.  Download the etherpad-lite-cf.zip file.  We need to extract this file to a new folder—do not extract it in the folder it is sitting in.  For example, I extracted it into an empty folder called blah.  Make sure you do not have the zip file you downloaded in the newly created folder, it should just contain the extracted files:</p>
+<pre><code>[10:50 AM] jsloyer@jeffs-mbp [blah]&gt;pwd
+/Users/jsloyer/Downloads/blah
+[10:50 AM] jsloyer@jeffs-mbp [blah]&gt;ls
+CHANGELOG.md Procfile node_modules src var
+CONTRIBUTING.md README.md package.json start.bat
+LICENSE bin settings.json tests
+Makefile doc settings.json.template tools
+</code></pre>
+<p>The next step is pushing the app to Bluemix.  Run the following command, replacing yourappname with a unique name for your app.  This name will also be the url to your app as well.  If you get an error mentioning the host is taken, just choose a different name.</p>
+<pre><code>cf push yourappname -m 512M -b https://github.com/cloudfoundry/nodejs-buildpack.git
+</code></pre><p>The above is saying we are giving our app 512MB of memory and calling out a specific buildpack to use (in this case Node.js). This step will take awhile but eventually you should get the following output.</p>
+<pre><code>0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+App started Showing health and status for app jbs-etherpad3 in org jbsloyer@us.ibm.com / space demos as ...
+OK
+requested state: started
+instances: 1/1
+usage: 512M x 1 instances
+urls: jbs-etherpad3.mybluemix.net
+state since cpu memory disk
+#0 running 2015-01-13 10:36:32 AM 0.0% 87.2M of 512M 242.1M of 1G
+</code></pre>
+<p>If you visit the url from above, Etherpad will be functional, however it is using a built-in database and this isn’t what we want.  We want to back in with MySQL.</p>
+<h3 id="create-and-bind-a-database-to-our-app">Create and bind a database to our app</h3>
+<p>Next, we need to create a service to allow Etherpad to connect to our database.  To do that, let’s go back to the Bluemix UI.  In the top click on Dashboard, you should see the app you created.  Let’s go ahead and click on it.</p>
+<p>To add the service Bluemix will provision and bind a service to our app for us.  Click &ldquo;Add A Service&rdquo; and scroll down to data management.  We want ClearDB for this app.  Click on ClearDB.  ClearDB is a hosted version of MySQL.  Everything on the right should be pre-populated so let’s just click &ldquo;Create&rdquo;.  If things are not pre-populated, choose the appropriate app, the one we just created.</p>
+<p>It will ask if you want to restage the app, that is fine, so click RESTAGE.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/restage-medium.jpg" alt="restage Etherpad in Cloud Foundry – Quick Start Guide"></p>
+<h3 id="configure-the-app-with-cleardb-mysql">Configure the app with ClearDB (MySQL)</h3>
+<p>To switch the app over to MySQL, we need to edit the <code>settings.json</code> for the app and then re-upload the app to Bluemix. You will need to replace the value DATABASE on line 9 with the name of your ClearDB service.  To get this info, let’s go back to the Bluemix UI and our app.  If you click on &ldquo;Show Credentials&rdquo;, it will give you the name of your ClearDB service, copy this.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/showcreds-medium.jpg" alt="showcreds Etherpad in Cloud Foundry – Quick Start Guide"></p>
+<p>Copy the name, in this example it is &ldquo;ClearDB MySQL Database-hu&rdquo;, without quotes.  I have highlighted below what you need to copy, don’t copy the quotes.  I have hidden my connection info to my database so my database can’t be hacked.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/dbname-medium.jpg" alt="dbname Etherpad in Cloud Foundry – Quick Start Guide"></p>
+<p>Open up settings.json with your favorite text editor and on line 9 replace DATABASE with the name of your ClearDB service that we copied from above.  Save the file. Here is my line 9:</p>
+<pre><code>&quot;dbService&quot;: &quot;ClearDB MySQL Database-hu&quot;,
+</code></pre><p>The last step is re-pushing our app to Bluemix since we made a change to it.  To do this we need to use the push command we used above:</p>
+<pre><code>cf push yourappname -m 512M -b https://github.com/cloudfoundry/nodejs-buildpack.git
+</code></pre><p>Eventually it should show us that our app is running, my output is below:</p>
+<pre><code>0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+App started Showing health and status for app jbs-etherpad3 in org jbsloyer@us.ibm.com / space demos as ...
+OK
+requested state: started
+instances: 1/1
+usage: 512M x 1 instances
+urls: jbs-etherpad3.mybluemix.net
+state since cpu memory disk
+#0 running 2015-01-13 10:36:32 AM 0.0% 87.2M of 512M 242.1M of 1G
+</code></pre>
+<p>So if we visit the url it gave us, Etherpad should be up and running.  If you run into issues please post a comment here or post to <a href="http://stackoverflow.com/questions/tagged/bluemix">Stackoverflow</a>.</p>
+<h3 id="ssl">SSL</h3>
+<p>Bluemix provides SSL out of the box for your app.  If your app is running at <strong>http</strong>://jbs-etherpad3.mybluemix.net you are given SSL for free.  To use SSL, just access your app over https, for my example it would be <strong>https</strong>://jbs-etherpad3.mybluemix.net.  If you want to use SSL with your own domain name and certificate, you can do this also!  See <a href="https://jeffsloyer.io/2014/08/18/inbound-ssl-in-bluemix/">SSL Certificates and Bluemix Custom Domains</a> on how to do it.</p>
+<p>For more info about SSL in for free in Bluemix check out the following video.</p>
+<!-- raw HTML omitted -->
+<h3 id="caveats">Caveats</h3>
+<ul>
+<li>The biggest issue to me is that this deployment of Etherpad only allows 1 instance. While this works for development and testing, it is not suitable for production.  This is a limitation right now of Etherpad in the way it uses socket.io and sessions. If you need more capacity, just bump up your RAM for your app.</li>
+</ul>
+<h3 id="instructions-adapted-from-these-references">Instructions adapted from these references</h3>
+<ul>
+<li>
+<p><a href="https://github.com/cloudfoundry-community/etherpad-lite-cf#using-database-from-user-provided-service">https://github.com/cloudfoundry-community/etherpad-lite-cf#using-database-from-user-provided-service</a></p>
+</li>
+<li>
+<p><a href="http://arthurh.fr/blog-Install-etherpad-lite-with-cloudfoundry">http://arthurh.fr/blog-Install-etherpad-lite-with-cloudfoundry</a></p>
+</li>
+</ul>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

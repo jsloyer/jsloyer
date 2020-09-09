@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Control home devices with Bluemix Internet of Things -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/robots-blog-post-header1.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Control Home Devices With Bluemix Internet of Things</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Fri, Feb 6, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/video" >Video</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/cloudant" >cloudant</a> <a href="http://www.jeffsloyer.io/tags/node.js" >node.js</a> <a href="http://www.jeffsloyer.io/tags/iot" >iot</a> <a href="http://www.jeffsloyer.io/tags/raspberry-pi" >raspberry pi</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020.  These devices make up something called the Internet of Things.  These devices can be controlled remotely and interconnected.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/iotdevicesincrease-medium.png" alt="iotdevicesincrease Control home devices with Bluemix Internet of Things"></p>
+<p>While a lot of these devices can be connected to the Internet, most of them are &ldquo;dumb&rdquo; devices right now.  To turn these &ldquo;dumb&rdquo; devices into smart devices you can use the <a href="http://internetofthings.ibmcloud.com">Internet of Things</a> to connect them to the cloud.  Simple things such as a washing machine or a coffee pot can be connected to the Internet.  More practical systems can be connected also, such as a home automation system or a thermostat.  Going even further a mine could connect safety sensors to the Internet of Things as well.</p>
+<!-- raw HTML omitted -->
+<p>The Internet of Things allows for these devices to either be controlled or act as sensors and provides a means for them to communicate.  This is done over a protocol called MQTT. According to <a href="http://mqtt.org/">mqtt.org</a>, &ldquo;MQTT is a machine-to-machine (M2M)/Internet of Things connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport.&rdquo;  This works great for many devices as-is, doesn’t have many dependencies, it is very lightweight, and doesn’t require tremendous amounts of processing power.</p>
+<p>IBM Bluemix provides a platform for creating these apps that utilize all these sensors.  You can basically almost use any programming language you want, Bring Your Own Language (BYOL) and utilize services that do the heavy lifting for you.  This heavy lifting is the Internet of Things (IoT) service in Bluemix.  It implements that MQTT protocol and allows you to control and receive data from these devices.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/robots-blog-post-header1-medium.jpg" alt="robots blog post header1 1024x665 Control home devices with Bluemix Internet of Things"></p>
+<p>Do you have a bunch of left over Christmas lights sitting around that will be collecting dust till next year? Until now Christmas lights are a once a year thing, that isn’t true anymore.  Time to get the dust off of your lights and use them for something fun! Enter Christmas Lights controlled by a Raspberry Pi via IoT in Bluemix!</p>
+<p>You can control these Christmas Lights using the Internet of Things and IBM Bluemix. Who <em>doesn’t</em> love large amounts of Christmas lights?  I sure love them.  Add on to that syncing lights to music and the ability to control lights from your phone and giving passersbys the ability to vote for songs they wanna see the lights synced to by texting.  How cool is that?</p>
+<h2 id="introduction">Introduction:</h2>
+<p>This is going to be a three part series: The first part (this post) will focus on the hardware setup, all the wiring and connecting things up to the Raspberry Pi.  The second part will focus on the software configuration of the Raspberry Pi, and the final part will focus on the Bluemix app that allows people to vote on songs to play and the integration to control the Raspberry Pi with the IoT service in Bluemix.</p>
+<p>So some of our goals that we are going to accomplish are the following.</p>
+<ul>
+<li>
+<p><strong>Part 1</strong> – Setup and wire together relays, outlets, and the Raspberry Pi</p>
+</li>
+<li>
+<p><a href="http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/"><strong>Part 2</strong></a> – Power on the Raspberry Pi, installed Raspbian (OS for the Pi), install and configure the lighting control software</p>
+</li>
+<li>
+<p><strong>Part 3</strong> – Deploy a Bluemix app with the IoT, Twilio, and Cloudant services to interact with users and the Raspberry Pi (an example of the app is <a href="http://lights.mybluemix.net/">http://lights.mybluemix.net/</a>; please note this is not connected to my Raspberry Pi right now, so clicking the play button won’t do anything.)</p>
+</li>
+</ul>
+<p>Here is a little teaser of the expected outcome:</p>
+<!-- raw HTML omitted -->
+<p>Let’s jump into it…</p>
+<h2 id="part-1-setting-up-the-hardware">Part 1: Setting up the hardware</h2>
+<p>These instructions have been adapted from the following sites.</p>
+<ul>
+<li>
+<p><a href="https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/">https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/</a></p>
+</li>
+<li>
+<p><a href="https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI">https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI</a></p>
+</li>
+<li>
+<p><a href="http://lightshowpi.org/download-and-install">http://lightshowpi.org/download-and-install</a></p>
+</li>
+<li>
+<p><a href="http://lightshowpi.org/configuring-and-testing-your-hardware">http://lightshowpi.org/configuring-and-testing-your-hardware</a></p>
+</li>
+<li>
+<p><a href="http://lightshowpi.org/play-music">http://lightshowpi.org/play-music</a></p>
+</li>
+</ul>
+<p>The first step is getting a Raspberry Pi, I highly recommend getting the <a href="http://amzn.to/2C63713">CanaKit on Amazon</a>.  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.</p>
+<p>The first step is deciding how many individual light channels you want—you can do up to 48 actually, but for this post we will doing 16 channels.  What that means is 16 individual strands of lights that can be controlled.  So let’s make a shopping list.</p>
+<p>Shopping List:</p>
+<ul>
+<li>
+<p>8 <a href="http://amzn.to/2CamxBW">two gang outlets</a></p>
+</li>
+<li>
+<p>2 <a href="http://amzn.to/2DLctzJ">4 gang blue plastic outlet boxes</a></p>
+</li>
+<li>
+<p><a href="http://amzn.to/2zYuQyW">50 feet of 12 gauge electrical wire</a></p>
+</li>
+<li>
+<p><a href="http://amzn.to/2CCI8UP">2 bags of assorted wire nuts</a></p>
+</li>
+<li>
+<p>2 relays (1 relay per each 8 light channels, available <a href="http://amzn.to/2C7lx1E">on Amazon</a>)</p>
+</li>
+<li>
+<p>1 <a href="http://amzn.to/2DLo6qF">powerstrip</a></p>
+</li>
+<li>
+<p><a href="http://amzn.to/2Cv8WsJ">2 electrical extension cords</a></p>
+</li>
+<li>
+<p><a href="http://amzn.to/2CzX99O">16 strands of Christmas lights</a></p>
+</li>
+</ul>
+<p>Tools Required:</p>
+<ul>
+<li>
+<p><a href="http://amzn.to/2EsJH8e">Wire Stripper</a></p>
+</li>
+<li>
+<p><a href="http://amzn.to/2CBl8Wi">Screw Drivers, phillips and flat</a></p>
+</li>
+<li>
+<p><a href="http://amzn.to/2CapKBL">Multimeter -optional</a></p>
+</li>
+</ul>
+<p>My brother (<a href="https://twitter.com/esloyer">@esloyer</a>) helped me wire this whole thing up and came up with an adapted wiring schema based off the sites above, thanks bro!</p>
+<p>Once you get all the items on the shopping list we need to start taking apart the 50 feet of wire, there is 2 wires inside of the casing, a black and then a white one.  We need to get them out of the casing, take a pocket knife or utility knife and make a cut into the casing at one end, you can basically then peal back the casing on the whole 50 feet of wire then.</p>
+<p>Below is a wiring diagram that we need to complete.  You can do this multiple ways but below is a suggestion.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/Capture-medium.png" alt="Capture 1024x642 Control home devices with Bluemix Internet of Things"></p>
+<p>What we need to do is basically daisy chain all the &ldquo;hot&rdquo; wires together between each set of 4 gang double gang outlets.  We do this so we don’t overload a particular circuit.  So to do this we need to cut the end off of our cheap extension cord that has a plug on it, we need to then strip the wires, and then identity which wire is the hot/positive wire.  Below is a picture of a wire, the hot/positive wire will have dashes or stripes on it, the cold/neutral wire will NOT have any dashes or stripes:</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/electrical-cord-medium.jpg" alt="electrical cord 1024x764 Control home devices with Bluemix Internet of Things"></p>
+<p>We need to take the hot wire and put it into a wire nut.  We will then take some wire from our 50 feet, strip one of the ends and twist it into the wire nut.  This will get attached to positive input on the relay.  We need to repeat this for each channel.  In the picture below I have an additional wire going from the first wire nut to another wire nut because all the wires going to the relay wouldn’t fit into one wire nut.  We are just effectively connecting two wires together here.</p>
+<p>The next step is running a wire from each channel on the relay to electrical outlet.  This is the hot wire to each outlet but this wire is being controlled by the relay.  Think of the relay as a simple on/off switch that you would find at home to control a light.  On most double electrical outlets there is a tab on the side that comes enabled that makes most receptacles operate as one, this is desirable in a house so an electrician only has to run one wire to the outlet but in our case we want to take advantage of controlling both receptacles.  We need to break this tab on both sides of the outlet.  Take a pair of needle nodes pliers and bend the tab back and forth and eventually it will come off.  See the photos below.</p>
+<p>Before:</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/FH13MAR_SWIOUT_14-medium.jpg" alt="FH13MAR SWIOUT 14 Control home devices with Bluemix Internet of Things"></p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/electrical-outlet-garbage-disposal-5-medium.jpg" alt="electrical outlet garbage disposal 5 Control home devices with Bluemix Internet of Things"></p>
+<p>After:</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/electrical-outlet-garbage-disposal-4-medium.jpg" alt="electrical outlet garbage disposal 4 Control home devices with Bluemix Internet of Things"></p>
+<p>So next we need to connect our cold/negative wires to each of the outlets.  If you look at the wiring diagram (above) I have one cold/neutral wire going to the first outlet and each additional outlet is daisy chained to it.  This is just to complete the circuit.  Below is the finished product.  We basically have our outlets daisy chained together with our cold/neutral wires and then hold/positive wires have individual channels to the relay.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/2014-12-02-15.16.57-medium.jpg" alt="2014 12 02 15.16.57 Control home devices with Bluemix Internet of Things"></p>
+<p>Congratulations the hard part is over! Well, at least for me, since electrical stuff isn’t my forte.</p>
+<h2 id="parts-in-the-series">Parts in the Series</h2>
+<ul>
+<li><a href="http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/">Part 2</a></li>
+</ul>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

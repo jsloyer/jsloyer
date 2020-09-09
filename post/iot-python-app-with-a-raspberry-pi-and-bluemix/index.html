@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IoT Python app with a Raspberry Pi and Bluemix -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/iot-pi.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>IoT Python App With a Raspberry Pi and Bluemix</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Thu, Apr 2, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/video" >Video</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/flask" >flask</a> <a href="http://www.jeffsloyer.io/tags/iot" >iot</a> <a href="http://www.jeffsloyer.io/tags/python" >python</a> <a href="http://www.jeffsloyer.io/tags/raspberry-pi" >raspberry pi</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>This is an extension/continuation from the blog post on how to create a <a href="http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/">basic Python webapp</a>.  In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the <a href="https://internetofthings.ibmcloud.com/">Internet of Things Foundation</a> in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi.  The tutorial also uses Twilio to interact with the Raspberry Pi.</p>
+<p>So what does this look like?  Here is a simple architecture diagram.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/raspberrypidiagram-medium.png" alt="raspberrypidiagram IoT Python app with a Raspberry Pi and Bluemix"></p>
+<!-- raw HTML omitted -->
+<p>In the above diagram there is two flows:</p>
+<ul>
+<li>
+<p>The first flow involves pressing a HTML button in the Python Flask app in Bluemix to either turn on or off an LED on the Raspberry Pi.</p>
+</li>
+<li>
+<p>The second flow involves pressing a physical button on the breadboard on the Raspberry Pi and using the IoT service in Bluemix and our app in Bluemix it will send a text message of our choosing to a phone number we enter in the Python Flask app in Bluemix using Twilio.</p>
+</li>
+</ul>
+<p>This all took only about 100 lines of code, pretty cool huh?</p>
+<p>If you prefer to watch a video of this instead of going through the written steps in this tutorial, check out the video below.</p>
+<h2 id="setup">Setup</h2>
+<p>There is two parts to setting this up.  If we take a look at the architecture diagram above we see that there is a Raspberry Pi piece and then a Bluemix piece.  We are going to go through the Raspberry Pi piece first then we will go through the Bluemix piece.</p>
+<h2 id="raspberry-pi-setup-steps">Raspberry Pi Setup Steps</h2>
+<ol>
+<li>
+<p>Sign up for a Bluemix account, visit <a href="http://bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp">http://bluemix.net</a> in your web browser and click “Sign-up” in the top right.  We require a couple bits of information</p>
+</li>
+<li>
+<p>Wait for an email to arrive, it should only take a couple minutes.  There should be a link in the email that says “Click here to complete your registration”, click that.  Sign in with the username and password you created from step 1.</p>
+</li>
+<li>
+<p>Obtain a Raspberry Pi, a bread board, wires, a LED, and a button  (your best bet is getting a starter kit such as the <a href="http://amzn.to/2C63713">Canakit</a>)</p>
+</li>
+<li>
+<p>Place an LED in the breadboard (place the shorter side to the left)<img src="http://www.jeffsloyer.io/images/2015/06/led-medium.png" alt="led IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>Place a 220 ohm resistor in the breadboard connecting the short side (the left side of the LED) to the ground rail (the rail with the – sign).  Make sure to place the side of the resistor with the red stripes closest to the LED_NOTE:_ The way the breadboard works is connections run vertically not horizontally<img src="http://www.jeffsloyer.io/images/2015/06/resistor-medium.png" alt="resistor IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>Connect a wire from the ground rail to the GND on the pinout board<img src="http://www.jeffsloyer.io/images/2015/06/ground-medium.png" alt="ground IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>On the right side of the LED, connect a wire to the the port labeled 17.<strong>NOTE:</strong> The way the breadboard works is connections run vertically not horizontally.<img src="http://www.jeffsloyer.io/images/2015/06/gpio17-medium.png" alt="gpio17 IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>Place the button in the breadboard, it takes a bit of force to press it in all the way.  It won’t break it.<img src="http://www.jeffsloyer.io/images/2015/06/button-medium.png" alt="button IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>Connect a wire from the right side of the button to the ground rail.<img src="http://www.jeffsloyer.io/images/2015/06/buttonground-medium.png" alt="buttonground IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>Connect a wire from the ground rail to a GND port, it doesn’t matter which one it is<img src="http://www.jeffsloyer.io/images/2015/06/buttongroundrail-medium.png" alt="buttongroundrail IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>Lastly, connect a wire from the left side of the button to GPIO port 18.<img src="http://www.jeffsloyer.io/images/2015/06/gpio18-medium.png" alt="gpio18 IoT Python app with a Raspberry Pi and Bluemix"></p>
+</li>
+<li>
+<p>Next we need to either use the console for our Raspberry Pi and the terminal application on the device itself or use SSH.  I am going to use SSH.</p>
+</li>
+<li>
+<p>To get the IP address of your Raspberry Pi the easiest thing is to open up the terminal app on the Raspberry Pi, it is under accessories -&gt; Terminal</p>
+</li>
+<li>
+<p>Type <code>ifconfig</code>..  If you are connected over Ethernet the IP address will be under eth0, if you are connected over wifi, the IP address will be under wlan0</p>
+</li>
+<li>
+<p>Next we need to ssh into the device.—Windows, download Putty and use that to connect to the IP address—Mac and Linux, open the Terminal app, type <code>ssh pi@myipaddress</code> where myipaddress is the IP address of the Raspberry Pi, ex. <code>192.168.1.65</code></p>
+</li>
+<li>
+<p>The password is raspberrypi</p>
+</li>
+<li>
+<p>We need to run some commands to update our Raspberry Pi, run the following.  It will ask you to confirm with the “Y” key</p>
+<p>sudo apt-get update
+sudo-apt-get upgrade</p>
+</li>
+<li>
+<p>Next we need to install a helper library for using GPIO</p>
+<p>git clone git://git.drogon.net/wiringPi
+cd wiringPi
+./build</p>
+</li>
+<li>
+<p>Next we need to install the IoT library on the Raspberry Pi</p>
+<p>curl -LO <a href="https://github.com/ibm-messaging/iot-raspberrypi/releases/download/1.0.2/iot_1.0-1_armhf.deb">https://github.com/ibm-messaging/iot-raspberrypi/releases/download/1.0.2/iot_1.0-1_armhf.deb</a>
+sudo dpkg -i iot_1.0-1_armf.deb</p>
+</li>
+<li>
+<p>We need to get the device ID of our raspberry Pi do this run the following and save the output</p>
+<p>service iot getdeviceid
+#example output
+The device id is b827eba5b236</p>
+</li>
+</ol>
+<pre><code>We will want to copy the id `b827eba5b236`, yours obviously will be different
+</code></pre>
+<ol start="21">
+<li>
+<p>Open up a web browser and goto <a href="http://bluemix.net/">bluemix.net</a>, and click on “Catalog” in the top.  Scroll down to the very bottom and click “Internet of Things”.</p>
+</li>
+<li>
+<p>Give the service a name, use iot-python (you must do this exactly or later things won’t work), for App choose “Leave unbound”, click “Create”.</p>
+</li>
+<li>
+<p>On the left of the next page click “Launch dashboard”.</p>
+</li>
+<li>
+<p>At the top click on “Devices”.</p>
+</li>
+<li>
+<p>Click “Add Device”.</p>
+</li>
+<li>
+<p>For the second field (it says e.g. mydevice type) type in exactly <code>raspberrypi</code> (you need to have it spelled like this or there will be issues).  For device ID paste in the device ID we got from step 20, mine is <code>b827ba5b236</code>.  Click continue.</p>
+</li>
+<li>
+<p>On the next page it will show something like below, copy this and switch back to terminal on your Raspberry Pi.</p>
+<p>org=pwftki
+type=raspberrypi
+id=000000000000
+auth-method=token
+auth-token=cXQaGx8o!a9HwxM-ka</p>
+</li>
+<li>
+<p>Choose your favorite text editor but I am going to use vi.  Type the following to open the file we want to edit.</p>
+<p>sudo vi /etc/iotsample-raspberrypi/device.cfg</p>
+</li>
+<li>
+<p>To paste the text press the “i” key.  Then paste the text, this will depend on the OS you are on.</p>
+</li>
+<li>
+<p>To save the file hit the “Esc” key.  Then Type “:wq” and then press “Enter”.  That will save the file.</p>
+</li>
+<li>
+<p>Let’s restart the IoT service on our Raspberry Pi to start sending the data to the IoT service</p>
+<p>sudo service iot restart</p>
+</li>
+<li>
+<p>Next we need to download the Python code to run on the Raspberry Pi, run the following:</p>
+<p>cd ~
+git clone <a href="https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git">https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git</a>
+cd python-iot-raspberry-pi</p>
+</li>
+<li>
+<p>Now we need to install the package manager for Python:</p>
+<p>sudo apt-get install python-pip
+sudo pip install -r requirements.txt</p>
+</li>
+<li>
+<p>One last bit, we need a config file for our app before we can start it.  Lets run the following:</p>
+<p>vi ~/device.cfg</p>
+</li>
+<li>
+<p>Remember this is vi again, so remember the shortcuts for inserting text and saving it from step 29,30.  The contents of the file should look something like below, replacing yourapikey, yourdeviceid, youriotorg, and yourapitoken with the correct values. To generate the API key and token we can get them from going back to the web browser and going to the Internet of Things Foundation.  At the top  click on API Keys.  Click “New API Key”.  The values that it gives you will be the values you use for the yourapitoken and yourapikey. <code>yourdeviceid</code> is the value we got from step 20 <code>youriotorg</code> is from step 27, it is also in your config file; in my case my value is pwftki. Let’s save the file (remember, “Esc”, “:wq”, “Enter”)</p>
+<p>[application]
+org=youriotorg
+id=yourdeviceid
+auth-method=apikey
+auth-key=yourapikey
+auth-token=yourauthtoken</p>
+</li>
+<li>
+<p>OK, so now we can launch/start the app on the Raspberry Pi.  To do that run the following:</p>
+<p>cd ~/python-iot-raspberry-pi
+sudo python client.py</p>
+</li>
+</ol>
+<h2 id="bluemix-app-setup-steps">Bluemix App Setup Steps</h2>
+<h6 id="note--the-following-steps-are-to-be-run-on-your-desktop-not-the-raspberry-pi">NOTE:  The following steps are to be run on your desktop NOT the Raspberry Pi.</h6>
+<ol>
+<li>
+<p>We will need to install the Cloud Foundry CLI to deploy our app to Bluemix.  To do this head over to <a href="https://github.com/cloudfoundry/cli/releases">https://github.com/cloudfoundry/cli/releases</a>.  Choose the appropriate installer for your platform, download it and run the installer.</p>
+</li>
+<li>
+<p>So let’s open up a new terminal Window, we will need to do the rest on our development machine/laptop.</p>
+</li>
+<li>
+<p>We need to download the Python code for our app.  Run the following.  If you don’t have git installed follow these instructions <a href="http://git-scm.com/book/en/v2/Getting-Started-Installing-Git">here</a>.</p>
+<p>git clone <a href="https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git">https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git</a>
+cd python-iot-raspberry-pi</p>
+</li>
+<li>
+<p>In your web browser go back to the tab that you have Bluemix open with.  In the top click “Catalog”, scroll down to find “Twilio”.  Click on that.</p>
+</li>
+<li>
+<p>If you already have a Twilio account and want to use that skip to step 6.  If you don’t have a Twilio account on the right hand side click “Register at Twilio”.</p>
+</li>
+<li>
+<p>Twilio will ask you for some information and you will need to verify your phone number.  This is important as only numbers verified with the free plan will work with your app.   If you want to be able to text any number you need to pay for Twilio, its $1/month/phone number.</p>
+</li>
+<li>
+<p>Once you are signed up for your account, head to <a href="https://www.twilio.com/user/account/voice-messaging">https://www.twilio.com/user/account/voice-messaging</a>.  Near the top right there will be a twistie that says “Show API Credentials”, click that.  There is two pieces of information here, the Account SID and Auth Token.  We will need to copy these back to the Bluemix tab we have open with Twilio.</p>
+</li>
+<li>
+<p>Paste your Account SID in the field in Bluemix that says Account SID, paste your Auth Token in the Auth Token field.</p>
+</li>
+<li>
+<p>For the Service name you must type in this exactly iot-twilio</p>
+</li>
+<li>
+<p>For the App, choose “Leave Unbound”</p>
+</li>
+<li>
+<p>Click Create.</p>
+</li>
+<li>
+<p>Switch back to the terminal that you have on your local dev machine, not your Raspberry Pi.</p>
+</li>
+<li>
+<p>We need to login to Bluemix, to do that, type <code>cf login -a https://api.ng.bluemix.net</code>. It will ask you for your username and password. This is from step 1 in the Raspberry Pi section above.</p>
+</li>
+<li>
+<p>To deploy our application all we need to do now is type <code>cf push myappname</code> where myapp name is a unique name you choose for your app.<em>NOTE:</em> If you get an error mentioning a route is taken, choose a different name and run <code>cf push</code> with a new app name.</p>
+</li>
+<li>
+<p>It will take about a minute or two to deploy your application but eventually you will get some output that looks like the following:</p>
+<p>requested state: started
+instances: 1/1
+usage: 1G x 1 instances
+urls: testapp-jbs.mybluemix.net
+last uploaded: Fri Jul 31 00:25:17 UTC 2015
+stack: lucid64
+buildpack: SDK for Node.js(TM) (ibm-node.js-0.12.7)</p>
+</li>
+</ol>
+<p>There is a row that says <code>urls:</code>, copy that URL and paste it into your browser.</p>
+<p>If everything went well you should have a page that looks like the following:</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/pythoniotapp-medium.png" alt="pythoniotapp IoT Python app with a Raspberry Pi and Bluemix"></p>
+<p>An important note here, do not press the button on the Raspberry Pi until you enter a phone number and text message here, if you do the app will crash.  If you do this you can restart you app with <code>cf restart myappname</code>, where myappname is the name of the app you chose above.</p>
+<p>When you click the “On” button it should turn the light on for you.  If you press the “Off” button it should turn the light off.</p>
+<h2 id="feedback">Feedback</h2>
+<p>Follow us on Twitter at <a href="https://twitter.com/IBMBluemix">@IBMBluemix</a> and follow the author of this blog post (Jeff Sloyer, one of our developer advocates) at <a href="https://twitter.com/jsloyer">@jsloyer</a></p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

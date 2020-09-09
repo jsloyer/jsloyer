@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/</link>
+    <description>Recent content in Tags on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Sun, 30 Aug 2020 23:24:00 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>airplay</title>
+      <link>http://www.jeffsloyer.io/tags/airplay/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/airplay/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apple</title>
+      <link>http://www.jeffsloyer.io/tags/apple/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/apple/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>firewall</title>
+      <link>http://www.jeffsloyer.io/tags/firewall/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/firewall/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ubiquiti</title>
+      <link>http://www.jeffsloyer.io/tags/ubiquiti/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/ubiquiti/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>udm</title>
+      <link>http://www.jeffsloyer.io/tags/udm/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/udm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unifi</title>
+      <link>http://www.jeffsloyer.io/tags/unifi/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/unifi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>usg</title>
+      <link>http://www.jeffsloyer.io/tags/usg/</link>
+      <pubDate>Mon, 01 Apr 2019 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/usg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sonos</title>
+      <link>http://www.jeffsloyer.io/tags/sonos/</link>
+      <pubDate>Mon, 11 Feb 2019 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/sonos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>att</title>
+      <link>http://www.jeffsloyer.io/tags/att/</link>
+      <pubDate>Wed, 04 Apr 2018 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/att/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>backup</title>
+      <link>http://www.jeffsloyer.io/tags/backup/</link>
+      <pubDate>Wed, 06 Dec 2017 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/backup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bluemix</title>
+      <link>http://www.jeffsloyer.io/tags/bluemix/</link>
+      <pubDate>Wed, 29 Mar 2017 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/bluemix/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>containers</title>
+      <link>http://www.jeffsloyer.io/tags/containers/</link>
+      <pubDate>Wed, 29 Mar 2017 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/containers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>http://www.jeffsloyer.io/tags/kubernetes/</link>
+      <pubDate>Wed, 29 Mar 2017 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>docker</title>
+      <link>http://www.jeffsloyer.io/tags/docker/</link>
+      <pubDate>Mon, 19 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go</title>
+      <link>http://www.jeffsloyer.io/tags/go/</link>
+      <pubDate>Mon, 19 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/go/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>http://www.jeffsloyer.io/tags/golang/</link>
+      <pubDate>Mon, 19 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>migrate</title>
+      <link>http://www.jeffsloyer.io/tags/migrate/</link>
+      <pubDate>Sun, 18 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/migrate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wordpress</title>
+      <link>http://www.jeffsloyer.io/tags/wordpress/</link>
+      <pubDate>Sun, 18 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/wordpress/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>buildpack</title>
+      <link>http://www.jeffsloyer.io/tags/buildpack/</link>
+      <pubDate>Wed, 26 Aug 2015 11:17:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/buildpack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>php</title>
+      <link>http://www.jeffsloyer.io/tags/php/</link>
+      <pubDate>Wed, 26 Aug 2015 11:17:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node.js</title>
+      <link>http://www.jeffsloyer.io/tags/node.js/</link>
+      <pubDate>Mon, 24 Aug 2015 11:21:03 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>watson</title>
+      <link>http://www.jeffsloyer.io/tags/watson/</link>
+      <pubDate>Mon, 24 Aug 2015 11:21:03 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/watson/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>meteor</title>
+      <link>http://www.jeffsloyer.io/tags/meteor/</link>
+      <pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/meteor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mongodb</title>
+      <link>http://www.jeffsloyer.io/tags/mongodb/</link>
+      <pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>websockets</title>
+      <link>http://www.jeffsloyer.io/tags/websockets/</link>
+      <pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/websockets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>http://www.jeffsloyer.io/tags/devops/</link>
+      <pubDate>Mon, 20 Jul 2015 10:54:13 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudfoundry</title>
+      <link>http://www.jeffsloyer.io/tags/cloudfoundry/</link>
+      <pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/cloudfoundry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zero downtime</title>
+      <link>http://www.jeffsloyer.io/tags/zero-downtime/</link>
+      <pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/zero-downtime/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>box</title>
+      <link>http://www.jeffsloyer.io/tags/box/</link>
+      <pubDate>Mon, 29 Jun 2015 10:46:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/box/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>flask</title>
+      <link>http://www.jeffsloyer.io/tags/flask/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/flask/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>iot</title>
+      <link>http://www.jeffsloyer.io/tags/iot/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/iot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>http://www.jeffsloyer.io/tags/python/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raspberry pi</title>
+      <link>http://www.jeffsloyer.io/tags/raspberry-pi/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/raspberry-pi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgresql</title>
+      <link>http://www.jeffsloyer.io/tags/postgresql/</link>
+      <pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/postgresql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>redis</title>
+      <link>http://www.jeffsloyer.io/tags/redis/</link>
+      <pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/redis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ror</title>
+      <link>http://www.jeffsloyer.io/tags/ror/</link>
+      <pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/ror/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ruby</title>
+      <link>http://www.jeffsloyer.io/tags/ruby/</link>
+      <pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ruby on rails</title>
+      <link>http://www.jeffsloyer.io/tags/ruby-on-rails/</link>
+      <pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/ruby-on-rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cloudant</title>
+      <link>http://www.jeffsloyer.io/tags/cloudant/</link>
+      <pubDate>Tue, 17 Feb 2015 10:02:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/cloudant/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>amqp</title>
+      <link>http://www.jeffsloyer.io/tags/amqp/</link>
+      <pubDate>Mon, 19 Jan 2015 09:34:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/amqp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>microservices</title>
+      <link>http://www.jeffsloyer.io/tags/microservices/</link>
+      <pubDate>Mon, 19 Jan 2015 09:34:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/microservices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mqtt</title>
+      <link>http://www.jeffsloyer.io/tags/mqtt/</link>
+      <pubDate>Mon, 19 Jan 2015 09:34:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/mqtt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>etherpad</title>
+      <link>http://www.jeffsloyer.io/tags/etherpad/</link>
+      <pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/etherpad/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>http://www.jeffsloyer.io/tags/mysql/</link>
+      <pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>twilio</title>
+      <link>http://www.jeffsloyer.io/tags/twilio/</link>
+      <pubDate>Mon, 24 Nov 2014 22:06:16 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/twilio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javaee</title>
+      <link>http://www.jeffsloyer.io/tags/javaee/</link>
+      <pubDate>Mon, 24 Nov 2014 21:54:23 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/javaee/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>liberty</title>
+      <link>http://www.jeffsloyer.io/tags/liberty/</link>
+      <pubDate>Mon, 24 Nov 2014 21:54:23 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/liberty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>templates</title>
+      <link>http://www.jeffsloyer.io/tags/templates/</link>
+      <pubDate>Mon, 18 Aug 2014 22:10:32 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/templates/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>themes</title>
+      <link>http://www.jeffsloyer.io/tags/themes/</link>
+      <pubDate>Mon, 18 Aug 2014 22:10:32 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/themes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>security</title>
+      <link>http://www.jeffsloyer.io/tags/security/</link>
+      <pubDate>Mon, 18 Aug 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/security/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssl</title>
+      <link>http://www.jeffsloyer.io/tags/ssl/</link>
+      <pubDate>Mon, 18 Aug 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/ssl/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>express</title>
+      <link>http://www.jeffsloyer.io/tags/express/</link>
+      <pubDate>Thu, 17 Apr 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/express/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kraken.js</title>
+      <link>http://www.jeffsloyer.io/tags/kraken.js/</link>
+      <pubDate>Thu, 17 Apr 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/tags/kraken.js/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

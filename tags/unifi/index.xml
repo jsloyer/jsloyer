@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>unifi on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/unifi/</link>
+    <description>Recent content in unifi on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Sun, 30 Aug 2020 23:24:00 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/unifi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay</title>
+      <link>http://www.jeffsloyer.io/post/apple-airplay-udm/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/apple-airplay-udm/</guid>
+      <description>Background As a follow on from a previous post I discussed how to enable the IGMP Proxy in the USG product line to permit cross VLAN mDNS traffic. In the UDM/UDM-Pro line its a bit different. There is config.gateway.json file anymore. There are multiple workarounds out there to run Docker contaienrs to add in extra functionality, however this is not one of them.
+If you are looking to bypass your AT&amp;amp;T gateway then you will need to head down the Docker path, but if you are looking for just Airplay across VLAN&amp;rsquo;s you have arrived at the correct article.</description>
+    </item>
+    
+    <item>
+      <title>Cross VLAN traffic with a USG and Apple Airplay</title>
+      <link>http://www.jeffsloyer.io/post/apple-airplay-usg/</link>
+      <pubDate>Mon, 01 Apr 2019 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/apple-airplay-usg/</guid>
+      <description>Background As a follow on from a previous post I discussed how I locked down VLAN&amp;rsquo;s from a IoT VLAN to my core data VLAN. In that post I described how I got my Sonos speakers and Sonos controller to work over locked down VLAN&amp;rsquo;s. I recently hooked up an old Apple Airport Express and music wouldn&amp;rsquo;t flow when I was on the data VLAN to the IoT VLAN where the Airport Express resided.</description>
+    </item>
+    
+    <item>
+      <title>Firewall Ports for the Unifi USG and Sonos Speakers</title>
+      <link>http://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</link>
+      <pubDate>Mon, 11 Feb 2019 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</guid>
+      <description>Background At home I run the 4 port USG router on my Unifi&amp;rsquo;ed network. I have a couple different VLAN&amp;rsquo;s, Data, Management, Security, IoT, and Guest. Each of these networks already has some policies that prevent some of the VLAN&amp;rsquo;s talking to each other. For example I have some firewall rules that prevent my security cameras from talking to the IoT network and talking out to the public Internet. For the past couple months I haven&amp;rsquo;t been running a locked down IoT network.</description>
+    </item>
+    
+    <item>
+      <title>ATT Uverse Modem Bypass - UniFi USG</title>
+      <link>http://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/</link>
+      <pubDate>Wed, 04 Apr 2018 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/</guid>
+      <description>Background Ever since I have switched over to Ubiquiti&amp;rsquo;s Unifi setup for my home I have been searching for a way to eliminate AT&amp;amp;T&amp;rsquo;s residential gateway from my setup. I have AT&amp;amp;T Fiber and I detest AT&amp;amp;T&amp;rsquo;s residential gateway. I won&amp;rsquo;t go into the reasons now but just know the list is almost endless. It would be great if AT&amp;amp;T just allowed you not to use that if you have a router of your own.</description>
+    </item>
+    
+  </channel>
+</rss>

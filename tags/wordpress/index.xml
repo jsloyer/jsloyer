@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wordpress on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/wordpress/</link>
+    <description>Recent content in wordpress on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Sun, 18 Dec 2016 14:11:14 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/wordpress/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Why I Chose Hugo over Wordpress - Part 2</title>
+      <link>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</link>
+      <pubDate>Sun, 18 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</guid>
+      <description>This post has been a long time going and much overdue, it has almost been 12 months since publishing the follow up to my previous post Why I Chose Hugo Over Wordpress. But I am finally going to take the time and explain all the technical parts about how I made this blog work with Hugo.
+Setting up the site First to get started you need to install Hugo.
+brew update &amp;amp;&amp;amp; brew install hugo Next you need to create a basic Hugo site.</description>
+    </item>
+    
+    <item>
+      <title>Why I Chose Hugo over Wordpress</title>
+      <link>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</link>
+      <pubDate>Fri, 08 Jan 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</guid>
+      <description>I am finally back with my blog, sorry it has been quite awhile. I just recently finished a migration of my blog my running on Wordpress, which was hosted on WPEngine and is a really awesome service, to Github pages. I got tired of using Wordpress and WPEngine cost me about $30/month&amp;hellip; So I decided to migrate the site to Github pages where I can run the site for free.</description>
+    </item>
+    
+  </channel>
+</rss>

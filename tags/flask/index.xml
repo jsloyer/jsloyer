@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>flask on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/flask/</link>
+    <description>Recent content in flask on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Thu, 02 Apr 2015 10:29:53 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/flask/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>IoT Python app with a Raspberry Pi and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</guid>
+      <description>This is an extension/continuation from the blog post on how to create a basic Python webapp. In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the Internet of Things Foundation in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi. The tutorial also uses Twilio to interact with the Raspberry Pi.
+So what does this look like? Here is a simple architecture diagram.</description>
+    </item>
+    
+    <item>
+      <title>Simple Hello World Python App using Flask</title>
+      <link>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</link>
+      <pubDate>Mon, 30 Mar 2015 10:17:51 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</guid>
+      <description>Hey Y’all! Jeff here again, today we are going to be going through some really simple steps to get started deploying a simple hello world python app using Flask on Bluemix.
+Flask is an awesome and really lightweight framework in Python to create powerful webapps. We are going to use it make a really simple hello world app in Python though.
+In this post we are going to go through the written instructions on how to do it but if you prefer watching a video check out the video below.</description>
+    </item>
+    
+  </channel>
+</rss>

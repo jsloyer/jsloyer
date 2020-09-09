@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/post/</link>
+    <description>Recent content in Blog on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Sun, 30 Aug 2020 23:24:00 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay</title>
+      <link>http://www.jeffsloyer.io/post/apple-airplay-udm/</link>
+      <pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/apple-airplay-udm/</guid>
+      <description>Background As a follow on from a previous post I discussed how to enable the IGMP Proxy in the USG product line to permit cross VLAN mDNS traffic. In the UDM/UDM-Pro line its a bit different. There is config.gateway.json file anymore. There are multiple workarounds out there to run Docker contaienrs to add in extra functionality, however this is not one of them.
+If you are looking to bypass your AT&amp;amp;T gateway then you will need to head down the Docker path, but if you are looking for just Airplay across VLAN&amp;rsquo;s you have arrived at the correct article.</description>
+    </item>
+    
+    <item>
+      <title>Cross VLAN traffic with a USG and Apple Airplay</title>
+      <link>http://www.jeffsloyer.io/post/apple-airplay-usg/</link>
+      <pubDate>Mon, 01 Apr 2019 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/apple-airplay-usg/</guid>
+      <description>Background As a follow on from a previous post I discussed how I locked down VLAN&amp;rsquo;s from a IoT VLAN to my core data VLAN. In that post I described how I got my Sonos speakers and Sonos controller to work over locked down VLAN&amp;rsquo;s. I recently hooked up an old Apple Airport Express and music wouldn&amp;rsquo;t flow when I was on the data VLAN to the IoT VLAN where the Airport Express resided.</description>
+    </item>
+    
+    <item>
+      <title>Firewall Ports for the Unifi USG and Sonos Speakers</title>
+      <link>http://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</link>
+      <pubDate>Mon, 11 Feb 2019 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</guid>
+      <description>Background At home I run the 4 port USG router on my Unifi&amp;rsquo;ed network. I have a couple different VLAN&amp;rsquo;s, Data, Management, Security, IoT, and Guest. Each of these networks already has some policies that prevent some of the VLAN&amp;rsquo;s talking to each other. For example I have some firewall rules that prevent my security cameras from talking to the IoT network and talking out to the public Internet. For the past couple months I haven&amp;rsquo;t been running a locked down IoT network.</description>
+    </item>
+    
+    <item>
+      <title>ATT Uverse Modem Bypass - UniFi USG</title>
+      <link>http://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/</link>
+      <pubDate>Wed, 04 Apr 2018 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/</guid>
+      <description>Background Ever since I have switched over to Ubiquiti&amp;rsquo;s Unifi setup for my home I have been searching for a way to eliminate AT&amp;amp;T&amp;rsquo;s residential gateway from my setup. I have AT&amp;amp;T Fiber and I detest AT&amp;amp;T&amp;rsquo;s residential gateway. I won&amp;rsquo;t go into the reasons now but just know the list is almost endless. It would be great if AT&amp;amp;T just allowed you not to use that if you have a router of your own.</description>
+    </item>
+    
+    <item>
+      <title>Backblaze vs Crashplan</title>
+      <link>http://www.jeffsloyer.io/post/backblaze-vs-crashplan/</link>
+      <pubDate>Wed, 06 Dec 2017 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/backblaze-vs-crashplan/</guid>
+      <description>Most people do not think about backups or want to take the time to set one up or spend the money. Boy is that a mistake&amp;hellip; Most people (myself included) are in that boat and they realize they need to backup their data after its too late and they have lost that precious photo of their baby being born.
+There are multiple methods for backing up your data, they range from a thumb drive to remote backup.</description>
+    </item>
+    
+    <item>
+      <title>Using Cabin with the IBM Bluemix Container Service</title>
+      <link>http://www.jeffsloyer.io/post/ibm-container-service-cabin/</link>
+      <pubDate>Wed, 29 Mar 2017 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/ibm-container-service-cabin/</guid>
+      <description>I haven&amp;rsquo;t posted in awhile because I have taken a new role at IBM and helped lead the development of the new IBM Bluemix Container Service that allows you to run managed Kubernetes clusters on IBM.
+For a little background, IBM has introduced a managed Kubernetes Service, for more information please read the announce post here.
+Cabin is a pretty cool mobile app that lets you manage your Kubernetes cluster through your Android or iPhone.</description>
+    </item>
+    
+    <item>
+      <title>Cross Compiling Golang with a Docker Alpine Container</title>
+      <link>http://www.jeffsloyer.io/post/cross-compiling-docker-alpine-golang/</link>
+      <pubDate>Mon, 19 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/cross-compiling-docker-alpine-golang/</guid>
+      <description>Recently at work I have been struggling with building a small/minimized Docker container of a Go app I have been working on. I started with busybox but it has a major short coming&amp;hellip; CA certificates. It isn&amp;rsquo;t trivial to get CA Certs on a busybox container. This problem effectively prevents you from using SSL or TLS with your app&amp;hellip; This is a non-starter&amp;hellip;
+Enter Alpine I was doing some reading and I have seen a couple articles mention Alpine, its effectively a slimmed down version of busybox but it makes it trivially easy to install packages, in my case CA Certificates!</description>
+    </item>
+    
+    <item>
+      <title>Why I Chose Hugo over Wordpress - Part 2</title>
+      <link>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</link>
+      <pubDate>Sun, 18 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</guid>
+      <description>This post has been a long time going and much overdue, it has almost been 12 months since publishing the follow up to my previous post Why I Chose Hugo Over Wordpress. But I am finally going to take the time and explain all the technical parts about how I made this blog work with Hugo.
+Setting up the site First to get started you need to install Hugo.
+brew update &amp;amp;&amp;amp; brew install hugo Next you need to create a basic Hugo site.</description>
+    </item>
+    
+    <item>
+      <title>Why I Chose Hugo over Wordpress</title>
+      <link>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</link>
+      <pubDate>Fri, 08 Jan 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</guid>
+      <description>I am finally back with my blog, sorry it has been quite awhile. I just recently finished a migration of my blog my running on Wordpress, which was hosted on WPEngine and is a really awesome service, to Github pages. I got tired of using Wordpress and WPEngine cost me about $30/month&amp;hellip; So I decided to migrate the site to Github pages where I can run the site for free.</description>
+    </item>
+    
+    <item>
+      <title>Fixing common errors with the PHP Buildpack in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</link>
+      <pubDate>Wed, 26 Aug 2015 11:17:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</guid>
+      <description>Following up from my previous post, Canonical recently dropped support for lucid64 which is Ubuntu 10.04 LTS. This affects Cloud Foundry as lucid64 is the basis for most buildpacks. In Cloud Foundry lucid64 is being phased out for Ubuntu 14.04 LTS which is known as cflinuxfs2 in Cloud Foundry.
+Getting stacks in org jbsloyer@us.ibm.com / space dev as jbsloyer@us.ibm.com... OK name description lucid64 Ubuntu 10.04 cflinuxfs2 Ubuntu 14.04.2 trusty The PHP buildpack will take the default system buildpack and right now in Bluemix it is lucid64.</description>
+    </item>
+    
+    <item>
+      <title>Peering Inside a Criminal’s Mind using IBM Watson</title>
+      <link>http://www.jeffsloyer.io/post/peering-inside-a-criminals-mind-using-ibm-watson/</link>
+      <pubDate>Mon, 24 Aug 2015 11:21:03 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/peering-inside-a-criminals-mind-using-ibm-watson/</guid>
+      <description>With the recent shooting in South Carolina in reminds us that criminal&amp;rsquo;s can and will continue to harm people. They seem like random acts to most of us but to a criminal the acts make sense to them? No one can answer this question except the criminal. To peer inside a criminal&amp;rsquo;s would be next to impossible but what if there existed another way to peer inside their mind&amp;rsquo;s? This could be used to try to identify patterns or personality traits that exist.</description>
+    </item>
+    
+    <item>
+      <title>(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link>
+      <pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid>
+      <description>This is a follow up post to a previous post on Deploying your Meteor app to Cloud Foundry and Bluemix. In this post we went through how to deploy a Meteor app to Cloud Foundry and Bluemix. In this post we will be going through the same thing except in a video format. Check out the video below.
+I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](https://twitter.</description>
+    </item>
+    
+    <item>
+      <title>Deploying your Meteor app to Cloud Foundry and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link>
+      <pubDate>Wed, 05 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid>
+      <description>Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript. It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.
+I heard about Meteor mid-2014 but it peaked my interest last week when I was at a customer and a developer at the customer was building a Meteor app and they were asking how to run it on Bluemix.</description>
+    </item>
+    
+    <item>
+      <title>Common Deploy Errors with Community Buildpacks in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</link>
+      <pubDate>Wed, 29 Jul 2015 10:58:25 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</guid>
+      <description>Recently the company that owns development for Ubuntu (Canonical) just announced it is dropping support for lucid 64 which is Ubuntu 10.04 LTS. What does this mean for Cloud Foundry and the community buildpacks?
+Well nothing really but there is a couple gotcha&amp;rsquo;s you should know about.
+I have seen issues with the following buildpacks, this is not a comprehensive list but the ones I at least know about.
+  PHP - https://github.</description>
+    </item>
+    
+    <item>
+      <title>Zero downtime deployments with Bluemix and Codeship</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/</link>
+      <pubDate>Mon, 20 Jul 2015 10:54:13 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/</guid>
+      <description>This is a part two post following up on my earlier post on Zero Downtime Deployment with the CF Autopilot Plugin. I highly encourage you to read the first part before reading this post but if you are lazy I will go over the high level concepts here.
+Overview of Part 1 (Quick Refresher) In part 1 we went over what a zero downtime deployment is and why it is in important.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployment with the CF Autopilot Plugin - Video</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</link>
+      <pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</guid>
+      <description>I recently wrote a blog post on what a zero downtime deployment is, why it is important, and how to perform one. I am now posting a video on the same topic so you can learn about a zero downtime deployment by watching a video instead.
+If you prefer the tutorial and text instructions please check out Zero Downtime Deployment with the CF Autopilot Plugin.
+I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](https://twitter.</description>
+    </item>
+    
+    <item>
+      <title>Personality Box – You had me at upload</title>
+      <link>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</link>
+      <pubDate>Mon, 29 Jun 2015 10:46:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</guid>
+      <description>As announced yesterday, IBM has formed a partnership with Box.com, a partnership that includes the integration of Box into the Bluemix catalog. With its REST-based Content and View APIs, embedding enterprise-grade file storage into your app and enabling file sharing among your users has never been simpler.
+To help you on your way to becoming a file-sharing guru, Bluemix developer advocate Jake Peyser and I have built a sample app that you can leverage as you begin to explore the possibilities of the Box.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployment with the CF Autopilot Plugin</title>
+      <link>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</link>
+      <pubDate>Fri, 19 Jun 2015 10:41:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</guid>
+      <description>Zero down time deployments are a must for any Internet app running at scale. Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer. This is not acceptable anymore. Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.</description>
+    </item>
+    
+    <item>
+      <title>Get Pumped for the Cloud Foundry Summit</title>
+      <link>http://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</link>
+      <pubDate>Thu, 30 Apr 2015 10:38:05 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</guid>
+      <description>I’m pumped for the Cloud Foundry Summit! Are you??? Well if you aren’t yet hopefully you will be after reading this!
+If you attended the conference last year there was an awesome presentation on the future of Diego. What is Diego you ask? It is the new DEA that is coming for Cloud Foundry. It is a complete re-write in Go and will add some new features such as the ability to swap out the underlaying linux containers for things like Docker.</description>
+    </item>
+    
+    <item>
+      <title>IoT Python app with a Raspberry Pi and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</guid>
+      <description>This is an extension/continuation from the blog post on how to create a basic Python webapp. In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the Internet of Things Foundation in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi. The tutorial also uses Twilio to interact with the Raspberry Pi.
+So what does this look like? Here is a simple architecture diagram.</description>
+    </item>
+    
+    <item>
+      <title>Simple Hello World Python App using Flask</title>
+      <link>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</link>
+      <pubDate>Mon, 30 Mar 2015 10:17:51 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</guid>
+      <description>Hey Y’all! Jeff here again, today we are going to be going through some really simple steps to get started deploying a simple hello world python app using Flask on Bluemix.
+Flask is an awesome and really lightweight framework in Python to create powerful webapps. We are going to use it make a really simple hello world app in Python though.
+In this post we are going to go through the written instructions on how to do it but if you prefer watching a video check out the video below.</description>
+    </item>
+    
+    <item>
+      <title>Tips for Migrating Ruby on Rails Applications to Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/</link>
+      <pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/</guid>
+      <description>Who doesn’t love some Ruby? Bluemix definitely loves Ruby on Rails! Sometimes running a Ruby on Rails app can be a little tricky, so I have included some tips and tricks for migrating your Ruby on Rails app to Bluemix. They will include:
+ Required gems Code tweaks Accessing external databases Deploying your app  Required gems If you are using PostgreSQL you need to include pg. Sqlite3 is included to get local development working as well.</description>
+    </item>
+    
+    <item>
+      <title>Control home devices with Bluemix Internet of Things (Part 2)</title>
+      <link>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</link>
+      <pubDate>Tue, 17 Feb 2015 10:02:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</guid>
+      <description>Part 2: Configuring the Raspberry Pi This is a continuation of Part 1 of Controlling home devices with Bluemix Internet Of Things If you haven’t read Part 1, please do that first…
+In Part 1 we got the electrical work out of the way. We wired up the relay’s and connected the circuit’s. In this part of the 3 part series we will configure the Raspberry Pi to control the relay’s that we wired up in part 1.</description>
+    </item>
+    
+    <item>
+      <title>Control home devices with Bluemix Internet of Things</title>
+      <link>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</link>
+      <pubDate>Fri, 06 Feb 2015 09:49:21 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</guid>
+      <description>The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020. These devices make up something called the Internet of Things. These devices can be controlled remotely and interconnected.
+While a lot of these devices can be connected to the Internet, most of them are &amp;ldquo;dumb&amp;rdquo; devices right now. To turn these &amp;ldquo;dumb&amp;rdquo; devices into smart devices you can use the Internet of Things to connect them to the cloud.</description>
+    </item>
+    
+    <item>
+      <title>How Watson and Bluemix see the State of the Union</title>
+      <link>http://www.jeffsloyer.io/post/how-watson-and-bluemix-see-the-state-of-the-union/</link>
+      <pubDate>Wed, 21 Jan 2015 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/how-watson-and-bluemix-see-the-state-of-the-union/</guid>
+      <description>The State of the Union, a live broadcast that many Americans historically use as a tool to form opinions about the current political system, and gain insight from their Commander in Chief into the transparency of a system of checks and balances. What is more interesting is the thoughts and underlying feelings between the State of the Union. If we could figure out how the President is feeling or portraying himself, could we infer how the President will schedule and work with legislation and policy for the rest of the year?</description>
+    </item>
+    
+    <item>
+      <title>Microservices in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/microservices-in-bluemix/</link>
+      <pubDate>Mon, 19 Jan 2015 09:34:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/microservices-in-bluemix/</guid>
+      <description>Monolith apps are no more. The age of the monolith is over. It wasn’t that long ago that companies and developers (myself included) were deploying one giant app that did everything. The app would serve all your static files, front-end HTML and CSS and Javascript, act as your REST API, serve as your data persistance tier, handles sessions, handle logins, and do security for your app. The list could keep going on and on.</description>
+    </item>
+    
+    <item>
+      <title>Etherpad in Cloud Foundry – Quick Start Guide</title>
+      <link>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</link>
+      <pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</guid>
+      <description>Etherpad Lite is an awesome online collaboration platform. Multiple open source projects use it for collaboration. One of the most notable ones is the Openstack Project Openstack Etherpad. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry.</description>
+    </item>
+    
+    <item>
+      <title>Twitter Personality Comparisons Using Watson</title>
+      <link>http://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</link>
+      <pubDate>Mon, 24 Nov 2014 22:06:16 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</guid>
+      <description>Hey Yall!
+We are back at it again with some demos!!!
+Did you ever wonder if you and your favorite celebrity would be compatible if you met?? I sure do! Or did you ever wonder how you could become a better leader, I sure do. Today you would have to go Google the person and analyze posts and articles about them and be a personality expert to see if you have personality traits in common.</description>
+    </item>
+    
+    <item>
+      <title>Deploying a Watson and Cloudant App with DevOps Services</title>
+      <link>http://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</link>
+      <pubDate>Mon, 24 Nov 2014 21:54:23 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</guid>
+      <description>Backed by popular demand this is a continuation of the post Building a Java EE app on IBM Bluemix Using Watson and Cloudant.
+This post will detail how to build and deploy the app using IBM DevOps Services.
+There is a bit of magic behind this, its called &amp;ldquo;The Deploy to Bluemix Button&amp;rdquo;&amp;hellip;
+Clicking the magic button below will setup the app using IBM DevOps services and deploy the whole application for you.</description>
+    </item>
+    
+    <item>
+      <title>Onboarding Guide for Bluemix for Third Parties</title>
+      <link>http://www.jeffsloyer.io/post/onboarding-guide-for-bluemix-for-third-parties/</link>
+      <pubDate>Wed, 19 Nov 2014 21:42:10 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/onboarding-guide-for-bluemix-for-third-parties/</guid>
+      <description>While IBM is rapidly bringing new services and capabilities into Bluemix, one of the reasons our customers are so interested in Bluemix is because they can use our platform and services in conjunction with many other open source and third party APIs and services. The ability to easily access and integrate this combination of technology is one of the biggest values for any developer looking to build applications on Bluemix.</description>
+    </item>
+    
+    <item>
+      <title>Building a Java EE app on IBM Bluemix Using Watson, Cloudant</title>
+      <link>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</link>
+      <pubDate>Tue, 14 Oct 2014 22:36:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</guid>
+      <description>Hey Y’all!
+Jeff here again and something I am really excited about is Watson is now available for anyone to use in Bluemix!
+Today we are going to be building an example app using Java, Cloudant, and Watson.
+Ok let’s talk through what this app is going to do before we build it.
+Meet Ivy (hello!)
+She’s a talent manager at a growing tech startup.
+She’s looking for a new hire that would be a good fit on her team but the company is so popular that she has a huge inventory of resumes to sort through.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployments with Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</link>
+      <pubDate>Mon, 18 Aug 2014 22:10:32 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</guid>
+      <description>In Cloud Foundry (the open source technology behind Bluemix), when you do a cf push, Cloud Foundry will actually stop your app and restart it with the new code that you just uploaded. This presents an issue for a production app or any app that is actually serving users. There is a shortcoming with the current DEA (the part in Cloud Foundry that runs your app) but the next version of the DEA (Diego) will help address this.</description>
+    </item>
+    
+    <item>
+      <title>Inbound Ssl in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/</link>
+      <pubDate>Mon, 18 Aug 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/</guid>
+      <description>Did you know in Bluemix you get inbound SSL for free? It is automatically turned on and enabled for every app. All you have to do is just access your app over https instead of http.
+Developers don’t need to implement SSL in their app, you just need to support HTTP and the Bluemix infrastructure will support HTTPS for you and do SSL offloading.
+Additionally Bluemix supports the x-forwarded-proto header to allow developers to check with protocol requests are coming in over.</description>
+    </item>
+    
+    <item>
+      <title>Kraken.Js and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/kraken-js-and-bluemix/</link>
+      <pubDate>Thu, 17 Apr 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/kraken-js-and-bluemix/</guid>
+      <description>Kraken.JS is a new wonderful framework wrapper around Express for Node.JS. It includes things such as pre-canned security settings, templating, and internationalization. While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do. While security is very important in your app why should you have to write redundant code for this. The answer is you do not have to anymore.</description>
+    </item>
+    
+  </channel>
+</rss>

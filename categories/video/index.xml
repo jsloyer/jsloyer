@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Video on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/categories/video/</link>
+    <description>Recent content in Video on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Wed, 26 Aug 2015 11:17:31 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/categories/video/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fixing common errors with the PHP Buildpack in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</link>
+      <pubDate>Wed, 26 Aug 2015 11:17:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</guid>
+      <description>Following up from my previous post, Canonical recently dropped support for lucid64 which is Ubuntu 10.04 LTS. This affects Cloud Foundry as lucid64 is the basis for most buildpacks. In Cloud Foundry lucid64 is being phased out for Ubuntu 14.04 LTS which is known as cflinuxfs2 in Cloud Foundry.
+Getting stacks in org jbsloyer@us.ibm.com / space dev as jbsloyer@us.ibm.com... OK name description lucid64 Ubuntu 10.04 cflinuxfs2 Ubuntu 14.04.2 trusty The PHP buildpack will take the default system buildpack and right now in Bluemix it is lucid64.</description>
+    </item>
+    
+    <item>
+      <title>(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link>
+      <pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid>
+      <description>This is a follow up post to a previous post on Deploying your Meteor app to Cloud Foundry and Bluemix. In this post we went through how to deploy a Meteor app to Cloud Foundry and Bluemix. In this post we will be going through the same thing except in a video format. Check out the video below.
+I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](https://twitter.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployment with the CF Autopilot Plugin - Video</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</link>
+      <pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</guid>
+      <description>I recently wrote a blog post on what a zero downtime deployment is, why it is important, and how to perform one. I am now posting a video on the same topic so you can learn about a zero downtime deployment by watching a video instead.
+If you prefer the tutorial and text instructions please check out Zero Downtime Deployment with the CF Autopilot Plugin.
+I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](https://twitter.</description>
+    </item>
+    
+    <item>
+      <title>Personality Box – You had me at upload</title>
+      <link>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</link>
+      <pubDate>Mon, 29 Jun 2015 10:46:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</guid>
+      <description>As announced yesterday, IBM has formed a partnership with Box.com, a partnership that includes the integration of Box into the Bluemix catalog. With its REST-based Content and View APIs, embedding enterprise-grade file storage into your app and enabling file sharing among your users has never been simpler.
+To help you on your way to becoming a file-sharing guru, Bluemix developer advocate Jake Peyser and I have built a sample app that you can leverage as you begin to explore the possibilities of the Box.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployment with the CF Autopilot Plugin</title>
+      <link>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</link>
+      <pubDate>Fri, 19 Jun 2015 10:41:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</guid>
+      <description>Zero down time deployments are a must for any Internet app running at scale. Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer. This is not acceptable anymore. Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.</description>
+    </item>
+    
+    <item>
+      <title>IoT Python app with a Raspberry Pi and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</guid>
+      <description>This is an extension/continuation from the blog post on how to create a basic Python webapp. In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the Internet of Things Foundation in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi. The tutorial also uses Twilio to interact with the Raspberry Pi.
+So what does this look like? Here is a simple architecture diagram.</description>
+    </item>
+    
+    <item>
+      <title>Simple Hello World Python App using Flask</title>
+      <link>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</link>
+      <pubDate>Mon, 30 Mar 2015 10:17:51 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</guid>
+      <description>Hey Y’all! Jeff here again, today we are going to be going through some really simple steps to get started deploying a simple hello world python app using Flask on Bluemix.
+Flask is an awesome and really lightweight framework in Python to create powerful webapps. We are going to use it make a really simple hello world app in Python though.
+In this post we are going to go through the written instructions on how to do it but if you prefer watching a video check out the video below.</description>
+    </item>
+    
+    <item>
+      <title>Control home devices with Bluemix Internet of Things</title>
+      <link>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</link>
+      <pubDate>Fri, 06 Feb 2015 09:49:21 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</guid>
+      <description>The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020. These devices make up something called the Internet of Things. These devices can be controlled remotely and interconnected.
+While a lot of these devices can be connected to the Internet, most of them are &amp;ldquo;dumb&amp;rdquo; devices right now. To turn these &amp;ldquo;dumb&amp;rdquo; devices into smart devices you can use the Internet of Things to connect them to the cloud.</description>
+    </item>
+    
+    <item>
+      <title>Etherpad in Cloud Foundry – Quick Start Guide</title>
+      <link>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</link>
+      <pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</guid>
+      <description>Etherpad Lite is an awesome online collaboration platform. Multiple open source projects use it for collaboration. One of the most notable ones is the Openstack Project Openstack Etherpad. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry.</description>
+    </item>
+    
+    <item>
+      <title>Building a Java EE app on IBM Bluemix Using Watson, Cloudant</title>
+      <link>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</link>
+      <pubDate>Tue, 14 Oct 2014 22:36:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</guid>
+      <description>Hey Y’all!
+Jeff here again and something I am really excited about is Watson is now available for anyone to use in Bluemix!
+Today we are going to be building an example app using Java, Cloudant, and Watson.
+Ok let’s talk through what this app is going to do before we build it.
+Meet Ivy (hello!)
+She’s a talent manager at a growing tech startup.
+She’s looking for a new hire that would be a good fit on her team but the company is so popular that she has a huge inventory of resumes to sort through.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/mysql/</link>
+    <description>Recent content in mysql on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Sat, 03 Jan 2015 22:19:30 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Etherpad in Cloud Foundry – Quick Start Guide</title>
+      <link>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</link>
+      <pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</guid>
+      <description>Etherpad Lite is an awesome online collaboration platform. Multiple open source projects use it for collaboration. One of the most notable ones is the Openstack Project Openstack Etherpad. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry.</description>
+    </item>
+    
+  </channel>
+</rss>

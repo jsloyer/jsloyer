@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Kraken.Js and Bluemix -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/kraken.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Kraken.Js and Bluemix</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Thu, Apr 17, 2014
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/node.js" >node.js</a> <a href="http://www.jeffsloyer.io/tags/kraken.js" >kraken.js</a> <a href="http://www.jeffsloyer.io/tags/express" >express</a> <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>Kraken.JS is a new wonderful framework wrapper around Express for Node.JS.  It includes things such as pre-canned security settings, templating, and internationalization.  While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore.</p>
+<p>While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore. With Kraken.JS it will drastically cut the number of lines down in your Node app.  I currently have an app right now where I am estimating if I converted it to Kraken.JS it would cut my code base by 33%. So let’s jump into Kraken.JS, the instructions below were based on <a href="http://krakenjs.com/#gettingstarted%22">Kraken’s documentation</a>.</p>
+<ol>
+<li>
+<p>Step 1, install Kraken if you do not already have it installed.</p>
+<pre><code> sudo npm install -g generator-kraken
+</code></pre>
+<p>Note: If &ldquo;yo&rdquo; yeoman is not installed, the above command will install it.</p>
+</li>
+<li>
+<p>Create a basic project (follow the prompts on the screen)</p>
+<pre><code> yo kraken
+</code></pre>
+</li>
+<li>
+<p>Start your app</p>
+<pre><code> npm start
+</code></pre>
+</li>
+</ol>
+<p>If you notice the app started on <code>8000</code>, with Bluemix and other PaaS’ you need to start your app on the port that the PaaS assigns you.  To do this we need to modify the example app slightly. If you open up <code>index.js</code> down near the bottom you will see the following code snippet. …</p>
+<pre><code>if (require.main === module) {
+    kraken.create(app).listen(function (err) {
+        if (err) {
+            console.error(err.stack);
+        }
+    });
+}
+</code></pre><p>The above code will automatically bind to port <code>8000</code>, we need to allow it to bind to a port that Bluemix wants.  Modify the code snippet to the following.</p>
+<pre><code>if (require.main === module) {
+    kraken.create(app).listen(process.env.VCAP_APP_PORT || 8000, function (err) {
+        if (err) {
+            console.error(err.stack);
+        }
+    });
+}
+</code></pre><p>The whole source of this app is on <a href="https://github.com/IBM-Bluemix/kraken-example">Github here</a>.  If you want to pull the code do the following.</p>
+<pre><code>git clone https://github.com/IBM-Bluemix/kraken-example.git
+</code></pre>
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

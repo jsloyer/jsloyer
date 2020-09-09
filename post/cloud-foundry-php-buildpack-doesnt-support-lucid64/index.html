@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Common Deploy Errors with Community Buildpacks in Bluemix -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/fedup.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Common Deploy Errors With Community Buildpacks in Bluemix</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Wed, Jul 29, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/other" >Other</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/php" >php</a> <a href="http://www.jeffsloyer.io/tags/buildpack" >buildpack</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>Recently the company that owns development for Ubuntu (Canonical) just announced it is dropping support for lucid 64 which is Ubuntu 10.04 LTS.  What does this mean for Cloud Foundry and the community buildpacks?</p>
+<p>Well nothing really but there is a couple gotcha&rsquo;s you should know about.</p>
+<p>I have seen issues with the following buildpacks, this is not a comprehensive list but the ones I at least know about.</p>
+<ul>
+<li>
+<p>PHP - https://github.com/cloudfoundry/php-buildpack.git</p>
+</li>
+<li>
+<p>Static Build Pack - https://github.com/cloudfoundry/staticfile-buildpack.git</p>
+</li>
+</ul>
+<p>These issues are documented in a couple StackOverflow posts but we are going to go through what is causing it and how to fix it.</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p><a href="http://stackoverflow.com/questions/31057357/static-buildpack-deploy-now-failing-due-to-unsupported-stack/31058075#31058075">Static Buildpack</a></p>
+</li>
+<li>
+<p><a href="http://stackoverflow.com/questions/31057357/static-buildpack-deploy-now-failing-due-to-unsupported-stack/31062482#31062482">Static Buildpack</a></p>
+</li>
+</ul>
+<p>If you are pushing an app to Cloud Foundry and getting an error message like the following there is a workaround you need to do to get the community buildpack&rsquo;s to work.</p>
+<p>For example I have a super simple PHP app on Github I use for debugging, it is located here. For this blog post we are going to use that app.</p>
+<pre><code>git clone https://github.com/jsloyer/phpinfo.git
+cd phpinfo
+cf push phpinfo-jbs2 -b https://github.com/cloudfoundry/php-buildpack.git
+.....
+It looks like you're deploying on a stack (currently set to *lucid64*) that's not supported by this buildpack.
+That could be because you're using a recent buildpack release on a deprecated stack.
+If you're using the buildpack installed by your CF admin, please let your admin know you saw this error message.
+If you at one point specified a buildpack that's at git URL, please make sure you're pointed at a version that supports this stack.
+Staging failed: Buildpack compilation step failed
+
+FAILED
+BuildpackCompileFailed
+</code></pre><p>What this is saying is the instance of Cloud Foundry that you are running on the default stack you get is an old version of Ubuntu. The PHP buildpack excepts the newer version of linux. This stack is called <code>cflinuxfs2</code> also known as <code>Ubuntu 14.04</code>.</p>
+<p>To work around this you just need to specify the stack you want to use.</p>
+<pre><code>cf push phpinfo-jbs2 -b https://github.com/cloudfoundry/php-buildpack.git -s cflinuxfs2
+</code></pre><p>More information can be found on this issue on <a href="https://github.com/cloudfoundry/php-buildpack/issues/87">Github</a>.</p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

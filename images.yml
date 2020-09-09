@@ -1,0 +1,2190 @@
+
+
+
+#!#!#!#!# Do not edit below this line.
+# Generated automatically using `grunt imageinfo`
+
+static/images/2014/08/the-site-can-never-be-broken-large.jpg:
+    width: 1200
+    height: 144
+    aspect: 8.333333333333334
+static/images/2014/08/the-site-can-never-be-broken-medium.jpg:
+    width: 800
+    height: 96
+    aspect: 8.333333333333334
+static/images/2014/08/the-site-can-never-be-broken-thumb.jpg:
+    width: 400
+    height: 48
+    aspect: 8.333333333333334
+static/images/2015/01/devops-borat-large.jpg:
+    width: 347
+    height: 335
+    aspect: 1.035820895522388
+static/images/2015/01/devops-borat-medium.jpg:
+    width: 347
+    height: 335
+    aspect: 1.035820895522388
+static/images/2015/01/devops-borat-thumb.jpg:
+    width: 347
+    height: 335
+    aspect: 1.035820895522388
+static/images/2015/01/mqlight-large.jpg:
+    width: 152
+    height: 172
+    aspect: 0.8837209302325582
+static/images/2015/01/mqlight-medium.jpg:
+    width: 152
+    height: 172
+    aspect: 0.8837209302325582
+static/images/2015/01/mqlight-thumb.jpg:
+    width: 152
+    height: 172
+    aspect: 0.8837209302325582
+static/images/2015/01/sample_screenshot-large.png:
+    width: 850
+    height: 665
+    aspect: 1.2781954887218046
+static/images/2015/01/sample_screenshot-medium.png:
+    width: 800
+    height: 626
+    aspect: 1.2779552715654952
+static/images/2015/01/sample_screenshot-thumb.png:
+    width: 400
+    height: 313
+    aspect: 1.2779552715654952
+static/images/2015/01/two-pizza-large.jpg:
+    width: 1000
+    height: 667
+    aspect: 1.4992503748125936
+static/images/2015/01/two-pizza-medium.jpg:
+    width: 800
+    height: 534
+    aspect: 1.4981273408239701
+static/images/2015/01/two-pizza-thumb.jpg:
+    width: 400
+    height: 267
+    aspect: 1.4981273408239701
+static/images/2015/03/button-large.png:
+    width: 155
+    height: 32
+    aspect: 4.84375
+static/images/2015/03/button-medium.png:
+    width: 155
+    height: 32
+    aspect: 4.84375
+static/images/2015/03/button-thumb.png:
+    width: 155
+    height: 32
+    aspect: 4.84375
+static/images/2015/03/icon_smile-large.gif:
+    width: 15
+    height: 15
+    aspect: 1
+static/images/2015/03/icon_smile-medium.gif:
+    width: 15
+    height: 15
+    aspect: 1
+static/images/2015/03/icon_smile-thumb.gif:
+    width: 15
+    height: 15
+    aspect: 1
+static/images/2015/06/2014-12-02-15.16.57-large.jpg:
+    width: 1200
+    height: 900
+    aspect: 1.3333333333333333
+static/images/2015/06/2014-12-02-15.16.57-medium.jpg:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/2015/06/2014-12-02-15.16.57-thumb.jpg:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333
+static/images/2015/06/2015-02-16-11.31.19-large.jpg:
+    width: 768
+    height: 1024
+    aspect: 0.75
+static/images/2015/06/2015-02-16-11.31.19-medium.jpg:
+    width: 768
+    height: 1024
+    aspect: 0.75
+static/images/2015/06/2015-02-16-11.31.19-thumb.jpg:
+    width: 400
+    height: 533
+    aspect: 0.7504690431519699
+static/images/2015/06/3178503206_278cd86c6d_b-large.jpg:
+    width: 1024
+    height: 679
+    aspect: 1.508100147275405
+static/images/2015/06/3178503206_278cd86c6d_b-medium.jpg:
+    width: 799
+    height: 530
+    aspect: 1.5075471698113208
+static/images/2015/06/3178503206_278cd86c6d_b-thumb.jpg:
+    width: 400
+    height: 265
+    aspect: 1.509433962264151
+static/images/2015/06/3178503206_e5d5c274f7_o-large.jpg:
+    width: 1200
+    height: 795
+    aspect: 1.509433962264151
+static/images/2015/06/3178503206_e5d5c274f7_o-medium.jpg:
+    width: 800
+    height: 530
+    aspect: 1.509433962264151
+static/images/2015/06/3178503206_e5d5c274f7_o-thumb.jpg:
+    width: 400
+    height: 265
+    aspect: 1.509433962264151
+static/images/2015/06/8568353810_30fa30c147_o-large.jpg:
+    width: 1024
+    height: 682
+    aspect: 1.501466275659824
+static/images/2015/06/8568353810_30fa30c147_o-medium.jpg:
+    width: 800
+    height: 533
+    aspect: 1.5009380863039399
+static/images/2015/06/8568353810_30fa30c147_o-thumb.jpg:
+    width: 399
+    height: 266
+    aspect: 1.5
+static/images/2015/06/about-large.jpg:
+    width: 440
+    height: 440
+    aspect: 1
+static/images/2015/06/about-medium.jpg:
+    width: 440
+    height: 440
+    aspect: 1
+static/images/2015/06/about-thumb.jpg:
+    width: 400
+    height: 400
+    aspect: 1
+static/images/2015/06/add-service-large.png:
+    width: 1131
+    height: 755
+    aspect: 1.4980132450331125
+static/images/2015/06/add-service-medium.png:
+    width: 800
+    height: 534
+    aspect: 1.4981273408239701
+static/images/2015/06/add-service-thumb.png:
+    width: 400
+    height: 267
+    aspect: 1.4981273408239701
+static/images/2015/06/addabuilder-large.png:
+    width: 300
+    height: 293
+    aspect: 1.023890784982935
+static/images/2015/06/addabuilder-medium.png:
+    width: 300
+    height: 293
+    aspect: 1.023890784982935
+static/images/2015/06/addabuilder-thumb.png:
+    width: 300
+    height: 293
+    aspect: 1.023890784982935
+static/images/2015/06/addnewdb-large.png:
+    width: 600
+    height: 96
+    aspect: 6.25
+static/images/2015/06/addnewdb-medium.png:
+    width: 600
+    height: 96
+    aspect: 6.25
+static/images/2015/06/addnewdb-thumb.png:
+    width: 400
+    height: 64
+    aspect: 6.25
+static/images/2015/06/addservice-large.png:
+    width: 300
+    height: 76
+    aspect: 3.9473684210526314
+static/images/2015/06/addservice-medium.png:
+    width: 300
+    height: 76
+    aspect: 3.9473684210526314
+static/images/2015/06/addservice-thumb.png:
+    width: 300
+    height: 76
+    aspect: 3.9473684210526314
+static/images/2015/06/addserviceagain-large.png:
+    width: 846
+    height: 695
+    aspect: 1.2172661870503596
+static/images/2015/06/addserviceagain-medium.png:
+    width: 800
+    height: 657
+    aspect: 1.21765601217656
+static/images/2015/06/addserviceagain-thumb.png:
+    width: 400
+    height: 329
+    aspect: 1.21580547112462
+static/images/2015/06/addstage-large.png:
+    width: 300
+    height: 242
+    aspect: 1.2396694214876034
+static/images/2015/06/addstage-medium.png:
+    width: 300
+    height: 242
+    aspect: 1.2396694214876034
+static/images/2015/06/addstage-thumb.png:
+    width: 300
+    height: 242
+    aspect: 1.2396694214876034
+static/images/2015/06/advanced-large.png:
+    width: 300
+    height: 54
+    aspect: 5.555555555555555
+static/images/2015/06/advanced-medium.png:
+    width: 300
+    height: 54
+    aspect: 5.555555555555555
+static/images/2015/06/advanced-thumb.png:
+    width: 300
+    height: 54
+    aspect: 5.555555555555555
+static/images/2015/06/antbuild-large.png:
+    width: 1024
+    height: 528
+    aspect: 1.9393939393939394
+static/images/2015/06/antbuild-medium.png:
+    width: 800
+    height: 413
+    aspect: 1.937046004842615
+static/images/2015/06/antbuild-thumb.png:
+    width: 400
+    height: 206
+    aspect: 1.941747572815534
+static/images/2015/06/appname-large.png:
+    width: 783
+    height: 171
+    aspect: 4.578947368421052
+static/images/2015/06/appname-medium.png:
+    width: 783
+    height: 171
+    aspect: 4.578947368421052
+static/images/2015/06/appname-thumb.png:
+    width: 398
+    height: 87
+    aspect: 4.574712643678161
+static/images/2015/06/apprunning-large.png:
+    width: 715
+    height: 306
+    aspect: 2.3366013071895426
+static/images/2015/06/apprunning-medium.png:
+    width: 715
+    height: 306
+    aspect: 2.3366013071895426
+static/images/2015/06/apprunning-thumb.png:
+    width: 400
+    height: 171
+    aspect: 2.3391812865497075
+static/images/2015/06/apprunning1-large.jpg:
+    width: 1099
+    height: 311
+    aspect: 3.5337620578778135
+static/images/2015/06/apprunning1-medium.jpg:
+    width: 799
+    height: 226
+    aspect: 3.5353982300884956
+static/images/2015/06/apprunning1-thumb.jpg:
+    width: 399
+    height: 113
+    aspect: 3.5309734513274336
+static/images/2015/06/bluemixcatalog-large.png:
+    width: 1024
+    height: 443
+    aspect: 2.311512415349887
+static/images/2015/06/bluemixcatalog-medium.png:
+    width: 800
+    height: 346
+    aspect: 2.3121387283236996
+static/images/2015/06/bluemixcatalog-thumb.png:
+    width: 400
+    height: 173
+    aspect: 2.3121387283236996
+static/images/2015/06/buildanddeploy-large.png:
+    width: 300
+    height: 53
+    aspect: 5.660377358490566
+static/images/2015/06/buildanddeploy-medium.png:
+    width: 300
+    height: 53
+    aspect: 5.660377358490566
+static/images/2015/06/buildanddeploy-thumb.png:
+    width: 300
+    height: 53
+    aspect: 5.660377358490566
+static/images/2015/06/builder-large.png:
+    width: 712
+    height: 586
+    aspect: 1.2150170648464165
+static/images/2015/06/builder-medium.png:
+    width: 712
+    height: 586
+    aspect: 1.2150170648464165
+static/images/2015/06/builder-thumb.png:
+    width: 400
+    height: 329
+    aspect: 1.21580547112462
+static/images/2015/06/builderdone-large.png:
+    width: 300
+    height: 228
+    aspect: 1.3157894736842106
+static/images/2015/06/builderdone-medium.png:
+    width: 300
+    height: 228
+    aspect: 1.3157894736842106
+static/images/2015/06/builderdone-thumb.png:
+    width: 300
+    height: 228
+    aspect: 1.3157894736842106
+static/images/2015/06/buildfinished-large.png:
+    width: 852
+    height: 220
+    aspect: 3.8727272727272726
+static/images/2015/06/buildfinished-medium.png:
+    width: 800
+    height: 207
+    aspect: 3.864734299516908
+static/images/2015/06/buildfinished-thumb.png:
+    width: 399
+    height: 103
+    aspect: 3.8737864077669903
+static/images/2015/06/buildrunning-large.png:
+    width: 300
+    height: 195
+    aspect: 1.5384615384615385
+static/images/2015/06/buildrunning-medium.png:
+    width: 300
+    height: 195
+    aspect: 1.5384615384615385
+static/images/2015/06/buildrunning-thumb.png:
+    width: 300
+    height: 195
+    aspect: 1.5384615384615385
+static/images/2015/06/button-large.png:
+    width: 1200
+    height: 616
+    aspect: 1.948051948051948
+static/images/2015/06/button-medium.png:
+    width: 800
+    height: 411
+    aspect: 1.9464720194647203
+static/images/2015/06/button-thumb.png:
+    width: 400
+    height: 205
+    aspect: 1.951219512195122
+static/images/2015/06/buttonground-large.png:
+    width: 1200
+    height: 611
+    aspect: 1.9639934533551555
+static/images/2015/06/buttonground-medium.png:
+    width: 800
+    height: 407
+    aspect: 1.9656019656019657
+static/images/2015/06/buttonground-thumb.png:
+    width: 400
+    height: 204
+    aspect: 1.9607843137254901
+static/images/2015/06/buttongroundrail-large.png:
+    width: 1200
+    height: 848
+    aspect: 1.4150943396226414
+static/images/2015/06/buttongroundrail-medium.png:
+    width: 800
+    height: 565
+    aspect: 1.415929203539823
+static/images/2015/06/buttongroundrail-thumb.png:
+    width: 400
+    height: 283
+    aspect: 1.4134275618374559
+static/images/2015/06/Capture-large.png:
+    width: 1024
+    height: 642
+    aspect: 1.5950155763239875
+static/images/2015/06/Capture-medium.png:
+    width: 800
+    height: 502
+    aspect: 1.593625498007968
+static/images/2015/06/Capture-thumb.png:
+    width: 400
+    height: 251
+    aspect: 1.593625498007968
+static/images/2015/06/catalog-large.png:
+    width: 300
+    height: 99
+    aspect: 3.0303030303030303
+static/images/2015/06/catalog-medium.png:
+    width: 300
+    height: 99
+    aspect: 3.0303030303030303
+static/images/2015/06/catalog-thumb.png:
+    width: 300
+    height: 99
+    aspect: 3.0303030303030303
+static/images/2015/06/catalog1-large.png:
+    width: 431
+    height: 143
+    aspect: 3.013986013986014
+static/images/2015/06/catalog1-medium.png:
+    width: 431
+    height: 143
+    aspect: 3.013986013986014
+static/images/2015/06/catalog1-thumb.png:
+    width: 400
+    height: 133
+    aspect: 3.007518796992481
+static/images/2015/06/cloudant-large.png:
+    width: 1135
+    height: 272
+    aspect: 4.172794117647059
+static/images/2015/06/cloudant-medium.png:
+    width: 800
+    height: 192
+    aspect: 4.166666666666667
+static/images/2015/06/cloudant-thumb.png:
+    width: 400
+    height: 96
+    aspect: 4.166666666666667
+static/images/2015/06/cloudantclick-large.png:
+    width: 783
+    height: 578
+    aspect: 1.3546712802768166
+static/images/2015/06/cloudantclick-medium.png:
+    width: 783
+    height: 578
+    aspect: 1.3546712802768166
+static/images/2015/06/cloudantclick-thumb.png:
+    width: 400
+    height: 295
+    aspect: 1.3559322033898304
+static/images/2015/06/cloudantclick1-large.png:
+    width: 300
+    height: 221
+    aspect: 1.3574660633484164
+static/images/2015/06/cloudantclick1-medium.png:
+    width: 300
+    height: 221
+    aspect: 1.3574660633484164
+static/images/2015/06/cloudantclick1-thumb.png:
+    width: 300
+    height: 221
+    aspect: 1.3574660633484164
+static/images/2015/06/cloudantcreate-large.png:
+    width: 360
+    height: 464
+    aspect: 0.7758620689655172
+static/images/2015/06/cloudantcreate-medium.png:
+    width: 360
+    height: 464
+    aspect: 0.7758620689655172
+static/images/2015/06/cloudantcreate-thumb.png:
+    width: 360
+    height: 464
+    aspect: 0.7758620689655172
+static/images/2015/06/cloudantlaunch-large.png:
+    width: 1024
+    height: 351
+    aspect: 2.9173789173789175
+static/images/2015/06/cloudantlaunch-medium.png:
+    width: 799
+    height: 274
+    aspect: 2.9160583941605838
+static/images/2015/06/cloudantlaunch-thumb.png:
+    width: 400
+    height: 137
+    aspect: 2.9197080291970803
+static/images/2015/06/cloudantlaunch1-large.png:
+    width: 300
+    height: 103
+    aspect: 2.912621359223301
+static/images/2015/06/cloudantlaunch1-medium.png:
+    width: 300
+    height: 103
+    aspect: 2.912621359223301
+static/images/2015/06/cloudantlaunch1-thumb.png:
+    width: 300
+    height: 103
+    aspect: 2.912621359223301
+static/images/2015/06/cloudantrestage-large.png:
+    width: 852
+    height: 721
+    aspect: 1.1816920943134535
+static/images/2015/06/cloudantrestage-medium.png:
+    width: 800
+    height: 677
+    aspect: 1.1816838995568686
+static/images/2015/06/cloudantrestage-thumb.png:
+    width: 399
+    height: 338
+    aspect: 1.180473372781065
+static/images/2015/06/copydone-large.png:
+    width: 1024
+    height: 219
+    aspect: 4.675799086757991
+static/images/2015/06/copydone-medium.png:
+    width: 800
+    height: 171
+    aspect: 4.678362573099415
+static/images/2015/06/copydone-thumb.png:
+    width: 400
+    height: 86
+    aspect: 4.651162790697675
+static/images/2015/06/createapp-large.png:
+    width: 228
+    height: 300
+    aspect: 0.76
+static/images/2015/06/createapp-medium.png:
+    width: 228
+    height: 300
+    aspect: 0.76
+static/images/2015/06/createapp-thumb.png:
+    width: 228
+    height: 300
+    aspect: 0.76
+static/images/2015/06/credentialsshow-large.png:
+    width: 790
+    height: 694
+    aspect: 1.138328530259366
+static/images/2015/06/credentialsshow-medium.png:
+    width: 790
+    height: 694
+    aspect: 1.138328530259366
+static/images/2015/06/credentialsshow-thumb.png:
+    width: 400
+    height: 351
+    aspect: 1.1396011396011396
+static/images/2015/06/datagbases-large.png:
+    width: 236
+    height: 368
+    aspect: 0.6413043478260869
+static/images/2015/06/datagbases-medium.png:
+    width: 236
+    height: 368
+    aspect: 0.6413043478260869
+static/images/2015/06/datagbases-thumb.png:
+    width: 236
+    height: 368
+    aspect: 0.6413043478260869
+static/images/2015/06/db-large.png:
+    width: 300
+    height: 150
+    aspect: 2
+static/images/2015/06/db-medium.png:
+    width: 300
+    height: 150
+    aspect: 2
+static/images/2015/06/db-thumb.png:
+    width: 300
+    height: 150
+    aspect: 2
+static/images/2015/06/dbname-large.jpg:
+    width: 455
+    height: 559
+    aspect: 0.813953488372093
+static/images/2015/06/dbname-large.png:
+    width: 422
+    height: 209
+    aspect: 2.0191387559808613
+static/images/2015/06/dbname-medium.jpg:
+    width: 455
+    height: 559
+    aspect: 0.813953488372093
+static/images/2015/06/dbname-medium.png:
+    width: 422
+    height: 209
+    aspect: 2.0191387559808613
+static/images/2015/06/dbname-thumb.jpg:
+    width: 400
+    height: 491
+    aspect: 0.814663951120163
+static/images/2015/06/dbname-thumb.png:
+    width: 400
+    height: 198
+    aspect: 2.0202020202020203
+static/images/2015/06/deploy-large.png:
+    width: 695
+    height: 561
+    aspect: 1.2388591800356505
+static/images/2015/06/deploy-medium.png:
+    width: 695
+    height: 561
+    aspect: 1.2388591800356505
+static/images/2015/06/deploy-thumb.png:
+    width: 400
+    height: 323
+    aspect: 1.238390092879257
+static/images/2015/06/deploybefore-large.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/2015/06/deploybefore-medium.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/2015/06/deploybefore-thumb.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/2015/06/done-large.png:
+    width: 300
+    height: 207
+    aspect: 1.4492753623188406
+static/images/2015/06/done-medium.png:
+    width: 300
+    height: 207
+    aspect: 1.4492753623188406
+static/images/2015/06/done-thumb.png:
+    width: 300
+    height: 207
+    aspect: 1.4492753623188406
+static/images/2015/06/electrical-cord-large.jpg:
+    width: 1024
+    height: 764
+    aspect: 1.3403141361256545
+static/images/2015/06/electrical-cord-medium.jpg:
+    width: 800
+    height: 597
+    aspect: 1.340033500837521
+static/images/2015/06/electrical-cord-thumb.jpg:
+    width: 399
+    height: 298
+    aspect: 1.3389261744966443
+static/images/2015/06/electrical-outlet-garbage-disposal-4-large.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/2015/06/electrical-outlet-garbage-disposal-4-medium.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/2015/06/electrical-outlet-garbage-disposal-4-thumb.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/2015/06/electrical-outlet-garbage-disposal-5-large.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/2015/06/electrical-outlet-garbage-disposal-5-medium.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/2015/06/electrical-outlet-garbage-disposal-5-thumb.jpg:
+    width: 249
+    height: 187
+    aspect: 1.3315508021390374
+static/images/2015/06/enterpassword-large.png:
+    width: 611
+    height: 274
+    aspect: 2.22992700729927
+static/images/2015/06/enterpassword-medium.png:
+    width: 611
+    height: 274
+    aspect: 2.22992700729927
+static/images/2015/06/enterpassword-thumb.png:
+    width: 399
+    height: 179
+    aspect: 2.2290502793296088
+static/images/2015/06/existingproject-large.png:
+    width: 535
+    height: 543
+    aspect: 0.9852670349907919
+static/images/2015/06/existingproject-medium.png:
+    width: 535
+    height: 543
+    aspect: 0.9852670349907919
+static/images/2015/06/existingproject-thumb.png:
+    width: 400
+    height: 406
+    aspect: 0.9852216748768473
+static/images/2015/06/feed-large.png:
+    width: 32
+    height: 32
+    aspect: 1
+static/images/2015/06/feed-medium.png:
+    width: 32
+    height: 32
+    aspect: 1
+static/images/2015/06/feed-thumb.png:
+    width: 32
+    height: 32
+    aspect: 1
+static/images/2015/06/FH13MAR_SWIOUT_14-large.jpg:
+    width: 450
+    height: 355
+    aspect: 1.267605633802817
+static/images/2015/06/FH13MAR_SWIOUT_14-medium.jpg:
+    width: 450
+    height: 355
+    aspect: 1.267605633802817
+static/images/2015/06/FH13MAR_SWIOUT_14-thumb.jpg:
+    width: 400
+    height: 316
+    aspect: 1.2658227848101267
+static/images/2015/06/Figure5a-large.png:
+    width: 600
+    height: 211
+    aspect: 2.843601895734597
+static/images/2015/06/Figure5a-medium.png:
+    width: 600
+    height: 211
+    aspect: 2.843601895734597
+static/images/2015/06/Figure5a-thumb.png:
+    width: 400
+    height: 141
+    aspect: 2.8368794326241136
+static/images/2015/06/finishimport-large.png:
+    width: 773
+    height: 692
+    aspect: 1.1170520231213872
+static/images/2015/06/finishimport-medium.png:
+    width: 773
+    height: 692
+    aspect: 1.1170520231213872
+static/images/2015/06/finishimport-thumb.png:
+    width: 400
+    height: 358
+    aspect: 1.1173184357541899
+static/images/2015/06/fork-large.png:
+    width: 300
+    height: 83
+    aspect: 3.6144578313253013
+static/images/2015/06/fork-medium.png:
+    width: 300
+    height: 83
+    aspect: 3.6144578313253013
+static/images/2015/06/fork-project-large.png:
+    width: 475
+    height: 488
+    aspect: 0.9733606557377049
+static/images/2015/06/fork-project-medium.png:
+    width: 475
+    height: 488
+    aspect: 0.9733606557377049
+static/images/2015/06/fork-project-thumb.png:
+    width: 400
+    height: 411
+    aspect: 0.9732360097323601
+static/images/2015/06/fork-thumb.png:
+    width: 300
+    height: 83
+    aspect: 3.6144578313253013
+static/images/2015/06/fork2-large.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/2015/06/fork2-medium.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/2015/06/fork2-thumb.png:
+    width: 300
+    height: 239
+    aspect: 1.2552301255230125
+static/images/2015/06/gpio17-large.png:
+    width: 1200
+    height: 609
+    aspect: 1.9704433497536946
+static/images/2015/06/gpio17-medium.png:
+    width: 800
+    height: 406
+    aspect: 1.9704433497536946
+static/images/2015/06/gpio17-thumb.png:
+    width: 400
+    height: 203
+    aspect: 1.9704433497536946
+static/images/2015/06/gpio18-large.png:
+    width: 1200
+    height: 848
+    aspect: 1.4150943396226414
+static/images/2015/06/gpio18-medium.png:
+    width: 800
+    height: 565
+    aspect: 1.415929203539823
+static/images/2015/06/gpio18-thumb.png:
+    width: 400
+    height: 283
+    aspect: 1.4134275618374559
+static/images/2015/06/ground-large.png:
+    width: 1200
+    height: 588
+    aspect: 2.0408163265306123
+static/images/2015/06/ground-medium.png:
+    width: 800
+    height: 392
+    aspect: 2.0408163265306123
+static/images/2015/06/ground-thumb.png:
+    width: 400
+    height: 196
+    aspect: 2.0408163265306123
+static/images/2015/06/https-large.png:
+    width: 250
+    height: 250
+    aspect: 1
+static/images/2015/06/https-medium.png:
+    width: 250
+    height: 250
+    aspect: 1
+static/images/2015/06/https-thumb.png:
+    width: 250
+    height: 250
+    aspect: 1
+static/images/2015/06/import-large.png:
+    width: 905
+    height: 652
+    aspect: 1.388036809815951
+static/images/2015/06/import-medium.png:
+    width: 800
+    height: 576
+    aspect: 1.3888888888888888
+static/images/2015/06/import-thumb.png:
+    width: 400
+    height: 288
+    aspect: 1.3888888888888888
+static/images/2015/06/iotdevicesincrease-large.png:
+    width: 700
+    height: 270
+    aspect: 2.5925925925925926
+static/images/2015/06/iotdevicesincrease-medium.png:
+    width: 700
+    height: 270
+    aspect: 2.5925925925925926
+static/images/2015/06/iotdevicesincrease-thumb.png:
+    width: 399
+    height: 154
+    aspect: 2.590909090909091
+static/images/2015/06/jeff-and-blake-300x73-large.jpg:
+    width: 300
+    height: 73
+    aspect: 4.109589041095891
+static/images/2015/06/jeff-and-blake-300x73-medium.jpg:
+    width: 300
+    height: 73
+    aspect: 4.109589041095891
+static/images/2015/06/jeff-and-blake-300x73-thumb.jpg:
+    width: 300
+    height: 73
+    aspect: 4.109589041095891
+static/images/2015/06/jeff-and-blake-large.jpg:
+    width: 696
+    height: 169
+    aspect: 4.118343195266272
+static/images/2015/06/jeff-and-blake-medium.jpg:
+    width: 696
+    height: 169
+    aspect: 4.118343195266272
+static/images/2015/06/jeff-and-blake-thumb.jpg:
+    width: 399
+    height: 97
+    aspect: 4.11340206185567
+static/images/2015/06/jeff-and-ibm-design-large.jpg:
+    width: 735
+    height: 176
+    aspect: 4.176136363636363
+static/images/2015/06/jeff-and-ibm-design-medium.jpg:
+    width: 735
+    height: 176
+    aspect: 4.176136363636363
+static/images/2015/06/jeff-and-ibm-design-thumb.jpg:
+    width: 400
+    height: 96
+    aspect: 4.166666666666667
+static/images/2015/06/led-large.png:
+    width: 1200
+    height: 614
+    aspect: 1.9543973941368078
+static/images/2015/06/led-medium.png:
+    width: 800
+    height: 409
+    aspect: 1.9559902200488997
+static/images/2015/06/led-thumb.png:
+    width: 400
+    height: 205
+    aspect: 1.951219512195122
+static/images/2015/06/liberty-large.png:
+    width: 1184
+    height: 677
+    aspect: 1.7488921713441654
+static/images/2015/06/liberty-medium.png:
+    width: 799
+    height: 457
+    aspect: 1.7483588621444202
+static/images/2015/06/liberty-thumb.png:
+    width: 400
+    height: 229
+    aspect: 1.7467248908296944
+static/images/2015/06/liberty1-large.png:
+    width: 1184
+    height: 677
+    aspect: 1.7488921713441654
+static/images/2015/06/liberty1-medium.png:
+    width: 799
+    height: 457
+    aspect: 1.7483588621444202
+static/images/2015/06/liberty1-thumb.png:
+    width: 400
+    height: 229
+    aspect: 1.7467248908296944
+static/images/2015/06/new-app-large.png:
+    width: 351
+    height: 460
+    aspect: 0.7630434782608696
+static/images/2015/06/new-app-medium.png:
+    width: 351
+    height: 460
+    aspect: 0.7630434782608696
+static/images/2015/06/new-app-thumb.png:
+    width: 351
+    height: 460
+    aspect: 0.7630434782608696
+static/images/2015/06/node-large.png:
+    width: 269
+    height: 300
+    aspect: 0.8966666666666666
+static/images/2015/06/node-medium.png:
+    width: 269
+    height: 300
+    aspect: 0.8966666666666666
+static/images/2015/06/node-thumb.png:
+    width: 269
+    height: 300
+    aspect: 0.8966666666666666
+static/images/2015/06/overviewbluemix-large.png:
+    width: 321
+    height: 469
+    aspect: 0.6844349680170576
+static/images/2015/06/overviewbluemix-medium.png:
+    width: 321
+    height: 469
+    aspect: 0.6844349680170576
+static/images/2015/06/overviewbluemix-thumb.png:
+    width: 321
+    height: 469
+    aspect: 0.6844349680170576
+static/images/2015/06/password-large.png:
+    width: 613
+    height: 268
+    aspect: 2.287313432835821
+static/images/2015/06/password-medium.png:
+    width: 613
+    height: 268
+    aspect: 2.287313432835821
+static/images/2015/06/password-thumb.png:
+    width: 400
+    height: 175
+    aspect: 2.2857142857142856
+static/images/2015/06/password1-large.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/2015/06/password1-medium.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/2015/06/password1-thumb.png:
+    width: 400
+    height: 365
+    aspect: 1.095890410958904
+static/images/2015/06/password11-large.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/2015/06/password11-medium.png:
+    width: 775
+    height: 708
+    aspect: 1.094632768361582
+static/images/2015/06/password11-thumb.png:
+    width: 400
+    height: 365
+    aspect: 1.095890410958904
+static/images/2015/06/personality-box-large.png:
+    width: 600
+    height: 354
+    aspect: 1.694915254237288
+static/images/2015/06/personality-box-medium.png:
+    width: 600
+    height: 354
+    aspect: 1.694915254237288
+static/images/2015/06/personality-box-thumb.png:
+    width: 400
+    height: 236
+    aspect: 1.694915254237288
+static/images/2015/06/personalitysotu-large.jpg:
+    width: 461
+    height: 1024
+    aspect: 0.4501953125
+static/images/2015/06/personalitysotu-medium.jpg:
+    width: 461
+    height: 1024
+    aspect: 0.4501953125
+static/images/2015/06/personalitysotu-thumb.jpg:
+    width: 400
+    height: 889
+    aspect: 0.4499437570303712
+static/images/2015/06/pythoniotapp-large.png:
+    width: 671
+    height: 192
+    aspect: 3.4947916666666665
+static/images/2015/06/pythoniotapp-medium.png:
+    width: 671
+    height: 192
+    aspect: 3.4947916666666665
+static/images/2015/06/pythoniotapp-thumb.png:
+    width: 398
+    height: 114
+    aspect: 3.491228070175439
+static/images/2015/06/raspberry-pi-lights-wiring-diagram-large.png:
+    width: 889
+    height: 642
+    aspect: 1.384735202492212
+static/images/2015/06/raspberry-pi-lights-wiring-diagram-medium.png:
+    width: 800
+    height: 578
+    aspect: 1.3840830449826989
+static/images/2015/06/raspberry-pi-lights-wiring-diagram-thumb.png:
+    width: 400
+    height: 289
+    aspect: 1.3840830449826989
+static/images/2015/06/raspberrypidiagram-large.png:
+    width: 1200
+    height: 786
+    aspect: 1.5267175572519085
+static/images/2015/06/raspberrypidiagram-medium.png:
+    width: 800
+    height: 524
+    aspect: 1.5267175572519085
+static/images/2015/06/raspberrypidiagram-thumb.png:
+    width: 400
+    height: 262
+    aspect: 1.5267175572519085
+static/images/2015/06/replicate-large.png:
+    width: 846
+    height: 549
+    aspect: 1.540983606557377
+static/images/2015/06/replicate-medium.png:
+    width: 800
+    height: 519
+    aspect: 1.5414258188824663
+static/images/2015/06/replicate-thumb.png:
+    width: 400
+    height: 260
+    aspect: 1.5384615384615385
+static/images/2015/06/replicate1-large.png:
+    width: 846
+    height: 549
+    aspect: 1.540983606557377
+static/images/2015/06/replicate1-medium.png:
+    width: 800
+    height: 519
+    aspect: 1.5414258188824663
+static/images/2015/06/replicate1-thumb.png:
+    width: 400
+    height: 260
+    aspect: 1.5384615384615385
+static/images/2015/06/replication-large.png:
+    width: 223
+    height: 369
+    aspect: 0.6043360433604336
+static/images/2015/06/replication-medium.png:
+    width: 223
+    height: 369
+    aspect: 0.6043360433604336
+static/images/2015/06/replication-thumb.png:
+    width: 223
+    height: 369
+    aspect: 0.6043360433604336
+static/images/2015/06/resistor-large.png:
+    width: 1200
+    height: 605
+    aspect: 1.9834710743801653
+static/images/2015/06/resistor-medium.png:
+    width: 800
+    height: 403
+    aspect: 1.9851116625310175
+static/images/2015/06/resistor-thumb.png:
+    width: 400
+    height: 202
+    aspect: 1.9801980198019802
+static/images/2015/06/restage-large.jpg:
+    width: 1104
+    height: 524
+    aspect: 2.1068702290076335
+static/images/2015/06/restage-large.png:
+    width: 706
+    height: 567
+    aspect: 1.2451499118165785
+static/images/2015/06/restage-medium.jpg:
+    width: 800
+    height: 380
+    aspect: 2.1052631578947367
+static/images/2015/06/restage-medium.png:
+    width: 706
+    height: 567
+    aspect: 1.2451499118165785
+static/images/2015/06/restage-thumb.jpg:
+    width: 400
+    height: 190
+    aspect: 2.1052631578947367
+static/images/2015/06/restage-thumb.png:
+    width: 400
+    height: 321
+    aspect: 1.2461059190031152
+static/images/2015/06/robots-blog-post-header1-large.jpg:
+    width: 1024
+    height: 665
+    aspect: 1.5398496240601505
+static/images/2015/06/robots-blog-post-header1-medium.jpg:
+    width: 800
+    height: 520
+    aspect: 1.5384615384615385
+static/images/2015/06/robots-blog-post-header1-thumb.jpg:
+    width: 400
+    height: 260
+    aspect: 1.5384615384615385
+static/images/2015/06/Ruby_on_Rails-logo-large.png:
+    width: 316
+    height: 376
+    aspect: 0.8404255319148937
+static/images/2015/06/Ruby_on_Rails-logo-medium.png:
+    width: 316
+    height: 376
+    aspect: 0.8404255319148937
+static/images/2015/06/Ruby_on_Rails-logo-thumb.png:
+    width: 316
+    height: 376
+    aspect: 0.8404255319148937
+static/images/2015/06/showcreds-large.jpg:
+    width: 1200
+    height: 1039
+    aspect: 1.1549566891241578
+static/images/2015/06/showcreds-medium.jpg:
+    width: 800
+    height: 693
+    aspect: 1.1544011544011543
+static/images/2015/06/showcreds-thumb.jpg:
+    width: 400
+    height: 346
+    aspect: 1.1560693641618498
+static/images/2015/06/twilio-large.png:
+    width: 300
+    height: 137
+    aspect: 2.18978102189781
+static/images/2015/06/twilio-medium.png:
+    width: 300
+    height: 137
+    aspect: 2.18978102189781
+static/images/2015/06/twilio-thumb.png:
+    width: 300
+    height: 137
+    aspect: 2.18978102189781
+static/images/2015/06/urlforapp-large.jpg:
+    width: 1099
+    height: 311
+    aspect: 3.5337620578778135
+static/images/2015/06/urlforapp-medium.jpg:
+    width: 799
+    height: 226
+    aspect: 3.5353982300884956
+static/images/2015/06/urlforapp-thumb.jpg:
+    width: 399
+    height: 113
+    aspect: 3.5309734513274336
+static/images/2015/06/user-modeling-large.png:
+    width: 1199
+    height: 401
+    aspect: 2.9900249376558605
+static/images/2015/06/user-modeling-medium.png:
+    width: 800
+    height: 268
+    aspect: 2.985074626865672
+static/images/2015/06/user-modeling-thumb.png:
+    width: 400
+    height: 134
+    aspect: 2.985074626865672
+static/images/2015/06/usermodeling-large.png:
+    width: 300
+    height: 115
+    aspect: 2.608695652173913
+static/images/2015/06/usermodeling-medium.png:
+    width: 300
+    height: 115
+    aspect: 2.608695652173913
+static/images/2015/06/usermodeling-thumb.png:
+    width: 300
+    height: 115
+    aspect: 2.608695652173913
+static/images/2015/06/usermodeling2-large.png:
+    width: 224
+    height: 300
+    aspect: 0.7466666666666667
+static/images/2015/06/usermodeling2-medium.png:
+    width: 224
+    height: 300
+    aspect: 0.7466666666666667
+static/images/2015/06/usermodeling2-thumb.png:
+    width: 224
+    height: 300
+    aspect: 0.7466666666666667
+static/images/2015/06/usermodelingapp-large.jpg:
+    width: 992
+    height: 699
+    aspect: 1.419170243204578
+static/images/2015/06/usermodelingapp-medium.jpg:
+    width: 800
+    height: 564
+    aspect: 1.4184397163120568
+static/images/2015/06/usermodelingapp-thumb.jpg:
+    width: 400
+    height: 282
+    aspect: 1.4184397163120568
+static/images/2015/06/visualizationsotu-large.jpg:
+    width: 906
+    height: 854
+    aspect: 1.0608899297423888
+static/images/2015/06/visualizationsotu-medium.jpg:
+    width: 800
+    height: 754
+    aspect: 1.0610079575596818
+static/images/2015/06/visualizationsotu-thumb.jpg:
+    width: 400
+    height: 377
+    aspect: 1.0610079575596818
+static/images/2015/06/watson-create-large.png:
+    width: 373
+    height: 468
+    aspect: 0.7970085470085471
+static/images/2015/06/watson-create-medium.png:
+    width: 373
+    height: 468
+    aspect: 0.7970085470085471
+static/images/2015/06/watson-create-thumb.png:
+    width: 373
+    height: 468
+    aspect: 0.7970085470085471
+static/images/2015/06/watsonappcreate-large.jpg:
+    width: 351
+    height: 557
+    aspect: 0.63016157989228
+static/images/2015/06/watsonappcreate-medium.jpg:
+    width: 351
+    height: 557
+    aspect: 0.63016157989228
+static/images/2015/06/watsonappcreate-thumb.jpg:
+    width: 351
+    height: 557
+    aspect: 0.63016157989228
+static/images/2015/06/watsonconnected-large.jpg:
+    width: 1107
+    height: 623
+    aspect: 1.7768860353130016
+static/images/2015/06/watsonconnected-medium.jpg:
+    width: 800
+    height: 450
+    aspect: 1.7777777777777777
+static/images/2015/06/watsonconnected-thumb.jpg:
+    width: 400
+    height: 225
+    aspect: 1.7777777777777777
+static/images/2015/06/zero-downtime-graphics.001-large.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.001-medium.png:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.001-thumb.png:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.002-large.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.002-medium.png:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.002-thumb.png:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.003-large.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.003-medium.png:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.003-thumb.png:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.004-large.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.004-medium.png:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.004-thumb.png:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.005-large.png:
+    width: 1024
+    height: 768
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.005-medium.png:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/2015/06/zero-downtime-graphics.005-thumb.png:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333
+static/images/2015/07/add-new-pipeline-large.jpg:
+    width: 1075
+    height: 463
+    aspect: 2.321814254859611
+static/images/2015/07/add-new-pipeline-medium.jpg:
+    width: 800
+    height: 345
+    aspect: 2.318840579710145
+static/images/2015/07/add-new-pipeline-thumb.jpg:
+    width: 399
+    height: 172
+    aspect: 2.3197674418604652
+static/images/2015/07/add-new-pipeline1-large.jpg:
+    width: 1075
+    height: 463
+    aspect: 2.321814254859611
+static/images/2015/07/add-new-pipeline1-medium.jpg:
+    width: 800
+    height: 345
+    aspect: 2.318840579710145
+static/images/2015/07/add-new-pipeline1-thumb.jpg:
+    width: 399
+    height: 172
+    aspect: 2.3197674418604652
+static/images/2015/07/analyze-large.jpg:
+    width: 1200
+    height: 793
+    aspect: 1.5132408575031526
+static/images/2015/07/analyze-medium.jpg:
+    width: 799
+    height: 528
+    aspect: 1.5132575757575757
+static/images/2015/07/analyze-thumb.jpg:
+    width: 400
+    height: 264
+    aspect: 1.5151515151515151
+static/images/2015/07/choose-repo-large.png:
+    width: 810
+    height: 703
+    aspect: 1.1522048364153628
+static/images/2015/07/choose-repo-medium.png:
+    width: 800
+    height: 694
+    aspect: 1.1527377521613833
+static/images/2015/07/choose-repo-thumb.png:
+    width: 400
+    height: 347
+    aspect: 1.1527377521613833
+static/images/2015/07/clear-large.jpg:
+    width: 1200
+    height: 857
+    aspect: 1.4002333722287048
+static/images/2015/07/clear-medium.jpg:
+    width: 800
+    height: 571
+    aspect: 1.4010507880910683
+static/images/2015/07/clear-thumb.jpg:
+    width: 400
+    height: 286
+    aspect: 1.3986013986013985
+static/images/2015/07/clearsetup-large.jpg:
+    width: 802
+    height: 685
+    aspect: 1.1708029197080292
+static/images/2015/07/clearsetup-medium.jpg:
+    width: 800
+    height: 683
+    aspect: 1.171303074670571
+static/images/2015/07/clearsetup-thumb.jpg:
+    width: 400
+    height: 342
+    aspect: 1.1695906432748537
+static/images/2015/07/codesnip-large.jpg:
+    width: 853
+    height: 665
+    aspect: 1.2827067669172931
+static/images/2015/07/codesnip-medium.jpg:
+    width: 800
+    height: 624
+    aspect: 1.2820512820512822
+static/images/2015/07/codesnip-thumb.jpg:
+    width: 400
+    height: 312
+    aspect: 1.2820512820512822
+static/images/2015/07/connectscm-large.png:
+    width: 826
+    height: 396
+    aspect: 2.085858585858586
+static/images/2015/07/connectscm-medium.png:
+    width: 800
+    height: 384
+    aspect: 2.0833333333333335
+static/images/2015/07/connectscm-thumb.png:
+    width: 400
+    height: 192
+    aspect: 2.0833333333333335
+static/images/2015/07/customscript-large.jpg:
+    width: 1187
+    height: 818
+    aspect: 1.4511002444987775
+static/images/2015/07/customscript-medium.jpg:
+    width: 800
+    height: 551
+    aspect: 1.4519056261343013
+static/images/2015/07/customscript-thumb.jpg:
+    width: 400
+    height: 276
+    aspect: 1.4492753623188406
+static/images/2015/07/deletepipeline-large.jpg:
+    width: 802
+    height: 685
+    aspect: 1.1708029197080292
+static/images/2015/07/deletepipeline-medium.jpg:
+    width: 800
+    height: 683
+    aspect: 1.171303074670571
+static/images/2015/07/deletepipeline-thumb.jpg:
+    width: 400
+    height: 342
+    aspect: 1.1695906432748537
+static/images/2015/07/enter-text-large.jpg:
+    width: 1199
+    height: 834
+    aspect: 1.4376498800959232
+static/images/2015/07/enter-text-medium.jpg:
+    width: 800
+    height: 556
+    aspect: 1.4388489208633093
+static/images/2015/07/enter-text-thumb.jpg:
+    width: 400
+    height: 278
+    aspect: 1.4388489208633093
+static/images/2015/07/envars-large.jpg:
+    width: 1089
+    height: 540
+    aspect: 2.0166666666666666
+static/images/2015/07/envars-medium.jpg:
+    width: 800
+    height: 397
+    aspect: 2.0151133501259446
+static/images/2015/07/envars-thumb.jpg:
+    width: 399
+    height: 198
+    aspect: 2.015151515151515
+static/images/2015/07/envarssetup-large.jpg:
+    width: 1142
+    height: 614
+    aspect: 1.8599348534201954
+static/images/2015/07/envarssetup-medium.jpg:
+    width: 800
+    height: 430
+    aspect: 1.8604651162790697
+static/images/2015/07/envarssetup-thumb.jpg:
+    width: 400
+    height: 215
+    aspect: 1.8604651162790697
+static/images/2015/07/krakenLogo-large.png:
+    width: 544
+    height: 544
+    aspect: 1
+static/images/2015/07/krakenLogo-medium.png:
+    width: 544
+    height: 544
+    aspect: 1
+static/images/2015/07/krakenLogo-thumb.png:
+    width: 400
+    height: 400
+    aspect: 1
+static/images/2015/07/masterbranch-large.jpg:
+    width: 1145
+    height: 440
+    aspect: 2.602272727272727
+static/images/2015/07/masterbranch-medium.jpg:
+    width: 799
+    height: 307
+    aspect: 2.6026058631921822
+static/images/2015/07/masterbranch-thumb.jpg:
+    width: 400
+    height: 154
+    aspect: 2.5974025974025974
+static/images/2015/07/meteor-logo-large.png:
+    width: 600
+    height: 142
+    aspect: 4.225352112676056
+static/images/2015/07/meteor-logo-medium.png:
+    width: 600
+    height: 142
+    aspect: 4.225352112676056
+static/images/2015/07/meteor-logo-thumb.png:
+    width: 400
+    height: 95
+    aspect: 4.2105263157894735
+static/images/2015/07/npminstall-large.jpg:
+    width: 793
+    height: 605
+    aspect: 1.3107438016528925
+static/images/2015/07/npminstall-medium.jpg:
+    width: 793
+    height: 605
+    aspect: 1.3107438016528925
+static/images/2015/07/npminstall-thumb.jpg:
+    width: 400
+    height: 305
+    aspect: 1.3114754098360655
+static/images/2015/07/pdf-to-txt-large.jpg:
+    width: 1200
+    height: 411
+    aspect: 2.9197080291970803
+static/images/2015/07/pdf-to-txt-medium.jpg:
+    width: 800
+    height: 274
+    aspect: 2.9197080291970803
+static/images/2015/07/pdf-to-txt-thumb.jpg:
+    width: 400
+    height: 137
+    aspect: 2.9197080291970803
+static/images/2015/07/personality-large.jpg:
+    width: 1198
+    height: 1220
+    aspect: 0.9819672131147541
+static/images/2015/07/personality-medium.jpg:
+    width: 800
+    height: 815
+    aspect: 0.9815950920245399
+static/images/2015/07/personality-norway-large.jpg:
+    width: 1200
+    height: 1200
+    aspect: 1
+static/images/2015/07/personality-norway-medium.jpg:
+    width: 800
+    height: 800
+    aspect: 1
+static/images/2015/07/personality-norway-thumb.jpg:
+    width: 400
+    height: 400
+    aspect: 1
+static/images/2015/07/personality-thumb.jpg:
+    width: 400
+    height: 407
+    aspect: 0.9828009828009828
+static/images/2015/07/personality-virginia-tech-large.jpg:
+    width: 1158
+    height: 1232
+    aspect: 0.939935064935065
+static/images/2015/07/personality-virginia-tech-medium.jpg:
+    width: 800
+    height: 851
+    aspect: 0.9400705052878966
+static/images/2015/07/personality-virginia-tech-thumb.jpg:
+    width: 400
+    height: 426
+    aspect: 0.9389671361502347
+static/images/2020/airplay-udm-1-large.jpg:
+    width: 1200
+    height: 801
+    aspect: 1.4981273408239701
+static/images/2020/airplay-udm-1-medium.jpg:
+    width: 800
+    height: 534
+    aspect: 1.4981273408239701
+static/images/2020/airplay-udm-1-thumb.jpg:
+    width: 400
+    height: 267
+    aspect: 1.4981273408239701
+static/images/2020/airplay-udm-2-large.jpg:
+    width: 1200
+    height: 1201
+    aspect: 0.9991673605328892
+static/images/2020/airplay-udm-2-medium.jpg:
+    width: 800
+    height: 801
+    aspect: 0.9987515605493134
+static/images/2020/airplay-udm-2-thumb.jpg:
+    width: 400
+    height: 400
+    aspect: 1
+static/images/2020/airplay-udm-3-large.jpg:
+    width: 1200
+    height: 644
+    aspect: 1.8633540372670807
+static/images/2020/airplay-udm-3-medium.jpg:
+    width: 799
+    height: 429
+    aspect: 1.8624708624708626
+static/images/2020/airplay-udm-3-thumb.jpg:
+    width: 400
+    height: 215
+    aspect: 1.8604651162790697
+static/images/2020/sound_mixer-large.jpg:
+    width: 1200
+    height: 800
+    aspect: 1.5
+static/images/2020/sound_mixer-medium.jpg:
+    width: 800
+    height: 533
+    aspect: 1.5009380863039399
+static/images/2020/sound_mixer-thumb.jpg:
+    width: 400
+    height: 267
+    aspect: 1.4981273408239701
+static/images/alpine-large.jpg:
+    width: 1200
+    height: 658
+    aspect: 1.8237082066869301
+static/images/alpine-medium.jpg:
+    width: 799
+    height: 438
+    aspect: 1.8242009132420092
+static/images/alpine-thumb.jpg:
+    width: 400
+    height: 219
+    aspect: 1.82648401826484
+static/images/backblaze-tuning-large.png:
+    width: 1199
+    height: 956
+    aspect: 1.25418410041841
+static/images/backblaze-tuning-medium.png:
+    width: 800
+    height: 638
+    aspect: 1.2539184952978057
+static/images/backblaze-tuning-thumb.png:
+    width: 400
+    height: 319
+    aspect: 1.2539184952978057
+static/images/box-large.png:
+    width: 720
+    height: 368
+    aspect: 1.9565217391304348
+static/images/box-medium.png:
+    width: 720
+    height: 368
+    aspect: 1.9565217391304348
+static/images/box-thumb.png:
+    width: 399
+    height: 204
+    aspect: 1.9558823529411764
+static/images/cabin-large.jpg:
+    width: 1080
+    height: 720
+    aspect: 1.5
+static/images/cabin-medium.jpg:
+    width: 800
+    height: 533
+    aspect: 1.5009380863039399
+static/images/cabin-thumb.jpg:
+    width: 400
+    height: 267
+    aspect: 1.4981273408239701
+static/images/cabin1-large.jpg:
+    width: 750
+    height: 1334
+    aspect: 0.5622188905547226
+static/images/cabin1-medium.jpg:
+    width: 750
+    height: 1334
+    aspect: 0.5622188905547226
+static/images/cabin1-thumb.jpg:
+    width: 400
+    height: 711
+    aspect: 0.5625879043600562
+static/images/cabin2-large.jpg:
+    width: 750
+    height: 1334
+    aspect: 0.5622188905547226
+static/images/cabin2-medium.jpg:
+    width: 750
+    height: 1334
+    aspect: 0.5622188905547226
+static/images/cabin2-thumb.jpg:
+    width: 400
+    height: 711
+    aspect: 0.5625879043600562
+static/images/cabin3-large.jpg:
+    width: 750
+    height: 1334
+    aspect: 0.5622188905547226
+static/images/cabin3-medium.jpg:
+    width: 750
+    height: 1334
+    aspect: 0.5622188905547226
+static/images/cabin3-thumb.jpg:
+    width: 400
+    height: 711
+    aspect: 0.5625879043600562
+static/images/circle-into-square-large.png:
+    width: 1200
+    height: 1200
+    aspect: 1
+static/images/circle-into-square-medium.png:
+    width: 800
+    height: 800
+    aspect: 1
+static/images/circle-into-square-thumb.png:
+    width: 400
+    height: 400
+    aspect: 1
+static/images/crashplan1-large.png:
+    width: 1200
+    height: 1656
+    aspect: 0.7246376811594203
+static/images/crashplan1-medium.png:
+    width: 800
+    height: 1104
+    aspect: 0.7246376811594203
+static/images/crashplan1-thumb.png:
+    width: 400
+    height: 552
+    aspect: 0.7246376811594203
+static/images/crashplan2-large.png:
+    width: 1150
+    height: 910
+    aspect: 1.2637362637362637
+static/images/crashplan2-medium.png:
+    width: 800
+    height: 633
+    aspect: 1.263823064770932
+static/images/crashplan2-thumb.png:
+    width: 400
+    height: 317
+    aspect: 1.2618296529968454
+static/images/crashplan3-large.png:
+    width: 1200
+    height: 840
+    aspect: 1.4285714285714286
+static/images/crashplan3-medium.png:
+    width: 800
+    height: 560
+    aspect: 1.4285714285714286
+static/images/crashplan3-thumb.png:
+    width: 400
+    height: 280
+    aspect: 1.4285714285714286
+static/images/crashplan4-large.png:
+    width: 1200
+    height: 1405
+    aspect: 0.8540925266903915
+static/images/crashplan4-medium.png:
+    width: 800
+    height: 937
+    aspect: 0.8537886872998933
+static/images/crashplan4-thumb.png:
+    width: 400
+    height: 468
+    aspect: 0.8547008547008547
+static/images/devops-large.jpg:
+    width: 1200
+    height: 803
+    aspect: 1.4943960149439601
+static/images/devops-medium.jpg:
+    width: 800
+    height: 536
+    aspect: 1.492537313432836
+static/images/devops-thumb.jpg:
+    width: 400
+    height: 268
+    aspect: 1.492537313432836
+static/images/easy-large.jpg:
+    width: 1200
+    height: 1200
+    aspect: 1
+static/images/easy-medium.jpg:
+    width: 800
+    height: 800
+    aspect: 1
+static/images/easy-thumb.jpg:
+    width: 400
+    height: 400
+    aspect: 1
+static/images/fedup-large.jpg:
+    width: 929
+    height: 622
+    aspect: 1.4935691318327975
+static/images/fedup-medium.jpg:
+    width: 800
+    height: 536
+    aspect: 1.492537313432836
+static/images/fedup-thumb.jpg:
+    width: 400
+    height: 268
+    aspect: 1.492537313432836
+static/images/gh-pages-generation-large.jpg:
+    width: 1199
+    height: 439
+    aspect: 2.7312072892938497
+static/images/gh-pages-generation-medium.jpg:
+    width: 800
+    height: 293
+    aspect: 2.7303754266211606
+static/images/gh-pages-generation-thumb.jpg:
+    width: 399
+    height: 146
+    aspect: 2.732876712328767
+static/images/github-token-large.jpg:
+    width: 1200
+    height: 1481
+    aspect: 0.8102633355840648
+static/images/github-token-medium.jpg:
+    width: 800
+    height: 987
+    aspect: 0.8105369807497467
+static/images/github-token-thumb.jpg:
+    width: 400
+    height: 494
+    aspect: 0.8097165991902834
+static/images/glasses-large.jpg:
+    width: 960
+    height: 627
+    aspect: 1.5311004784688995
+static/images/glasses-medium.jpg:
+    width: 800
+    height: 523
+    aspect: 1.5296367112810707
+static/images/glasses-thumb.jpg:
+    width: 400
+    height: 261
+    aspect: 1.5325670498084292
+static/images/guide-large.jpg:
+    width: 1134
+    height: 759
+    aspect: 1.4940711462450593
+static/images/guide-medium.jpg:
+    width: 799
+    height: 535
+    aspect: 1.4934579439252336
+static/images/guide-thumb.jpg:
+    width: 400
+    height: 268
+    aspect: 1.492537313432836
+static/images/helloworld-large.png:
+    width: 512
+    height: 256
+    aspect: 2
+static/images/helloworld-medium.png:
+    width: 512
+    height: 256
+    aspect: 2
+static/images/helloworld-thumb.png:
+    width: 400
+    height: 200
+    aspect: 2
+static/images/hiring-large.png:
+    width: 1200
+    height: 800
+    aspect: 1.5
+static/images/hiring-medium.png:
+    width: 800
+    height: 533
+    aspect: 1.5009380863039399
+static/images/hiring-thumb.png:
+    width: 400
+    height: 267
+    aspect: 1.4981273408239701
+static/images/iot-pi-large.jpg:
+    width: 700
+    height: 484
+    aspect: 1.4462809917355373
+static/images/iot-pi-medium.jpg:
+    width: 700
+    height: 484
+    aspect: 1.4462809917355373
+static/images/iot-pi-thumb.jpg:
+    width: 400
+    height: 277
+    aspect: 1.444043321299639
+static/images/kraken-large.jpg:
+    width: 1047
+    height: 677
+    aspect: 1.5465288035450517
+static/images/kraken-medium.jpg:
+    width: 800
+    height: 517
+    aspect: 1.5473887814313345
+static/images/kraken-thumb.jpg:
+    width: 400
+    height: 259
+    aspect: 1.5444015444015444
+static/images/meteor-large.jpg:
+    width: 1200
+    height: 1226
+    aspect: 0.9787928221859706
+static/images/meteor-medium.jpg:
+    width: 800
+    height: 818
+    aspect: 0.9779951100244498
+static/images/meteor-thumb.jpg:
+    width: 400
+    height: 409
+    aspect: 0.9779951100244498
+static/images/migrate-large.jpg:
+    width: 1066
+    height: 785
+    aspect: 1.3579617834394904
+static/images/migrate-medium.jpg:
+    width: 800
+    height: 589
+    aspect: 1.3582342954159592
+static/images/migrate-thumb.jpg:
+    width: 400
+    height: 295
+    aspect: 1.3559322033898304
+static/images/personality-large.jpg:
+    width: 845
+    height: 439
+    aspect: 1.9248291571753986
+static/images/personality-medium.jpg:
+    width: 800
+    height: 416
+    aspect: 1.9230769230769231
+static/images/personality-thumb.jpg:
+    width: 400
+    height: 208
+    aspect: 1.9230769230769231
+static/images/robots-blog-post-header1-large.jpg:
+    width: 1024
+    height: 458
+    aspect: 2.2358078602620086
+static/images/robots-blog-post-header1-medium.jpg:
+    width: 800
+    height: 358
+    aspect: 2.2346368715083798
+static/images/robots-blog-post-header1-thumb.jpg:
+    width: 400
+    height: 179
+    aspect: 2.2346368715083798
+static/images/secure-large.jpg:
+    width: 1200
+    height: 988
+    aspect: 1.214574898785425
+static/images/secure-medium.jpg:
+    width: 800
+    height: 658
+    aspect: 1.21580547112462
+static/images/secure-thumb.jpg:
+    width: 400
+    height: 329
+    aspect: 1.21580547112462
+static/images/unplug-large.jpg:
+    width: 494
+    height: 192
+    aspect: 2.5729166666666665
+static/images/unplug-medium.jpg:
+    width: 494
+    height: 192
+    aspect: 2.5729166666666665
+static/images/unplug-thumb.jpg:
+    width: 399
+    height: 155
+    aspect: 2.574193548387097
+static/images/usg-apple-airplay-1-large.jpg:
+    width: 1200
+    height: 1373
+    aspect: 0.8739985433357611
+static/images/usg-apple-airplay-1-medium.jpg:
+    width: 800
+    height: 915
+    aspect: 0.8743169398907104
+static/images/usg-apple-airplay-1-thumb.jpg:
+    width: 400
+    height: 458
+    aspect: 0.8733624454148472
+static/images/usg-sonos-1-large.jpg:
+    width: 1200
+    height: 1372
+    aspect: 0.8746355685131195
+static/images/usg-sonos-1-medium.jpg:
+    width: 800
+    height: 915
+    aspect: 0.8743169398907104
+static/images/usg-sonos-1-thumb.jpg:
+    width: 400
+    height: 457
+    aspect: 0.87527352297593
+static/images/usg-sonos-10-large.jpg:
+    width: 1199
+    height: 324
+    aspect: 3.700617283950617
+static/images/usg-sonos-10-medium.jpg:
+    width: 800
+    height: 216
+    aspect: 3.7037037037037037
+static/images/usg-sonos-10-thumb.jpg:
+    width: 400
+    height: 108
+    aspect: 3.7037037037037037
+static/images/usg-sonos-11-large.jpg:
+    width: 1200
+    height: 1271
+    aspect: 0.9441384736428009
+static/images/usg-sonos-11-medium.jpg:
+    width: 800
+    height: 847
+    aspect: 0.9445100354191264
+static/images/usg-sonos-11-thumb.jpg:
+    width: 400
+    height: 424
+    aspect: 0.9433962264150944
+static/images/usg-sonos-12-large.jpg:
+    width: 1200
+    height: 424
+    aspect: 2.830188679245283
+static/images/usg-sonos-12-medium.jpg:
+    width: 799
+    height: 282
+    aspect: 2.8333333333333335
+static/images/usg-sonos-12-thumb.jpg:
+    width: 399
+    height: 141
+    aspect: 2.8297872340425534
+static/images/usg-sonos-13-large.jpg:
+    width: 1200
+    height: 771
+    aspect: 1.556420233463035
+static/images/usg-sonos-13-medium.jpg:
+    width: 800
+    height: 514
+    aspect: 1.556420233463035
+static/images/usg-sonos-13-thumb.jpg:
+    width: 400
+    height: 257
+    aspect: 1.556420233463035
+static/images/usg-sonos-2-large.jpg:
+    width: 1146
+    height: 428
+    aspect: 2.677570093457944
+static/images/usg-sonos-2-medium.jpg:
+    width: 800
+    height: 299
+    aspect: 2.6755852842809364
+static/images/usg-sonos-2-thumb.jpg:
+    width: 399
+    height: 149
+    aspect: 2.6778523489932886
+static/images/usg-sonos-3-large.jpg:
+    width: 1200
+    height: 611
+    aspect: 1.9639934533551555
+static/images/usg-sonos-3-medium.jpg:
+    width: 800
+    height: 407
+    aspect: 1.9656019656019657
+static/images/usg-sonos-3-thumb.jpg:
+    width: 400
+    height: 204
+    aspect: 1.9607843137254901
+static/images/usg-sonos-4-large.jpg:
+    width: 1200
+    height: 1311
+    aspect: 0.9153318077803204
+static/images/usg-sonos-4-medium.jpg:
+    width: 800
+    height: 874
+    aspect: 0.9153318077803204
+static/images/usg-sonos-4-thumb.jpg:
+    width: 400
+    height: 437
+    aspect: 0.9153318077803204
+static/images/usg-sonos-5-large.jpg:
+    width: 1156
+    height: 406
+    aspect: 2.8472906403940885
+static/images/usg-sonos-5-medium.jpg:
+    width: 800
+    height: 281
+    aspect: 2.8469750889679717
+static/images/usg-sonos-5-thumb.jpg:
+    width: 399
+    height: 140
+    aspect: 2.85
+static/images/usg-sonos-6-large.jpg:
+    width: 1200
+    height: 563
+    aspect: 2.1314387211367674
+static/images/usg-sonos-6-medium.jpg:
+    width: 799
+    height: 375
+    aspect: 2.1306666666666665
+static/images/usg-sonos-6-thumb.jpg:
+    width: 400
+    height: 188
+    aspect: 2.127659574468085
+static/images/usg-sonos-7-large.jpg:
+    width: 1200
+    height: 516
+    aspect: 2.3255813953488373
+static/images/usg-sonos-7-medium.jpg:
+    width: 800
+    height: 344
+    aspect: 2.3255813953488373
+static/images/usg-sonos-7-thumb.jpg:
+    width: 400
+    height: 172
+    aspect: 2.3255813953488373
+static/images/usg-sonos-8-large.png:
+    width: 1200
+    height: 675
+    aspect: 1.7777777777777777
+static/images/usg-sonos-8-medium.png:
+    width: 800
+    height: 450
+    aspect: 1.7777777777777777
+static/images/usg-sonos-8-thumb.png:
+    width: 400
+    height: 225
+    aspect: 1.7777777777777777
+static/images/usg-sonos-9-large.jpg:
+    width: 1200
+    height: 1358
+    aspect: 0.8836524300441826
+static/images/usg-sonos-9-medium.jpg:
+    width: 800
+    height: 905
+    aspect: 0.8839779005524862
+static/images/usg-sonos-9-thumb.jpg:
+    width: 400
+    height: 453
+    aspect: 0.8830022075055187
+static/images/wall-large.jpg:
+    width: 1200
+    height: 798
+    aspect: 1.5037593984962405
+static/images/wall-medium.jpg:
+    width: 800
+    height: 532
+    aspect: 1.5037593984962405
+static/images/wall-thumb.jpg:
+    width: 400
+    height: 266
+    aspect: 1.5037593984962405
+static/images/white-flag-large.jpg:
+    width: 1200
+    height: 900
+    aspect: 1.3333333333333333
+static/images/white-flag-medium.jpg:
+    width: 800
+    height: 600
+    aspect: 1.3333333333333333
+static/images/white-flag-thumb.jpg:
+    width: 400
+    height: 300
+    aspect: 1.3333333333333333

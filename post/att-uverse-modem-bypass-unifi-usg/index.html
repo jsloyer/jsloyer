@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ATT Uverse Modem Bypass - UniFi USG -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/secure.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>ATT Uverse Modem Bypass - UniFi USG</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Wed, Apr 4, 2018
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/att" >att</a> <a href="http://www.jeffsloyer.io/tags/unifi" >unifi</a> <a href="http://www.jeffsloyer.io/tags/ubiquiti" >ubiquiti</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <h1 id="background">Background</h1>
+<p>Ever since I have switched over to Ubiquiti&rsquo;s Unifi setup for my home I have been searching for a way to eliminate AT&amp;T&rsquo;s
+residential gateway from my setup.  I have AT&amp;T Fiber and I detest AT&amp;T&rsquo;s residential gateway.  I won&rsquo;t go into the reasons now but just
+know the list is almost endless.  It would be great if AT&amp;T just allowed you not to use that if you have a router of your own.  I would love
+to see AT&amp;T allow residential fiber customers on their PON network to bypass the ONT but that might be too much to ask.  I will gladly take
+a set in the right direction by eliminating the residential gateway in my routing to the Internet.</p>
+<p>I recently stumbled on some amazing instructions when researching why AT&amp;T uses a public IP that isn&rsquo;t assigned to them, 1.1.1.1.  If you
+aren&rsquo;t aware of 1.1.1.1, it&rsquo;s Cloudflare&rsquo;s new DNS servers that promise to be faster than Google&rsquo;s public DNS servers.  If you aren&rsquo;t using them I would highly encourage you to do so, check out <a href="http://1.1.1.1/">this</a> for more information.  Turns out I found a blog post that
+documented if you remove the AT&amp;T gateway you can then route to 1.1.1.1 on AT&amp;T&rsquo;s network and not get blocked.</p>
+<p>If you don&rsquo;t have your own Unifi USG you can order one on Amazon.</p>
+<!-- raw HTML omitted -->
+<p>If you don&rsquo;t have a Unifi Cloud Key you can use the following to get one off of Amazon also.</p>
+<!-- raw HTML omitted -->
+<p>Just a note here, I am not taking any credit for any of the instructions, I am just merely adding my custom work I needed to do to get it working.  The instructions were great actually, there is just a step at the end that is a little confusing and hard.  You have to generate
+a custom config for your USG and its not straightforward on how to do this so I am posting my experience with it.</p>
+<p>The original instructions can be found at <a href="https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/">https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/</a>.</p>
+<h1 id="custom-config">Custom Config</h1>
+<p>In the instructions you will eventually get to a point where you have to generate a custom config file from your USG, the output will be a file called <code>configdump.txt</code>.</p>
+<p>You will need to heavily modify that file to remove information that you can configure in the Unifi UI to avoid issues going forward.  The author provided a wonderful example of his config file called <code>config.gateway.json</code>, it can be found below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+	<span style="color:#f92672">&#34;interfaces&#34;</span>: {
+		<span style="color:#f92672">&#34;ethernet&#34;</span>: {
+			<span style="color:#f92672">&#34;eth0&#34;</span>: {
+				<span style="color:#f92672">&#34;address&#34;</span>: [
+					<span style="color:#e6db74">&#34;dhcp&#34;</span>
+				],
+				<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;WAN&#34;</span>,
+				<span style="color:#f92672">&#34;dhcp-options&#34;</span>: {
+					<span style="color:#f92672">&#34;client-option&#34;</span>: [
+						<span style="color:#e6db74">&#34;retry 60;&#34;</span>
+					],
+					<span style="color:#f92672">&#34;default-route&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>,
+					<span style="color:#f92672">&#34;default-route-distance&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>,
+					<span style="color:#f92672">&#34;name-server&#34;</span>: <span style="color:#e6db74">&#34;no-update&#34;</span>
+				},
+				<span style="color:#f92672">&#34;duplex&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>,
+				<span style="color:#f92672">&#34;firewall&#34;</span>: {
+					<span style="color:#f92672">&#34;in&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_IN&#34;</span>
+					},
+					<span style="color:#f92672">&#34;local&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_LOCAL&#34;</span>
+					},
+					<span style="color:#f92672">&#34;out&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_OUT&#34;</span>
+					}
+				},
+				<span style="color:#f92672">&#34;speed&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>,
+				<span style="color:#f92672">&#34;vif&#34;</span>: {
+					<span style="color:#f92672">&#34;0&#34;</span>: {
+						<span style="color:#f92672">&#34;address&#34;</span>: [
+							<span style="color:#e6db74">&#34;dhcp&#34;</span>
+						],
+						<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;WAN VLAN 0&#34;</span>,
+						<span style="color:#f92672">&#34;dhcp-options&#34;</span>: {
+							<span style="color:#f92672">&#34;default-route&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>,
+							<span style="color:#f92672">&#34;default-route-distance&#34;</span>: <span style="color:#e6db74">&#34;210&#34;</span>,
+							<span style="color:#f92672">&#34;name-server&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>
+						},
+						<span style="color:#f92672">&#34;firewall&#34;</span>: {
+							<span style="color:#f92672">&#34;in&#34;</span>: {
+								<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_IN&#34;</span>
+							},
+							<span style="color:#f92672">&#34;local&#34;</span>: {
+								<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_LOCAL&#34;</span>
+							}
+						},
+						<span style="color:#f92672">&#34;mac&#34;</span>: <span style="color:#e6db74">&#34;E0:BB:CC:DD:EE:FF&#34;</span>
+					}
+				}
+			},
+			<span style="color:#f92672">&#34;eth2&#34;</span>: {
+				<span style="color:#f92672">&#34;address&#34;</span>: [
+					<span style="color:#e6db74">&#34;dhcp&#34;</span>
+				],
+				<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;AT&amp;T router&#34;</span>,
+				<span style="color:#f92672">&#34;dhcp-options&#34;</span>: {
+					<span style="color:#f92672">&#34;client-option&#34;</span>: [
+						<span style="color:#e6db74">&#34;retry 60;&#34;</span>
+					],
+					<span style="color:#f92672">&#34;default-route&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>,
+					<span style="color:#f92672">&#34;default-route-distance&#34;</span>: <span style="color:#e6db74">&#34;220&#34;</span>,
+					<span style="color:#f92672">&#34;name-server&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>
+				},
+				<span style="color:#f92672">&#34;duplex&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>,
+				<span style="color:#f92672">&#34;firewall&#34;</span>: {
+					<span style="color:#f92672">&#34;in&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_IN&#34;</span>
+					},
+					<span style="color:#f92672">&#34;local&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_LOCAL&#34;</span>
+					},
+					<span style="color:#f92672">&#34;out&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_OUT&#34;</span>
+					}
+				},
+				<span style="color:#f92672">&#34;speed&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>
+			}
+		}
+	},
+	<span style="color:#f92672">&#34;port-forward&#34;</span>: {
+		<span style="color:#f92672">&#34;wan-interface&#34;</span>: <span style="color:#e6db74">&#34;eth0.0&#34;</span>
+	},
+	<span style="color:#f92672">&#34;service&#34;</span>: {
+		<span style="color:#f92672">&#34;dns&#34;</span>: {
+			<span style="color:#f92672">&#34;dynamic&#34;</span>: {
+				<span style="color:#f92672">&#34;interface&#34;</span>: {
+					<span style="color:#f92672">&#34;eth0.0&#34;</span>: {
+						<span style="color:#f92672">&#34;service&#34;</span>: {
+							<span style="color:#f92672">&#34;custom-cloudflare&#34;</span>: {
+								<span style="color:#f92672">&#34;host-name&#34;</span>: [
+									<span style="color:#e6db74">&#34;websiteurl&#34;</span>
+								],
+								<span style="color:#f92672">&#34;login&#34;</span>: <span style="color:#e6db74">&#34;email&#34;</span>,
+								<span style="color:#f92672">&#34;options&#34;</span>: [
+									<span style="color:#e6db74">&#34;zone=websiteurl use=web ssl=yes&#34;</span>
+								],
+								<span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;apikey&#34;</span>,
+								<span style="color:#f92672">&#34;protocol&#34;</span>: <span style="color:#e6db74">&#34;cloudflare&#34;</span>,
+								<span style="color:#f92672">&#34;server&#34;</span>: <span style="color:#e6db74">&#34;www.cloudflare.com&#34;</span>
+							}
+						}
+					}
+				}
+			}
+		},
+		<span style="color:#f92672">&#34;nat&#34;</span>: {
+			<span style="color:#f92672">&#34;rule&#34;</span>: {
+				<span style="color:#f92672">&#34;5010&#34;</span>: {
+					<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;masquerade for WAN&#34;</span>,
+					<span style="color:#f92672">&#34;outbound-interface&#34;</span>: <span style="color:#e6db74">&#34;eth0.0&#34;</span>,
+					<span style="color:#f92672">&#34;protocol&#34;</span>: <span style="color:#e6db74">&#34;all&#34;</span>,
+					<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;masquerade&#34;</span>
+				}
+			}
+		},
+		<span style="color:#f92672">&#34;upnp2&#34;</span>: {
+			<span style="color:#f92672">&#34;listen-on&#34;</span>: [
+				<span style="color:#e6db74">&#34;eth1&#34;</span>
+			],
+			<span style="color:#f92672">&#34;nat-pmp&#34;</span>: <span style="color:#e6db74">&#34;enable&#34;</span>,
+			<span style="color:#f92672">&#34;secure-mode&#34;</span>: <span style="color:#e6db74">&#34;enable&#34;</span>,
+			<span style="color:#f92672">&#34;wan&#34;</span>: <span style="color:#e6db74">&#34;eth0.0&#34;</span>
+		}
+	}
+}
+</code></pre></div><p>The only problem with the above file is I had a VPN setup and running and after going through the author&rsquo;s instructions everything worked except the VPN so I had to go through and add in the relative bits related to my VPN setup on my USG.</p>
+<p>Below is my config file <code>config.gateway.json</code> with some sensitive information nulled out.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+	<span style="color:#f92672">&#34;interfaces&#34;</span>: {
+		<span style="color:#f92672">&#34;ethernet&#34;</span>: {
+			<span style="color:#f92672">&#34;eth0&#34;</span>: {
+				<span style="color:#f92672">&#34;address&#34;</span>: [
+					<span style="color:#e6db74">&#34;dhcp&#34;</span>
+				],
+				<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;WAN&#34;</span>,
+				<span style="color:#f92672">&#34;dhcp-options&#34;</span>: {
+					<span style="color:#f92672">&#34;client-option&#34;</span>: [
+						<span style="color:#e6db74">&#34;retry 60;&#34;</span>
+					],
+					<span style="color:#f92672">&#34;default-route&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>,
+					<span style="color:#f92672">&#34;default-route-distance&#34;</span>: <span style="color:#e6db74">&#34;1&#34;</span>,
+					<span style="color:#f92672">&#34;name-server&#34;</span>: <span style="color:#e6db74">&#34;no-update&#34;</span>
+				},
+				<span style="color:#f92672">&#34;duplex&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>,
+				<span style="color:#f92672">&#34;firewall&#34;</span>: {
+					<span style="color:#f92672">&#34;in&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_IN&#34;</span>
+					},
+					<span style="color:#f92672">&#34;local&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_LOCAL&#34;</span>
+					},
+					<span style="color:#f92672">&#34;out&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_OUT&#34;</span>
+					}
+				},
+				<span style="color:#f92672">&#34;speed&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>,
+				<span style="color:#f92672">&#34;vif&#34;</span>: {
+					<span style="color:#f92672">&#34;0&#34;</span>: {
+						<span style="color:#f92672">&#34;address&#34;</span>: [
+							<span style="color:#e6db74">&#34;dhcp&#34;</span>
+						],
+						<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;WAN VLAN 0&#34;</span>,
+						<span style="color:#f92672">&#34;dhcp-options&#34;</span>: {
+							<span style="color:#f92672">&#34;default-route&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>,
+							<span style="color:#f92672">&#34;default-route-distance&#34;</span>: <span style="color:#e6db74">&#34;210&#34;</span>,
+							<span style="color:#f92672">&#34;name-server&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>
+						},
+						<span style="color:#f92672">&#34;firewall&#34;</span>: {
+							<span style="color:#f92672">&#34;in&#34;</span>: {
+								<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_IN&#34;</span>
+							},
+							<span style="color:#f92672">&#34;local&#34;</span>: {
+								<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_LOCAL&#34;</span>
+							}
+						},
+						<span style="color:#f92672">&#34;mac&#34;</span>: <span style="color:#e6db74">&#34;ab:cd:ef:12:34:56&#34;</span>
+					}
+				}
+			},
+			<span style="color:#f92672">&#34;eth2&#34;</span>: {
+				<span style="color:#f92672">&#34;address&#34;</span>: [
+					<span style="color:#e6db74">&#34;dhcp&#34;</span>
+				],
+				<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;AT&amp;T router&#34;</span>,
+				<span style="color:#f92672">&#34;dhcp-options&#34;</span>: {
+					<span style="color:#f92672">&#34;client-option&#34;</span>: [
+						<span style="color:#e6db74">&#34;retry 60;&#34;</span>
+					],
+					<span style="color:#f92672">&#34;default-route&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>,
+					<span style="color:#f92672">&#34;default-route-distance&#34;</span>: <span style="color:#e6db74">&#34;220&#34;</span>,
+					<span style="color:#f92672">&#34;name-server&#34;</span>: <span style="color:#e6db74">&#34;update&#34;</span>
+				},
+				<span style="color:#f92672">&#34;duplex&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>,
+				<span style="color:#f92672">&#34;firewall&#34;</span>: {
+					<span style="color:#f92672">&#34;in&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_IN&#34;</span>
+					},
+					<span style="color:#f92672">&#34;local&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_LOCAL&#34;</span>
+					},
+					<span style="color:#f92672">&#34;out&#34;</span>: {
+						<span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;WAN_OUT&#34;</span>
+					}
+				},
+				<span style="color:#f92672">&#34;speed&#34;</span>: <span style="color:#e6db74">&#34;auto&#34;</span>
+			}
+		}
+	},
+	<span style="color:#f92672">&#34;port-forward&#34;</span>: {
+		<span style="color:#f92672">&#34;wan-interface&#34;</span>: <span style="color:#e6db74">&#34;eth0.0&#34;</span>
+	},
+	<span style="color:#f92672">&#34;service&#34;</span>: {
+		<span style="color:#f92672">&#34;dns&#34;</span>: {
+			<span style="color:#f92672">&#34;dynamic&#34;</span>: {
+				<span style="color:#f92672">&#34;interface&#34;</span>: {
+					<span style="color:#f92672">&#34;eth0.0&#34;</span>: {
+						<span style="color:#f92672">&#34;service&#34;</span>: {
+							<span style="color:#f92672">&#34;dyndns&#34;</span>: {
+								<span style="color:#f92672">&#34;host-name&#34;</span>: [
+									<span style="color:#e6db74">&#34;domain.dyndns.org&#34;</span>
+								],
+								<span style="color:#f92672">&#34;login&#34;</span>: <span style="color:#e6db74">&#34;someuser&#34;</span>,
+								<span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;xxxxxx&#34;</span>
+							}
+						}
+					}
+				}
+			},
+			<span style="color:#f92672">&#34;forwarding&#34;</span>: {
+				<span style="color:#f92672">&#34;except-interface&#34;</span>: [
+					<span style="color:#e6db74">&#34;eth0.0&#34;</span>
+				]
+			}
+		},
+		<span style="color:#f92672">&#34;nat&#34;</span>: {
+			<span style="color:#f92672">&#34;rule&#34;</span>: {
+				<span style="color:#f92672">&#34;5010&#34;</span>: {
+					<span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;masquerade for WAN&#34;</span>,
+					<span style="color:#f92672">&#34;outbound-interface&#34;</span>: <span style="color:#e6db74">&#34;eth0.0&#34;</span>,
+					<span style="color:#f92672">&#34;protocol&#34;</span>: <span style="color:#e6db74">&#34;all&#34;</span>,
+					<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;masquerade&#34;</span>
+				}
+			}
+		},
+		<span style="color:#f92672">&#34;lldp&#34;</span>: {
+			<span style="color:#f92672">&#34;interface&#34;</span>: {
+				<span style="color:#f92672">&#34;eth0.0&#34;</span>: {
+					<span style="color:#f92672">&#34;disable&#34;</span>: <span style="color:#e6db74">&#34;&#39;&#39;&#34;</span>
+				}
+			}
+		}
+	},
+	<span style="color:#f92672">&#34;vpn&#34;</span>: {
+		<span style="color:#f92672">&#34;ipsec&#34;</span>: {
+			<span style="color:#f92672">&#34;ipsec-interfaces&#34;</span>: {
+				<span style="color:#f92672">&#34;interface&#34;</span>: [
+					<span style="color:#e6db74">&#34;eth0.0&#34;</span>
+				]
+			}
+		},
+		<span style="color:#f92672">&#34;l2tp&#34;</span>: {
+			<span style="color:#f92672">&#34;remote-access&#34;</span>: {
+				<span style="color:#f92672">&#34;dhcp-interface&#34;</span>: <span style="color:#e6db74">&#34;eth0.0&#34;</span>
+			}
+		}
+	}
+}
+</code></pre></div><p>The most important thing to note is anywhere you find <code>eth0</code>, you need to replace it with <code>eth0.0</code>.  It took some guessing and checking and having to reset my USG a couple times but I eventually got things working.</p>
+<p>Make sure to special attention to the config above.  You only need to copy down to an individual key pair in the JSON to get to <code>eth0</code>.  However if a key is called <code>eth0</code> you will need to copy everything below it as its the key for that information.  A good example of this can be found in the dns section above.</p>
+<p>I would highly encourage you to use the above file as a starting point and modify it as you see fit if you have any other information referencing <code>eth0</code>.</p>
+<h1 id="speed-test-results">Speed Test Results</h1>
+<p>Below are a couple speed tests I captured after.  My speeds roughly stayed the same which is amazing as I have seen some instructions that greatly reduce the speed with a bridge running on the USG.  I did notice the ping times went down a couple milliseconds, I will take that any day, things feel a lot more snappier now!!!</p>
+<h2 id="speed-tests">Speed tests</h2>
+<h3 id="att">AT&amp;T</h3>
+<p><img src="http://www.speedtest.net/result/7204894482.png" alt="att speed test"></p>
+<h3 id="celito-fiber">Celito Fiber</h3>
+<p><img src="http://www.speedtest.net/result/7204900004.png" alt="celito fiber speed test"></p>
+<h1 id="credits">Credits</h1>
+<p>Again I don&rsquo;t want to detract from the amazing work that was done at <a href="https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/">https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/</a>.</p>
+<p>Also shout out to <a href="https://github.com/jaysoffian">Jay Soffian</a> for writing the EAP Proxy, checkout the <a href="https://github.com/jaysoffian/eap_proxy">Github project</a> and give it a star for his awesome work!</p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

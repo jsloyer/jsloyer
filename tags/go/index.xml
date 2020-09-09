@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/go/</link>
+    <description>Recent content in go on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 19 Dec 2016 14:11:14 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cross Compiling Golang with a Docker Alpine Container</title>
+      <link>http://www.jeffsloyer.io/post/cross-compiling-docker-alpine-golang/</link>
+      <pubDate>Mon, 19 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/cross-compiling-docker-alpine-golang/</guid>
+      <description>Recently at work I have been struggling with building a small/minimized Docker container of a Go app I have been working on. I started with busybox but it has a major short coming&amp;hellip; CA certificates. It isn&amp;rsquo;t trivial to get CA Certs on a busybox container. This problem effectively prevents you from using SSL or TLS with your app&amp;hellip; This is a non-starter&amp;hellip;
+Enter Alpine I was doing some reading and I have seen a couple articles mention Alpine, its effectively a slimmed down version of busybox but it makes it trivially easy to install packages, in my case CA Certificates!</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployments with Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</link>
+      <pubDate>Mon, 18 Aug 2014 22:10:32 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</guid>
+      <description>In Cloud Foundry (the open source technology behind Bluemix), when you do a cf push, Cloud Foundry will actually stop your app and restart it with the new code that you just uploaded. This presents an issue for a production app or any app that is actually serving users. There is a shortcoming with the current DEA (the part in Cloud Foundry that runs your app) but the next version of the DEA (Diego) will help address this.</description>
+    </item>
+    
+  </channel>
+</rss>

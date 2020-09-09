@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Firewall Ports for the Unifi USG and Sonos Speakers -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/wall.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Firewall Ports for the Unifi USG and Sonos Speakers</h1>
+               <h2 class="subheading">Setup a Multi-Vlan Network With Sonos and the Unifi USG With Sonos Speakers</h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Mon, Feb 11, 2019
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/sonos" >sonos</a> <a href="http://www.jeffsloyer.io/tags/usg" >usg</a> <a href="http://www.jeffsloyer.io/tags/firewall" >firewall</a> <a href="http://www.jeffsloyer.io/tags/unifi" >unifi</a> <a href="http://www.jeffsloyer.io/tags/ubiquiti" >ubiquiti</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <h1 id="background">Background</h1>
+<p>At home I run the 4 port USG router on my Unifi&rsquo;ed network.  I have a couple different VLAN&rsquo;s, Data, Management, Security, IoT, and Guest.
+Each of these networks already has some policies that prevent some of the VLAN&rsquo;s talking to each other.  For example I have some firewall rules that prevent my security cameras from talking to the IoT network and talking out to the public Internet.  For the past couple months I haven&rsquo;t been running a locked down IoT network.  What this means for me is not allowing the IoT VLAN to talk to my Data and Management VLAN&rsquo;s.  This is a problem as all of my servers, my iPhone, and laptop are on the Data VLAN.  When I turned on a firewall rule to block all traffic to the Data VLAN from the IoT VLAN my Sonos speakers stopped working.  After lots of research and trial and error I got things working again.  To get things working again you need to run a ICMP Proxy on your USG as well as turn on some additional firewall rules.</p>
+<h1 id="icmp-proxy">ICMP Proxy</h1>
+<p>The ICMP Proxy is probably the most important bit of all of this.  The proxy will forward ICMP packets from one VLAN to another.  This is crucial in getting Sonos to work on a multi-VLAN setup.  For me the following configuration worked, I will walk through what needs to be changed for your setup.</p>
+<p><strong>Notes</strong></p>
+<ul>
+<li>VLAN 2 is my Data VLAN (trusted)</li>
+<li>VLAN 4 is my IoT VLAN (untrusted)</li>
+<li>The config below is for a USG 4 Port.  If you are running a 3 Port USG change <code>eth0</code> to <code>eth1</code>.</li>
+<li>You will need to change the VLAN numbers twice below, for example <code>eth0.2</code> and <code>eth0.4</code>.</li>
+</ul>
+<pre><code>{
+    &quot;protocols&quot;: {
+        &quot;igmp-proxy&quot;: {
+            &quot;interface&quot;: {
+                &quot;eth0.2&quot;: {
+                    &quot;alt-subnet&quot;: [
+                        &quot;0.0.0.0/0&quot;
+                    ],
+                    &quot;role&quot;: &quot;upstream&quot;,
+                    &quot;threshold&quot;: &quot;1&quot;
+                },
+                &quot;eth0.4&quot;: {
+                    &quot;alt-subnet&quot;: [
+                        &quot;0.0.0.0/0&quot;
+                    ],
+                    &quot;role&quot;: &quot;downstream&quot;,
+                    &quot;threshold&quot;: &quot;1&quot;
+                }
+            }
+        }
+    }
+}
+</code></pre><p>The above snippet will need to go on your Unifi Controller.  If you are on Linux it is located at <code>/var/lib/unifi/sites&lt;siteid&gt;/config.gateway.json</code>.  To get your site id open your web browser and log into your Unifi controller.  The site id will be in the url.  Make sure you are targheted to the correct site.  For example a possible url could be <code>https://10.1.1.1:8443/manage/site/fozvabde/devices/1/50</code>.  In this case the site id is <code>fozvabde</code>.</p>
+<p>Once you have placed your eddited JSON snippet into <code>/var/lib/unifi/sites&lt;siteid&gt;/config.gateway.json</code> login into your controller and navigate to the Devices tab.  On that tab select the USG and then click on Config and then Manage Device.  Here you will want to click on force provision.  Doing this will write the above <code>config.gateway.json</code> file to your USG and then turn on the ICMP Proxy.  At this point check to make sure having a Sonos controller on your trusted VLAN can talk to your Sonos Speakers on your untrusted VLAN.  If it doesn&rsquo;t work check the <code>config.gateway.json</code> file and make sure you have your interfaces and VLAN&rsquo;s correct.  If you can&rsquo;t figure it out leave a comment below.</p>
+<h1 id="firewall-rules">Firewall Rules</h1>
+<p>Since we now have things working again we need to break things again.  We need to block the traffic from the untrusted VLAN to the trusted VLAN.</p>
+<h2 id="block-all-untrusted-traffic">Block all untrusted traffic</h2>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-1-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-1-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-2-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-2-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p>I have a group created for my untrusted VLAN&rsquo;s, see below.</p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-3-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-3-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<h2 id="allow-icmp-traffic">Allow ICMP Traffic</h2>
+<p>Next we need to allow ICMP traffic from your untrusted VLAN to your trusted VLAN.  See below.
+<a href="http://www.jeffsloyer.io/images/usg-sonos-4-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-4-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-5-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-5-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<h2 id="allow-sonos-traffic">Allow Sonos Traffic</h2>
+<p>Next wee need to allow Sonos traffic.  To do this I created two port groups, one for UDP and one for TCP.  each of them has a corresponding firewall rule.</p>
+<h3 id="allow-sonos-tcp">Allow Sonos TCP</h3>
+<p>I created a port group for my TCP traffic.  See below.</p>
+<pre><code>SRC SONOS - DST STREAM-DEVICE - TCP
+TCP-3401
+TCP30000-60000
+</code></pre><p><a href="http://www.jeffsloyer.io/images/usg-sonos-6-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-6-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p>In the rule below you will notice there is a destination group as well in addition to the ports.  I have added the IP&rsquo;s of my Sonos speakers to a group so I can only open a couple pinholes for traffic instead of the whole VLAN.  See below.</p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-8-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-8-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-9-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-9-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-10-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-10-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<h3 id="allow-sonos-udp">Allow Sonos UDP</h3>
+<p>I created a port group for my TCP traffic.  See below.</p>
+<pre><code>SRC SONOS - DST STREAM-DEVICE - UDP
+UDP-1901
+UDP30000-60000
+</code></pre><p><a href="http://www.jeffsloyer.io/images/usg-sonos-17medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-7-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p>I am using the same port group for the source as I did above for the IP&rsquo;s of the Sonos speakers.</p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-11-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-11-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-12-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-12-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<h2 id="ordering-of-the-rules">Ordering of the rules</h2>
+<p>The ordering of the firewall rules is extremely important.  Make sure you have your allow rules before your deny rules.  If not things will not work.</p>
+<p>See below for my final set of rules.</p>
+<p><a href="http://www.jeffsloyer.io/images/usg-sonos-13-medium.jpg"><img src="http://www.jeffsloyer.io/images/usg-sonos-13-medium.jpg" alt="usg screenshot from unifi"></a></p>
+<h1 id="credit">Credit</h1>
+<p><a href="https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950">https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950</a></p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

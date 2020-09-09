@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Simple Hello World Python App using Flask -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/helloworld.png')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Simple Hello World Python App Using Flask</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Mon, Mar 30, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/video" >Video</a>, <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/flask" >flask</a> <a href="http://www.jeffsloyer.io/tags/python" >python</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>Hey Y’all!  Jeff here again, today we are going to be going through some really simple steps to get started deploying a simple hello world python app using Flask on Bluemix.</p>
+<p><a href="http://flask.pocoo.org/">Flask</a> is an awesome and really lightweight framework in Python to create powerful webapps.  We are going to use it make a really simple hello world app in Python though.</p>
+<!-- raw HTML omitted -->
+<p>In this post we are going to go through the written instructions on how to do it but if you prefer watching a video check out the video below.</p>
+<!-- raw HTML omitted -->
+<p>In this tutorial we are going to go through two steps to deploy the app.  One is a simple click a button to deploy to your app, we will go through that first.  The second approach is a little more in depth and involves installing a command line tool to upload the application.  This is great and preferred if you will be editing the code or you want to dig into the nuts and bolts of things.</p>
+<h2 id="simple-getting-started-steps">Simple Getting Started Steps</h2>
+<ol>
+<li>
+<p>Sign up for a Bluemix account, visit <a href="http://bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp">http://bluemix.net</a> in your web browser and click “Sign-up” in the top right.  We require a couple bits of information</p>
+</li>
+<li>
+<p>Wait for an email to arrive, it should only take a couple minutes.  There should be a link in the email that says “Click here to complete your registration”, click that.  Sign in with the username and password you created from step 1.</p>
+</li>
+<li>
+<p>Click the button below (this will deploy the app for you).</p>
+</li>
+</ol>
+<pre><code>[![button Simple Hello World Python App using Flask](/images/2015/03/button-medium.png)](https://bluemix.net/deploy?repository=https%3A%2F%2Fgithub.com%2FIBM-Bluemix%2Fpython-hello-world-flask.git&amp;cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp)
+</code></pre>
+<ol start="4">
+<li>
+<p>You will come to a page that has a button called “Login”.  Go ahead and click that.</p>
+</li>
+<li>
+<p>Next you will be taken to a page that asks you to create an alias.  If my email address was <a href="mailto:jeff.davis251@gmail.com">jeff.davis251@gmail.com</a> I would use jeffdavis251.  Hint it doesn’t like periods <img src="http://www.jeffsloyer.io/images/2015/03/icon_smile-medium.gif" alt="icon smile Simple Hello World Python App using Flask"></p>
+</li>
+<li>
+<p>Click Create.</p>
+</li>
+<li>
+<p>It will take you to another page, click “Continue”.</p>
+</li>
+<li>
+<p>Now everything is basically setup, it will take us to a page that looks like what is below, just click the “Deploy” button.
+<a href="http://www.jeffsloyer.io/images/2015/03/deploybutton1-medium.png"><img src="http://www.jeffsloyer.io/images/2015/03/deploybutton1-medium.png" alt="deploybutton1 1024x541 Simple Hello World Python App using Flask"></a></p>
+</li>
+<li>
+<p>Grab a cup of coffee or take a bathroom break, well a quick one!  It will only take a minute or two to deploy the app.</p>
+</li>
+<li>
+<p>In a hot second you should be taken to a page that looks like what is below.  To view your hello world app just click the button “View your App”.
+<a href="http://www.jeffsloyer.io/images/2015/03/deploy-done-medium.png"><img src="http://www.jeffsloyer.io/images/2015/03/deploy-done-medium.png" alt="deploy done 1024x544 Simple Hello World Python App using Flask"></a></p>
+</li>
+</ol>
+<p>Thats it for the quick and easy steps.  Let’s go through the more advanced steps where you can modify the code and upload the app from your own machine.</p>
+<h2 id="a-little-more-involved-steps">A little more involved steps</h2>
+<ol>
+<li>
+<p>This will assume you have signed up for an account, steps 1 and 2 from above.  If you haven’t signed up for an account scroll up and do that now.</p>
+</li>
+<li>
+<p>Install Git, follow the instructions from <a href="http://git-scm.com/book/en/v2/Getting-Started-Installing-Git">here</a>.</p>
+</li>
+<li>
+<p>Install the Cloud Foundry command line.  Choose the appropriate installer from <a href="https://github.com/cloudfoundry/cli/releases">here</a> and download it and run the installer.  You might be asking what Cloud Foundry is, its the open source Platform as a Service that Bluemix is built on.</p>
+</li>
+<li>
+<p>Open up the terminal/command prompt
+Mac – Click on the finder icon in the top right, search for terminal and open that
+Linux – Depends on your distro, but you probably know where it is, in the menu look for accessories usually then terminal, open that
+Windows – Click the start button, search for cmd, open that</p>
+</li>
+<li>
+<p>Type the following.  The following commands downloads the starter app and puts us into the right directory to deploy the app.</p>
+<p>git clone <a href="https://github.com/IBM-Bluemix/python-hello-world-flask.git">https://github.com/IBM-Bluemix/python-hello-world-flask.git</a>
+cd python-hello-world-flask</p>
+</li>
+<li>
+<p>Next we need to login to Bluemix, we will use the terminal window that we already have open for this.</p>
+<p>cf login -a <a href="https://api.ng.bluemix.net">https://api.ng.bluemix.net</a></p>
+</li>
+</ol>
+<pre><code>__Note__: It will ask for your username and password, this is the one you just created.
+</code></pre>
+<ol start="7">
+<li>
+<p>Last step, we just need to upload the app, run the following replacing myappname with the URL you want your app to be available at.  Bluemix will give you a URL based on this name.  If I chose jeff-is-awesome, my app would be available at <a href="http://jeff-is-awesome.mybluemix.net">http://jeff-is-awesome.mybluemix.net</a>.</p>
+<p>cf push myappname</p>
+</li>
+</ol>
+<p>If you get an error mentioning something like below, that means someone already has an app using that URL, just choose another one and rerun the command</p>
+<h4 id="error">Error:</h4>
+<pre><code>[01:54 PM] jsloyer@Jeffs-MacBook-Pro [python-hello-world-flask]&gt;cf push jeff-is-awesome
+Creating app jeff-is-awesome in org jbsloyer@us.ibm.com / space demos as jbsloyer@us.ibm.com...
+OK
+
+Creating route jeff-is-awesome.mybluemix.net...
+FAILED
+Server error, status code: 400, error code: 210003, message: The host is taken: jeff-is-awesome
+</code></pre><h4 id="fix">Fix:</h4>
+<pre><code>cf push myappname-unique
+</code></pre><p>You will basically get some output that looks like the following.  It will give you the URL to access your app.  In this case the URL to my app is <code>http://jeff-is-awesome2.mybluemix.net</code>.</p>
+<pre><code>[02:05 PM] jsloyer@Jeffs-MacBook-Pro [python-hello-world-flask]&gt;cf push jeff-is-awesome2
+Updating app jeff-is-awesome2 in org jbsloyer@us.ibm.com / space demos as jbsloyer@us.ibm.com...
+
+... snip ...
+
+App jeff-is-awesome2 was started using this command `python hello.py`
+
+Showing health and status for app jeff-is-awesome2 in org jbsloyer@us.ibm.com / space demos as jbsloyer@us.ibm.com...
+</code></pre><h2 id="wrapping-up">Wrapping Up</h2>
+<p>To recap we just went through two different ways to deploy a python app to Bluemix.  The first method is really quick so you can see the power of the platform and get something up and running quick.  The second approach used the command line so you can modify the app and hack on it and customize it.</p>
+<h2 id="feedback">Feedback</h2>
+<p>Follow us on Twitter at <a href="http://twitter.com/IBMBluemix">@IBMBluemix</a>.</p>
+<p>Follow the author of this blog post (Jeff Sloyer, one of our developer advocates) at <a href="http://twitter.com/jsloyer">@jsloyer</a></p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mongodb on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/mongodb/</link>
+    <description>Recent content in mongodb on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 24 Aug 2015 11:03:35 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/mongodb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link>
+      <pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid>
+      <description>This is a follow up post to a previous post on Deploying your Meteor app to Cloud Foundry and Bluemix. In this post we went through how to deploy a Meteor app to Cloud Foundry and Bluemix. In this post we will be going through the same thing except in a video format. Check out the video below.
+I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](https://twitter.</description>
+    </item>
+    
+    <item>
+      <title>Deploying your Meteor app to Cloud Foundry and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link>
+      <pubDate>Wed, 05 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid>
+      <description>Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript. It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.
+I heard about Meteor mid-2014 but it peaked my interest last week when I was at a customer and a developer at the customer was building a Meteor app and they were asking how to run it on Bluemix.</description>
+    </item>
+    
+  </channel>
+</rss>

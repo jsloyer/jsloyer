@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cloudfoundry on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/cloudfoundry/</link>
+    <description>Recent content in cloudfoundry on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Wed, 01 Jul 2015 10:51:49 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/cloudfoundry/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Zero Downtime Deployment with the CF Autopilot Plugin - Video</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</link>
+      <pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</guid>
+      <description>I recently wrote a blog post on what a zero downtime deployment is, why it is important, and how to perform one. I am now posting a video on the same topic so you can learn about a zero downtime deployment by watching a video instead.
+If you prefer the tutorial and text instructions please check out Zero Downtime Deployment with the CF Autopilot Plugin.
+I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](https://twitter.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployment with the CF Autopilot Plugin</title>
+      <link>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</link>
+      <pubDate>Fri, 19 Jun 2015 10:41:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</guid>
+      <description>Zero down time deployments are a must for any Internet app running at scale. Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer. This is not acceptable anymore. Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.</description>
+    </item>
+    
+    <item>
+      <title>Get Pumped for the Cloud Foundry Summit</title>
+      <link>http://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</link>
+      <pubDate>Thu, 30 Apr 2015 10:38:05 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</guid>
+      <description>I’m pumped for the Cloud Foundry Summit! Are you??? Well if you aren’t yet hopefully you will be after reading this!
+If you attended the conference last year there was an awesome presentation on the future of Diego. What is Diego you ask? It is the new DEA that is coming for Cloud Foundry. It is a complete re-write in Go and will add some new features such as the ability to swap out the underlaying linux containers for things like Docker.</description>
+    </item>
+    
+    <item>
+      <title>Etherpad in Cloud Foundry – Quick Start Guide</title>
+      <link>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</link>
+      <pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</guid>
+      <description>Etherpad Lite is an awesome online collaboration platform. Multiple open source projects use it for collaboration. One of the most notable ones is the Openstack Project Openstack Etherpad. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry.</description>
+    </item>
+    
+    <item>
+      <title>Inbound Ssl in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/</link>
+      <pubDate>Mon, 18 Aug 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/</guid>
+      <description>Did you know in Bluemix you get inbound SSL for free? It is automatically turned on and enabled for every app. All you have to do is just access your app over https instead of http.
+Developers don’t need to implement SSL in their app, you just need to support HTTP and the Bluemix infrastructure will support HTTPS for you and do SSL offloading.
+Additionally Bluemix supports the x-forwarded-proto header to allow developers to check with protocol requests are coming in over.</description>
+    </item>
+    
+  </channel>
+</rss>

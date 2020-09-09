@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Deploying your Meteor app to Cloud Foundry and Bluemix -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/meteor.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Deploying Your Meteor App to Cloud Foundry and Bluemix</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Wed, Aug 5, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/meteor" >meteor</a> <a href="http://www.jeffsloyer.io/tags/mongodb" >mongodb</a> <a href="http://www.jeffsloyer.io/tags/websockets" >websockets</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p><a href="http://www.jeffsloyer.io/images/2015/07/meteor-logo-medium.png"><img src="http://www.jeffsloyer.io/images/2015/07/meteor-logo-medium.png" alt="meteor-logo"></a>Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript.  It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.</p>
+<p>I heard about Meteor mid-2014 but it peaked my interest last week when I was at a customer and a developer at the customer was building a Meteor app and they were asking how to run it on Bluemix.  Of course doing my job I helped the developer get the app running but it took a couple tweaks to the Cloud Foundry buildpack for Meteor.<!-- raw HTML omitted --></p>
+<p>You might be asking what a buildpack is, that&rsquo;s totally fine.  In Cloud Foundry you can use basically any language you want for your app, all you need is some code to laydown the app server or middleware and compile your code together and install dependencies.  For Meteor there is a buildpack available but it was slighly out of date.</p>
+<p>Last week and this week I committed some changes to the buildpack to make it more robust and compatible for newer Meteor apps.</p>
+<p>The buildpack now will allow you to use your existing Meteor app and push it to Cloud Foundry and Bluemix.</p>
+<p>For the rest of this blog post I am going to walk through on how to build an example Meteor app and push it to Bluemix.</p>
+<h2 id="pre-reqs">Pre-req&rsquo;s</h2>
+<ul>
+<li>Sign up for a <a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-MeteorSample-_-Node-MongoLab-_-BM-DevAd">Bluemix</a> account.  Go <a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-MeteorSample-_-Node-MongoLab-_-BM-DevAd">Bluemix</a> and click on Sign-up in the top right hand corner.</li>
+<li>Meteor installed locally, go <a href="https://www.meteor.com/install">Meteor install</a> to install Meteor</li>
+<li>Cloud Foundry Command Line (CLI) installed, go <a href="https://www.ng.bluemix.net/docs/#starters/install_cli.html">install CLI</a> for instructions</li>
+</ul>
+<h2 id="steps">Steps</h2>
+<ol>
+<li>
+<p>Create a sample Meteor app, we are going to use the leaderboard example</p>
+<pre><code> meteor create --example leaderboard
+</code></pre>
+</li>
+<li>
+<p>Push the sample app to Bluemix. <strong>Note</strong>, this command will not start the app, we will need to choose our database next. Also replace leaderboard with a unique name for your app, for example leaderboard-jbs (my intials).</p>
+<pre><code> cf push leaderboard -b https://github.com/cloudfoundry-community/cf-meteor-buildpack.git --no-start
+</code></pre>
+</li>
+<li>
+<p>Next we need to choose if we want to use the built on Mongo DB with Cloud Foundry or an external third party MongoLab. It honestly doesn&rsquo;t matter too much but MongoLab is built for scale is more reliable, I would choose MongoLab myself.</p>
+<p><strong>Built in MongoDB:</strong></p>
+<ol>
+<li>
+<p>Create the database.
+cf create-service mongodb 100 leaderboard-mongodb</p>
+</li>
+<li>
+<p>Connect the database to our app. Replace leaderboard with the name of your app (ex. leaderboard-jbs).</p>
+<pre><code> cf bind-service leaderboard leaderboard-mongodb
+</code></pre>
+<p>would then become</p>
+<pre><code> cf bind-service leaderboard-jbs leaderboard-mongodb
+</code></pre>
+</li>
+</ol>
+<p><strong>MongoLab:</strong></p>
+<ol>
+<li>
+<p>Create the database.
+cf create-service mongolab sandbox leaderboard-mongolab</p>
+</li>
+<li>
+<p>Connect the database to our app. Replace leaderboard with the name of your app (ex. leaderboard-jbs).</p>
+<pre><code> cf bind-service leaderboard leaderboard-mongolab
+</code></pre>
+</li>
+</ol>
+<p>would then become</p>
+<pre><code>     cf bind-service leaderboard-jbs leaderboard-mongolab
+</code></pre>
+</li>
+<li>
+<p>Start the application. Replace leaderboard with the name of your app</p>
+<pre><code> cf start leaderboard
+</code></pre>
+</li>
+</ol>
+<p>Open up two web browsers and goto the same url, for me my URL would be <a href="http://leaderboard-jbs.mybluemix.net">http://leaderboard-jbs.mybluemix.net</a>.  I got this url by putting the name of my app in front of mybluemix.net.</p>
+<p>In the video below you can see when you choose a player and then click add 5 points the other browser is updated instantly.  The example app is saving this information in the Mongo database then using websockets to notify all the connected clients of the change.  This is one of the really powerful features of Meteor.</p>
+<p>The work with the developer at the client last week has renewed my interest in Meteor and will have to dig into it more.</p>
+<p>If you prefer to watch a video of this as well, check out Video – <a href="http://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/">Deploying your Meteor app to Cloud Foundry and Bluemix</a>.</p>
+<p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](<a href="https://twitter.com/jsloyer">https://twitter.com/jsloyer</a> target=).  There will also be a video forth coming as well.</p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

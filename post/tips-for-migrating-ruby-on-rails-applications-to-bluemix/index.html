@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Tips for Migrating Ruby on Rails Applications to Bluemix -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/migrate.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Tips for Migrating Ruby on Rails Applications to Bluemix</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Thu, Mar 5, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/postgresql" >postgresql</a> <a href="http://www.jeffsloyer.io/tags/redis" >redis</a> <a href="http://www.jeffsloyer.io/tags/ror" >ror</a> <a href="http://www.jeffsloyer.io/tags/ruby" >ruby</a> <a href="http://www.jeffsloyer.io/tags/ruby-on-rails" >ruby on rails</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p><img src="http://www.jeffsloyer.io/images/2015/06/Ruby_on_Rails-logo-medium.png" alt="Ruby on Rails.svg  231x300 Tips for Migrating Ruby on Rails Applications to Bluemix">Who doesn’t love some Ruby?  Bluemix definitely loves Ruby on Rails!  Sometimes running a Ruby on Rails app can be a little tricky, so I have included some tips and tricks for migrating your Ruby on Rails app to Bluemix. They will include:</p>
+<ul>
+<li>Required gems</li>
+<li>Code tweaks</li>
+<li>Accessing external databases</li>
+<li>Deploying your app</li>
+</ul>
+<!-- raw HTML omitted -->
+<h3 id="required-gems">Required gems</h3>
+<p>If you are using PostgreSQL you need to include <code>pg</code>. Sqlite3 is included to get local development working as well.  Add the following line to your Gemfile.</p>
+<pre><code>gem 'pg'
+gem 'sqlite3'
+</code></pre><p>Additionally there are two more gems you should include as well.  These gems will be included by some Ruby buildpacks but we should include them just in case.</p>
+<pre><code>gem &quot;cf-autoconfig&quot;, &quot;~&gt; 0.2.1&quot;
+gem 'rails_12factor', group: :production
+</code></pre><h3 id="code-tweaks--external-databases">Code tweaks &amp; external databases</h3>
+<p>When you deploy your app to Bluemix, the Ruby buildpack will overwrite your database.yml file to pull in the attached DB service.  You should have a <code>database.yml</code> file if you are running locally.  Below is a pretty standard one:</p>
+<pre><code># SQLite version 3.x
+#   gem install sqlite3-ruby (not necessary on OS X Leopard)
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+
+# Warning: The database defined as &quot;test&quot; will be erased and
+# re-generated from your development database when you run &quot;rake&quot;.
+# Do not set this db to the same as development or production.
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: sqlite3
+  database: db/production.sqlite3
+  pool: 5
+  timeout: 5000
+</code></pre><p>If you are using Redis and PostgreSQL, it can be a little tricky to use two databases.  Here is the config for using Redis with <a href="https://github.com/resque/resque">Resque</a> (a task scheduler that is backed by Redis).  This file is specific to resque and its located at <code>config/initializers/resque.yml</code>.</p>
+<pre><code>require 'resque/status_server'
+require 'json'
+
+rails_root = ENV['RAILS_ROOT'] || File.dirname(__FILE__) + '/../..'
+rails_env = ENV['RAILS_ENV'] || 'development'
+
+resque_config = YAML.load_file(rails_root + '/config/resque.yml')
+
+if rails_env != &quot;production&quot;
+    Resque.redis = resque_config[rails_env]
+else
+    vcap_services = JSON.parse(ENV['VCAP_SERVICES'])
+    credentials = vcap_services[&quot;rediscloud&quot;][0][&quot;credentials&quot;]
+    Resque.redis = &quot;:&quot; + credentials[&quot;password&quot;] + &quot;@&quot; + credentials[&quot;hostname&quot;] + &quot;:&quot; + credentials[&quot;port&quot;]
+end
+</code></pre><h3 id="deploy-your-app">Deploy your app!</h3>
+<p>To deploy your app, you need to create some services in Bluemix for your app.  We will do this with the Cloud Foundry command line.</p>
+<p><em>PostgreSQL:</em></p>
+<pre><code>cf create-service elephantsql turtle postgres-myapp
+#postgres-myapp is the name of your service, you can name this whatever you want
+</code></pre><p><em>Redis:</em></p>
+<pre><code>cf create-service rediscloud 25mb redis-myapp
+#redis-myapp is the name of your service, you can name this whatever you want
+</code></pre><h3 id="prepare-your-app">Prepare your app</h3>
+<p>Cloud Foundry requires a file called <code>manifest.yml</code> to help bind services to your app and defining memory limits, CPU limits, and the number of instances required.  Belows is an example file I used.  The name of the app is the unique identifier of your app that will be in your account.  Hostname is the hostname of the app, it will be <em>yourhostname</em>.mybluemix.net or if you are running in London it will be <em>yourhostname</em>.eu-gb.mybluemix.net.  The <code>command</code> is pretty important, it says it will run the <code>db:setup</code> everytime the app is deployed, this should probably be changed to <code>db:migrate</code> instead though.</p>
+<pre><code>---
+applications:
+#swap out myapp-jbs for your own app name
+- name: myapp-jbs
+  memory: 1GB
+  instances: 1
+  path: .
+  command: bundle exec rake db:setup &amp;&amp; bundle exec rails s -p $PORT
+  services:
+  #swap out the below for your own
+  #cf cs elephantsql turtle yourownname
+  #cf cs rediscloud 25mb yourownname
+  #redis cloud has different plans, check out cf marketplace for the plans
+    - postgres-myapp
+    - redis-myapp
+</code></pre><h3 id="push-your-app">Push your app</h3>
+<p>So we are on the final step, time to push our app!  If you are using Ruby 2.2.0, it’s not officially supported by Cloud Foundry, but there is a buildpack that is part of the Cloud Foundry community github that we can use.  It tracks pretty close to the latest Ruby and Rails.  For my app I used Ruby 2.2.0 and Rails 4.2.0:</p>
+<pre><code>cf push -b https://github.com/cloudfoundry/ruby-buildpack.git
+
+</code></pre><h3 id="one-last-little-tip">One last little tip…</h3>
+<p>One last little tweak if you are familiar with Git it will make your life in Cloud Foundry land a little better.  There is a file called <code>.cfignore</code> that goes in the root of your project, it basically acts like <code>.gitgnore</code> and prevents files being updated to Cloud Foundry.  So for Ruby on Rails you probably would want your vendor folder here and etc.  I have put one below that I use.</p>
+<pre><code>.DS_STORE
+# Ignore bundler config
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore coverage
+/coverage
+
+# Tag file
+tags
+.idea/
+
+.swo
+.swp
+
+.envrc
+
+cscope*
+
+doc/*
+
+.jira-url
+
+vendor/*
+</code></pre><p>If you have any issues please reach out to us on <a href="http://stackoverflow.com/questions/tagged/bluemix">StackOverflow</a>!  In the top righthand corner click “Ask Question”.</p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

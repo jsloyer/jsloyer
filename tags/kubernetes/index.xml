@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kubernetes on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/kubernetes/</link>
+    <description>Recent content in kubernetes on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Wed, 29 Mar 2017 09:45:24 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using Cabin with the IBM Bluemix Container Service</title>
+      <link>http://www.jeffsloyer.io/post/ibm-container-service-cabin/</link>
+      <pubDate>Wed, 29 Mar 2017 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/ibm-container-service-cabin/</guid>
+      <description>I haven&amp;rsquo;t posted in awhile because I have taken a new role at IBM and helped lead the development of the new IBM Bluemix Container Service that allows you to run managed Kubernetes clusters on IBM.
+For a little background, IBM has introduced a managed Kubernetes Service, for more information please read the announce post here.
+Cabin is a pretty cool mobile app that lets you manage your Kubernetes cluster through your Android or iPhone.</description>
+    </item>
+    
+  </channel>
+</rss>

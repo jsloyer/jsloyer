@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>amqp on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/amqp/</link>
+    <description>Recent content in amqp on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 19 Jan 2015 09:34:18 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/amqp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Microservices in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/microservices-in-bluemix/</link>
+      <pubDate>Mon, 19 Jan 2015 09:34:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/microservices-in-bluemix/</guid>
+      <description>Monolith apps are no more. The age of the monolith is over. It wasn’t that long ago that companies and developers (myself included) were deploying one giant app that did everything. The app would serve all your static files, front-end HTML and CSS and Javascript, act as your REST API, serve as your data persistance tier, handles sessions, handle logins, and do security for your app. The list could keep going on and on.</description>
+    </item>
+    
+  </channel>
+</rss>

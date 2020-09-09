@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Control home devices with Bluemix Internet of Things (Part 2) -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/robots-blog-post-header1.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Control Home Devices With Bluemix Internet of Things (Part 2)</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Tue, Feb 17, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/cloudant" >cloudant</a> <a href="http://www.jeffsloyer.io/tags/node.js" >node.js</a> <a href="http://www.jeffsloyer.io/tags/iot" >iot</a> <a href="http://www.jeffsloyer.io/tags/raspberry-pi" >raspberry pi</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <h2 id="part-2-configuring-the-raspberry-pi">Part 2: Configuring the Raspberry Pi</h2>
+<p>This is a continuation of Part 1 of Controlling home devices with Bluemix Internet Of Things  If you haven’t read <a href="http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/">Part 1</a>, please do that first…</p>
+<p>In Part 1 we got the electrical work out of the way.  We wired up the relay’s and connected the circuit’s.  In this part of the 3 part series we will configure the Raspberry Pi to control the relay’s that we wired up in part 1.</p>
+<p>So without delay let’s jump into the next part.</p>
+<!-- raw HTML omitted -->
+<h2 id="install-software-on-the-raspberry-pi">Install software on the Raspberry Pi</h2>
+<p>The first step of getting your Raspberry Pi setup is installing Raspbian.  If you have the <a href="http://amzn.to/2C63713">Canakit</a> its pretty easy, just plug in the wifi dongle and insert the SD card and plug in power.  If you don’t have the <a href="http://amzn.to/2C63713">Canakit</a>  follow the instructions from <a href="http://www.raspberrypi.org/help/noobs-setup">here</a>.  Once you get Raspbian installed open up a terminal.</p>
+<p>Next, we will need to update Raspbian to the latest.  To do this run the following.</p>
+<pre><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre><p>Next, we will need to download  <a href="http://lightshowpi.org">LightShowPi</a>.  <a href="http://lightshowpi.org">LightShowPi</a> is the foundation for syncing the lights to the music.</p>
+<pre><code># Install git (if you don't already have it)
+sudo apt-get install git-core
+
+
+
+
+# Clone the repository to /home/pi/lightshowpi
+cd ~
+git clone https://togiles@bitbucket.org/togiles/lightshowpi.git
+
+# Grab the stable branch
+cd lightshowpi git fetch &amp;&amp; git checkout stable
+</code></pre><p>Next, we need to install LightShowPi, run the following.  Please not the install step will take some time, be patient…</p>
+<pre><code>cd /home/pi/lightshowpi
+sudo ./install.sh
+</code></pre><p>Once the install is complete we need to reboot the Raspberry Pi to pickup some new environment variables. To reboot run the following.</p>
+<pre><code>sudo reboot
+</code></pre><h2 id="wire-up-the-raspberry-pis-breadboard">Wire up the Raspberry Pi’s breadboard</h2>
+<p>Once we have rebooted we need to connect the bread board to the Raspberry Pi and connect the bread board to the relays.  This took some tinkering to figure out the GPIO ports but below I have posted a picture of mybread board on how it was constructed.   For me I set everything up with 8 channels first and using LED’s provided in the <a href="http://amzn.to/2C63713">Canakit</a> to make sure everything was working then I moved over to the real relays.  So let’s do that.</p>
+<p>I would highly recommend following the steps in <a href="https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI">this page</a> on getting your bread board working.</p>
+<p>Below is a picture of my finished bread board with 16 channels.  I have included a wiring diagram as well.  Basically each GPIO port goes to the input side of the relay controller.  If you notice I have a couple left over LED’s on the bread board, this was done via the tutorial list above.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/2015-02-16-11.31.19-medium.jpg"><img src="http://www.jeffsloyer.io/images/2015/06/2015-02-16-11.31.19-medium.jpg" alt="2015 02 16 11.31.19 768x1024 Control home devices with Bluemix Internet of Things (Part 2)"></a></p>
+<p>What is going on above is each of the delays is plugged into a GPIO port and then plugged into the ground rail and connected by a resistor.  The particular resistor I am using is a 220 Ohm resistor.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/raspberry-pi-lights-wiring-diagram-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/raspberry-pi-lights-wiring-diagram-medium.png" alt="raspberry pi lights wiring diagram Control home devices with Bluemix Internet of Things (Part 2)"></a></p>
+<p>So let’s test some things out.  Let’s play a pre-loaded song.</p>
+<pre><code>cd ~/lightshowpi
+sudo python py/synchronized_lights.py --file=/home/pi/lightshowpi/music/sample/ovenrake_deck-the-halls.mp3
+</code></pre><p>All the relays should be flashing.  At this point you can plug the lights into the outlets as well.  If you notice the lights go on solid for 30 seconds before the songs play, we can override this.  Additionally this file has the GPIO pins mapping as well.  This mapping is for using the full 16 channels, if you are using less just remove some of the mappings from the end of the gpio_pins line.  To do this we need to place a config file in our home directory.</p>
+<pre><code>cd ~
+touch .lights.cfg
+</code></pre><p>Choose your favorite text editor and put the following contents in the file.  We change the time it waits from 30 seconds to 1.</p>
+<pre><code>[hardware]
+gpio_pins = 0,1,2,3,4,5,6,7,21,22,23,24,25,26,28,29
+
+[lightshow]
+preshow_configuration =
+    {
+        &quot;transitions&quot;: [
+            {
+                &quot;type&quot;: &quot;on&quot;,
+                &quot;duration&quot;: 1,
+                &quot;channel_control&quot;: {
+                }
+            },
+            {
+                &quot;type&quot;: &quot;off&quot;,
+                &quot;duration&quot;: 1,
+                &quot;channel_control&quot;: {
+                }
+            }
+        ]
+    }
+</code></pre><p>That is it for this part.  In the next part of this series we will configure the Bluemix app to respond to text message votes and then the app to interface with the python code that controls the lights.</p>
+<h2 id="parts-in-the-series">Parts in the Series</h2>
+<ul>
+<li><a href="http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/">Part 1</a></li>
+</ul>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>templates on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/templates/</link>
+    <description>Recent content in templates on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 18 Aug 2014 22:10:32 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/templates/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Zero Downtime Deployments with Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</link>
+      <pubDate>Mon, 18 Aug 2014 22:10:32 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</guid>
+      <description>In Cloud Foundry (the open source technology behind Bluemix), when you do a cf push, Cloud Foundry will actually stop your app and restart it with the new code that you just uploaded. This presents an issue for a production app or any app that is actually serving users. There is a shortcoming with the current DEA (the part in Cloud Foundry that runs your app) but the next version of the DEA (Diego) will help address this.</description>
+    </item>
+    
+  </channel>
+</rss>

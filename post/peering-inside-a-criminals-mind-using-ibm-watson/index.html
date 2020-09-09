@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Peering Inside a Criminal’s Mind using IBM Watson -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/glasses.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Peering Inside a Criminal’s Mind Using IBM Watson</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Mon, Aug 24, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/node.js" >node.js</a> <a href="http://www.jeffsloyer.io/tags/watson" >watson</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>With the recent shooting in South Carolina in reminds us that criminal&rsquo;s can and will continue to harm people.  They seem like random acts to most of us but to a criminal the acts make sense to them?  No one can answer this question except the criminal.  To peer inside a criminal&rsquo;s would be next to impossible but what if there existed another way to peer inside their mind&rsquo;s?  This could be used to try to identify patterns or personality traits that exist.  This information could be used to prevent these horrible acts and better humanity.<!-- raw HTML omitted --></p>
+<p>So how would we do this?  I work at IBM so the answer is obviously IBM Watson.  We all have heard of Watson, IBM Watson <a href="http://blog.ted.com/how-did-supercomputer-watson-beat-jeopardy-champion-ken-jennings-experts-discuss/">beat Ken Jennings on Jeopardy</a>.  However there is so much more that Watson can do, <a href="https://console.ng.bluemix.net/catalog?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd">check this out</a> for all the cool things Watson can do.  One of the really cool services that Watson now provides is something called Personality Insights.  This service can analyze the personality of text in meer seconds via a REST API.  One of the things IBM is trying to do now is make all these really cool technologies available to everyone and anyone.  They are doing it through something called <a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd">IBM Bluemix</a>.  <a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd">Bluemix</a> is IBM&rsquo;s platform as a service (PaaS), and it has a whole giant catalog of really cool technologies from IBM as well as lots of other third parties.  You can sign up for a free 30 day account by going <a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd">here</a>.</p>
+<p>So how does this fit back with peering inside of a criminal.  Well I hope you guessed the answer, we are going to use Personality Insights to analyze the personality of a couple criminal&rsquo;s and look for some common traits.</p>
+<p>Let&rsquo;s take the most recent horrible attack, the South Carolina church shooting.  Dylann Roof posted a manifesto online and we are going to use that as the basis to peer into his mind.</p>
+<p>There are two ways to try this out for yourself.  Let&rsquo;s go through both of them.</p>
+<ol>
+<li>
+<p>Sign up a <a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd">Bluemix account</a></p>
+</li>
+<li>
+<p>Click the button deploy.  The button will automagically deploy the Personality Insights starter app that we are going to use.  If you are interested in the code head over to <a href="https://github.com/IBM-Bluemix/personality-insights-nodejs">Github</a>.</p>
+</li>
+</ol>
+<pre><code>[![Deploy to Bluemix](/images//2015/03/button-medium.png)](https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/personality-insights-nodejs.git&amp;cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-WatsonCriminalAnalysis-_-Node-WatsonPersonalityInsights-_-BM-DevAd)
+</code></pre>
+<ol start="3">
+<li>
+<p>Once you app is finished deploying click &ldquo;View your app&rdquo;.  You will be taken to your app.</p>
+</li>
+<li>
+<p>Hint, if you are lazy and don&rsquo;t want to do the above steps go <a href="http://watson-um-demo.mybluemix.net">here</a>.</p>
+</li>
+<li>
+<p>Next we need to get the text from Dylann Roof that we want to analyze.  It can be found <a href="http://lastrhodesian.com/data/documents/rtf88.txt">here</a>.  Open the link and copy all the text.</p>
+</li>
+<li>
+<p>Click on &ldquo;Clear&rdquo;</p>
+</li>
+</ol>
+<pre><code>[![clear](/images//2015/07/clear-medium.jpg)](/images/2015/07/clear-medium.jpg)
+</code></pre>
+<ol start="7">
+<li>Paste the text into the text box</li>
+</ol>
+<pre><code>[![enter-text](/images//2015/07/enter-text-medium.jpg)](/images/2015/07/enter-text-medium.jpg)
+</code></pre>
+<ol start="8">
+<li>Click &ldquo;Analyze&rdquo;</li>
+</ol>
+<pre><code>[![analyze](/images//2015/07/analyze-medium.jpg)](/images/2015/07/analyze-medium.jpg)
+</code></pre>
+<p>Watson will return us Dylann Roof&rsquo;s personality based on the manifesto in just a matter of seconds.</p>
+<!-- raw HTML omitted -->
+<p>You are unconcerned with art: you are less concerned with artistic or creative activities than most people who participated in our surveys. You are laid-back: you appreciate a relaxed pace in life. And you are intermittent: you have a hard time sticking with difficult tasks for a long period of time.</p>
+<p>More than most people, your choices are driven by a desire for well-being.</p>
+<p>You consider helping others to guide a large part of what you do: you think it is important to take care of the people around you. You are relatively unconcerned with tradition: you care more about making your own path than following what others have done.<!-- raw HTML omitted --> &ndash; IBM Watson Analysis of Dylann Roof&rsquo;s manifesto<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>Additionally Watson provides us a visualization as well.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/07/personality-medium.jpg"><img src="http://www.jeffsloyer.io/images//2015/07/personality-medium.jpg" alt="personality"></a></p>
+<p>Let&rsquo;s next take a look at Anders Behring Breivik, who was responsible for the 2011 attacks in Norway.  His manifesto is available <a href="https://info.publicintelligence.net/AndersBehringBreivikManifesto.pdf">here</a>.  You will need to convert it to a <code>.txt</code> file. You can do this <a href="http://www.zamzar.com/convert/pdf-to-txt/">here</a>. It will email you a copy of the manifesto in a <code>.txt</code> file.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/07/pdf-to-txt-medium.jpg"><img src="http://www.jeffsloyer.io/images//2015/07/pdf-to-txt-medium.jpg" alt="pdf-to-txt"></a></p>
+<p>So let&rsquo;s repeat the same steps as above.</p>
+<ol>
+<li>Clear the text area</li>
+<li>Paste the text</li>
+<li>Click Analyze</li>
+</ol>
+<p><strong>NOTE:</strong> You will need to make sure you have deployed the Bluemix app yourself for this one, the text file is really big and the default app does not support really large files.</p>
+<!-- raw HTML omitted -->
+<p>You are philosophical: you are open to and intrigued by new ideas and love to explore them. You are imaginative: you have a wild imagination. And you are independent: you have a strong desire to have time to yourself.</p>
+<p>You are motivated to seek out experiences that provide a strong feeling of prestige.</p>
+<p>You are relatively unconcerned with both taking pleasure in life and tradition. You prefer activities with a purpose greater than just personal enjoyment. And you care more about making your own path than following what others have done.  <!-- raw HTML omitted --> &ndash; IBM Watson Analysis of Anders Behring Breivik&rsquo;s manifesto<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.jeffsloyer.io/images/2015/07/personality-norway-medium.jpg"><img src="http://www.jeffsloyer.io/images//2015/07/personality-norway-medium.jpg" alt="personality-norway"></a>One last example.  I went to Virginia Tech and I was at the school when the <a href="http://www.cnn.com/2013/10/31/us/virginia-tech-shootings-fast-facts/">massacre happened there</a>.  This one hits quite close to home to me.  I was supposed to be in a classroom that fellow students were massacred but I overslept.  Let&rsquo;s take a look at Seung Hui Cho’s &ldquo;Manifesto&rdquo;.  His manifesto is available <a href="https://schoolshooters.info/sites/default/files/cho_manifesto_1.1.pdf">here</a>.  You will need to convert it to a <code>.txt</code> file. You can do this <a href="http://www.zamzar.com/convert/pdf-to-txt/">here</a>. It will email you a copy of the manifesto in a <code>.txt</code> file.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/07/pdf-to-txt-medium.jpg"><img src="http://www.jeffsloyer.io/images//2015/07/pdf-to-txt-medium.jpg" alt="pdf-to-txt"></a></p>
+<p>So let&rsquo;s repeat the same steps as above.</p>
+<ol>
+<li>Clear the text area</li>
+<li>Paste the text</li>
+<li>Click Analyze</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>You are content: you are content with your level of accomplishment and do not feel the need to set ambitious goals. You are confident: you are hard to embarrass and are self-confident most of the time. And you are carefree: you do what you want, disregarding rules and obligations.</p>
+<p>More than most people, your choices are driven by a desire for modernity.</p>
+<p>You consider independence to guide a large part of what you do: you like to set your own goals to decide how to best achieve them. You are relatively unconcerned with tradition: you care more about making your own path than following what others have done. <!-- raw HTML omitted --> &ndash; IBM Watson Analysis of Seung Hui Cho&rsquo;s manifesto<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p><a href="http://www.jeffsloyer.io/images/2015/07/personality-virginia-tech-medium.jpg"><img src="http://www.jeffsloyer.io/images/2015/07/personality-virginia-tech-medium.jpg" alt="personality-virginia-tech"></a>Let&rsquo;s do some analysis on all this data now.  It looks like all the shooter&rsquo;s from these massacres have the following in common.</p>
+<p>It looks like from the Charleston and Norway events both share the following traits and a high percentage of both of them.</p>
+<ul>
+<li>Authority-challenging</li>
+<li>Self-transcendence</li>
+<li>Openness to change</li>
+</ul>
+<p>Also on the flip side they both share the following traits with low percentages, which if you think about it means probably huge red flags.</p>
+<ul>
+<li>Conversation (Charleston was 3%, Norway was 11%)</li>
+<li>Cheerfulness (Charleston 12%, Norway 2%)</li>
+<li>Trust (Charleston 11%, Norway 8%)</li>
+<li>Uncompromising (Charleston 9%, 3%)</li>
+</ul>
+<p>So digging into it a little more by no means am I a psychologist but it seems to me that a person that has low values in conversation, cheerfulness, trust, and uncompromising could definitely be red flags.  Additionally, high values in authority-challenging, self-transcendence, openness to change paired with the above low characteristics could be a model to try to detect some of these behaviors and thoughts earlier on.</p>
+<p>Going forward if police or schools could analyze the text of suspected criminal&rsquo;s before hand maybe these horrible massacre&rsquo;s could of been prevented.  Maybe for the Dylann Roof case if the FBI examiner that reviewed Dylann Roof&rsquo;s gun permit had access to a tool like this it could of prevented the whole situation.  I know that is kinda big brother but I really believe in a somewhat of an invasion of privacy for the overall good of humanity.</p>
+<p>This demo could easily be extended to use more automated methods as well.  Think of companies like Dropbox analyzing files or your ISP analyzing files.  I know this would be quite creepy but it could honestly possibly save lives and prevent these horrible massacres.</p>
+<p>I know this post is kind of controversial but it is good to be talking about this and hopefully some good will come from this.  Please leave me feedback below or tweet me <a href="http://twitter.com/jsloyer">@jsloyer</a>.</p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sonos on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/sonos/</link>
+    <description>Recent content in sonos on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 11 Feb 2019 13:24:00 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/sonos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Firewall Ports for the Unifi USG and Sonos Speakers</title>
+      <link>http://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</link>
+      <pubDate>Mon, 11 Feb 2019 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</guid>
+      <description>Background At home I run the 4 port USG router on my Unifi&amp;rsquo;ed network. I have a couple different VLAN&amp;rsquo;s, Data, Management, Security, IoT, and Guest. Each of these networks already has some policies that prevent some of the VLAN&amp;rsquo;s talking to each other. For example I have some firewall rules that prevent my security cameras from talking to the IoT network and talking out to the public Internet. For the past couple months I haven&amp;rsquo;t been running a locked down IoT network.</description>
+    </item>
+    
+  </channel>
+</rss>

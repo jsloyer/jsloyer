@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>How Watson and Bluemix see the State of the Union -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/2015/06/1USIIGtkypiwhO6W4o8cwIw.jpeg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>How Watson and Bluemix See the State of the Union</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Wed, Jan 21, 2015
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/watson" >watson</a> <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/node.js" >node.js</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>The State of the Union, a live broadcast that many Americans historically use as a tool to form opinions about the current political system, and gain insight from their Commander in Chief into the transparency of a system of checks and balances.  What is more interesting is the thoughts and underlying feelings between the State of the Union.  If we could figure out how the President is feeling or portraying himself, could we infer how the President will schedule and work with legislation and policy for the rest of the year?</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/1USIIGtkypiwhO6W4o8cwIw-medium.jpeg" alt=" How Watson and Bluemix see the State of the Union"></p>
+<p>If we tried to do this today, could we go back and re-read all of the State of the Unions and apply custom algorithms to help determine the sentiment behind the speeches?  This is no longer a dream, but a reality.  We can use <a href="http://bluemix.net/">IBM Bluemix</a> to create an app that will pull in the speeches and leverage the IBM Watson User Modeling Service to analyze the speeches.</p>
+<!-- raw HTML omitted -->
+<p>Wouldn’t it be interesting if we could compare the speeches from previous State of the Union addresses and compare the underlying sentiment behind them?  Today we can, and it is pretty easy.  MSNBC published <a href="http://www.msnbc.com/msnbc/how-supercomputer-sees-the-state-the-union">How a supercomputer sees the State of the Union</a> explaining how they used IBM Watson to do this.  Let’s take it a step further, let’s build our app in about 5 minutes, and try it ourselves!</p>
+<!-- raw HTML omitted -->
+<p>So let’s dig into how we could do this.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/BluemixSOTU3-medium.gif" alt="BluemixSOTU3 How Watson and Bluemix see the State of the Union"></p>
+<h3 id="lets-build-it">Let’s Build it!</h3>
+<p>The goal at the end of these couple steps is to have our own Node.js app that uses the User Modeling Service to analyze the 2015 State of the Union.</p>
+<ol>
+<li>
+<p>So first we need to sign up for <a href="http://bluemix.net/">Bluemix</a> if you don’t have an account.</p>
+</li>
+<li>
+<p>Once we have logged in visit the Catalog and at the top under Boilerplates let’s click on UserModeling Node.js, or go <a href="https://console.ng.bluemix.net/catalog/personality-insights-nodejs-web-starter/">directly here</a>.</p>
+</li>
+<li>
+<p>On the right hand side we just need to give our app a name.  This will be the URL we will access our app at.  Note, it needs to be unique, for my app I chose sotu-jbs, you can choose anything you want.<img src="http://www.jeffsloyer.io/images/2015/06/watsonappcreate-medium.jpg" alt="watsonappcreate How Watson and Bluemix see the State of the Union"></p>
+</li>
+<li>
+<p>Click Create.  What is happening behind the scenes is Bluemix is spinning up a Node.js starter app that will allow you to analyze the state of the union address with Watson.  Pretty cool huh?</p>
+</li>
+<li>
+<p>Bluemix will take you to a dashboard and after a little bit it will show you that your app is up and running.  To access our app, click the URL near the top of the dashboard under the name of our app.<img src="http://www.jeffsloyer.io/images/2015/06/apprunning1-medium.jpg" alt="apprunning1 How Watson and Bluemix see the State of the Union"><img src="http://www.jeffsloyer.io/images/2015/06/urlforapp-medium.jpg" alt="urlforapp How Watson and Bluemix see the State of the Union"></p>
+</li>
+<li>
+<p>Now the hard bit, we need to grab the full text of the speech.  This year was the first time the White House put out the full text of the speech, it is available on <a href="http://edition.cnn.com/2015/01/20/politics/state-of-the-union-2015-transcript-full-text/index.html">CNN</a>.  I have also made the full text available <a href="https://dl.dropboxusercontent.com/u/66686/2015sotu.txt">here</a>.  Copy this text.</p>
+</li>
+<li>
+<p>Go back to your app you created that just opened up.  It should show something like the following.  We want to clear the text and paste the full contents of the State of the Union.<img src="http://www.jeffsloyer.io/images/2015/06/usermodelingapp-medium.jpg" alt="usermodelingapp How Watson and Bluemix see the State of the Union"></p>
+</li>
+<li>
+<p>Click &ldquo;Analyze&rdquo;.</p>
+</li>
+</ol>
+<p>That’s it.   You should have some output like the following. With Bluemix and Watson we were just able to analyze the sentiment/personality of the President in the 2015 State of the Union.</p>
+<p>Personality with percentages:</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/personalitysotu-medium.jpg" alt="personalitysotu 461x1024 How Watson and Bluemix see the State of the Union"></p>
+<p>Personality Visualization:</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/visualizationsotu-medium.jpg" alt="visualizationsotu How Watson and Bluemix see the State of the Union"></p>
+<h3 id="wrap-up">Wrap up</h3>
+<p>So let’s go over what we did, in a matter of less than 5 minutes we spun up a Node.js app, connected it to Watson and analyzed the State of the Union.  What Bluemix does for us is gives us a platform to run our apps and connects super cool and powerful services such as Watson to our apps in a matter of seconds.  In the image below, we can see our app running and that is connected to Watson.</p>
+<p><img src="http://www.jeffsloyer.io/images/2015/06/watsonconnected-medium.jpg" alt="watsonconnected How Watson and Bluemix see the State of the Union"></p>
+<p>If you want to give this a try without deploying an app head over to the <a href="http://watson-um-demo.mybluemix.net/">User Modeling Demo in Bluemix</a> and paste in your text.</p>
+<h3 id="learn-more">Learn More</h3>
+<p>If you want to learn more about other Bluemix services and Watson services go to the following links.</p>
+<ul>
+<li>
+<p><a href="https://console.ng.bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp#/solutions">Bluemix Solutions</a></p>
+</li>
+<li>
+<p><a href="https://console.ng.bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp#/store/cloudOEPaneId=store">Bluemix Services</a></p>
+</li>
+<li>
+<p><a href="https://console.ng.bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp#/solutions/solution=watson">Watson Services in Bluemix</a></p>
+</li>
+<li>
+<p><a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/user-modeling.html">Watson Developer Cloud – User Modeling</a></p>
+</li>
+</ul>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

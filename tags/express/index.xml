@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>express on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/express/</link>
+    <description>Recent content in express on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Thu, 17 Apr 2014 13:24:00 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/express/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kraken.Js and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/kraken-js-and-bluemix/</link>
+      <pubDate>Thu, 17 Apr 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/kraken-js-and-bluemix/</guid>
+      <description>Kraken.JS is a new wonderful framework wrapper around Express for Node.JS. It includes things such as pre-canned security settings, templating, and internationalization. While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do. While security is very important in your app why should you have to write redundant code for this. The answer is you do not have to anymore.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Building a Java EE app on IBM Bluemix Using Watson, Cloudant -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/hiring.png')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Building a Java EE App on IBM Bluemix Using Watson, Cloudant</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Tue, Oct 14, 2014
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/sample-code" >Sample Code</a>, <a href="http://www.jeffsloyer.io/categories/tutorial" >Tutorial</a>, <a href="http://www.jeffsloyer.io/categories/video" >Video</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/bluemix" >bluemix</a> <a href="http://www.jeffsloyer.io/tags/cloudant" >cloudant</a> <a href="http://www.jeffsloyer.io/tags/javaee" >javaee</a> <a href="http://www.jeffsloyer.io/tags/watson" >watson</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>Hey Y’all!</p>
+<p>Jeff here again and something I am really excited about is Watson is <a href="https://developer.ibm.com/bluemix/2014/10/08/watson-on-bluemix">now available for anyone to use in Bluemix!</a></p>
+<p>Today we are going to be building an example app using Java, Cloudant, and Watson.</p>
+<p>Ok let’s talk through what this app is going to do before we build it.</p>
+<p>Meet Ivy (hello!)</p>
+<p>She’s a talent manager at a growing tech startup.</p>
+<p>She’s looking for a new hire that would be a good fit on her team but the company is so popular that she has a huge inventory of resumes to sort through. She’s looking for tools to help her, and tools beyond just simple tag filters.</p>
+<p>With Watson services she can also start to solve for a problem like, &ldquo;I’m looking for another developer like &ldquo;[insert cool employee].&rdquo;</p>
+<p>So in this case, the application can issue queries such as,</p>
+<blockquote>
+<p>Find me a Developer like Craig Smith.Then search through all possible candidate and return a ranked list of candidates sorted by highest-to-lowest percentage of personality resemblance. From here, searches can be refined by including technical skills. Find me a Developer like Craig Smith, and knows Java, C and Python.</p>
+</blockquote>
+<blockquote>
+<p>&ndash; <!-- raw HTML omitted -->Ivy (HR Manager)<!-- raw HTML omitted --></p>
+</blockquote>
+<p>Make sense??</p>
+<p>Ok let’s jump right in.</p>
+<h2 id="pre-reqs">Pre-req&rsquo;s</h2>
+<p>First thing you need to do is clone the github project with some starter code.</p>
+<pre><code>git clone https://github.com/IBM-Bluemix/talent-manager.git
+</code></pre><p>Or <a href="https://github.com/IBM-Bluemix/talent-manager/archive/master.zip">download a zip file</a> if you don’t have git installed.</p>
+<p>Next we need to complete a couple pre-req steps.</p>
+<ol>
+<li><a href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers">Download Eclipse EE</a></li>
+<li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">Download and install Java 1.7 JDK</a></li>
+<li><a href="https://www.ng.bluemix.net/docs/#starters/install_cli.html?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd">Download and install the Cloud Foundry CLI</a></li>
+<li><a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd">Sign up for a FREE IBM Bluemix account if you don’t have one yet</a></li>
+</ol>
+<p>Ok once we have all that setup we can start creating our app.</p>
+<h2 id="create-the-application">Create the application</h2>
+<p>First we need to sign into Bluemix, so open your browser and head on over to <a href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd">Bluemix</a>.  We need to login.  Up at the top lets go ahead and click on Catalog.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/catalog-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/catalog-medium.png" alt="catalog 300x99 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Scroll down a little and click on Liberty</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/liberty-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/liberty-medium.png" alt="liberty 1024x585 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>On the right hand side we need to give our app a name.  Please note that this name must be unique.  Also remember this name as we will need it later…</p>
+<p>Click create.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/new-app-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/new-app-medium.png" alt="new app Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Bluemix will start deploying our app and Bluemix will start our app.</p>
+<p>So next we need to add Cloudant and Watson to our app!</p>
+<p>So do you that make sure you are in the dashboard and have your app open like the screencap below.  We will then click the &ldquo;Add A Service&rdquo; button.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/add-service-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/add-service-medium.png" alt="add service 1024x683 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>First let’s add Watson.  Scroll down until you find the &ldquo;User Modeling&rdquo; Service.  Go ahead and click that.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/user-modeling-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/user-modeling-medium.png" alt="user modeling 1024x342 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Again, all we have to do is click &ldquo;Create&rdquo; on the right hand side.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/watson-create-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/watson-create-medium.png" alt="watson create Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Bluemix is going to ask us if we want to restage our app, we should click the &ldquo;OK&rdquo; button.  What Bluemix is asking us here is since we made a change to our app, the app needs to be restarted to bind in Watson.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/restage-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/restage-medium.png" alt="restage Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Next, let’s click &ldquo;Add A Service&rdquo; again.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/addserviceagain-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/addserviceagain-medium.png" alt="addserviceagain Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a>
+This time scroll down to the bottom and choose &ldquo;Cloudant&rdquo;.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/cloudant-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/cloudant-medium.png" alt="cloudant 1024x245 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Then click &ldquo;Create&rdquo; on the right hand side.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/cloudantcreate-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/cloudantcreate-medium.png" alt="cloudantcreate Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>It is going to ask us to restage our app again, go ahead and click &ldquo;OK&rdquo;.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/cloudantrestage-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/cloudantrestage-medium.png" alt="cloudantrestage Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Now we have all our services added.  Let’s go ahead and start getting some data imported.</p>
+<p>On the dashboard for the app let’s go ahead and click on Cloudant.</p>
+<h2 id="explanation-of-cloudant">Explanation of Cloudant</h2>
+<p>So let’s pause and explain what Cloudant is.  Cloudant is a No-SQL database that is based on CouchDB.  The big difference between a relationship database and No-SQL database is illustrated below.  In the relationship database you have to have multiple tables to represent the data and have to use SQL and JOIN statements to get data from both tables.  In a No-SQL database which is commonly referred to as a document store database you stores JSON documents/data (as illustrated on the left below).</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/Figure5a-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/Figure5a-medium.png" alt="Figure5a Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>So back to the demo&hellip;</p>
+<h2 id="eclipse-steps">Eclipse Steps</h2>
+<p>In Eclipse, right click on the project’s area on the left.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/import-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/import-medium.png" alt="import Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Under General click existing project into workspace and click next</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/existingproject-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/existingproject-medium.png" alt="existingproject Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Next we want to find our project we downloaded from github.  We need to browse to the directory where it is.  Once you find the talent-manager folder, go one more level down into that into a folder called personafusion (as shown below). Click finish.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/finishimport-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/finishimport-medium.png" alt="finishimport Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Next, we need to make a couple code edits…</p>
+<p>In <code>src/com.ibm.personafusion/Config.java</code>.</p>
+<p>Line 10 currently reads like below.</p>
+<pre><code>public static final String CLOUDANT_NAME = &quot;&quot;;
+</code></pre><p>It needs to be changed to what is below.  This is our Cloudant database name we created.  If you used something other than &ldquo;talent-manager here&rdquo; type that in.</p>
+<pre><code>public static final String CLOUDANT_NAME = &quot;talent-manager&quot;;
+</code></pre><p>Go ahead and save that file and close it.</p>
+<p>Next open <code>src/com.ibm.personafusion/CloudantClient.java</code></p>
+<p>We need to update our constructor from what is below.</p>
+<pre><code>public CloudantClient()
+    {
+        this.httpClient = null;
+
+        //TODO read env VCAP_SERVICES and parse it into JSON
+        this.port = Config.CLOUDANT_PORT;
+        this.host = &quot;&quot;;
+        this.username = &quot;&quot;;
+        this.password = &quot;&quot;;
+        this.name = Config.CLOUDANT_NAME;
+        this.dbc = this.createDBConnector();
+</code></pre><p>To this.</p>
+<pre><code>private JSONArray cloudant;
+private JSONObject cloudantInstance;
+private JSONObject cloudantCredentials;
+
+  public CloudantClient()
+  {
+    this.httpClient = null;
+
+     try {
+        String VCAP_SERVICES = System.getenv(&quot;VCAP_SERVICES&quot;);
+        JSONObject vcap;
+        vcap = (JSONObject) JSONObject.parse(VCAP_SERVICES);
+
+        cloudant = (JSONArray) vcap.get(&quot;cloudantNoSQLDB&quot;);
+        cloudantInstance = (JSONObject) cloudant.get(0);
+        cloudantCredentials = (JSONObject) cloudantInstance.get(&quot;credentials&quot;);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      this.port = Config.CLOUDANT_PORT;
+      this.host = (String) cloudantCredentials.get(&quot;host&quot;);
+      this.username = (String) cloudantCredentials.get(&quot;username&quot;);
+      this.password = (String) cloudantCredentials.get(&quot;password&quot;);
+      this.name = Config.CLOUDANT_NAME;
+      this.dbc = this.createDBConnector();
+  }
+</code></pre><p>If you notice we also added 3 global variables as well.</p>
+<p>Next we need to update the Watson code as well.  This is located in <code>src/com.ibm.personafusion/services/WatonUserModeler.java</code></p>
+<p>Before:</p>
+<pre><code>public WatsonUserModeller() {
+    //TODO read env VCAP_SERVICES and parse it into JSON
+    this.username = &quot;&quot;;
+    this.password = &quot;&quot;;
+    this.base_url = &quot;&quot;;
+    this.profile_api = Config.WATSON_PROF_API;
+    this.visual_api = Config.WATSON_VIZ_API;
+    this.executor = Executor.newInstance().auth(username, password);
+    if (this.executor == null)
+    {
+        System.err.println(&quot;Authentication failed in WatsonUserModeller.&quot;);
+    }
+}
+</code></pre><p>After:</p>
+<pre><code>private static JSONArray watson;
+private static JSONObject watsonInstance;
+private static JSONObject watsonCredentials;
+
+    private Executor executor;
+
+    public WatsonUserModeller()
+    {
+        try {
+            String VCAP_SERVICES = System.getenv(&quot;VCAP_SERVICES&quot;);
+            JSONObject vcap;
+            vcap = (JSONObject) JSONObject.parse(VCAP_SERVICES);
+
+            watson = (JSONArray) vcap.get(&quot;user_modeling&quot;);
+            watsonInstance = (JSONObject) watson.get(0);
+            watsonCredentials = (JSONObject) watsonInstance.get(&quot;credentials&quot;);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        this.username = (String) watsonCredentials.get(&quot;username&quot;);
+        this.password = (String) watsonCredentials.get(&quot;password&quot;);
+        this.base_url = (String) watsonCredentials.get(&quot;url&quot;);
+        this.profile_api = Config.WATSON_PROF_API;
+        this.visual_api = Config.WATSON_VIZ_API;
+        this.executor = Executor.newInstance().auth(username, password);
+        if (this.executor == null)
+        {
+            System.err.println(&quot;Authentication failed in WatsonUserModeller.&quot;);
+        }
+    }
+</code></pre><p>Ok, so the app is basically done, we need to build our war file now, on the left side in Eclipse, open build.xml.  On the right hand side right click build [default] and then &ldquo;Run As&rdquo; and then &ldquo;Ant Build&rdquo;.  This will generate our WAR file for us that we will deploy.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/antbuild-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/antbuild-medium.png" alt="antbuild 1024x528 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>In the bottom it should say &ldquo;BUILD SUCESSFULL&rdquo;.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/buildfinished-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/buildfinished-medium.png" alt="buildfinished Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>The next and last step involves deploy your app to bluemix.  This step requires the Cloud Foundry CLI to be installed (if you haven’t done this yet scroll back up the pre-req’s section above).</p>
+<p>If you are on Windows open up the command prompt, if you are on a Mac or Linux open up the terminal.</p>
+<p>Type the following.</p>
+<pre><code>cf login -a https://api.ng.bluemix.net
+</code></pre><p>It will then ask for your username and password that you registered with for Bluemix. There are two important files in this directory.</p>
+<ol>
+<li><strong>manifest.yml</strong></li>
+<li><strong>webStarterApp.war</strong></li>
+</ol>
+<p>We need to edit the <code>manifest.yml</code> file and then we can deploy the app.
+Open the file in your favorite text editor or you can use Eclipse as well. The contents of the file are below.
+There are two important lines in here, host and name. These values need to be unique and match the app we deployed earlier. In my case the app name is talent-manager-awesome, so my file would then become what is below.</p>
+<p>This value comes from Bluemix, lets open the Bluemix dashboard in our web browser again.  In the screenshot below we can just copy the name of the app and paste this into the <code>manifest.yml</code> file.  So don’t copy my apps name exactly as it won’t work, it needs to be your app’s unique name.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/appname-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/appname-medium.png" alt="appname Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Now the final step we need to cd (change directory) in our command prompt or terminal to where the <code>manifest.yml</code> and webStarterApp.war are located.  For me its located at <code>/Users/jsloyer/Downloads/talent-manager-master/personafusion</code>.</p>
+<pre><code>cd /Users/jsloyer/Downloads/talent-manager-master/personafusion
+cf push
+</code></pre><p>The cf push command pushes our app to Bluemix, a bunch of text will fly bay saying its deploying and eventually it will say the app is starting and then it is up and running.  Bluemix will give you a URL you can access your app at.</p>
+<p><a href="http://www.jeffsloyer.io/images/2015/06/apprunning-medium.png"><img src="http://www.jeffsloyer.io/images/2015/06/apprunning-medium.png" alt="apprunning Building a Java EE app on IBM Bluemix Using Watson and Cloudant "></a></p>
+<p>Voila!!!!  We created a Java web app using Cloudant and Watson on IBM Bluemix!</p>
+<p>Source Code:
+<a href="https://ibm.biz/talent-manager">https://ibm.biz/talent-manager</a></p>
+<p>Feedback is welcome, please contact me on Twitter @jsloyer – <a href="http://twitter.com/jsloyer">http://twitter.com/jsloyer</a></p>
+<p>For a video walkthrough of this demo please visit <a href="http://ibm.biz/talent-manager-demo">http://ibm.biz/talent-manager-demo</a> or watch the video below!</p>
+<!-- raw HTML omitted -->
+<p>This app was developed over the course of 48 hours at an internal hackathon. The developers and designers that worked on this are the following.</p>
+<ul>
+<li>Eva XIAOHUI LUO</li>
+<li>MICHAEL J. YOUNG</li>
+<li>SEAN J. WELLECK</li>
+<li>BRIAN T. HAN</li>
+<li>MICHAEL POPLAVSKI</li>
+<li>ALAN XIA</li>
+<li>Jeff Sloyer</li>
+</ul>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

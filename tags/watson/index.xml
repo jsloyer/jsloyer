@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>watson on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/watson/</link>
+    <description>Recent content in watson on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 24 Aug 2015 11:21:03 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/watson/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Peering Inside a Criminal’s Mind using IBM Watson</title>
+      <link>http://www.jeffsloyer.io/post/peering-inside-a-criminals-mind-using-ibm-watson/</link>
+      <pubDate>Mon, 24 Aug 2015 11:21:03 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/peering-inside-a-criminals-mind-using-ibm-watson/</guid>
+      <description>With the recent shooting in South Carolina in reminds us that criminal&amp;rsquo;s can and will continue to harm people. They seem like random acts to most of us but to a criminal the acts make sense to them? No one can answer this question except the criminal. To peer inside a criminal&amp;rsquo;s would be next to impossible but what if there existed another way to peer inside their mind&amp;rsquo;s? This could be used to try to identify patterns or personality traits that exist.</description>
+    </item>
+    
+    <item>
+      <title>Personality Box – You had me at upload</title>
+      <link>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</link>
+      <pubDate>Mon, 29 Jun 2015 10:46:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</guid>
+      <description>As announced yesterday, IBM has formed a partnership with Box.com, a partnership that includes the integration of Box into the Bluemix catalog. With its REST-based Content and View APIs, embedding enterprise-grade file storage into your app and enabling file sharing among your users has never been simpler.
+To help you on your way to becoming a file-sharing guru, Bluemix developer advocate Jake Peyser and I have built a sample app that you can leverage as you begin to explore the possibilities of the Box.</description>
+    </item>
+    
+    <item>
+      <title>How Watson and Bluemix see the State of the Union</title>
+      <link>http://www.jeffsloyer.io/post/how-watson-and-bluemix-see-the-state-of-the-union/</link>
+      <pubDate>Wed, 21 Jan 2015 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/how-watson-and-bluemix-see-the-state-of-the-union/</guid>
+      <description>The State of the Union, a live broadcast that many Americans historically use as a tool to form opinions about the current political system, and gain insight from their Commander in Chief into the transparency of a system of checks and balances. What is more interesting is the thoughts and underlying feelings between the State of the Union. If we could figure out how the President is feeling or portraying himself, could we infer how the President will schedule and work with legislation and policy for the rest of the year?</description>
+    </item>
+    
+    <item>
+      <title>Twitter Personality Comparisons Using Watson</title>
+      <link>http://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</link>
+      <pubDate>Mon, 24 Nov 2014 22:06:16 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</guid>
+      <description>Hey Yall!
+We are back at it again with some demos!!!
+Did you ever wonder if you and your favorite celebrity would be compatible if you met?? I sure do! Or did you ever wonder how you could become a better leader, I sure do. Today you would have to go Google the person and analyze posts and articles about them and be a personality expert to see if you have personality traits in common.</description>
+    </item>
+    
+    <item>
+      <title>Deploying a Watson and Cloudant App with DevOps Services</title>
+      <link>http://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</link>
+      <pubDate>Mon, 24 Nov 2014 21:54:23 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</guid>
+      <description>Backed by popular demand this is a continuation of the post Building a Java EE app on IBM Bluemix Using Watson and Cloudant.
+This post will detail how to build and deploy the app using IBM DevOps Services.
+There is a bit of magic behind this, its called &amp;ldquo;The Deploy to Bluemix Button&amp;rdquo;&amp;hellip;
+Clicking the magic button below will setup the app using IBM DevOps services and deploy the whole application for you.</description>
+    </item>
+    
+    <item>
+      <title>Building a Java EE app on IBM Bluemix Using Watson, Cloudant</title>
+      <link>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</link>
+      <pubDate>Tue, 14 Oct 2014 22:36:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</guid>
+      <description>Hey Y’all!
+Jeff here again and something I am really excited about is Watson is now available for anyone to use in Bluemix!
+Today we are going to be building an example app using Java, Cloudant, and Watson.
+Ok let’s talk through what this app is going to do before we build it.
+Meet Ivy (hello!)
+She’s a talent manager at a growing tech startup.
+She’s looking for a new hire that would be a good fit on her team but the company is so popular that she has a huge inventory of resumes to sort through.</description>
+    </item>
+    
+  </channel>
+</rss>

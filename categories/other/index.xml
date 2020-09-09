@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Other on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/categories/other/</link>
+    <description>Recent content in Other on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Sun, 18 Dec 2016 14:11:14 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/categories/other/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Why I Chose Hugo over Wordpress - Part 2</title>
+      <link>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</link>
+      <pubDate>Sun, 18 Dec 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</guid>
+      <description>This post has been a long time going and much overdue, it has almost been 12 months since publishing the follow up to my previous post Why I Chose Hugo Over Wordpress. But I am finally going to take the time and explain all the technical parts about how I made this blog work with Hugo.
+Setting up the site First to get started you need to install Hugo.
+brew update &amp;amp;&amp;amp; brew install hugo Next you need to create a basic Hugo site.</description>
+    </item>
+    
+    <item>
+      <title>Why I Chose Hugo over Wordpress</title>
+      <link>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</link>
+      <pubDate>Fri, 08 Jan 2016 14:11:14 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</guid>
+      <description>I am finally back with my blog, sorry it has been quite awhile. I just recently finished a migration of my blog my running on Wordpress, which was hosted on WPEngine and is a really awesome service, to Github pages. I got tired of using Wordpress and WPEngine cost me about $30/month&amp;hellip; So I decided to migrate the site to Github pages where I can run the site for free.</description>
+    </item>
+    
+    <item>
+      <title>Common Deploy Errors with Community Buildpacks in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</link>
+      <pubDate>Wed, 29 Jul 2015 10:58:25 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</guid>
+      <description>Recently the company that owns development for Ubuntu (Canonical) just announced it is dropping support for lucid 64 which is Ubuntu 10.04 LTS. What does this mean for Cloud Foundry and the community buildpacks?
+Well nothing really but there is a couple gotcha&amp;rsquo;s you should know about.
+I have seen issues with the following buildpacks, this is not a comprehensive list but the ones I at least know about.
+  PHP - https://github.</description>
+    </item>
+    
+    <item>
+      <title>Get Pumped for the Cloud Foundry Summit</title>
+      <link>http://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</link>
+      <pubDate>Thu, 30 Apr 2015 10:38:05 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</guid>
+      <description>I’m pumped for the Cloud Foundry Summit! Are you??? Well if you aren’t yet hopefully you will be after reading this!
+If you attended the conference last year there was an awesome presentation on the future of Diego. What is Diego you ask? It is the new DEA that is coming for Cloud Foundry. It is a complete re-write in Go and will add some new features such as the ability to swap out the underlaying linux containers for things like Docker.</description>
+    </item>
+    
+  </channel>
+</rss>

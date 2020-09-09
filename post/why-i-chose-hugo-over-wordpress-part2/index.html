@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Why I Chose Hugo over Wordpress - Part 2 -- JeffSloyer.io</title>
+
+    
+
+    
+    <link href="http://www.jeffsloyer.io//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="http://www.jeffsloyer.io//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8023940796191232",
+              enable_page_level_ads: true
+         });
+    </script>
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.jeffsloyer.io/">JeffSloyer.io</a>
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/">home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/about/">About</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/speaking/">Speaking</a>
+                    </li>
+                    
+                    <li>
+                        <a href="http://www.jeffsloyer.io/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+    
+    
+    <header class="intro-header" style="background-image: url('http://www.jeffsloyer.io///original-images/migrate.jpg')">
+      
+      <div class="container">
+        <div class="row">
+           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+             <div class="post-heading">
+               <h1>Why I Chose Hugo Over Wordpress - Part 2</h1>
+               <h2 class="subheading"></h2>
+               <span class="meta">Posted by <a href="#">Jeff Sloyer</a> on Sun, Dec 18, 2016
+                 <br />
+                 In <a href="http://www.jeffsloyer.io/categories/other" >Other</a>, 
+
+                 <br />
+                 Tags <a href="http://www.jeffsloyer.io/tags/wordpress" >wordpress</a> <a href="http://www.jeffsloyer.io/tags/migrate" >migrate</a> 
+
+               </span>
+             </div>
+           </div>
+        </div>
+      </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+   style="display:inline-block;width:728px;height:90px"
+   data-ad-client="ca-pub-8023940796191232"
+   data-ad-slot="8035315505"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+                  <p>This post has been a long time going and much overdue, it has almost been 12 months
+since publishing the follow up to my previous post <a href="http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/">Why I Chose Hugo Over Wordpress.</a>  But I am finally going to take the time and explain all the technical parts about how I made this blog work with Hugo.</p>
+<h2 id="setting-up-the-site">Setting up the site</h2>
+<p>First to get started you need to install Hugo.</p>
+<pre><code>brew update &amp;&amp; brew install hugo
+</code></pre><p>Next you need to create a basic Hugo site.</p>
+<pre><code>hugo new site jsloyer
+</code></pre><p>With Hugo you you can use themes, I am using a modified version of <a href="https://github.com/humboldtux/startbootstrap-clean-blog">StartBootstrap Clean Blog</a>.</p>
+<p>I embedded the theme into my <a href="https://github.com/jsloyer/jsloyer/tree/master/themes/startbootstrap-clean-blog">GitHub project</a>.</p>
+<p>Once you embed the theme you need to tell Hugo to use the theme.</p>
+<p>You do this in <a href="https://github.com/jsloyer/jsloyer/blob/master/config.toml#L6">config.toml</a>.</p>
+<pre><code>theme = &quot;startbootstrap-clean-blog&quot;
+</code></pre><p>Speaking of git you need to setup a GitHub project, the name is really important&hellip; If you are publishing the Hugo site under your own GitHub org, ie your username, the git project needs to match that.  For me my GitHub username is <code>jsloyer</code> so my git project name is <code>jsloyer</code> as well.  The reason for this is how GitHub pages works in picking up the build and publishing for a GitHub pages site.</p>
+<p>You will be doing all of your work on the <code>master</code> branch.  Think of the <code>master</code> branch as you would with any of piece of software, the <code>master</code> branch is the raw code, in this case just markdown.  There is another special magic branch called <code>gh-pages</code> that we will go through later that makes your repo into a GitHub pages site.</p>
+<h3 id="creating-a-post">Creating a post</h3>
+<p>So next we need to create our first post!  To do this its pretty simple&hellip;</p>
+<pre><code>hugo new post/good-to-great.md
+</code></pre><p>Next I start up Hugo to see how the site will look.</p>
+<pre><code>hugo server --buildDrafts
+</code></pre><p>This starts Hugo in dev mode where you can see a post while you are working on it.  The beauty is you can even check the unfinished post into git but until you flip the magic <code>draft</code> setting on a post it won&rsquo;t be live on the Internet.</p>
+<p>As you make changes to your post and save it Hugo will automatically reload in the browser what the post will look like.</p>
+<p>Before we jump into how to take a post live lets look at some of the metadata in the post&hellip;  Here is some metadata for a <a href="http://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/">previous post of mine.</a></p>
+<pre><code>+++
+categories = [&quot;Other&quot;]
+date = &quot;2016-01-08T14:11:14-05:00&quot;
+description = &quot;&quot;
+draft = false
+image = &quot;/original-images/migrate.jpg&quot;
+tags = [&quot;wordpress&quot;, &quot;migrate&quot;]
+title = &quot;Why I Chose Hugo over Wordpress&quot;
+
++++
+</code></pre><p>You can set some various pieces of information for a post.  For my particular theme each post has a Jumbotron image, that is set via the <code>image</code> attribute.  More on images later&hellip;  You can also set tags as well as the title of the post.  The most interesting bit here is the <code>draft = false</code> line.  This is what I was referring to above in controlling when a post gets published.  Once you feel like your post is ready just change it to <code>draft = true</code>.</p>
+<h3 id="publishing">Publishing</h3>
+<p>The next step is publishing your post, once you set the <code>draft = true</code> for a post you need to check this file into Git.</p>
+<pre><code>git add .
+git commit -m &quot;my awesome post&quot;
+git push origin master
+</code></pre><p>At this point you think you might be done but you aren&rsquo;t you need to setup GitHub Pages and a pipeline&hellip;</p>
+<p>I chose <a href="http://wercker.com">Wercker</a> as my continuous delivery (CD) engine for this.  It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to GitHub.</p>
+<p>Before we get into the pipeline we need to setup the git project as a GitHub pages site.</p>
+<p>Goto the settings page for your project, for me its <code>https://github.com/jsloyer/jsloyer/settings</code>.</p>
+<p>Scroll down to the bottom&hellip;</p>
+<p>Click &ldquo;Launch automatic page generator&rdquo;, see below.  Go through the wizard, it really doesn&rsquo;t matter what you choose here, you are going to replace the content anyways&hellip;</p>
+<p><a href="http://www.jeffsloyer.io/images/gh-pages-generation-medium.jpg"><img src="http://www.jeffsloyer.io/images/gh-pages-generation-medium.jpg" alt="automatic page generator"></a></p>
+<p>Once you have this setup it might take a little bit but your site will be available.  For example my site without the custom domain name is <code>http://jsloyer.github.io/jsloyer</code>.  Replace your GitHub username with mine and you will be able to access the default site.</p>
+<p><strong>Note:</strong>  If you want to use a custom domain name I&rsquo;ll include the instructions below, for example my site is hosted on <code>www.jeffsloyer.io</code>.</p>
+<h3 id="automatic-pipelinepublishing">Automatic Pipeline/Publishing</h3>
+<p>The next step is to to get automatic publishing setup.  So what happens for me is when I check in a new commit to the master branch, Wercker builds my images and builds the site and publishes it back to the <code>gh-pages</code> branch automatically.</p>
+<p>To do this you need a file called <code>werkcer.yml</code> in your project.  Below is a copy of mine.</p>
+<pre><code>box: nodesource/node
+build:
+  steps:
+    - install-packages:
+        packages: graphicsmagick
+    - npm-install
+    - grunt:
+        tasks: processimages
+    - arjen/hugo-build:
+        version: &quot;0.14&quot;
+        theme: startbootstrap-clean-blog
+deploy:
+  steps:
+    - install-packages:
+        packages: git ssh-client
+    - lukevivier/gh-pages@0.2.1:
+        token: $GIT_TOKEN
+        domain: www.jeffsloyer.io
+        basedir: public
+</code></pre><p>The above yaml file will build my Hugo site for me as well as build my images in an optimized format as well.  The only bit you need to change is if you want to use a specific theme, if you don&rsquo;t want to use the one that I am using change the following to the values you need.</p>
+<pre><code>theme: startbootstrap-clean-blog
+</code></pre><p>Let&rsquo;s take a bit and talk through my automatic image minimization and rendering.  During build time my images are compressed and minimized to different sizes.  I only check in high quality original images and the build process optimizes them for me.  To do that you need two files.  They are below.  I am not going to go through how it works but basically all you have to do is run <code>grunt processimages</code> and the tasks will optimize your images&hellip;</p>
+<p><strong>package.json</strong></p>
+<pre><code>{
+  &quot;name&quot;: &quot;blog&quot;,
+  &quot;version&quot;: &quot;0.0.1&quot;,
+  &quot;repository&quot;: {
+    &quot;type&quot;: &quot;git&quot;,
+    &quot;url&quot;: &quot;https://github.com/jsloyer/jsloyer.git&quot;
+  },
+  &quot;author&quot;: &quot;Jeff Sloyer&quot;,
+  &quot;dependencies&quot;: {
+    &quot;glob&quot;: &quot;*&quot;,
+    &quot;grunt&quot;: &quot;*&quot;,
+    &quot;grunt-cli&quot;: &quot;*&quot;,
+    &quot;grunt-contrib-concat&quot;: &quot;*&quot;,
+    &quot;grunt-contrib-connect&quot;: &quot;*&quot;,
+    &quot;grunt-contrib-copy&quot;: &quot;*&quot;,
+    &quot;grunt-contrib-jshint&quot;: &quot;*&quot;,
+    &quot;grunt-contrib-sass&quot;: &quot;*&quot;,
+    &quot;grunt-contrib-uglify&quot;: &quot;*&quot;,
+    &quot;grunt-contrib-watch&quot;: &quot;*&quot;,
+    &quot;grunt-jekyll&quot;: &quot;*&quot;,
+    &quot;grunt-responsive-images&quot;: &quot;^0.1.7&quot;,
+    &quot;grunt-shell&quot;: &quot;*&quot;,
+    &quot;image-size&quot;: &quot;*&quot;,
+    &quot;yamljs&quot;: &quot;*&quot;
+  }
+}
+
+</code></pre><p><strong>Gruntfile.js</strong></p>
+<pre><code>var grunt = require('grunt'),
+    fs = require('fs'),
+    glob = require('glob'),
+    sizeOf = require('image-size'),
+    YAML = require('yamljs');
+
+grunt.loadNpmTasks('grunt-contrib-concat');
+grunt.loadNpmTasks('grunt-contrib-connect');
+grunt.loadNpmTasks('grunt-contrib-copy');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-sass');
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-responsive-images');
+grunt.loadNpmTasks('grunt-jekyll');
+grunt.loadNpmTasks('grunt-shell');
+
+grunt.initConfig({
+
+    responsive_images: {
+        myTask: {
+          options: {
+            sizes: [{
+              name: 'thumb',
+              width: 400
+            },{
+              name: 'medium',
+              width: 800
+            },{
+              name: &quot;large&quot;,
+              width: 1200
+            }]
+          },
+          files: [{
+            expand: true,
+            src: ['**/*.{jpg,gif,png,jpeg}'],
+            cwd: 'static/original-images',
+            dest: 'static/images'
+          }]
+        }
+    }
+});
+
+grunt.registerTask('resize', [&quot;responsive_images&quot;]);
+grunt.registerTask('imageinfo', function(){
+    var done = this.async();
+    glob('static/images/**/*.{jpg,gif,png}', {}, function(err, files){
+        var existingYml = fs.readFileSync(&quot;static/images.yml&quot;).toString();
+        var a = existingYml.split(&quot;#!#!#!#!#&quot;);
+        existingYml = a[0].trim();
+
+        var data = {};
+        files.forEach(function(file){
+            var dimensions = sizeOf(file);
+            var image = {
+                width: dimensions.width,
+                height: dimensions.height,
+                aspect: dimensions.width / dimensions.height
+            }
+            data[file] = image;
+        })
+
+        var yamlString = YAML.stringify(data);
+        var yamlHeading = &quot;\n\n\n#!#!#!#!# Do not edit below this line.\n&quot;;
+        yamlHeading += &quot;# Generated automatically using `grunt imageinfo`\n\n&quot;;
+
+        fs.writeFileSync(&quot;static/images.yml&quot;, existingYml + yamlHeading + yamlString);
+        console.log('done');
+        done();
+    });
+
+});
+grunt.registerTask('processimages', ['resize', 'imageinfo']);
+
+grunt.registerTask('default', ['processimages']);
+
+</code></pre><p>Check in the above files to GitHub, the files are the following.</p>
+<ul>
+<li><code>wercker.yml</code></li>
+<li><code>Gruntfile.js</code></li>
+<li><code>package.json</code></li>
+</ul>
+<p>The next step is getting a token from GitHub.  To generate a token goto <a href="https://github.com/settings/tokens">https://github.com/settings/tokens</a>.</p>
+<p>You will want a token with the following permissions.  <strong>Note once you generate the token copy it because GitHub won&rsquo;t display it to you again&hellip;</strong></p>
+<p><a href="http://www.jeffsloyer.io/images/GitHub-token-medium.jpg"><img src="http://www.jeffsloyer.io/images/GitHub-token-medium.jpg" alt="GitHub token"></a></p>
+<p>Next we need to goto <a href="https://wercker.com">Wercker</a> and login with our GitHub credentials.  Once you have logged in click &ldquo;Create&rdquo; at the top and choose application or just click <a href="https://app.wercker.com/applications/create">here</a>.  You will need to choose your your repo and I chose to make my pipeline private, it is up to you.  Once you have finished that you need enter in yout Gitub token so Wercker and deploy your built Hugo site back to GitHub.</p>
+<p>Next we need to edit the pipeline to deploy to GitHub.  To do this click on the workflows tab.  For example my link is <a href="https://app.wercker.com/jsloyer/jsloyer/workflows">https://app.wercker.com/jsloyer/jsloyer/workflows</a>.</p>
+<p>Under pipeline there should already be one called <code>build</code>.  Click on <code>build</code>.  Scroll down to &ldquo;Ignore Branches&rdquo;, type in <code>gh-pages</code>.  We are ignoring the <code>gh-pages</code> branch as we don&rsquo;t ever want to build that, we just build master.  Click &ldquo;Update&rdquo;.  Go back in your browser.  We need to add another pipeline called <code>GitHubPages</code>.  We need to set an environment variable called <code>GIT_TOKEN</code>, paste in your GitHub token from earlier, click &ldquo;Protected&rdquo;.  Don&rsquo;t worry Wercker won&rsquo;t expose this to the public.  For the name enter in <code>GitHubPages</code>.  For &ldquo;YML Pipeline name&rdquo; enter in <code>deploy</code>.  Save this and you are now finished.</p>
+<p>To trigger a build check in a file into the master branch, the pipeline should execute and deploy your site back to GitHub Pages.  If it doesn&rsquo;t post a comment below and I will help you through it.</p>
+<h3 id="advanced-stuff">Advanced Stuff</h3>
+<p>Below I am going to go through some advanced stuff that you probably want&hellip;</p>
+<h4 id="custom-domain-name">Custom Domain Name</h4>
+<p>For my site my site is available at <code>www.jeffsloyer.io</code>.  To do this you need to have the domain name in your <code>config.toml</code>, mine is <a href="https://github.com/jsloyer/jsloyer/blob/master/config.toml#L1">available here</a>.  Additionally you need your domain name in your <code>wercker.yml</code> as well, mine is posted above.</p>
+<p>Lastly you need a CNAME entry with your registrar to point to GitHub.  For more information go <a href="https://help.github.com/articles/setting-up-a-www-subdomain/">here</a>.  The CNAME record should point to <code>your-username.GitHub.io</code>.  For example my site <code>www.jeffsloyer.io</code> has a CNAME record that points to <code>jsloyer.GitHub.io</code>.  It migh take a bit for DNS to update, depends on how long of a TTL you have&hellip;</p>
+<p>Follow the instructions <a href="https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-GitHub-pages-site/">here</a> to add the domain name to the GitHub project as well.</p>
+<h3 id="add-ons">Add-ons</h3>
+<p>Hugo has a lot of addons, some are even built right in.  For example Google Analytics and Disqus.</p>
+<p>To Google Analytics I just had to add one line to <code>config.toml</code>.</p>
+<pre><code>Ganalytics = &quot;UA-xxxx-xxx&quot;
+</code></pre><p>To add Disqus integration I just had to also add one line to <code>config.toml</code>.</p>
+<pre><code>disqusShortname = &quot;xxxx&quot;
+</code></pre><p>Pretty simple&hellip;  For a full list of add-ons goto <code>https://gohugo.io/extras</code>.</p>
+<p>Also please follow me on Twitter at <a href="http://twitter.com/jsloyer">@jsloyer</a> and follow me on <a href="https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng">Youtube</a>!</p>
+
+                </div>
+                <div class="col-lg-4">
+                  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:600px"
+     data-ad-client="ca-pub-8023940796191232"
+     data-ad-slot="6599663109"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jeffsloyerio" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+    <hr>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <ul class="list-inline text-center">
+                    <li>
+                      <a href="mailto:">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://twitter.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                    <li>
+                      <a href="https://github.com/jsloyer">
+                        <span class="fa-stack fa-lg">
+                          <i class="fa fa-circle fa-stack-2x"></i>
+                          <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </a>
+                    </li>
+                    
+                  </ul>
+                  <p class="copyright text-muted">Code released under the Apache 2.0 license.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="http://www.jeffsloyer.io//js/jquery.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/bootstrap.min.js"></script>
+
+    
+    <script src="http://www.jeffsloyer.io//js/clean-blog.js"></script>
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-404795-24', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+</body>
+
+</html>
+

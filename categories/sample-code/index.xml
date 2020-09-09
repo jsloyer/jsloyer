@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sample Code on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/categories/sample-code/</link>
+    <description>Recent content in Sample Code on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 24 Aug 2015 11:21:03 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/categories/sample-code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Peering Inside a Criminal’s Mind using IBM Watson</title>
+      <link>http://www.jeffsloyer.io/post/peering-inside-a-criminals-mind-using-ibm-watson/</link>
+      <pubDate>Mon, 24 Aug 2015 11:21:03 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/peering-inside-a-criminals-mind-using-ibm-watson/</guid>
+      <description>With the recent shooting in South Carolina in reminds us that criminal&amp;rsquo;s can and will continue to harm people. They seem like random acts to most of us but to a criminal the acts make sense to them? No one can answer this question except the criminal. To peer inside a criminal&amp;rsquo;s would be next to impossible but what if there existed another way to peer inside their mind&amp;rsquo;s? This could be used to try to identify patterns or personality traits that exist.</description>
+    </item>
+    
+    <item>
+      <title>Deploying your Meteor app to Cloud Foundry and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link>
+      <pubDate>Wed, 05 Aug 2015 11:03:35 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid>
+      <description>Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript. It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.
+I heard about Meteor mid-2014 but it peaked my interest last week when I was at a customer and a developer at the customer was building a Meteor app and they were asking how to run it on Bluemix.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployment with the CF Autopilot Plugin</title>
+      <link>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</link>
+      <pubDate>Fri, 19 Jun 2015 10:41:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</guid>
+      <description>Zero down time deployments are a must for any Internet app running at scale. Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer. This is not acceptable anymore. Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.</description>
+    </item>
+    
+    <item>
+      <title>IoT Python app with a Raspberry Pi and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</link>
+      <pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</guid>
+      <description>This is an extension/continuation from the blog post on how to create a basic Python webapp. In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the Internet of Things Foundation in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi. The tutorial also uses Twilio to interact with the Raspberry Pi.
+So what does this look like? Here is a simple architecture diagram.</description>
+    </item>
+    
+    <item>
+      <title>Simple Hello World Python App using Flask</title>
+      <link>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</link>
+      <pubDate>Mon, 30 Mar 2015 10:17:51 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</guid>
+      <description>Hey Y’all! Jeff here again, today we are going to be going through some really simple steps to get started deploying a simple hello world python app using Flask on Bluemix.
+Flask is an awesome and really lightweight framework in Python to create powerful webapps. We are going to use it make a really simple hello world app in Python though.
+In this post we are going to go through the written instructions on how to do it but if you prefer watching a video check out the video below.</description>
+    </item>
+    
+    <item>
+      <title>Tips for Migrating Ruby on Rails Applications to Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/</link>
+      <pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/</guid>
+      <description>Who doesn’t love some Ruby? Bluemix definitely loves Ruby on Rails! Sometimes running a Ruby on Rails app can be a little tricky, so I have included some tips and tricks for migrating your Ruby on Rails app to Bluemix. They will include:
+ Required gems Code tweaks Accessing external databases Deploying your app  Required gems If you are using PostgreSQL you need to include pg. Sqlite3 is included to get local development working as well.</description>
+    </item>
+    
+    <item>
+      <title>Control home devices with Bluemix Internet of Things (Part 2)</title>
+      <link>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</link>
+      <pubDate>Tue, 17 Feb 2015 10:02:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</guid>
+      <description>Part 2: Configuring the Raspberry Pi This is a continuation of Part 1 of Controlling home devices with Bluemix Internet Of Things If you haven’t read Part 1, please do that first…
+In Part 1 we got the electrical work out of the way. We wired up the relay’s and connected the circuit’s. In this part of the 3 part series we will configure the Raspberry Pi to control the relay’s that we wired up in part 1.</description>
+    </item>
+    
+    <item>
+      <title>Control home devices with Bluemix Internet of Things</title>
+      <link>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</link>
+      <pubDate>Fri, 06 Feb 2015 09:49:21 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</guid>
+      <description>The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020. These devices make up something called the Internet of Things. These devices can be controlled remotely and interconnected.
+While a lot of these devices can be connected to the Internet, most of them are &amp;ldquo;dumb&amp;rdquo; devices right now. To turn these &amp;ldquo;dumb&amp;rdquo; devices into smart devices you can use the Internet of Things to connect them to the cloud.</description>
+    </item>
+    
+    <item>
+      <title>How Watson and Bluemix see the State of the Union</title>
+      <link>http://www.jeffsloyer.io/post/how-watson-and-bluemix-see-the-state-of-the-union/</link>
+      <pubDate>Wed, 21 Jan 2015 09:45:24 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/how-watson-and-bluemix-see-the-state-of-the-union/</guid>
+      <description>The State of the Union, a live broadcast that many Americans historically use as a tool to form opinions about the current political system, and gain insight from their Commander in Chief into the transparency of a system of checks and balances. What is more interesting is the thoughts and underlying feelings between the State of the Union. If we could figure out how the President is feeling or portraying himself, could we infer how the President will schedule and work with legislation and policy for the rest of the year?</description>
+    </item>
+    
+    <item>
+      <title>Microservices in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/microservices-in-bluemix/</link>
+      <pubDate>Mon, 19 Jan 2015 09:34:18 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/microservices-in-bluemix/</guid>
+      <description>Monolith apps are no more. The age of the monolith is over. It wasn’t that long ago that companies and developers (myself included) were deploying one giant app that did everything. The app would serve all your static files, front-end HTML and CSS and Javascript, act as your REST API, serve as your data persistance tier, handles sessions, handle logins, and do security for your app. The list could keep going on and on.</description>
+    </item>
+    
+    <item>
+      <title>Etherpad in Cloud Foundry – Quick Start Guide</title>
+      <link>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</link>
+      <pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</guid>
+      <description>Etherpad Lite is an awesome online collaboration platform. Multiple open source projects use it for collaboration. One of the most notable ones is the Openstack Project Openstack Etherpad. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry.</description>
+    </item>
+    
+    <item>
+      <title>Twitter Personality Comparisons Using Watson</title>
+      <link>http://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</link>
+      <pubDate>Mon, 24 Nov 2014 22:06:16 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</guid>
+      <description>Hey Yall!
+We are back at it again with some demos!!!
+Did you ever wonder if you and your favorite celebrity would be compatible if you met?? I sure do! Or did you ever wonder how you could become a better leader, I sure do. Today you would have to go Google the person and analyze posts and articles about them and be a personality expert to see if you have personality traits in common.</description>
+    </item>
+    
+    <item>
+      <title>Building a Java EE app on IBM Bluemix Using Watson, Cloudant</title>
+      <link>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</link>
+      <pubDate>Tue, 14 Oct 2014 22:36:53 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</guid>
+      <description>Hey Y’all!
+Jeff here again and something I am really excited about is Watson is now available for anyone to use in Bluemix!
+Today we are going to be building an example app using Java, Cloudant, and Watson.
+Ok let’s talk through what this app is going to do before we build it.
+Meet Ivy (hello!)
+She’s a talent manager at a growing tech startup.
+She’s looking for a new hire that would be a good fit on her team but the company is so popular that she has a huge inventory of resumes to sort through.</description>
+    </item>
+    
+    <item>
+      <title>Zero Downtime Deployments with Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</link>
+      <pubDate>Mon, 18 Aug 2014 22:10:32 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</guid>
+      <description>In Cloud Foundry (the open source technology behind Bluemix), when you do a cf push, Cloud Foundry will actually stop your app and restart it with the new code that you just uploaded. This presents an issue for a production app or any app that is actually serving users. There is a shortcoming with the current DEA (the part in Cloud Foundry that runs your app) but the next version of the DEA (Diego) will help address this.</description>
+    </item>
+    
+    <item>
+      <title>Inbound Ssl in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/</link>
+      <pubDate>Mon, 18 Aug 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/</guid>
+      <description>Did you know in Bluemix you get inbound SSL for free? It is automatically turned on and enabled for every app. All you have to do is just access your app over https instead of http.
+Developers don’t need to implement SSL in their app, you just need to support HTTP and the Bluemix infrastructure will support HTTPS for you and do SSL offloading.
+Additionally Bluemix supports the x-forwarded-proto header to allow developers to check with protocol requests are coming in over.</description>
+    </item>
+    
+    <item>
+      <title>Kraken.Js and Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/kraken-js-and-bluemix/</link>
+      <pubDate>Thu, 17 Apr 2014 13:24:00 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/kraken-js-and-bluemix/</guid>
+      <description>Kraken.JS is a new wonderful framework wrapper around Express for Node.JS. It includes things such as pre-canned security settings, templating, and internationalization. While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do. While security is very important in your app why should you have to write redundant code for this. The answer is you do not have to anymore.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>box on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/box/</link>
+    <description>Recent content in box on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Mon, 29 Jun 2015 10:46:59 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/box/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Personality Box – You had me at upload</title>
+      <link>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</link>
+      <pubDate>Mon, 29 Jun 2015 10:46:59 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</guid>
+      <description>As announced yesterday, IBM has formed a partnership with Box.com, a partnership that includes the integration of Box into the Bluemix catalog. With its REST-based Content and View APIs, embedding enterprise-grade file storage into your app and enabling file sharing among your users has never been simpler.
+To help you on your way to becoming a file-sharing guru, Bluemix developer advocate Jake Peyser and I have built a sample app that you can leverage as you begin to explore the possibilities of the Box.</description>
+    </item>
+    
+  </channel>
+</rss>

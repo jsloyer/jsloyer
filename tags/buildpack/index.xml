@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>buildpack on JeffSloyer.io</title>
+    <link>http://www.jeffsloyer.io/tags/buildpack/</link>
+    <description>Recent content in buildpack on JeffSloyer.io</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Code released under the Apache 2.0 license.</copyright>
+    <lastBuildDate>Wed, 26 Aug 2015 11:17:31 -0500</lastBuildDate>
+    
+	<atom:link href="http://www.jeffsloyer.io/tags/buildpack/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fixing common errors with the PHP Buildpack in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</link>
+      <pubDate>Wed, 26 Aug 2015 11:17:31 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</guid>
+      <description>Following up from my previous post, Canonical recently dropped support for lucid64 which is Ubuntu 10.04 LTS. This affects Cloud Foundry as lucid64 is the basis for most buildpacks. In Cloud Foundry lucid64 is being phased out for Ubuntu 14.04 LTS which is known as cflinuxfs2 in Cloud Foundry.
+Getting stacks in org jbsloyer@us.ibm.com / space dev as jbsloyer@us.ibm.com... OK name description lucid64 Ubuntu 10.04 cflinuxfs2 Ubuntu 14.04.2 trusty The PHP buildpack will take the default system buildpack and right now in Bluemix it is lucid64.</description>
+    </item>
+    
+    <item>
+      <title>Common Deploy Errors with Community Buildpacks in Bluemix</title>
+      <link>http://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</link>
+      <pubDate>Wed, 29 Jul 2015 10:58:25 -0500</pubDate>
+      
+      <guid>http://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</guid>
+      <description>Recently the company that owns development for Ubuntu (Canonical) just announced it is dropping support for lucid 64 which is Ubuntu 10.04 LTS. What does this mean for Cloud Foundry and the community buildpacks?
+Well nothing really but there is a couple gotcha&amp;rsquo;s you should know about.
+I have seen issues with the following buildpacks, this is not a comprehensive list but the ones I at least know about.
+  PHP - https://github.</description>
+    </item>
+    
+  </channel>
+</rss>
