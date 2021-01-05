@@ -10,7 +10,7 @@ title = "Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay"
 +++
 
 # Background
-As a follow on from a [previous post](/apple-airplay-usg) I discussed how to enable the IGMP Proxy in the USG product line to permit cross VLAN mDNS traffic.  In the UDM/UDM-Pro line its a bit different.  There is `config.gateway.json` file anymore.  There are multiple workarounds out there to run Docker contaienrs to add in extra functionality, however this is not one of them.
+As a follow on from a [previous post](/apple-airplay-usg) I discussed how to enable the IGMP Proxy in the USG product line to permit cross VLAN mDNS traffic.  In the UDM/UDM-Pro line its a bit different.  There is `config.gateway.json` file anymore.  There are multiple workarounds out there to run Docker containers to add in extra functionality, however this is not one of them.
 
 If you are looking to bypass your AT&T gateway then you will need to head down the Docker path, but if you are looking for just Airplay across VLAN's you have arrived at the correct article.
 
