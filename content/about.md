@@ -6,9 +6,9 @@ type = "about"
 
 +++
 
-Jeff Sloyer is currently a STSM (senior technical staff member) for the IBM Cloud Developer Services Tribe where he leads UX for multiple products including Kubernetes, Logging, Monitoring, Schematics (Terraform), and Functions.
+Jeff Sloyer is currently a STSM (senior technical staff member) for the IBM Cloud Developer Services Tribe where he leads development and architecture for IBM Cloud Satellite.
 
-Previously Jeff was the core dev lead for IBM Cloud Kubernetes/OpenShift Service.  He currently leads multiple squads of developers that builds IBM's managed Kubernetes service.
+He has previously led UX for multiple products including Kubernetes, Logging, Monitoring, Schematics (Terraform), and Functions.
 
 Jeff's previous role at IBM was a Developer Advocate.  He promoted IBM’s Platform as a Service (Paas), Bluemix. He’s a Node.JS developer most days, but tinkers in Java and Python. Sloyer is a hacker at heart who loves playing with new tech and cobbling together new demos and projects. He’s an avid traveler, flying around the world and speaking about Bluemix at conferences and events.
 
