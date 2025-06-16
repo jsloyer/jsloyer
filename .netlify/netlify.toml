@@ -1,0 +1,28 @@
+plugins = []
+headers = []
+redirects = []
+
+[functions]
+
+[functions."*"]
+
+[build]
+publish = "/Users/a723088/dev/hugo-theme-stack-starter/public"
+publishOrigin = "config"
+commandOrigin = "config"
+command = "hugo --gc --minify"
+
+[build.environment]
+HUGO_VERSION = "0.147.8"
+
+[build.processing]
+
+[build.processing.css]
+
+[build.processing.html]
+
+[build.processing.images]
+
+[build.processing.js]
+
+[build.services]
