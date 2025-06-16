@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2020-08-30T23:24:00-05:00"
 description = "Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay"
 draft = false
-image = "/original-images/2020/sound_mixer.jpg"
+image = "sound_mixer.jpg"
 tags = ["apple", "udm", "firewall", "unifi", "ubiquiti", "airplay"]
 title = "Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay"
 slug = "apple-airplay-udm/"
@@ -36,11 +36,11 @@ The next step is creating a single firewall rule.  The rule that needs to be cre
 
 This firewall rule should be created in the LAN_IN category.
 
-[![udm screenshot from unifi](/images/2020/airplay-udm-1-medium.jpg)](/images/2020/airplay-udm-1-medium.jpg)
+[![udm screenshot from unifi](airplay-udm-1.jpg)](airplay-udm-1.jpg)
 
-[![udm screenshot from unifi](/images/2020/airplay-udm-2-medium.jpg)](/images/2020/airplay-udm-2-medium.jpg)
+[![udm screenshot from unifi](airplay-udm-2.jpg)](airplay-udm-2.jpg)
 
-[![udm screenshot from unifi](/images/2020/airplay-udm-3-medium.jpg)](/images/2020/airplay-udm-3-medium.jpg)
+[![udm screenshot from unifi](airplay-udm-3.jpg)](airplay-udm-3.jpg)
 
 **Note:**  As with other allow rules this rule MUST go before your deny rules.
 
