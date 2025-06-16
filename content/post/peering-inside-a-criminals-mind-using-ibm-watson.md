@@ -9,7 +9,7 @@ title = "Peering Inside a Criminal’s Mind using IBM Watson"
 aliases = [
     "2015/08/24/peering-inside-a-criminals-mind-using-ibm-watson/"
 ]
-
+slug = "peering-inside-a-criminals-mind-using-ibm-watson/"
 +++
 
 With the recent shooting in South Carolina in reminds us that criminal's can and will continue to harm people.  They seem like random acts to most of us but to a criminal the acts make sense to them?  No one can answer this question except the criminal.  To peer inside a criminal's would be next to impossible but what if there existed another way to peer inside their mind's?  This could be used to try to identify patterns or personality traits that exist.  This information could be used to prevent these horrible acts and better humanity.<!-- more -->

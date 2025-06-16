@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/wall.jpg"
 tags = ["apple", "usg", "firewall", "unifi", "ubiquiti", "airplay"]
 title = "Cross VLAN traffic with a USG and Apple Airplay"
-
+slug = "/apple-airplay-usg"
 +++
 
 # Background

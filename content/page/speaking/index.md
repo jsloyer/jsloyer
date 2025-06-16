@@ -1,10 +1,14 @@
-+++
-date = "2016-01-12T10:09:20-05:00"
-draft = false
-type = "about"
-title = "Speaking Engagements"
-
-+++
+---
+title: Speaking
+description: Hugo, the world's fastest framework for building websites
+date: 2022-03-06
+license: CC BY-NC-ND
+menu:
+    main: 
+        weight: 2
+        params:
+            icon: user
+---
 
 ## Past Events
 * [Trilug - Linux Meetup](https://trilug.org/2019/02/26/march-14-kubernetes-from-the-trenches/)

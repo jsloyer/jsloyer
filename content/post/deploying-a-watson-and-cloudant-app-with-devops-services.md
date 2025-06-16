@@ -9,7 +9,7 @@ title = "Deploying a Watson and Cloudant App with DevOps Services"
 aliases = [
     "2014/11/24/deploying-a-watson-and-cloudant-app-with-devops-services/"
 ]
-
+slug = "deploying-a-watson-and-cloudant-app-with-devops-services/"
 +++
 
 Backed by popular demand this is a continuation of the post [Building a Java EE app on IBM Bluemix Using Watson and Cloudant](/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/).

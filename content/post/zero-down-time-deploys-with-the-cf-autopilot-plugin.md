@@ -9,7 +9,7 @@ title = "Zero Downtime Deployment with the CF Autopilot Plugin"
 alises = [
   "2015/06/19/zero-down-time-deploys-with-the-cf-autopilot-plugin/"
 ]
-
+slug = "zero-down-time-deploys-with-the-cf-autopilot-plugin/"
 +++
 
 Zero down time deployments are a must for any Internet app running at scale.  Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer.  This is not acceptable anymore.  Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.  The companies who create these apps understand the apps’s need to stay up, because their app is their only lifeline and, hopefully, a source of income from the world.

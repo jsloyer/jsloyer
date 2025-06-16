@@ -9,7 +9,7 @@ title = "Zero downtime deployments with Bluemix and Codeship"
 aliases = [
     "2015/07/20/zero-downtime-deployments-with-bluemix-and-codeship/"
 ]
-
+slug = "zero-downtime-deployments-with-bluemix-and-codeship/"
 +++
 
 This is a part two post following up on my earlier post on [Zero Downtime Deployment with the CF Autopilot Plugin](/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/).  I highly encourage you to read the first part before reading this post but if you are lazy I will go over the high level concepts here.

@@ -9,7 +9,7 @@ title = "Fixing common errors with the PHP Buildpack in Bluemix"
 aliases = [
     "2015/08/26/fixing-common-errors-with-the-php-buildpack-in-bluemix/"
 ]
-
+slug = "fixing-common-errors-with-the-php-buildpack-in-bluemix/"
 +++
 
 Following up from my [previous post](/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/), Canonical recently dropped support for `lucid64` which is Ubuntu 10.04 LTS. This affects Cloud Foundry as `lucid64` is the basis for most buildpacks. In Cloud Foundry `lucid64` is being phased out for Ubuntu 14.04 LTS which is known as `cflinuxfs2` in Cloud Foundry.

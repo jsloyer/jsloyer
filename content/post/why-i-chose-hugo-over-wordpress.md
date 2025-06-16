@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/migrate.jpg"
 tags = ["wordpress", "migrate"]
 title = "Why I Chose Hugo over Wordpress"
-
+slug = "why-i-chose-hugo-over-wordpress/"
 +++
 
 I am finally back with my blog, sorry it has been quite awhile.  I just recently finished a migration of my blog my running on Wordpress, which was hosted on [WPEngine](http://wpengine.com) and is a really awesome service, to Github pages.  I got tired of using Wordpress and WPEngine cost me about $30/month...  So I decided to migrate the site to Github pages where I can run the site for free.

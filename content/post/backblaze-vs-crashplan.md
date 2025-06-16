@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/alpine.jpg"
 tags = ["backup"]
 title = "Backblaze vs Crashplan"
-
+slug = "backblaze-vs-crashplan/"
 +++
 
 Most people do not think about backups or want to take the time to set one up or spend the money.

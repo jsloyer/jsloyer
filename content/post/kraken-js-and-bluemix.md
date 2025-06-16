@@ -9,7 +9,7 @@ title = "Kraken.Js and Bluemix"
 aliases = [
     "2014/04/17/kraken-js-and-bluemix/"
 ]
-
+slug = "kraken-js-and-bluemix/"
 +++
 
 Kraken.JS is a new wonderful framework wrapper around Express for Node.JS.  It includes things such as pre-canned security settings, templating, and internationalization.  While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore.

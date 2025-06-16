@@ -7,13 +7,15 @@ redirects = []
 [functions."*"]
 
 [build]
-publish = "/Users/a723088/dev/hugo-theme-stack-starter/public"
+publish = "/Users/a723088/dev/jsloyer/public"
 publishOrigin = "config"
 commandOrigin = "config"
 command = "hugo --gc --minify"
 
 [build.environment]
-HUGO_VERSION = "0.147.8"
+GO_VERSION = "1.24.2"
+HUGO_VERSION = "0.147.1"
+NODE_VERSION = "22"
 
 [build.processing]
 

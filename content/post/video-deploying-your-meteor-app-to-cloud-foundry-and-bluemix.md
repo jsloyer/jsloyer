@@ -9,7 +9,7 @@ title = "(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix"
 aliases = [
     "2015/08/24/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/"
 ]
-
+slug = "video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/"
 +++
 
 This is a follow up post to a previous post on [Deploying your Meteor app to Cloud Foundry and Bluemix.](/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/)  In this post we went through how to deploy a Meteor app to Cloud Foundry and Bluemix.  In this post we will be going through the same thing except in a video format.  Check out the video below.

@@ -9,7 +9,7 @@ title = "Etherpad in Cloud Foundry – Quick Start Guide"
 aliases = [
     "2015/01/13/etherpad-in-cloud-foundry-quick-start-guide/"
 ]
-
+slug = "etherpad-in-cloud-foundry-quick-start-guide/"
 +++
 
 Etherpad Lite is an awesome online collaboration platform.  Multiple open source projects use it for collaboration.  One of the most notable ones is the Openstack Project [Openstack Etherpad](https://etherpad.openstack.org/). To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry. No worries, here is one!

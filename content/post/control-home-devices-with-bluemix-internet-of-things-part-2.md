@@ -9,7 +9,7 @@ title = "Control home devices with Bluemix Internet of Things (Part 2)"
 aliases = [
     "2015/02/17/control-home-devices-with-bluemix-internet-of-things-part-2/"
 ]
-
+slug = "control-home-devices-with-bluemix-internet-of-things-part-2/"
 +++
 
 ## Part 2: Configuring the Raspberry Pi

@@ -1,10 +1,18 @@
-+++
-date = "2016-01-04T13:14:32-05:00"
-draft = false
-title = "About"
-type = "about"
-
-+++
+---
+title: About
+description: Hugo, the world's fastest framework for building websites
+date: 2022-03-06
+aliases:
+  - about-us
+  - about-hugo
+  - contact
+license: CC BY-NC-ND
+menu:
+    main: 
+        weight: 2
+        params:
+            icon: user
+---
 
 Jeff Sloyer is currently a STSM (senior technical staff member) for the IBM Cloud Developer Services Tribe where he leads development and architecture for IBM Cloud Satellite.
 

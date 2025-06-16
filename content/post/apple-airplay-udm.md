@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/2020/sound_mixer.jpg"
 tags = ["apple", "udm", "firewall", "unifi", "ubiquiti", "airplay"]
 title = "Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay"
-
+slug = "apple-airplay-udm/"
 +++
 
 # Background

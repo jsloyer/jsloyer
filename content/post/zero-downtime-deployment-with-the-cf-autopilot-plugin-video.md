@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/unplug.jpg"
 tags = ["bluemix", "devops", "zero downtime", "cloudfoundry"]
 title = "Zero Downtime Deployment with the CF Autopilot Plugin - Video"
-
+slug = "zero-downtime-deployment-with-the-cf-autopilot-plugin-video/"
 +++
 
 I recently wrote a [blog post ](/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/)on what a zero downtime deployment is, why it is important, and how to perform one. I am now posting a video on the same topic so you can learn about a zero downtime deployment by watching a video instead.

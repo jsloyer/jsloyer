@@ -9,7 +9,7 @@ title = "Personality Box – You had me at upload"
 aliases = [
     "2015/06/29/personality-box-you-had-me-at-upload/"
 ]
-
+slug = "personality-box-you-had-me-at-upload/"
 +++
 
 As [announced yesterday](http://www-03.ibm.com/press/us/en/pressrelease/47185.wss), IBM has formed a partnership with [Box.com](http://Box.com), a partnership that includes the integration of Box into the Bluemix catalog. With its REST-based Content and View APIs, embedding enterprise-grade file storage into your app and enabling file sharing among your users has never been simpler.

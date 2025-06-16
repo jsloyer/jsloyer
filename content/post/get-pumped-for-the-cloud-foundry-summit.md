@@ -9,7 +9,7 @@ title = "Get Pumped for the Cloud Foundry Summit"
 aliases = [
     "2015/04/30/get-pumped-for-the-cloud-foundry-summit/"
 ]
-
+slug = "get-pumped-for-the-cloud-foundry-summit/"
 +++
 
 I’m pumped for the Cloud Foundry Summit! Are you??? Well if you aren’t yet hopefully you will be after reading this!

@@ -9,7 +9,7 @@ title = "Twitter Personality Comparisons Using Watson"
 alises = [
     "2014/11/24/twitter-personality-comparisons-using-watson/"
 ]
-
+slug = "twitter-personality-comparisons-using-watson/"
 +++
 
 Hey Yall!

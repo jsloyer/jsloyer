@@ -9,7 +9,7 @@ title = "Zero Downtime Deployments with Bluemix"
 aliases = [
     "2014/08/18/zero-downtime-deployments-with-bluemix/"
 ]
-
+slug = "zero-downtime-deployments-with-bluemix/"
 +++
 
 
