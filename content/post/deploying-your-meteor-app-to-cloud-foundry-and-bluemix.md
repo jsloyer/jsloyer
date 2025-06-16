@@ -9,7 +9,7 @@ title = "Deploying your Meteor app to Cloud Foundry and Bluemix"
 aliases = [
     "2015/08/05/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/"
 ]
-
+slug = "deploying-your-meteor-app-to-cloud-foundry-and-bluemix/"
 +++
 
 

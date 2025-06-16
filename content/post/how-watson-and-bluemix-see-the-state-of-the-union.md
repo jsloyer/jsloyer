@@ -9,7 +9,7 @@ title = "How Watson and Bluemix see the State of the Union"
 aliases = [
     "2015/01/21/how-watson-and-bluemix-see-the-state-of-the-union/"
 ]
-
+slug = "how-watson-and-bluemix-see-the-state-of-the-union/"
 +++
 
 

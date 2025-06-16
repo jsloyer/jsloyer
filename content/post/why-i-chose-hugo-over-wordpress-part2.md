@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/migrate.jpg"
 tags = ["wordpress", "migrate"]
 title = "Why I Chose Hugo over Wordpress - Part 2"
-
+slug = "why-i-chose-hugo-over-wordpress-part2/"
 +++
 
 This post has been a long time going and much overdue, it has almost been 12 months

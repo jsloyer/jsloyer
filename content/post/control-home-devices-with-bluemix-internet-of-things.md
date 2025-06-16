@@ -9,7 +9,7 @@ title = "Control home devices with Bluemix Internet of Things"
 aliaes = [
     "2015/02/06/control-home-devices-with-bluemix-internet-of-things/"
 ]
-
+slug = "control-home-devices-with-bluemix-internet-of-things/"
 +++
 
 The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020.  These devices make up something called the Internet of Things.  These devices can be controlled remotely and interconnected.

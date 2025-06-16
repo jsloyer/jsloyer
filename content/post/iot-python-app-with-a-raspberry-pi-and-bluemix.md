@@ -9,7 +9,7 @@ title = "IoT Python app with a Raspberry Pi and Bluemix"
 aliases = [
     "2015/04/02/iot-python-app-with-a-raspberry-pi-and-bluemix/"
 ]
-
+slug = "iot-python-app-with-a-raspberry-pi-and-bluemix/"
 +++
 
 This is an extension/continuation from the blog post on how to create a [basic Python webapp](/post/simple-hello-world-python-app-using-flask/).  In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the [Internet of Things Foundation](https://internetofthings.ibmcloud.com/) in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi.  The tutorial also uses Twilio to interact with the Raspberry Pi.

@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/secure.jpg"
 tags = ["att", "unifi", "ubiquiti"]
 title = "ATT Uverse Modem Bypass - UniFi USG"
-
+slug = "att-uverse-modem-bypass-unifi-usg/"
 +++
 
 # Background

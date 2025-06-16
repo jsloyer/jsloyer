@@ -9,7 +9,7 @@ title = "Simple Hello World Python App using Flask"
 aliases = [
     "2015/03/30/simple-hello-world-python-app-using-flask/"
 ]
-
+slug = "simple-hello-world-python-app-using-flask/"
 +++
 
 

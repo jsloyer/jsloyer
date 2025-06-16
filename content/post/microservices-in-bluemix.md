@@ -9,7 +9,7 @@ title = "Microservices in Bluemix"
 aliases = [
     "2015/01/19/microservices-in-bluemix/"
 ]
-
+slug = "microservices-in-bluemix/"
 +++
 
 Monolith apps are no more.  The age of the monolith is over.  It wasn’t that long ago that companies and developers (myself included) were deploying one giant app that did everything.  The app would serve all your static files, front-end HTML and CSS and Javascript, act as your REST API, serve as your data persistance tier, handles sessions, handle logins, and do security for your app.  The list could keep going on and on.  As the age of the code base progresses it gets more and more complicated and tangled and if a new feature needs to be developed or an old piece of code needs to be modified it takes a cross functional team of many different people to make it happen.

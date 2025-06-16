@@ -9,7 +9,7 @@ title = "Onboarding Guide for Bluemix for Third Parties"
 aliases = [
     "2014/11/19/onboarding-guide-for-bluemix-for-third-parties/"
 ]
-
+slug = "onboarding-guide-for-bluemix-for-third-parties/"
 +++
 
 While IBM is rapidly bringing new services and capabilities into Bluemix, one of the reasons our customers are so interested in Bluemix is because they can use our platform and services in conjunction with many other open source and third party APIs and services. The ability to easily access and integrate this combination of technology is one of the biggest values for any developer looking to build applications on Bluemix.

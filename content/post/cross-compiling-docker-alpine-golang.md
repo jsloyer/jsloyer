@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/alpine.jpg"
 tags = ["docker", "golang", "go"]
 title = "Cross Compiling Golang with a Docker Alpine Container"
-
+slug = "cross-compiling-docker-alpine-golang/"
 +++
 
 Recently at work I have been struggling with building a small/minimized Docker container of a Go app I have been working on.  I started with `busybox` but it has a major short coming...  CA certificates.  It isn't trivial to get CA Certs on a `busybox` container.  This problem effectively prevents you from using SSL or TLS with your app...  This is a non-starter...

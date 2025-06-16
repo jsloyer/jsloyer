@@ -9,7 +9,7 @@ title = "Common Deploy Errors with Community Buildpacks in Bluemix"
 aliases = [
     "2015/07/29/cloud-foundry-php-buildpack-doesnt-support-lucid64/"
 ]
-
+slug = "cloud-foundry-php-buildpack-doesnt-support-lucid64/"
 +++
 
 Recently the company that owns development for Ubuntu (Canonical) just announced it is dropping support for lucid 64 which is Ubuntu 10.04 LTS.  What does this mean for Cloud Foundry and the community buildpacks?

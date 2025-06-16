@@ -9,7 +9,7 @@ title = "Tips for Migrating Ruby on Rails Applications to Bluemix"
 aliases = [
     "2015/03/05/tips-for-migrating-ruby-on-rails-applications-to-bluemix/"
 ]
-
+slug = "tips-for-migrating-ruby-on-rails-applications-to-bluemix/"
 +++
 
 ![Ruby on Rails.svg  231x300 Tips for Migrating Ruby on Rails Applications to Bluemix](/images/2015/06/Ruby_on_Rails-logo-medium.png)Who doesn’t love some Ruby?  Bluemix definitely loves Ruby on Rails!  Sometimes running a Ruby on Rails app can be a little tricky, so I have included some tips and tricks for migrating your Ruby on Rails app to Bluemix. They will include:

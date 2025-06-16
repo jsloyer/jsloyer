@@ -9,7 +9,7 @@ title = "Building a Java EE app on IBM Bluemix Using Watson, Cloudant"
 aliases = [
     "2014/10/17/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/"
 ]
-
+slug = "building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/"
 +++
 
 Hey Y’all!

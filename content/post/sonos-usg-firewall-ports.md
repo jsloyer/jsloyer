@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/wall.jpg"
 tags = ["sonos", "usg", "firewall", "unifi", "ubiquiti"]
 title = "Firewall Ports for the Unifi USG and Sonos Speakers"
-
+slug = "sonos-usg-firewall-ports/"
 +++
 
 # Background

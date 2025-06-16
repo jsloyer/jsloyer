@@ -6,7 +6,7 @@ draft = false
 image = "/original-images/cabin.jpg"
 tags = ["containers", "bluemix", "kubernetes"]
 title = "Using Cabin with the IBM Bluemix Container Service"
-
+slug = "ibm-container-service-cabin/"
 +++
 I haven't posted in awhile because I have taken a new role at IBM and helped lead the development of the
 new IBM Bluemix Container Service that allows you to run managed Kubernetes clusters on IBM.

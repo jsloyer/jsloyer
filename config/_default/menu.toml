@@ -1,0 +1,32 @@
+# Configure main menu and social menu
+#[[main]]
+#identifier = "home"
+#name = "Home"
+#url = "/"
+#[main.params]
+#icon = "home"
+#newtab = true
+
+[[social]]
+identifier = "github"
+name = "GitHub"
+url = "https://github.com/jsloyer"
+
+[social.params]
+icon = "brand-github"
+
+[[social]]
+identifier = "twitter"
+name = "Twitter"
+url = "https://twitter.com/jsloyer"
+
+[social.params]
+icon = "brand-twitter"
+
+[[social]]
+identifier = "linkedin"
+name = "Linked In"
+url = "https://www.linkedin.com/in/jeffsloyer/"
+
+[social.params]
+icon = "link"
