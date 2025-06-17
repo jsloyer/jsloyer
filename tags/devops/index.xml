@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Devops on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/devops/</link><description>Recent content in Devops on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 20 Jul 2015 10:54:13 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/devops/index.xml" rel="self" type="application/rss+xml"/><item><title>Zero downtime deployments with Bluemix and Codeship</title><link>https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/</link><pubDate>Mon, 20 Jul 2015 10:54:13 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/unplug.jpg" alt="Featured image of post Zero downtime deployments with Bluemix and Codeship" />&lt;p>This is a part two post following up on my earlier post on &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >Zero Downtime Deployment with the CF Autopilot Plugin&lt;/a>.  I highly encourage you to read the first part before reading this post but if you are lazy I will go over the high level concepts here.&lt;/p>
+&lt;h2 id="overview-of-part-1-quick-refresher">Overview of Part 1 (Quick Refresher)
+&lt;/h2>&lt;p>In &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >part 1&lt;/a> we went over what a zero downtime deployment is and why it is in important. Let&amp;rsquo;s briefly cover that again.&lt;/p>
+&lt;p>Zero Down time deployments are basically what they sound like.  You update production without taking downtime.  It’s not always that simple though.  For the context of this post we are going to be talking about how to do zero down time deployments in Cloud Foundry.&lt;!-- more -->&lt;/p>
+&lt;p>Basically it’s a little trick to taking advantage of the way Cloud Foundry runs underneath the covers.  Before we jump into it, there are a couple of caveats that we should discuss first.  To successfully take advantage of zero down time deployments you should have followed the &lt;a class="link" href="http://12factor.net/" target="_blank" rel="noopener"
+>12 Factor App guidelines&lt;/a>. This will ensure that your app is horizontally scalable and can be deployed in a manner that will result in zero down time.  Below are some highlights that you should abide by.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Do not store sessions on disk or in memory.  Store them in some type of shared database or file system.  This could be your favorite database or an in memory database as well.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Do not store configuration information in your application or on disk.  You should store your config info for your app in environment variables.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This is probably the most important, your application needs to be forward and backwards compatible with your database schema…  Say what?  Yes, you need to trust your developers to manage the database schema from your code.If you are using a relational database, you will need some kind of framework to do database migrations for you.  It’s not just that simple with relational databases though…  If you have a big database migration DO NOT PERORM MIGRATIONS THAT WILL INTERRUPT TRAFFIC!  Perform them slowly over time where migrations do not impact users and traffic.  Yahoo had a major application upgrade and it took them 6 months to do the migration to avoid impacting users and taking an outage.  Remember we do not take outages…  If you are in NoSQL land, your life is easier.  Just revision your API’s and educate your developers on forward and backwards data compatibility.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="importance-of-zero-down-time-deployments">Importance of Zero Down Time Deployments
+&lt;/h2>&lt;p>So why are zero down time deployments so important? The answer is simple, to keep your website/app up so you can make money! Well that might be over-simplified a bit, but basically it all boils down to keeping your app up so you can continue to do what you do best, and hopefully that involves making money. If you look at Facebook, for example, they put code into production weeks and months before a feature is exposed to the public. They extensively test the features on employees first, then slowly enable the features to the rest of the world. This is key, getting features in front of your customers and getting feedback from them. If it works that’s great, but if it doesn’t at least you know in a short time frame so you can remove it and pivot to go in a different direction. The current landscape is so fast paced that if you don’t get a feature out, your competition could beat you.&lt;/p>
+&lt;h2 id="how-does-it-work">How does it work?
+&lt;/h2>&lt;p>So let’s walk through what needs to happen to perform zero downtime deployments in Cloud Foundry.  For the use of the walk-through, the application is currently taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Deploy your app or use a currently running app.
+Currently your application is taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.001.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.001.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.001_hu_67a6719a618981e5.png 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.001_hu_9cf09c6100caf55a.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Deploy the new version of your app to &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+At this time there is currently two versions of your app running.  &lt;code>myapp.mybluemix.net&lt;/code> is still taking production traffic.
+The new app &lt;code>myapp-temp.mybluemix.net&lt;/code> is separate, it can be pointed to your production API keys and databases at this point.
+&lt;a class="link" href="zero-downtime-graphics.002.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.002.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.002_hu_eb1fe4ca1db1eba1.png 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.002_hu_f8db8cd111c0f3e7.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Perform smoke tests on the new version of the application.
+Some people say this step is optional, but to me its not.  This is key to make sure there wasn’t any weird regressions or merge issues, they CAN happen…&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Map production traffic to the new version of your app.
+At this point the old version of your app and the new version are both taking production traffic.
+&lt;a class="link" href="zero-downtime-graphics.003.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.003.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.003_hu_63c6b419a410167d.png 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.003_hu_17ea991aa50404ca.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unmap production traffic from the old version of the app.  You can optionally delete the old version as well.
+At this point the new version becomes production and ONLY it is taking traffic.
+The new version still has two URL’s though, &lt;code>myapp.mybluemix.net&lt;/code> and &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.004.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.004.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.004_hu_19326b037542fa88.png 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.004_hu_49e08d9f24a6dbc1.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remove the temporary route &lt;code>myapp-temp.mybluemix.net&lt;/code> from the new version of your app.
+&lt;a class="link" href="zero-downtime-graphics.005.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.005.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.005_hu_679aa03b0584be84.png 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/zero-downtime-graphics.005_hu_669e628ff6813144.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>While this can be scripted there really isn’t a need to do that, there is a Cloud Foundry CLI plugin to do this.&lt;/p>
+&lt;h2 id="autopilot-plugin">Autopilot plugin
+&lt;/h2>&lt;p>Recently the Cloud Foundry CLI started supporting plugins.  This is the holy grail for CF and you can start doing some fun stuff.  In this case, the fun stuff is automating the complex, possibly human error-prone, steps above.  As a dev, if I can automate something and reduce the chance of something going wrong, I am all in.  If you do this, your IT/operations department will love you.&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/concourse/autopilot" target="_blank" rel="noopener"
+>The plugin&lt;/a> performs the above steps for you for performing the zero downtime deployment.&lt;/p>
+&lt;p>In &lt;a class="link" href="http://jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" target="_blank" rel="noopener"
+>part 1&lt;/a> we deployed our application manually to Bluemix using the autopilot plugin locally, in this tutorial we are going to use &lt;a class="link" href="http://codeship.com/?utm_campaign=jeffsloyer.io" target="_blank" rel="noopener"
+>Codeship to automate our continuous delivery pipeline&lt;/a> to use the plugin to perform the zero downtime deployments.&lt;/p>
+&lt;h2 id="codeship-setup">Codeship setup
+&lt;/h2>&lt;p>First make sure you have a &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-CodeShipAutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> account, if you do not sign up by clicking &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-CodeShipAutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a>.&lt;/p>
+&lt;p>Secondly make sure you have signed up for a Codeship account, to do this head &lt;a class="link" href="https://codeship.com/registrations/new?utm_campaign=jeffsloyer.io" target="_blank" rel="noopener"
+>here&lt;/a>.  When I signed up, I clicked &amp;ldquo;Sign up with github&amp;rdquo;, make sure you do this so Codeship can authenticate with your Github account.&lt;/p>
+&lt;p>Once you are signed in click &amp;ldquo;Setup new Project&amp;rdquo;, it will bring you a screen like below.&lt;/p>
+&lt;p>&lt;a class="link" href="connectscm.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/connectscm.png"
+width="826"
+height="396"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/connectscm_hu_cfd9ce135e9dafea.png 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/connectscm_hu_b7bf29ed74798548.png 1024w"
+loading="lazy"
+alt="connectscm"
+class="gallery-image"
+data-flex-grow="208"
+data-flex-basis="500px"
+>&lt;/a>&lt;/p>
+&lt;p>Click on the button on the left.   If you signed up with your Github account it will authenticate you with Github, if you haven&amp;rsquo;t you will need to connect your account to Github.&lt;/p>
+&lt;p>Once you have done this you will get a screen like below.  Codeship will show you all the projects you have access to.&lt;/p>
+&lt;p>&lt;a class="link" href="choose-repo.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/choose-repo.png"
+width="810"
+height="703"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/choose-repo_hu_cfde52fb54d6180b.png 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/choose-repo_hu_e592db6a68df09bd.png 1024w"
+loading="lazy"
+alt="choose repo"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="276px"
+>&lt;/a>&lt;/p>
+&lt;p>Click on the repo you would like to use.&lt;/p>
+&lt;p>You will be then brought to a screen that ask you to setup your pipeline.&lt;/p>
+&lt;p>First, we need to remove the test pipeline, lets click on &amp;ldquo;Delete&amp;rdquo;. If you had unit tests you could run them here, for example &lt;code>grunt&lt;/code>.&lt;/p>
+&lt;p>&lt;a class="link" href="deletepipeline.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/deletepipeline.jpg"
+width="802"
+height="685"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/deletepipeline_hu_dc6df5389410d992.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/deletepipeline_hu_18e65c82043e01d7.jpg 1024w"
+loading="lazy"
+alt="deletepipeline"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="280px"
+>&lt;/a>&lt;/p>
+&lt;p>Next since this example is a Node.Js project, we want to make sure the node modules are correct, we want to run &lt;code>npm install&lt;/code> here.  We need to clear out the initial starter setup commands that have been highlighed below.&lt;/p>
+&lt;p>&lt;a class="link" href="clearsetup.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/clearsetup.jpg"
+width="802"
+height="685"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/clearsetup_hu_d73e3efbdf0e6fd3.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/clearsetup_hu_7a0edd7056413398.jpg 1024w"
+loading="lazy"
+alt="clearsetup"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="280px"
+>&lt;/a>&lt;/p>
+&lt;p>It should look like the following now.&lt;/p>
+&lt;p>&lt;a class="link" href="npminstall.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/npminstall.jpg"
+width="793"
+height="605"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/npminstall_hu_d8041549ea451508.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/npminstall_hu_8467e1a1d4f287d6.jpg 1024w"
+loading="lazy"
+alt="npminstall"
+class="gallery-image"
+data-flex-grow="131"
+data-flex-basis="314px"
+>&lt;/a>&lt;/p>
+&lt;p>Note, if you are using a different language you would want to run the appropriate dependency installer here, for example for Java &lt;code>mvn install&lt;/code>.&lt;/p>
+&lt;p>Lastly, click &amp;ldquo;Save and goto dashboard&amp;rdquo;.&lt;/p>
+&lt;p>Click on &amp;ldquo;Project settings&amp;rdquo; in the top right, then click on &amp;ldquo;Environment variables&amp;rdquo;.  You will be brought to a screen like the following.&lt;/p>
+&lt;p>&lt;a class="link" href="envars.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/envars.jpg"
+width="1089"
+height="540"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/envars_hu_223735f7a13891c2.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/envars_hu_b64bcf699cbf758e.jpg 1024w"
+loading="lazy"
+alt="envars"
+class="gallery-image"
+data-flex-grow="201"
+data-flex-basis="484px"
+>&lt;/a>&lt;/p>
+&lt;p>You need to setup a couple environment variables to make this work.&lt;/p>
+&lt;ul>
+&lt;li>CF_API&lt;/li>
+&lt;li>CF_SPACE&lt;/li>
+&lt;li>CF_ORG&lt;/li>
+&lt;li>CF_USERNAME&lt;/li>
+&lt;li>CF_PASSWORD&lt;/li>
+&lt;/ul>
+&lt;p>Below is a screen shot of things setup.&lt;/p>
+&lt;p>&lt;a class="link" href="envarssetup.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/envarssetup.jpg"
+width="1142"
+height="614"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/envarssetup_hu_69f6baff99214d30.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/envarssetup_hu_943725067c387b9e.jpg 1024w"
+loading="lazy"
+alt="envarssetup"
+class="gallery-image"
+data-flex-grow="185"
+data-flex-basis="446px"
+>&lt;/a>&lt;/p>
+&lt;p>Next, click deployment on the left and type in &amp;ldquo;master&amp;rdquo; without the quotes for the branch name and click &amp;ldquo;Save pipeline settings&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="masterbranch.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/masterbranch.jpg"
+width="1145"
+height="440"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/masterbranch_hu_976e160a90e35732.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/masterbranch_hu_c03a457ed11f0ed5.jpg 1024w"
+loading="lazy"
+alt="masterbranch"
+class="gallery-image"
+data-flex-grow="260"
+data-flex-basis="624px"
+>&lt;/a>&lt;/p>
+&lt;p>Click &amp;ldquo;Custom Script&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="customscript.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/customscript.jpg"
+width="1187"
+height="818"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/customscript_hu_ef55ff617613d555.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/customscript_hu_b3e5332b4dc4a783.jpg 1024w"
+loading="lazy"
+alt="customscript"
+class="gallery-image"
+data-flex-grow="145"
+data-flex-basis="348px"
+>&lt;/a>&lt;/p>
+&lt;p>Paste in the following code, replace &lt;code>myapp&lt;/code> with the name of your app.
+Note: This requires your app to have a &lt;code>manifest.yml&lt;/code>&lt;/p>
+&lt;p>It should look like the following.&lt;/p>
+&lt;p>&lt;a class="link" href="codesnip.jpg" >&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/codesnip.jpg"
+width="853"
+height="665"
+srcset="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/codesnip_hu_50fa23c1b8f13287.jpg 480w, https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/codesnip_hu_722fdd912729f58f.jpg 1024w"
+loading="lazy"
+alt="codesnip"
+class="gallery-image"
+data-flex-grow="128"
+data-flex-basis="307px"
+>&lt;/a>&lt;/p>
+&lt;p>Click &amp;ldquo;Create&amp;rdquo;.&lt;/p>
+&lt;p>You are all set.  Next time you do a git push to Github your app will be auto deployed to Bluemix!&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p></description></item><item><title>Zero Downtime Deployment with the CF Autopilot Plugin - Video</title><link>https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</link><pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/unplug.jpg" alt="Featured image of post Zero Downtime Deployment with the CF Autopilot Plugin - Video" />&lt;p>I recently wrote a &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >blog post &lt;/a>on what a zero downtime deployment is, why it is important, and how to perform one. I am now posting a video on the same topic so you can learn about a zero downtime deployment by watching a video instead.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/y4zor2y-yck" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>If you prefer the tutorial and text instructions please check out &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >Zero Downtime Deployment with the CF Autopilot Plugin&lt;/a>.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p></description></item><item><title>Zero Downtime Deployment with the CF Autopilot Plugin</title><link>https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</link><pubDate>Fri, 19 Jun 2015 10:41:59 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/unplug.jpg" alt="Featured image of post Zero Downtime Deployment with the CF Autopilot Plugin" />&lt;p>Zero down time deployments are a must for any Internet app running at scale.  Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer.  This is not acceptable anymore.  Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.  The companies who create these apps understand the apps’s need to stay up, because their app is their only lifeline and, hopefully, a source of income from the world.&lt;/p>
+&lt;p>Companies such as Facebook, Etsy, and Twitter have been using zero down time deployments for years.  They thrive because they do multiple deployments to production a day.  The number of deployments they do in one day is actually larger than most enterprise companies do in a full year.  Part of the trick is that the code changes are small but they have employed strategies such as zero down time deployments to get code into production as fast as they can.&lt;/p>
+&lt;!-- more -->
+&lt;h2 id="ground-rules">Ground Rules…
+&lt;/h2>&lt;p>There are many names for this, zero down time deployments, obviously, but some people use the term blue/green, while others use the term red/back.  They all mean the same thing.  Instead of having a bias for colors in this post lets use the term “zero down time”.&lt;/p>
+&lt;p>So what is it?&lt;/p>
+&lt;p>Zero Down time deployments are basically what they sound like.  You update production without taking downtime.  It’s not always that simple though.  For the context of this post we are going to be talking about how to do zero down time deployments in Cloud Foundry.&lt;/p>
+&lt;p>Basically it’s a little trick to taking advantage of the way Cloud Foundry runs underneath the covers.  Before we jump into it, there are a couple of caveats that we should discuss first.  To successfully take advantage of zero down time deployments you should have followed the &lt;a class="link" href="http://12factor.net/" target="_blank" rel="noopener"
+>12 Factor App guidelines&lt;/a>. This will ensure that your app is horizontally scalable and can be deployed in a manner that will result in zero down time.  Below are some highlights that you should abide by.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Do not store sessions on disk or in memory.  Store them in some type of shared database or file system.  This could be your favorite database or an in memory database as well.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Do not store configuration information in your application or on disk.  You should store your config info for your app in environment variables.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This is probably the most important, your application needs to be forward and backwards compatible with your database schema…  Say what?  Yes, you need to trust your developers to manage the database schema from your code.If you are using a relational database, you will need some kind of framework to do database migrations for you.  It’s not just that simple with relational databases though…  If you have a big database migration DO NOT PERORM MIGRATIONS THAT WILL INTERRUPT TRAFFIC!  Perform them slowly over time where migrations do not impact users and traffic.  Yahoo had a major application upgrade and it took them 6 months to do the migration to avoid impacting users and taking an outage.  Remember we do not take outages…  If you are in NoSQL land, your life is easier.  Just revision your API’s and educate your developers on forward and backwards data compatibility.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="importance-of-zero-down-time-deployments">Importance of Zero Down Time Deployments
+&lt;/h2>&lt;p>So why are zero down time deployments so important?  The answer is simple, to keep your website/app up so you can make money!  Well that might be over-simplified a bit, but basically it all boils down to keeping your app up so you can continue to do what you do best, and hopefully that involves making money.  If you look at Facebook, for example, they put code into production weeks and months before a feature is exposed to the public.  They extensively test the features on employees first, then slowly enable the features to the rest of the world.&lt;/p>
+&lt;p>This is key, getting features in front of your customers and getting feedback from them.  If it works that’s great, but if it doesn’t at least you know in a short time frame so you can remove it and pivot to go in a different direction.  The current landscape is so fast paced that if you don’t get a feature out, your competition could beat you.&lt;/p>
+&lt;h2 id="how-does-it-work">How does it work?
+&lt;/h2>&lt;p>So let’s walk through what needs to happen to perform zero downtime deployments in Cloud Foundry.  For the use of the walk-through, the application is currently taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Deploy your app or use a currently running app.
+Currently your application is taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.001.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001_hu_67a6719a618981e5.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001_hu_9cf09c6100caf55a.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Deploy the new version of your app to &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+At this time there is currently two versions of your app running.  &lt;code>myapp.mybluemix.net&lt;/code> is still taking production traffic.
+The new app &lt;code>myapp-temp.mybluemix.net&lt;/code> is separate, it can be pointed to your production API keys and databases at this point.
+&lt;a class="link" href="zero-downtime-graphics.002.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002_hu_eb1fe4ca1db1eba1.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002_hu_f8db8cd111c0f3e7.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Perform smoke tests on the new version of the application.
+Some people say this step is optional, but to me its not.  This is key to make sure there wasn’t any weird regressions or merge issues, they CAN happen…&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Map production traffic to the new version of your app.
+At this point the old version of your app and the new version are both taking production traffic.
+&lt;a class="link" href="zero-downtime-graphics.003.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003_hu_63c6b419a410167d.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003_hu_17ea991aa50404ca.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unmap production traffic from the old version of the app.  You can optionally delete the old version as well.
+At this point the new version becomes production and ONLY it is taking traffic.
+The new version still has two URL’s though, &lt;code>myapp.mybluemix.net&lt;/code> and &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.004.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004_hu_19326b037542fa88.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004_hu_49e08d9f24a6dbc1.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remove the temporary route &lt;code>myapp-temp.mybluemix.net&lt;/code> from the new version of your app.
+&lt;a class="link" href="zero-downtime-graphics.005.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005_hu_679aa03b0584be84.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005_hu_669e628ff6813144.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>While this can be scripted there really isn’t a need to do that, there is a Cloud Foundry CLI plugin to do this.&lt;/p>
+&lt;h2 id="autopilot-plugin">Autopilot plugin
+&lt;/h2>&lt;p>Recently the Cloud Foundry CLI started supporting plugins.  This is the holy grail for CF and you can start doing some fun stuff.  In this case, the fun stuff is automating the complex, possibly human error-prone, steps above.  As a dev, if I can automate something and reduce the chance of something going wrong, I am all in.  If you do this, your IT/operations department will love you.&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/concourse/autopilot" target="_blank" rel="noopener"
+>The plugin&lt;/a> performs the above steps for you for performing the zero downtime deployment.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Ensure you have a &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-AutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> account, if you do not sign up &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-AutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install dependencies.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>1. Golang installed ([instructions](https://golang.org/doc/install))
+2. Version 6.7.0 or greater of the Cloud Foundry CLI
+To check what version you have running, run `cf -v` in your terminal.
+[01:36 PM] jsloyer@jeffs-mbp-2 [~]&amp;gt;cf -v
+cf version 6.8.0-b15c536-2014-12-10T23:34:29+00:00
+To upgrade go [here](https://github.com/cloudfoundry/cli/releases).
+&lt;/code>&lt;/pre>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Ensure you have an app running/already deployed.  The plugin requires that you have an app already deployed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Run the following.  I will describe what each line is doing.&lt;/p>
+&lt;p>go get github.com/concourse/autopilot
+cf install-plugin $GOPATH/bin/autopilot
+cf login -a ${CF_API} -u ${CF_USERNAME} -p ${CF_PASSWORD} -o ${CF_ORG} -s ${CF_SPACE}
+cf zero-downtime-push myapp -f manifest.yml&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>Line 1 fetches the source code for the plugin.
+Line 2 installs the plugin
+Line 3 logins into Bluemix.  I have the sensitive information replace with environment variables.
+Line 4 performs the zero down time deployment.
+&lt;/code>&lt;/pre>
+&lt;p>The plugin does require a &lt;code>manifest.yml&lt;/code>.  The plugin basically views the &lt;code>manifest.yml&lt;/code> files as the truth of the state of the application.&lt;/p>
+&lt;h2 id="extensions-with-ci-pipelines">Extensions with CI Pipelines
+&lt;/h2>&lt;p>This will be forthcoming in an upcoming blog post on how to use some of the most popular CI engines out there.&lt;/p>
+&lt;h2 id="recap">Recap
+&lt;/h2>&lt;p>Just to review what we did here, we learned what zero down time deployments are, why they are crucial to any Internet scale application, and how to perform a zero down time deployment.  Then, we took it a step further on how to use a Cloud Foundry plugin to do the heavy lifting for us and automate the zero down time deployment.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p>
+&lt;h2 id="video">Video
+&lt;/h2>&lt;p>I have also published a video if you prefer to watch that instead, please check out &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/" >Zero Downtime Deployment with the CF Autopilot Plugin – Video.&lt;/a>&lt;/p>
+&lt;h2 id="additional-parts">Additional part&amp;rsquo;s
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/" >Zero downtime deployments with Bluemix and Codeship&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Twitter Personality Comparisons Using Watson</title><link>https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</link><pubDate>Mon, 24 Nov 2014 22:06:16 -0500</pubDate><guid>https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/personality.jpg" alt="Featured image of post Twitter Personality Comparisons Using Watson" />&lt;p>Hey Yall!&lt;/p>
+&lt;p>We are back at it again with some demos!!!&lt;/p>
+&lt;p>Did you ever wonder if you and your favorite celebrity would be compatible if you met?? I sure do! Or did you ever wonder how you could become a better leader, I sure do. Today you would have to go Google the person and analyze posts and articles about them and be a personality expert to see if you have personality traits in common.&lt;/p>
+&lt;p>Gone are those days now!&lt;/p>
+&lt;p>Enter &lt;a class="link" href="http://friendme.mybluemix.net/" target="_blank" rel="noopener"
+>FriendMe&lt;/a>!  Your trusted personality comparison using IBM Watson. The answer to the above questions are easy now.  For example,  if I compared myself to the IBM Design Twitter account, I can see my personality is very much alike with the IBM Design team.  Thats good news for me because I never considered myself a designer…
+&lt;a class="link" href="jeff-and-ibm-design.jpg" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-ibm-design.jpg"
+width="735"
+height="176"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-ibm-design_hu_28f61e73a8f04dee.jpg 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-ibm-design_hu_c826fa204f45822b.jpg 1024w"
+loading="lazy"
+alt="jeff and ibm design Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="417"
+data-flex-basis="1002px"
+>&lt;/a>&lt;/p>
+&lt;!-- more -->
+&lt;p>For the leadership, personal, and professional case, Jerry Cuomo is a very successful leader at IBM. I can see that myself and Jerry share 5 out of the top 5 personality traits in common.  In my career development I can see I need to develop myself more as a transformational leader.&lt;/p>
+&lt;p>&lt;a class="link" href="jeff-and-jerry.jpg" >&lt;img src="https://www.jeffsloyer.io/jeff-and-jerry.jpg"
+loading="lazy"
+alt="jeff and jerry Twitter Personality Comparisons Using Watson"
+>&lt;/a>&lt;/p>
+&lt;p>Lastly, I am going to do one more comparison, between myself and Blake McGregor (a product manager for Bluemix).&lt;/p>
+&lt;p>&lt;a class="link" href="jeff-and-blake.jpg" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-blake.jpg"
+width="696"
+height="169"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-blake_hu_fc4bfa4c430e1762.jpg 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-blake_hu_61c2772ae7c64668.jpg 1024w"
+loading="lazy"
+alt="jeff and blake Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="411"
+data-flex-basis="988px"
+>&lt;/a>&lt;/p>
+&lt;p>So let’s jump right into it.&lt;/p>
+&lt;p>This app was written in about 6 hours, its built using obviously IBM Bluemix, Node.JS, Angular.JS, Bootstrap, JQuery, IBM Watson, Cloudant, and Twilio.&lt;/p>
+&lt;p>If you went to the link above, &lt;a class="link" href="http://friendme.mybluemix.net/" target="_blank" rel="noopener"
+>here it is again&lt;/a>.  You can actually text the app.  If you text the app two Twitter handles it will tell you the compatibility between two people.&lt;/p>
+&lt;p>So the source code is available &lt;a class="link" href="https://github.com/IBM-bluemix/friendme" target="_blank" rel="noopener"
+>on Github&lt;/a>.&lt;/p>
+&lt;p>First, we are going to walk through on how to deploy this app and get it working in Bluemix.  Secondly, we are going to walk through how to use the command line to deploy this app as well.&lt;/p>
+&lt;p>If you haven’t already sign up for a &lt;a class="link" href="http://bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp" target="_blank" rel="noopener"
+>Bluemix account&lt;/a>.  Once you have done that head over to&lt;a class="link" href="http://jazzhub.com" target="_blank" rel="noopener"
+> jazzhub.com&lt;/a>.  Login there with the username and password you created from your Bluemix account.  If you haven’t logged in yet to jazzhub it will ask you to create an id.  For example if my email is &lt;a class="link" href="mailto:jsmith@co.com" >jsmith@co.com&lt;/a>, I would create a username of jsmith.&lt;/p>
+&lt;p>First, let’s open a web browser and goto &lt;a class="link" href="https://github.com/IBM-bluemix/friendme" target="_blank" rel="noopener"
+>https://github.com/IBM-bluemix/friendme&lt;/a>.  Since we already created an account or logged in jazzhub above we should be logged in.  On the right hand side near the top there should be a big button that says &amp;ldquo;Fork Project&amp;rdquo;.  Let’s click that.&lt;/p>
+&lt;p>&lt;a class="link" href="fork.png" >
+&lt;/a>&lt;a class="link" href="fork.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork.png"
+width="300"
+height="83"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork_hu_e5dda40ee0488710.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork_hu_92803f85830f436a.png 1024w"
+loading="lazy"
+alt="fork 300x83 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="361"
+data-flex-basis="867px"
+>&lt;/a>&lt;/p>
+&lt;p>Let’s go ahead and enter a project name, for example friendme, you can name it anything you want though.  Next place a check mark next to &amp;ldquo;Make it Private&amp;rdquo;, more on this later…  Next make sure an organization and space is shown, it should should your email address as the organization and the space should be dev.  Lastly, click &amp;ldquo;Save&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="fork2.png" >
+&lt;/a>&lt;a class="link" href="fork2.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork2.png"
+width="300"
+height="239"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork2_hu_fbd70f899f8fb918.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork2_hu_ba1847246db0f6e7.png 1024w"
+loading="lazy"
+alt="fork2 300x239 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="301px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we need to create the app in Bluemix and setup some services.  So in a new browser window navigate to&lt;a class="link" href="http://bluemix.net/" target="_blank" rel="noopener"
+> http://bluemix.net&lt;/a>.  In the top right click login.&lt;/p>
+&lt;p>Once you login click on catalog and find SDK for Node.JS.  Go ahead and click on it.&lt;/p>
+&lt;p>&lt;a class="link" href="node.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/node.png"
+width="269"
+height="300"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/node_hu_664ec7bd40c775fa.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/node_hu_b92ebc228a62d01c.png 1024w"
+loading="lazy"
+alt="node 269x300 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="89"
+data-flex-basis="215px"
+>&lt;/a>&lt;/p>
+&lt;p>Type in a name for your app, this will also be the URL for your app, remember this as we will need it later…  Then click &amp;ldquo;Create&amp;rdquo;.&lt;/p>
+&lt;p>Behind the scenes Bluemix is spinning up a container for our app, setting up SSL, and setting up load balancing. In a traditional IaaS, you would have to do all this manually and it can take hours or days…&lt;/p>
+&lt;p>&lt;a class="link" href="createapp.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/createapp.png"
+width="228"
+height="300"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/createapp_hu_ca3d17f5544aea86.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/createapp_hu_4f2e2fa607e1fc2.png 1024w"
+loading="lazy"
+alt="createapp 228x300 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="76"
+data-flex-basis="182px"
+>&lt;/a>&lt;/p>
+&lt;p>Next, we need to add some services to our app.  We need Watson and Cloudant.  Let’s do Watson first.  The Watson service that we want is User Modeling.  It will analyze text and determine someone’s personality.  So to do this let’s click &amp;ldquo;Add A Service&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="addservice.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addservice.png"
+width="300"
+height="76"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addservice_hu_c62a1aea4e3d8aaf.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addservice_hu_eb9eb4498b2765e5.png 1024w"
+loading="lazy"
+alt="addservice 300x76 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="394"
+data-flex-basis="947px"
+>&lt;/a>&lt;/p>
+&lt;p>Let’s go to the Watson section and click on &amp;ldquo;User Modeling&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="usermodeling.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling.png"
+width="300"
+height="115"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling_hu_2f8c7001bd53ffab.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling_hu_84422fde67a5add8.png 1024w"
+loading="lazy"
+alt="usermodeling 300x115 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="260"
+data-flex-basis="626px"
+>&lt;/a>&lt;/p>
+&lt;p>It will bring up a dialog asking us to bind the service to our app, on the right hand side, click &amp;ldquo;Create&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="usermodeling2.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling2.png"
+width="224"
+height="300"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling2_hu_de1ce743213412d5.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling2_hu_6cd2119b9367372.png 1024w"
+loading="lazy"
+alt="usermodeling2 224x300 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="74"
+data-flex-basis="179px"
+>&lt;/a>&lt;/p>
+&lt;p>It will ask us if we want to restage the app, go ahead and click ok.  What this means is it needs to bind the service to the app and to do this it needs to restart it.&lt;/p>
+&lt;p>Next, we need to create a database, to do this let’s click on the Cloudant tile.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantclick.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantclick.png"
+width="783"
+height="578"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantclick_hu_2627f191c7a6ddaf.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantclick_hu_37d962d33d1939e4.png 1024w"
+loading="lazy"
+alt="cloudantclick 300x221 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="325px"
+>&lt;/a>&lt;/p>
+&lt;p>Then let’s click on the launch button.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantlaunch.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantlaunch.png"
+width="1024"
+height="351"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantlaunch_hu_ae86217a151a7505.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantlaunch_hu_7ea855d9f0f4cd14.png 1024w"
+loading="lazy"
+alt="cloudantlaunch 300x103 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="291"
+data-flex-basis="700px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we need to create a database, click on &amp;ldquo;Add New Database&amp;rdquo; in the top right.&lt;/p>
+&lt;p>&lt;a class="link" href="addnewdb.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addnewdb.png"
+width="600"
+height="96"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addnewdb_hu_62b66c1c41ad5902.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addnewdb_hu_21993a5ddbe44cf2.png 1024w"
+loading="lazy"
+alt="addnewdb 300x48 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="625"
+data-flex-basis="1500px"
+>&lt;/a>&lt;/p>
+&lt;p>Then enter a name for the database, let’s use friendme, if you use something else we will have to edit the code…  Go ahead and click &amp;ldquo;Create&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="db.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/db.png"
+width="300"
+height="150"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/db_hu_7cbfe672df7b457.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/db_hu_da681d3bd90c9a6c.png 1024w"
+loading="lazy"
+alt="db 300x150 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="480px"
+>&lt;/a>&lt;/p>
+&lt;p>We can close out of Cloudant now.&lt;/p>
+&lt;p>So, since we are making API calls to Twilio and Twitter we need to register for API key’s.&lt;/p>
+&lt;p>Let’s do Twitter first, head on over to &lt;a class="link" href="http://apps.twitter.com" target="_blank" rel="noopener"
+>http://apps.twitter.com&lt;/a> and login with your Twitter username and password.&lt;/p>
+&lt;p>In the top right let’s click on &amp;ldquo;Create New App&amp;rdquo;.  Type in a name and description for the app, the URL actually doesn’t matter but let’s type in something real.  Remember above the name you created for your app in Bluemix, let’s type that in.  For example &lt;a class="link" href="http://friendme.mybluemix.net" target="_blank" rel="noopener"
+>http://friendme.mybluemix.net&lt;/a>.  Replace friendme with the name of your app.&lt;/p>
+&lt;p>Click on the &amp;ldquo;Keys and Access Tokens&amp;rdquo; tab.  Under Access Tokens click &amp;ldquo;Create my access token&amp;rdquo;.  Leave this tab open, we will need these API’s keys in a bit…&lt;/p>
+&lt;p>Next we need a Twilio phone number if you would like to be able to text your app.  If you don’t want to be able to text the app skip this section, you can use the UI of the app to interact with it.  Head on over to &lt;a class="link" href="https://www.twilio.com/try-twilio?promo=bluemix" target="_blank" rel="noopener"
+>https://www.twilio.com/try-twilio&lt;/a> and create an account.  If you already have an account go ahead and goto &lt;a class="link" href="https://www.twilio.com/user/account/phone-numbers/incoming" target="_blank" rel="noopener"
+>https://www.twilio.com/user/account/phone-numbers/incoming&lt;/a> or if you just created an account go there as well.&lt;/p>
+&lt;p>We need to buy a number, to do this click on &amp;ldquo;Buy Number&amp;rdquo; in the top right.  Make sure the number has texting capabilities.&lt;/p>
+&lt;p>&lt;a class="link" href="twilio.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/twilio.png"
+width="300"
+height="137"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/twilio_hu_68c2e6fd2edf5620.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/twilio_hu_4ed3b0a354196785.png 1024w"
+loading="lazy"
+alt="twilio 300x137 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="525px"
+>&lt;/a>&lt;/p>
+&lt;p>Try to find one of the cheaper ones, the cheapest you can find is $1/month, not bad…&lt;/p>
+&lt;p>So once we buy the number we will need our API key’s.  They can be found at &lt;a class="link" href="https://www.twilio.com/user/account/settings" target="_blank" rel="noopener"
+>https://www.twilio.com/user/account/settings&lt;/a>.  Leave this tab open like we did for Twitter, we will come back to this…&lt;/p>
+&lt;p>Ok so finally time to deploy our app.  To do this switch back to Jazzhub, click the &amp;ldquo;Build &amp;amp; Deploy&amp;rdquo; button in the top right.&lt;/p>
+&lt;p>&lt;a class="link" href="buildanddeploy.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildanddeploy.png"
+width="300"
+height="53"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildanddeploy_hu_2e7dc4ebc6f1abe9.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildanddeploy_hu_74a25e9bdc69aa6d.png 1024w"
+loading="lazy"
+alt="buildanddeploy 300x53 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="566"
+data-flex-basis="1358px"
+>&lt;/a>&lt;/p>
+&lt;p>Go ahead and click on &amp;ldquo;Advanced&amp;rdquo; to turn on deployments.&lt;/p>
+&lt;p>&lt;a class="link" href="advanced.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/advanced.png"
+width="300"
+height="54"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/advanced_hu_f46371b0d943eb.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/advanced_hu_a28873a289b8f3be.png 1024w"
+loading="lazy"
+alt="advanced 300x54 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="555"
+data-flex-basis="1333px"
+>&lt;/a>&lt;/p>
+&lt;p>Click on &amp;ldquo;add a builder&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="addabuilder.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addabuilder.png"
+width="300"
+height="293"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addabuilder_hu_b1577ed54355959a.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addabuilder_hu_ef4ceea7d73d3708.png 1024w"
+loading="lazy"
+alt="addabuilder 300x293 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="245px"
+>&lt;/a>&lt;/p>
+&lt;p>For builder type choose &amp;ldquo;Shell Script&amp;rdquo;.&lt;/p>
+&lt;p>For the build script text area enter the following.&lt;/p>
+&lt;pre>&lt;code>#!/bin/bash
+echo &amp;quot;do nothing&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Since it is node we really don’t need a build here…  If this wasn’t a demo and real app we would probably run some unit tests and do some linting here…&lt;/p>
+&lt;p>Click on Save.&lt;/p>
+&lt;p>&lt;a class="link" href="builderdone.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/builderdone.png"
+width="300"
+height="228"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/builderdone_hu_33480b611b0bc61b.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/builderdone_hu_62167e7eb1adad00.png 1024w"
+loading="lazy"
+alt="builderdone 300x228 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="131"
+data-flex-basis="315px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we need to set up the deployment.  Click on &amp;ldquo;add a stage&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="addstage.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addstage.png"
+width="300"
+height="242"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addstage_hu_e6e842bb605214ba.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addstage_hu_6a6b0c085cfe59c.png 1024w"
+loading="lazy"
+alt="addstage 300x242 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="297px"
+>&lt;/a>&lt;/p>
+&lt;p>Make sure the app name matches the app name we created in Bluemix.&lt;/p>
+&lt;p>Last thing we need to do is modify the build script.  This is the only really confusing bit, you need to make sure you set this up correct or the app won’t work…&lt;/p>
+&lt;p>When you first click on &amp;ldquo;add a stage&amp;rdquo; it will look like the following&amp;hellip;&lt;/p>
+&lt;p>&lt;a class="link" href="deploybefore.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/deploybefore.png"
+width="300"
+height="239"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/deploybefore_hu_c70508966d67118c.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/deploybefore_hu_5de1bf44ae6c9d35.png 1024w"
+loading="lazy"
+alt="deploybefore 300x239 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="301px"
+>&lt;/a>&lt;/p>
+&lt;p>The script will look like the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push &amp;#34;${CF_APP}&amp;#34; -n &amp;#34;${CF_APP}-${CF_SPACE}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># View logs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXIT_CODE=$?
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if [ $EXIT_CODE -ne 0 ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cf logs &amp;#34;${CF_APP}&amp;#34; --recent
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> exit $EXIT_CODE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>We will need to update it to the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWILIO_PHONENUMBER &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWILIO_SID &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWILIO_TOKEN &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_ACCESSTOKEN_KEY &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_ACCESSTOKEN_SECRET &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_CONSUMER_KEY &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_CONSUMER_SECRET &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf push &amp;#34;${CF_APP}&amp;#34; -c &amp;#34;node lib/app.js&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># View logs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXIT_CODE=$?
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if [ $EXIT_CODE -ne 0 ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cf logs &amp;#34;${CF_APP}&amp;#34; --recent
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> exit $EXIT_CODE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>For each of these values we need to substitute in the the correct values from the tab’s we kept open earlier from Twitter and Twilio.&lt;/p>
+&lt;p>If you remember earlier we made the project private, this was to prevent other people from seeing our secret access key’s.  DevOps Service will be rolling out a new over the coming weeks where you can find information for a public project.&lt;/p>
+&lt;p>Once you replace the values go ahead and click &amp;ldquo;Save&amp;rdquo;.&lt;/p>
+&lt;p>Last thing to do is click &amp;ldquo;Request Build&amp;rdquo;.  That should successfully complete and that will trigger a deployment of your app.&lt;/p>
+&lt;p>You can see the deployment is being performed by the following screen shot.&lt;/p>
+&lt;p>&lt;a class="link" href="buildrunning.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildrunning.png"
+width="300"
+height="195"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildrunning_hu_237b35032d571328.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildrunning_hu_4e4f5742827993e7.png 1024w"
+loading="lazy"
+alt="buildrunning 300x195 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="369px"
+>&lt;/a>&lt;/p>
+&lt;p>Once the deployment finishes you can click the link (name of your app) to your app to use it!&lt;/p>
+&lt;p>&lt;a class="link" href="done.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/done.png"
+width="300"
+height="207"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/done_hu_9354d5d3fcc4520a.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/done_hu_df2683bdbd9f874d.png 1024w"
+loading="lazy"
+alt="done 300x207 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/a>&lt;/p>
+&lt;p>Please reach out to me on Twitter (&lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a>) if you have any issues or post a comment below.&lt;/p></description></item></channel></rss>

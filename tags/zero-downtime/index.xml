@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Zero Downtime on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/zero-downtime/</link><description>Recent content in Zero Downtime on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 01 Jul 2015 10:51:49 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/zero-downtime/index.xml" rel="self" type="application/rss+xml"/><item><title>Zero Downtime Deployment with the CF Autopilot Plugin - Video</title><link>https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</link><pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/unplug.jpg" alt="Featured image of post Zero Downtime Deployment with the CF Autopilot Plugin - Video" />&lt;p>I recently wrote a &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >blog post &lt;/a>on what a zero downtime deployment is, why it is important, and how to perform one. I am now posting a video on the same topic so you can learn about a zero downtime deployment by watching a video instead.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/y4zor2y-yck" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>If you prefer the tutorial and text instructions please check out &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >Zero Downtime Deployment with the CF Autopilot Plugin&lt;/a>.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p></description></item><item><title>Zero Downtime Deployment with the CF Autopilot Plugin</title><link>https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</link><pubDate>Fri, 19 Jun 2015 10:41:59 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/unplug.jpg" alt="Featured image of post Zero Downtime Deployment with the CF Autopilot Plugin" />&lt;p>Zero down time deployments are a must for any Internet app running at scale.  Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer.  This is not acceptable anymore.  Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.  The companies who create these apps understand the apps’s need to stay up, because their app is their only lifeline and, hopefully, a source of income from the world.&lt;/p>
+&lt;p>Companies such as Facebook, Etsy, and Twitter have been using zero down time deployments for years.  They thrive because they do multiple deployments to production a day.  The number of deployments they do in one day is actually larger than most enterprise companies do in a full year.  Part of the trick is that the code changes are small but they have employed strategies such as zero down time deployments to get code into production as fast as they can.&lt;/p>
+&lt;!-- more -->
+&lt;h2 id="ground-rules">Ground Rules…
+&lt;/h2>&lt;p>There are many names for this, zero down time deployments, obviously, but some people use the term blue/green, while others use the term red/back.  They all mean the same thing.  Instead of having a bias for colors in this post lets use the term “zero down time”.&lt;/p>
+&lt;p>So what is it?&lt;/p>
+&lt;p>Zero Down time deployments are basically what they sound like.  You update production without taking downtime.  It’s not always that simple though.  For the context of this post we are going to be talking about how to do zero down time deployments in Cloud Foundry.&lt;/p>
+&lt;p>Basically it’s a little trick to taking advantage of the way Cloud Foundry runs underneath the covers.  Before we jump into it, there are a couple of caveats that we should discuss first.  To successfully take advantage of zero down time deployments you should have followed the &lt;a class="link" href="http://12factor.net/" target="_blank" rel="noopener"
+>12 Factor App guidelines&lt;/a>. This will ensure that your app is horizontally scalable and can be deployed in a manner that will result in zero down time.  Below are some highlights that you should abide by.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Do not store sessions on disk or in memory.  Store them in some type of shared database or file system.  This could be your favorite database or an in memory database as well.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Do not store configuration information in your application or on disk.  You should store your config info for your app in environment variables.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This is probably the most important, your application needs to be forward and backwards compatible with your database schema…  Say what?  Yes, you need to trust your developers to manage the database schema from your code.If you are using a relational database, you will need some kind of framework to do database migrations for you.  It’s not just that simple with relational databases though…  If you have a big database migration DO NOT PERORM MIGRATIONS THAT WILL INTERRUPT TRAFFIC!  Perform them slowly over time where migrations do not impact users and traffic.  Yahoo had a major application upgrade and it took them 6 months to do the migration to avoid impacting users and taking an outage.  Remember we do not take outages…  If you are in NoSQL land, your life is easier.  Just revision your API’s and educate your developers on forward and backwards data compatibility.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="importance-of-zero-down-time-deployments">Importance of Zero Down Time Deployments
+&lt;/h2>&lt;p>So why are zero down time deployments so important?  The answer is simple, to keep your website/app up so you can make money!  Well that might be over-simplified a bit, but basically it all boils down to keeping your app up so you can continue to do what you do best, and hopefully that involves making money.  If you look at Facebook, for example, they put code into production weeks and months before a feature is exposed to the public.  They extensively test the features on employees first, then slowly enable the features to the rest of the world.&lt;/p>
+&lt;p>This is key, getting features in front of your customers and getting feedback from them.  If it works that’s great, but if it doesn’t at least you know in a short time frame so you can remove it and pivot to go in a different direction.  The current landscape is so fast paced that if you don’t get a feature out, your competition could beat you.&lt;/p>
+&lt;h2 id="how-does-it-work">How does it work?
+&lt;/h2>&lt;p>So let’s walk through what needs to happen to perform zero downtime deployments in Cloud Foundry.  For the use of the walk-through, the application is currently taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Deploy your app or use a currently running app.
+Currently your application is taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.001.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001_hu_67a6719a618981e5.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001_hu_9cf09c6100caf55a.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Deploy the new version of your app to &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+At this time there is currently two versions of your app running.  &lt;code>myapp.mybluemix.net&lt;/code> is still taking production traffic.
+The new app &lt;code>myapp-temp.mybluemix.net&lt;/code> is separate, it can be pointed to your production API keys and databases at this point.
+&lt;a class="link" href="zero-downtime-graphics.002.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002_hu_eb1fe4ca1db1eba1.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002_hu_f8db8cd111c0f3e7.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Perform smoke tests on the new version of the application.
+Some people say this step is optional, but to me its not.  This is key to make sure there wasn’t any weird regressions or merge issues, they CAN happen…&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Map production traffic to the new version of your app.
+At this point the old version of your app and the new version are both taking production traffic.
+&lt;a class="link" href="zero-downtime-graphics.003.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003_hu_63c6b419a410167d.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003_hu_17ea991aa50404ca.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unmap production traffic from the old version of the app.  You can optionally delete the old version as well.
+At this point the new version becomes production and ONLY it is taking traffic.
+The new version still has two URL’s though, &lt;code>myapp.mybluemix.net&lt;/code> and &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.004.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004_hu_19326b037542fa88.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004_hu_49e08d9f24a6dbc1.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remove the temporary route &lt;code>myapp-temp.mybluemix.net&lt;/code> from the new version of your app.
+&lt;a class="link" href="zero-downtime-graphics.005.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005_hu_679aa03b0584be84.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005_hu_669e628ff6813144.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>While this can be scripted there really isn’t a need to do that, there is a Cloud Foundry CLI plugin to do this.&lt;/p>
+&lt;h2 id="autopilot-plugin">Autopilot plugin
+&lt;/h2>&lt;p>Recently the Cloud Foundry CLI started supporting plugins.  This is the holy grail for CF and you can start doing some fun stuff.  In this case, the fun stuff is automating the complex, possibly human error-prone, steps above.  As a dev, if I can automate something and reduce the chance of something going wrong, I am all in.  If you do this, your IT/operations department will love you.&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/concourse/autopilot" target="_blank" rel="noopener"
+>The plugin&lt;/a> performs the above steps for you for performing the zero downtime deployment.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Ensure you have a &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-AutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> account, if you do not sign up &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-AutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install dependencies.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>1. Golang installed ([instructions](https://golang.org/doc/install))
+2. Version 6.7.0 or greater of the Cloud Foundry CLI
+To check what version you have running, run `cf -v` in your terminal.
+[01:36 PM] jsloyer@jeffs-mbp-2 [~]&amp;gt;cf -v
+cf version 6.8.0-b15c536-2014-12-10T23:34:29+00:00
+To upgrade go [here](https://github.com/cloudfoundry/cli/releases).
+&lt;/code>&lt;/pre>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Ensure you have an app running/already deployed.  The plugin requires that you have an app already deployed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Run the following.  I will describe what each line is doing.&lt;/p>
+&lt;p>go get github.com/concourse/autopilot
+cf install-plugin $GOPATH/bin/autopilot
+cf login -a ${CF_API} -u ${CF_USERNAME} -p ${CF_PASSWORD} -o ${CF_ORG} -s ${CF_SPACE}
+cf zero-downtime-push myapp -f manifest.yml&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>Line 1 fetches the source code for the plugin.
+Line 2 installs the plugin
+Line 3 logins into Bluemix.  I have the sensitive information replace with environment variables.
+Line 4 performs the zero down time deployment.
+&lt;/code>&lt;/pre>
+&lt;p>The plugin does require a &lt;code>manifest.yml&lt;/code>.  The plugin basically views the &lt;code>manifest.yml&lt;/code> files as the truth of the state of the application.&lt;/p>
+&lt;h2 id="extensions-with-ci-pipelines">Extensions with CI Pipelines
+&lt;/h2>&lt;p>This will be forthcoming in an upcoming blog post on how to use some of the most popular CI engines out there.&lt;/p>
+&lt;h2 id="recap">Recap
+&lt;/h2>&lt;p>Just to review what we did here, we learned what zero down time deployments are, why they are crucial to any Internet scale application, and how to perform a zero down time deployment.  Then, we took it a step further on how to use a Cloud Foundry plugin to do the heavy lifting for us and automate the zero down time deployment.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p>
+&lt;h2 id="video">Video
+&lt;/h2>&lt;p>I have also published a video if you prefer to watch that instead, please check out &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/" >Zero Downtime Deployment with the CF Autopilot Plugin – Video.&lt;/a>&lt;/p>
+&lt;h2 id="additional-parts">Additional part&amp;rsquo;s
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/" >Zero downtime deployments with Bluemix and Codeship&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

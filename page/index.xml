@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Pages on Jeff Sloyer</title><link>https://www.jeffsloyer.io/page/</link><description>Recent content in Pages on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://www.jeffsloyer.io/page/index.xml" rel="self" type="application/rss+xml"/><item><title>About</title><link>https://www.jeffsloyer.io/about/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://www.jeffsloyer.io/about/</guid><description>&lt;p>Jeff Sloyer is currently a STSM (senior technical staff member) for the IBM Cloud Developer Services Tribe where he leads development and architecture for IBM Cloud Satellite.&lt;/p>
+&lt;p>He has previously led UX for multiple products including Kubernetes, Logging, Monitoring, Schematics (Terraform), and Functions.&lt;/p>
+&lt;p>Jeff&amp;rsquo;s previous role at IBM was a Developer Advocate. He promoted IBM’s Platform as a Service (Paas), Bluemix. He’s a Node.JS developer most days, but tinkers in Java and Python. Sloyer is a hacker at heart who loves playing with new tech and cobbling together new demos and projects. He’s an avid traveler, flying around the world and speaking about Bluemix at conferences and events.&lt;/p>
+&lt;p>On a more personal note Jeff Sloyer loves really anything outside. Some of his favorite activities include mountain biking, skiing, wake boarding, and hiking.&lt;/p>
+&lt;p>Jeff is also a home brewer, just a word of caution here, he is still learning… The last beer was a little bit of a mistake and fermented too long. The beer was supposed to be 7% and turned into 14%. Ooopies…&lt;/p>
+&lt;p>Additionally, Jeff is a foodie. He loves traveling and eating new food and experiencing different cultures. Additionally, the travel bug has bitten Jeff hard. He loves to travel to new places and spends a decent amount of time on airplanes. He even loves traveling so much he enjoys going through security. Weird I know right??? One day he hopes to get his own G5.&lt;/p>
+&lt;p>Lastly, Jeff is a big believer in the 2nd amendment and is a marksman.&lt;/p>
+&lt;p>Links:&lt;/p>
+&lt;ul>
+&lt;li>Twitter: &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>jsloyer&lt;/a>&lt;/li>
+&lt;li>Github: &lt;a class="link" href="http://github.com/jsloyer" target="_blank" rel="noopener"
+>jsloyer&lt;/a>&lt;/li>
+&lt;li>StackOverflow: &lt;a class="link" href="http://stackoverflow.com/users/3817025/jeff-sloyer" target="_blank" rel="noopener"
+>jeff-sloyer&lt;/a>&lt;/li>
+&lt;li>Youtube: &lt;a class="link" href="http://youtube.com/c/JeffSloyer" target="_blank" rel="noopener"
+>JeffSloyer&lt;/a>&lt;/li>
+&lt;li>DZone: &lt;a class="link" href="https://dzone.com/users/jsloyer" target="_blank" rel="noopener"
+>DZone&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Archives</title><link>https://www.jeffsloyer.io/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://www.jeffsloyer.io/archives/</guid><description/></item><item><title>Speaking</title><link>https://www.jeffsloyer.io/speaking/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://www.jeffsloyer.io/speaking/</guid><description>&lt;h2 id="past-events">Past Events
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://trilug.org/2019/02/26/march-14-kubernetes-from-the-trenches/" target="_blank" rel="noopener"
+>Trilug - Linux Meetup&lt;/a>
+&lt;ul>
+&lt;li>March 2019&lt;/li>
+&lt;li>Raleigh, NC&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.youtube.com/watch?v=ZzFjPqCibMc&amp;amp;feature=youtu.be" target="_blank" rel="noopener"
+>Kubecon 2018 - Europe&lt;/a>
+&lt;ul>
+&lt;li>May 2018&lt;/li>
+&lt;li>Copenhagen, Denmark&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a class="link" href="https://allthingsopen.org/talk/extreme-chatops-using-kubernetes-and-watson/" target="_blank" rel="noopener"
+>All Things Open 2017&lt;/a>
+&lt;ul>
+&lt;li>September 2017&lt;/li>
+&lt;li>Raleigh, NC, USA&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Box Works
+&lt;ul>
+&lt;li>October 2015&lt;/li>
+&lt;li>San Francisco, CA, USA&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.youtube.com/watch?v=xkB0qiU6PGk" target="_blank" rel="noopener"
+>Kranky Geek 2015&lt;/a>
+&lt;ul>
+&lt;li>September 11, 2015&lt;/li>
+&lt;li>San Francisco, CA, USA&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>All Things Open 2015
+&lt;ul>
+&lt;li>September 2015&lt;/li>
+&lt;li>Raleigh, NC, USA&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a class="link" href="https://youtu.be/4QXZl4cFw24?t=2h1m55s" target="_blank" rel="noopener"
+>Twilio Signal 2015 - Keynote&lt;/a>
+&lt;ul>
+&lt;li>May 18, 2015&lt;/li>
+&lt;li>San Francisco, CA, USA&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a class="link" href="http://nodesummit.com/media/mobile-web-apps-with-pouchdb-angularjs-node-js-and-ibm-cloudant-bradley-holt-jeff-sloyer/" target="_blank" rel="noopener"
+>Node Summit 2015&lt;/a>
+&lt;ul>
+&lt;li>February 10, 2015&lt;/li>
+&lt;li>San Francisco, CA, USA&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>Links</title><link>https://www.jeffsloyer.io/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.jeffsloyer.io/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
+&lt;p>This page&amp;rsquo;s frontmatter:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">links&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub is the world&amp;#39;s largest software development platform.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.com&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://www.typescriptlang.org&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ts-logo-128.jpg&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>image&lt;/code> field accepts both local and external images.&lt;/p></description></item><item><title>Search</title><link>https://www.jeffsloyer.io/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.jeffsloyer.io/search/</guid><description/></item></channel></rss>

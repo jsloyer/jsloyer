@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Etherpad on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/etherpad/</link><description>Recent content in Etherpad on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 03 Jan 2015 22:19:30 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/etherpad/index.xml" rel="self" type="application/rss+xml"/><item><title>Etherpad in Cloud Foundry – Quick Start Guide</title><link>https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</link><pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate><guid>https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</guid><description>&lt;p>Etherpad Lite is an awesome online collaboration platform.  Multiple open source projects use it for collaboration.  One of the most notable ones is the Openstack Project &lt;a class="link" href="https://etherpad.openstack.org/" target="_blank" rel="noopener"
+>Openstack Etherpad&lt;/a>. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry. No worries, here is one!&lt;/p>
+&lt;h3 id="loginregister-for-bluemix">Login/Register for Bluemix
+&lt;/h3>&lt;p>The first step is creating a Node.js app in Bluemix.  Let’s login to Bluemix, open a web browser and visit &lt;a class="link" href="http://bluemix.net/" target="_blank" rel="noopener"
+>Bluemix&lt;/a> and click LOG IN.  If you don’t have an account click, SIGN UP.  Since Etherpad-Lite is built using Node.js, we want to start with an empty Node.js app in Bluemix.  We will do this from the command line.&lt;/p>
+&lt;p>If you already have the CLI command line executable, you can skip this step.  If you don’t have it, follow the steps from the &lt;a class="link" href="https://www.ng.bluemix.net/docs/#cli/index.html#cli" target="_blank" rel="noopener"
+>Bluemix docs&lt;/a> on how to install the command line for your platform and how to set it up.  Once you get things setup you should be able to run &lt;code>cf s&lt;/code> and get the following output:&lt;/p>
+&lt;pre>&lt;code>[01:30 PM] jsloyer@jeffs-mbp [blah]&amp;gt;cf s
+cf domains Getting domains in org jbsloyer@us.ibm.com as ...
+name status
+mybluemix.net shared
+&lt;/code>&lt;/pre>
+&lt;p>Your output will be slightly different (this is ok).  This was just a check to make sure things are setup correctly.  If you are getting an auth error or error that you aren’t pointing to Cloud Foundry, refer back to the docs, reply to this post, or post a question to &lt;a class="link" href="http://stackoverflow.com/questions/tagged/bluemix" target="_blank" rel="noopener"
+>Stackoverflow&lt;/a> for help.&lt;/p>
+&lt;h3 id="upload-etherpad-lite-code-to-bluemix">Upload Etherpad-Lite Code to Bluemix
+&lt;/h3>&lt;p>OK, next we need to upload the Etherpad-Lite code to Bluemix. The version of Etherpad-Lite is a forked version of the Etherpad code that has made things easy for us with Cloud Foundry. So head on over to the &lt;a class="link" href="https://github.com/cloudfoundry-community/etherpad-lite-cf/releases" target="_blank" rel="noopener"
+>releases page&lt;/a> for &lt;code>etherpad-lite-cf&lt;/code>.  Choose the latest, as of this writing it was version 1.4.1.  Download the etherpad-lite-cf.zip file.  We need to extract this file to a new folder—do not extract it in the folder it is sitting in.  For example, I extracted it into an empty folder called blah.  Make sure you do not have the zip file you downloaded in the newly created folder, it should just contain the extracted files:&lt;/p>
+&lt;pre>&lt;code>[10:50 AM] jsloyer@jeffs-mbp [blah]&amp;gt;pwd
+/Users/jsloyer/Downloads/blah
+[10:50 AM] jsloyer@jeffs-mbp [blah]&amp;gt;ls
+CHANGELOG.md Procfile node_modules src var
+CONTRIBUTING.md README.md package.json start.bat
+LICENSE bin settings.json tests
+Makefile doc settings.json.template tools
+&lt;/code>&lt;/pre>
+&lt;p>The next step is pushing the app to Bluemix.  Run the following command, replacing yourappname with a unique name for your app.  This name will also be the url to your app as well.  If you get an error mentioning the host is taken, just choose a different name.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push yourappname -m 512M -b https://github.com/cloudfoundry/nodejs-buildpack.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The above is saying we are giving our app 512MB of memory and calling out a specific buildpack to use (in this case Node.js). This step will take awhile but eventually you should get the following output.&lt;/p>
+&lt;pre>&lt;code>0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+App started Showing health and status for app jbs-etherpad3 in org jbsloyer@us.ibm.com / space demos as ...
+OK
+requested state: started
+instances: 1/1
+usage: 512M x 1 instances
+urls: jbs-etherpad3.mybluemix.net
+state since cpu memory disk
+#0 running 2015-01-13 10:36:32 AM 0.0% 87.2M of 512M 242.1M of 1G
+&lt;/code>&lt;/pre>
+&lt;p>If you visit the url from above, Etherpad will be functional, however it is using a built-in database and this isn’t what we want.  We want to back in with MySQL.&lt;/p>
+&lt;h3 id="create-and-bind-a-database-to-our-app">Create and bind a database to our app
+&lt;/h3>&lt;p>Next, we need to create a service to allow Etherpad to connect to our database.  To do that, let’s go back to the Bluemix UI.  In the top click on Dashboard, you should see the app you created.  Let’s go ahead and click on it.&lt;/p>
+&lt;p>To add the service Bluemix will provision and bind a service to our app for us.  Click &amp;ldquo;Add A Service&amp;rdquo; and scroll down to data management.  We want ClearDB for this app.  Click on ClearDB.  ClearDB is a hosted version of MySQL.  Everything on the right should be pre-populated so let’s just click &amp;ldquo;Create&amp;rdquo;.  If things are not pre-populated, choose the appropriate app, the one we just created.&lt;/p>
+&lt;p>It will ask if you want to restage the app, that is fine, so click RESTAGE.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/restage.jpg"
+width="1104"
+height="524"
+srcset="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/restage_hu_ca631c0bc1af6ab7.jpg 480w, https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/restage_hu_692235e83d637c34.jpg 1024w"
+loading="lazy"
+alt="restage Etherpad in Cloud Foundry – Quick Start Guide"
+class="gallery-image"
+data-flex-grow="210"
+data-flex-basis="505px"
+>&lt;/p>
+&lt;h3 id="configure-the-app-with-cleardb-mysql">Configure the app with ClearDB (MySQL)
+&lt;/h3>&lt;p>To switch the app over to MySQL, we need to edit the &lt;code>settings.json&lt;/code> for the app and then re-upload the app to Bluemix. You will need to replace the value DATABASE on line 9 with the name of your ClearDB service.  To get this info, let’s go back to the Bluemix UI and our app.  If you click on &amp;ldquo;Show Credentials&amp;rdquo;, it will give you the name of your ClearDB service, copy this.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/showcreds.jpg"
+width="1578"
+height="1366"
+srcset="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/showcreds_hu_10f0797eafc6c3b0.jpg 480w, https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/showcreds_hu_5cf7d412493f8cf4.jpg 1024w"
+loading="lazy"
+alt="showcreds Etherpad in Cloud Foundry – Quick Start Guide"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="277px"
+>&lt;/p>
+&lt;p>Copy the name, in this example it is &amp;ldquo;ClearDB MySQL Database-hu&amp;rdquo;, without quotes.  I have highlighted below what you need to copy, don’t copy the quotes.  I have hidden my connection info to my database so my database can’t be hacked.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/dbname.jpg"
+width="455"
+height="559"
+srcset="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/dbname_hu_7a67a0ef1049138a.jpg 480w, https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/dbname_hu_149ae3ed997d67d.jpg 1024w"
+loading="lazy"
+alt="dbname Etherpad in Cloud Foundry – Quick Start Guide"
+class="gallery-image"
+data-flex-grow="81"
+data-flex-basis="195px"
+>&lt;/p>
+&lt;p>Open up settings.json with your favorite text editor and on line 9 replace DATABASE with the name of your ClearDB service that we copied from above.  Save the file. Here is my line 9:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;#34;dbService&amp;#34;: &amp;#34;ClearDB MySQL Database-hu&amp;#34;,
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The last step is re-pushing our app to Bluemix since we made a change to it.  To do this we need to use the push command we used above:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push yourappname -m 512M -b https://github.com/cloudfoundry/nodejs-buildpack.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Eventually it should show us that our app is running, my output is below:&lt;/p>
+&lt;pre>&lt;code>0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+App started Showing health and status for app jbs-etherpad3 in org jbsloyer@us.ibm.com / space demos as ...
+OK
+requested state: started
+instances: 1/1
+usage: 512M x 1 instances
+urls: jbs-etherpad3.mybluemix.net
+state since cpu memory disk
+#0 running 2015-01-13 10:36:32 AM 0.0% 87.2M of 512M 242.1M of 1G
+&lt;/code>&lt;/pre>
+&lt;p>So if we visit the url it gave us, Etherpad should be up and running.  If you run into issues please post a comment here or post to &lt;a class="link" href="http://stackoverflow.com/questions/tagged/bluemix" target="_blank" rel="noopener"
+>Stackoverflow&lt;/a>.&lt;/p>
+&lt;h3 id="ssl">SSL
+&lt;/h3>&lt;p>Bluemix provides SSL out of the box for your app.  If your app is running at &lt;strong>http&lt;/strong>://jbs-etherpad3.mybluemix.net you are given SSL for free.  To use SSL, just access your app over https, for my example it would be &lt;strong>https&lt;/strong>://jbs-etherpad3.mybluemix.net.  If you want to use SSL with your own domain name and certificate, you can do this also!  See &lt;a class="link" href="https://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/" >SSL Certificates and Bluemix Custom Domains&lt;/a> on how to do it.&lt;/p>
+&lt;p>For more info about SSL in for free in Bluemix check out the following video.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/3Y0wLQcXbQ0" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;h3 id="caveats">Caveats
+&lt;/h3>&lt;ul>
+&lt;li>The biggest issue to me is that this deployment of Etherpad only allows 1 instance. While this works for development and testing, it is not suitable for production.  This is a limitation right now of Etherpad in the way it uses socket.io and sessions. If you need more capacity, just bump up your RAM for your app.&lt;/li>
+&lt;/ul>
+&lt;h3 id="instructions-adapted-from-these-references">Instructions adapted from these references
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/cloudfoundry-community/etherpad-lite-cf#using-database-from-user-provided-service" target="_blank" rel="noopener"
+>https://github.com/cloudfoundry-community/etherpad-lite-cf#using-database-from-user-provided-service&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://arthurh.fr/blog-Install-etherpad-lite-with-cloudfoundry" target="_blank" rel="noopener"
+>http://arthurh.fr/blog-Install-etherpad-lite-with-cloudfoundry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul></description></item></channel></rss>

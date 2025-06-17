@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mongodb on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/mongodb/</link><description>Recent content in Mongodb on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 24 Aug 2015 11:03:35 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/mongodb/index.xml" rel="self" type="application/rss+xml"/><item><title>(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix</title><link>https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link><pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate><guid>https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor.jpg" alt="Featured image of post (Video) - Deploying your Meteor app to Cloud Foundry and Bluemix" />&lt;p>This is a follow up post to a previous post on &lt;a class="link" href="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/" >Deploying your Meteor app to Cloud Foundry and Bluemix.&lt;/a>  In this post we went through how to deploy a Meteor app to Cloud Foundry and Bluemix.  In this post we will be going through the same thing except in a video format.  Check out the video below.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/dyVmB8vHFaE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=).&lt;/p></description></item><item><title>Deploying your Meteor app to Cloud Foundry and Bluemix</title><link>https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link><pubDate>Wed, 05 Aug 2015 11:03:35 -0500</pubDate><guid>https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor.jpg" alt="Featured image of post Deploying your Meteor app to Cloud Foundry and Bluemix" />&lt;p>&lt;a class="link" href="meteor-logo.png" >&lt;img src="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor-logo.png"
+width="600"
+height="142"
+srcset="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor-logo_hu_d57525fbabf0753f.png 480w, https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor-logo_hu_ae8b5e4f60bf2df4.png 1024w"
+loading="lazy"
+alt="meteor-logo"
+class="gallery-image"
+data-flex-grow="422"
+data-flex-basis="1014px"
+>&lt;/a>Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript.  It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.&lt;/p>
+&lt;p>I heard about Meteor mid-2014 but it peaked my interest last week when I was at a customer and a developer at the customer was building a Meteor app and they were asking how to run it on Bluemix.  Of course doing my job I helped the developer get the app running but it took a couple tweaks to the Cloud Foundry buildpack for Meteor.&lt;!-- more -->&lt;/p>
+&lt;p>You might be asking what a buildpack is, that&amp;rsquo;s totally fine.  In Cloud Foundry you can use basically any language you want for your app, all you need is some code to laydown the app server or middleware and compile your code together and install dependencies.  For Meteor there is a buildpack available but it was slighly out of date.&lt;/p>
+&lt;p>Last week and this week I committed some changes to the buildpack to make it more robust and compatible for newer Meteor apps.&lt;/p>
+&lt;p>The buildpack now will allow you to use your existing Meteor app and push it to Cloud Foundry and Bluemix.&lt;/p>
+&lt;p>For the rest of this blog post I am going to walk through on how to build an example Meteor app and push it to Bluemix.&lt;/p>
+&lt;h2 id="pre-reqs">Pre-req&amp;rsquo;s
+&lt;/h2>&lt;ul>
+&lt;li>Sign up for a &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-MeteorSample-_-Node-MongoLab-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> account.  Go &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-MeteorSample-_-Node-MongoLab-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> and click on Sign-up in the top right hand corner.&lt;/li>
+&lt;li>Meteor installed locally, go &lt;a class="link" href="https://www.meteor.com/install" target="_blank" rel="noopener"
+>Meteor install&lt;/a> to install Meteor&lt;/li>
+&lt;li>Cloud Foundry Command Line (CLI) installed, go &lt;a class="link" href="https://www.ng.bluemix.net/docs/#starters/install_cli.html" target="_blank" rel="noopener"
+>install CLI&lt;/a> for instructions&lt;/li>
+&lt;/ul>
+&lt;h2 id="steps">Steps
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Create a sample Meteor app, we are going to use the leaderboard example&lt;/p>
+&lt;pre>&lt;code> meteor create --example leaderboard
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Push the sample app to Bluemix. &lt;strong>Note&lt;/strong>, this command will not start the app, we will need to choose our database next. Also replace leaderboard with a unique name for your app, for example leaderboard-jbs (my intials).&lt;/p>
+&lt;pre>&lt;code> cf push leaderboard -b https://github.com/cloudfoundry-community/cf-meteor-buildpack.git --no-start
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to choose if we want to use the built on Mongo DB with Cloud Foundry or an external third party MongoLab. It honestly doesn&amp;rsquo;t matter too much but MongoLab is built for scale is more reliable, I would choose MongoLab myself.&lt;/p>
+&lt;p>&lt;strong>Built in MongoDB:&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Create the database.
+cf create-service mongodb 100 leaderboard-mongodb&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect the database to our app. Replace leaderboard with the name of your app (ex. leaderboard-jbs).&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard leaderboard-mongodb
+&lt;/code>&lt;/pre>
+&lt;p>would then become&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard-jbs leaderboard-mongodb
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>MongoLab:&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Create the database.
+cf create-service mongolab sandbox leaderboard-mongolab&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect the database to our app. Replace leaderboard with the name of your app (ex. leaderboard-jbs).&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard leaderboard-mongolab
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>would then become&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard-jbs leaderboard-mongolab
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Start the application. Replace leaderboard with the name of your app&lt;/p>
+&lt;pre>&lt;code> cf start leaderboard
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>Open up two web browsers and goto the same url, for me my URL would be &lt;a class="link" href="http://leaderboard-jbs.mybluemix.net" target="_blank" rel="noopener"
+>http://leaderboard-jbs.mybluemix.net&lt;/a>.  I got this url by putting the name of my app in front of mybluemix.net.&lt;/p>
+&lt;p>In the video below you can see when you choose a player and then click add 5 points the other browser is updated instantly.  The example app is saving this information in the Mongo database then using websockets to notify all the connected clients of the change.  This is one of the really powerful features of Meteor.&lt;/p>
+&lt;p>The work with the developer at the client last week has renewed my interest in Meteor and will have to dig into it more.&lt;/p>
+&lt;p>If you prefer to watch a video of this as well, check out Video – &lt;a class="link" href="https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/" >Deploying your Meteor app to Cloud Foundry and Bluemix&lt;/a>.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=).  There will also be a video forth coming as well.&lt;/p></description></item></channel></rss>

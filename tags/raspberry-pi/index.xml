@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Raspberry Pi on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/raspberry-pi/</link><description>Recent content in Raspberry Pi on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 02 Apr 2015 10:29:53 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/raspberry-pi/index.xml" rel="self" type="application/rss+xml"/><item><title>IoT Python app with a Raspberry Pi and Bluemix</title><link>https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</link><pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate><guid>https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/iot-pi.jpg" alt="Featured image of post IoT Python app with a Raspberry Pi and Bluemix" />&lt;p>This is an extension/continuation from the blog post on how to create a &lt;a class="link" href="https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/" >basic Python webapp&lt;/a>.  In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the &lt;a class="link" href="https://internetofthings.ibmcloud.com/" target="_blank" rel="noopener"
+>Internet of Things Foundation&lt;/a> in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi.  The tutorial also uses Twilio to interact with the Raspberry Pi.&lt;/p>
+&lt;p>So what does this look like?  Here is a simple architecture diagram.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/raspberrypidiagram.png"
+width="1733"
+height="1135"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/raspberrypidiagram_hu_b8d126391b66e46f.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/raspberrypidiagram_hu_7ea4d030be7309b.png 1024w"
+loading="lazy"
+alt="raspberrypidiagram IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="152"
+data-flex-basis="366px"
+>&lt;/p>
+&lt;!-- more -->
+&lt;p>In the above diagram there is two flows:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The first flow involves pressing a HTML button in the Python Flask app in Bluemix to either turn on or off an LED on the Raspberry Pi.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The second flow involves pressing a physical button on the breadboard on the Raspberry Pi and using the IoT service in Bluemix and our app in Bluemix it will send a text message of our choosing to a phone number we enter in the Python Flask app in Bluemix using Twilio.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>This all took only about 100 lines of code, pretty cool huh?&lt;/p>
+&lt;p>If you prefer to watch a video of this instead of going through the written steps in this tutorial, check out the video below.&lt;/p>
+&lt;h2 id="setup">Setup
+&lt;/h2>&lt;p>There is two parts to setting this up.  If we take a look at the architecture diagram above we see that there is a Raspberry Pi piece and then a Bluemix piece.  We are going to go through the Raspberry Pi piece first then we will go through the Bluemix piece.&lt;/p>
+&lt;h2 id="raspberry-pi-setup-steps">Raspberry Pi Setup Steps
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Sign up for a Bluemix account, visit &lt;a class="link" href="http://bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp" target="_blank" rel="noopener"
+>http://bluemix.net&lt;/a> in your web browser and click “Sign-up” in the top right.  We require a couple bits of information&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Wait for an email to arrive, it should only take a couple minutes.  There should be a link in the email that says “Click here to complete your registration”, click that.  Sign in with the username and password you created from step 1.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Obtain a Raspberry Pi, a bread board, wires, a LED, and a button  (your best bet is getting a starter kit such as the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a>)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Place an LED in the breadboard (place the shorter side to the left)&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/led.png"
+width="2554"
+height="1306"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/led_hu_749bc4504e3b5cc6.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/led_hu_4471df89387d8785.png 1024w"
+loading="lazy"
+alt="led IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="469px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Place a 220 ohm resistor in the breadboard connecting the short side (the left side of the LED) to the ground rail (the rail with the – sign).  Make sure to place the side of the resistor with the red stripes closest to the LED_NOTE:_ The way the breadboard works is connections run vertically not horizontally&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/resistor.png"
+width="2560"
+height="1290"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/resistor_hu_120786989cc9512e.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/resistor_hu_24cd22be088cca61.png 1024w"
+loading="lazy"
+alt="resistor IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect a wire from the ground rail to the GND on the pinout board&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/ground.png"
+width="2550"
+height="1249"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/ground_hu_79ad35a9de1a948.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/ground_hu_96202a92d48757b1.png 1024w"
+loading="lazy"
+alt="ground IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="489px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the right side of the LED, connect a wire to the the port labeled 17.&lt;strong>NOTE:&lt;/strong> The way the breadboard works is connections run vertically not horizontally.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio17.png"
+width="2555"
+height="1297"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio17_hu_dc3ca2a2afad3c5e.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio17_hu_a296772ce5d30e4c.png 1024w"
+loading="lazy"
+alt="gpio17 IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="472px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Place the button in the breadboard, it takes a bit of force to press it in all the way.  It won’t break it.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/button.png"
+width="2551"
+height="1309"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/button_hu_a5fd50e46fdcb725.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/button_hu_7ec726de74ff3cce.png 1024w"
+loading="lazy"
+alt="button IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="194"
+data-flex-basis="467px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect a wire from the right side of the button to the ground rail.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttonground.png"
+width="2571"
+height="1308"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttonground_hu_af4c512b0d95dbf3.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttonground_hu_f859855800145f1b.png 1024w"
+loading="lazy"
+alt="buttonground IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect a wire from the ground rail to a GND port, it doesn’t matter which one it is&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttongroundrail.png"
+width="2036"
+height="1438"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttongroundrail_hu_7b138b6945318671.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttongroundrail_hu_ec70a82753480480.png 1024w"
+loading="lazy"
+alt="buttongroundrail IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="339px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Lastly, connect a wire from the left side of the button to GPIO port 18.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio18.png"
+width="2036"
+height="1438"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio18_hu_7b138b6945318671.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio18_hu_ec70a82753480480.png 1024w"
+loading="lazy"
+alt="gpio18 IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="339px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to either use the console for our Raspberry Pi and the terminal application on the device itself or use SSH.  I am going to use SSH.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To get the IP address of your Raspberry Pi the easiest thing is to open up the terminal app on the Raspberry Pi, it is under accessories -&amp;gt; Terminal&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Type &lt;code>ifconfig&lt;/code>..  If you are connected over Ethernet the IP address will be under eth0, if you are connected over wifi, the IP address will be under wlan0&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to ssh into the device.—Windows, download Putty and use that to connect to the IP address—Mac and Linux, open the Terminal app, type &lt;code>ssh pi@myipaddress&lt;/code> where myipaddress is the IP address of the Raspberry Pi, ex. &lt;code>192.168.1.65&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The password is raspberrypi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to run some commands to update our Raspberry Pi, run the following.  It will ask you to confirm with the “Y” key&lt;/p>
+&lt;p>sudo apt-get update
+sudo-apt-get upgrade&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to install a helper library for using GPIO&lt;/p>
+&lt;p>git clone git://git.drogon.net/wiringPi
+cd wiringPi
+./build&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to install the IoT library on the Raspberry Pi&lt;/p>
+&lt;p>curl -LO &lt;a class="link" href="https://github.com/ibm-messaging/iot-raspberrypi/releases/download/1.0.2/iot_1.0-1_armhf.deb" target="_blank" rel="noopener"
+>https://github.com/ibm-messaging/iot-raspberrypi/releases/download/1.0.2/iot_1.0-1_armhf.deb&lt;/a>
+sudo dpkg -i iot_1.0-1_armf.deb&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to get the device ID of our raspberry Pi do this run the following and save the output&lt;/p>
+&lt;p>service iot getdeviceid
+#example output
+The device id is b827eba5b236&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>We will want to copy the id `b827eba5b236`, yours obviously will be different
+&lt;/code>&lt;/pre>
+&lt;ol start="21">
+&lt;li>
+&lt;p>Open up a web browser and goto &lt;a class="link" href="http://bluemix.net/" target="_blank" rel="noopener"
+>bluemix.net&lt;/a>, and click on “Catalog” in the top.  Scroll down to the very bottom and click “Internet of Things”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Give the service a name, use iot-python (you must do this exactly or later things won’t work), for App choose “Leave unbound”, click “Create”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the left of the next page click “Launch dashboard”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At the top click on “Devices”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click “Add Device”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For the second field (it says e.g. mydevice type) type in exactly &lt;code>raspberrypi&lt;/code> (you need to have it spelled like this or there will be issues).  For device ID paste in the device ID we got from step 20, mine is &lt;code>b827ba5b236&lt;/code>.  Click continue.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the next page it will show something like below, copy this and switch back to terminal on your Raspberry Pi.&lt;/p>
+&lt;p>org=pwftki
+type=raspberrypi
+id=000000000000
+auth-method=token
+auth-token=cXQaGx8o!a9HwxM-ka&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose your favorite text editor but I am going to use vi.  Type the following to open the file we want to edit.&lt;/p>
+&lt;p>sudo vi /etc/iotsample-raspberrypi/device.cfg&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To paste the text press the “i” key.  Then paste the text, this will depend on the OS you are on.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To save the file hit the “Esc” key.  Then Type “:wq” and then press “Enter”.  That will save the file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Let’s restart the IoT service on our Raspberry Pi to start sending the data to the IoT service&lt;/p>
+&lt;p>sudo service iot restart&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to download the Python code to run on the Raspberry Pi, run the following:&lt;/p>
+&lt;p>cd ~
+git clone &lt;a class="link" href="https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git" target="_blank" rel="noopener"
+>https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git&lt;/a>
+cd python-iot-raspberry-pi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Now we need to install the package manager for Python:&lt;/p>
+&lt;p>sudo apt-get install python-pip
+sudo pip install -r requirements.txt&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>One last bit, we need a config file for our app before we can start it.  Lets run the following:&lt;/p>
+&lt;p>vi ~/device.cfg&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remember this is vi again, so remember the shortcuts for inserting text and saving it from step 29,30.  The contents of the file should look something like below, replacing yourapikey, yourdeviceid, youriotorg, and yourapitoken with the correct values. To generate the API key and token we can get them from going back to the web browser and going to the Internet of Things Foundation.  At the top  click on API Keys.  Click “New API Key”.  The values that it gives you will be the values you use for the yourapitoken and yourapikey. &lt;code>yourdeviceid&lt;/code> is the value we got from step 20 &lt;code>youriotorg&lt;/code> is from step 27, it is also in your config file; in my case my value is pwftki. Let’s save the file (remember, “Esc”, “:wq”, “Enter”)&lt;/p>
+&lt;p>[application]
+org=youriotorg
+id=yourdeviceid
+auth-method=apikey
+auth-key=yourapikey
+auth-token=yourauthtoken&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OK, so now we can launch/start the app on the Raspberry Pi.  To do that run the following:&lt;/p>
+&lt;p>cd ~/python-iot-raspberry-pi
+sudo python client.py&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="bluemix-app-setup-steps">Bluemix App Setup Steps
+&lt;/h2>&lt;h6 id="note--the-following-steps-are-to-be-run-on-your-desktop-not-the-raspberry-pi">NOTE: The following steps are to be run on your desktop NOT the Raspberry Pi.
+&lt;/h6>&lt;ol>
+&lt;li>
+&lt;p>We will need to install the Cloud Foundry CLI to deploy our app to Bluemix.  To do this head over to &lt;a class="link" href="https://github.com/cloudfoundry/cli/releases" target="_blank" rel="noopener"
+>https://github.com/cloudfoundry/cli/releases&lt;/a>.  Choose the appropriate installer for your platform, download it and run the installer.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So let’s open up a new terminal Window, we will need to do the rest on our development machine/laptop.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to download the Python code for our app.  Run the following.  If you don’t have git installed follow these instructions &lt;a class="link" href="http://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/p>
+&lt;p>git clone &lt;a class="link" href="https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git" target="_blank" rel="noopener"
+>https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git&lt;/a>
+cd python-iot-raspberry-pi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In your web browser go back to the tab that you have Bluemix open with.  In the top click “Catalog”, scroll down to find “Twilio”.  Click on that.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you already have a Twilio account and want to use that skip to step 6.  If you don’t have a Twilio account on the right hand side click “Register at Twilio”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Twilio will ask you for some information and you will need to verify your phone number.  This is important as only numbers verified with the free plan will work with your app.   If you want to be able to text any number you need to pay for Twilio, its $1/month/phone number.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once you are signed up for your account, head to &lt;a class="link" href="https://www.twilio.com/user/account/voice-messaging" target="_blank" rel="noopener"
+>https://www.twilio.com/user/account/voice-messaging&lt;/a>.  Near the top right there will be a twistie that says “Show API Credentials”, click that.  There is two pieces of information here, the Account SID and Auth Token.  We will need to copy these back to the Bluemix tab we have open with Twilio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Paste your Account SID in the field in Bluemix that says Account SID, paste your Auth Token in the Auth Token field.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For the Service name you must type in this exactly iot-twilio&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For the App, choose “Leave Unbound”&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click Create.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Switch back to the terminal that you have on your local dev machine, not your Raspberry Pi.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to login to Bluemix, to do that, type &lt;code>cf login -a https://api.ng.bluemix.net&lt;/code>. It will ask you for your username and password. This is from step 1 in the Raspberry Pi section above.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To deploy our application all we need to do now is type &lt;code>cf push myappname&lt;/code> where myapp name is a unique name you choose for your app.&lt;em>NOTE:&lt;/em> If you get an error mentioning a route is taken, choose a different name and run &lt;code>cf push&lt;/code> with a new app name.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It will take about a minute or two to deploy your application but eventually you will get some output that looks like the following:&lt;/p>
+&lt;p>requested state: started
+instances: 1/1
+usage: 1G x 1 instances
+urls: testapp-jbs.mybluemix.net
+last uploaded: Fri Jul 31 00:25:17 UTC 2015
+stack: lucid64
+buildpack: SDK for Node.js(TM) (ibm-node.js-0.12.7)&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>There is a row that says &lt;code>urls:&lt;/code>, copy that URL and paste it into your browser.&lt;/p>
+&lt;p>If everything went well you should have a page that looks like the following:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/pythoniotapp.png"
+width="671"
+height="192"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/pythoniotapp_hu_4e9b23f804cbe845.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/pythoniotapp_hu_2167463e78183380.png 1024w"
+loading="lazy"
+alt="pythoniotapp IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="349"
+data-flex-basis="838px"
+>&lt;/p>
+&lt;p>An important note here, do not press the button on the Raspberry Pi until you enter a phone number and text message here, if you do the app will crash.  If you do this you can restart you app with &lt;code>cf restart myappname&lt;/code>, where myappname is the name of the app you chose above.&lt;/p>
+&lt;p>When you click the “On” button it should turn the light on for you.  If you press the “Off” button it should turn the light off.&lt;/p>
+&lt;h2 id="feedback">Feedback
+&lt;/h2>&lt;p>Follow us on Twitter at &lt;a class="link" href="https://twitter.com/IBMBluemix" target="_blank" rel="noopener"
+>@IBMBluemix&lt;/a> and follow the author of this blog post (Jeff Sloyer, one of our developer advocates) at &lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a>&lt;/p></description></item><item><title>Control home devices with Bluemix Internet of Things (Part 2)</title><link>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</link><pubDate>Tue, 17 Feb 2015 10:02:18 -0500</pubDate><guid>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/robots-blog-post-header1.jpg" alt="Featured image of post Control home devices with Bluemix Internet of Things (Part 2)" />&lt;h2 id="part-2-configuring-the-raspberry-pi">Part 2: Configuring the Raspberry Pi
+&lt;/h2>&lt;p>This is a continuation of Part 1 of Controlling home devices with Bluemix Internet Of Things  If you haven’t read &lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/" >Part 1&lt;/a>, please do that first…&lt;/p>
+&lt;p>In Part 1 we got the electrical work out of the way.  We wired up the relay’s and connected the circuit’s.  In this part of the 3 part series we will configure the Raspberry Pi to control the relay’s that we wired up in part 1.&lt;/p>
+&lt;p>So without delay let’s jump into the next part.&lt;/p>
+&lt;!-- more -->
+&lt;h2 id="install-software-on-the-raspberry-pi">Install software on the Raspberry Pi
+&lt;/h2>&lt;p>The first step of getting your Raspberry Pi setup is installing Raspbian.  If you have the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a> its pretty easy, just plug in the wifi dongle and insert the SD card and plug in power.  If you don’t have the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a> follow the instructions from &lt;a class="link" href="http://www.raspberrypi.org/help/noobs-setup" target="_blank" rel="noopener"
+>here&lt;/a>.  Once you get Raspbian installed open up a terminal.&lt;/p>
+&lt;p>Next, we will need to update Raspbian to the latest.  To do this run the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get upgrade
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next, we will need to download  &lt;a class="link" href="http://lightshowpi.org" target="_blank" rel="noopener"
+>LightShowPi&lt;/a>.  &lt;a class="link" href="http://lightshowpi.org" target="_blank" rel="noopener"
+>LightShowPi&lt;/a> is the foundation for syncing the lights to the music.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Install git (if you don&amp;#39;t already have it)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install git-core
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Clone the repository to /home/pi/lightshowpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd ~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://togiles@bitbucket.org/togiles/lightshowpi.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Grab the stable branch
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd lightshowpi git fetch &amp;amp;&amp;amp; git checkout stable
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next, we need to install LightShowPi, run the following.  Please not the install step will take some time, be patient…&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd /home/pi/lightshowpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo ./install.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once the install is complete we need to reboot the Raspberry Pi to pickup some new environment variables. To reboot run the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo reboot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="wire-up-the-raspberry-pis-breadboard">Wire up the Raspberry Pi’s breadboard
+&lt;/h2>&lt;p>Once we have rebooted we need to connect the bread board to the Raspberry Pi and connect the bread board to the relays.  This took some tinkering to figure out the GPIO ports but below I have posted a picture of mybread board on how it was constructed.   For me I set everything up with 8 channels first and using LED’s provided in the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a> to make sure everything was working then I moved over to the real relays.  So let’s do that.&lt;/p>
+&lt;p>I would highly recommend following the steps in &lt;a class="link" href="https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI" target="_blank" rel="noopener"
+>this page&lt;/a> on getting your bread board working.&lt;/p>
+&lt;p>Below is a picture of my finished bread board with 16 channels.  I have included a wiring diagram as well.  Basically each GPIO port goes to the input side of the relay controller.  If you notice I have a couple left over LED’s on the bread board, this was done via the tutorial list above.&lt;/p>
+&lt;p>&lt;a class="link" href="2015-02-16-11.31.19.jpg" >&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/2015-02-16-11.31.19.jpg"
+width="768"
+height="1024"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/2015-02-16-11.31.19_hu_8e3a3585f737ad83.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/2015-02-16-11.31.19_hu_83f5355663a712a4.jpg 1024w"
+loading="lazy"
+alt="2015 02 16 11.31.19 768x1024 Control home devices with Bluemix Internet of Things (Part 2)"
+class="gallery-image"
+data-flex-grow="75"
+data-flex-basis="180px"
+>&lt;/a>&lt;/p>
+&lt;p>What is going on above is each of the delays is plugged into a GPIO port and then plugged into the ground rail and connected by a resistor.  The particular resistor I am using is a 220 Ohm resistor.&lt;/p>
+&lt;p>&lt;a class="link" href="raspberry-pi-lights-wiring-diagram.png" >&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/raspberry-pi-lights-wiring-diagram.png"
+width="889"
+height="642"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/raspberry-pi-lights-wiring-diagram_hu_577fe0bce0400bc4.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/raspberry-pi-lights-wiring-diagram_hu_ee9d4c62e896f7ce.png 1024w"
+loading="lazy"
+alt="raspberry pi lights wiring diagram Control home devices with Bluemix Internet of Things (Part 2)"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+>&lt;/a>&lt;/p>
+&lt;p>So let’s test some things out.  Let’s play a pre-loaded song.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd ~/lightshowpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo python py/synchronized_lights.py --file=/home/pi/lightshowpi/music/sample/ovenrake_deck-the-halls.mp3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>All the relays should be flashing.  At this point you can plug the lights into the outlets as well.  If you notice the lights go on solid for 30 seconds before the songs play, we can override this.  Additionally this file has the GPIO pins mapping as well.  This mapping is for using the full 16 channels, if you are using less just remove some of the mappings from the end of the gpio_pins line.  To do this we need to place a config file in our home directory.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd ~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">touch .lights.cfg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Choose your favorite text editor and put the following contents in the file.  We change the time it waits from 30 seconds to 1.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[hardware]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gpio_pins = 0,1,2,3,4,5,6,7,21,22,23,24,25,26,28,29
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[lightshow]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">preshow_configuration =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;transitions&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;on&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;duration&amp;#34;: 1,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;channel_control&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;off&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;duration&amp;#34;: 1,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;channel_control&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>That is it for this part.  In the next part of this series we will configure the Bluemix app to respond to text message votes and then the app to interface with the python code that controls the lights.&lt;/p>
+&lt;h2 id="parts-in-the-series">Parts in the Series
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/" >Part 1&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Control home devices with Bluemix Internet of Things</title><link>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</link><pubDate>Fri, 06 Feb 2015 09:49:21 -0500</pubDate><guid>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1.jpg" alt="Featured image of post Control home devices with Bluemix Internet of Things" />&lt;p>The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020.  These devices make up something called the Internet of Things.  These devices can be controlled remotely and interconnected.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease.png"
+width="700"
+height="270"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease_hu_6d11359f8f64425e.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease_hu_28b1f8b3db160b62.png 1024w"
+loading="lazy"
+alt="iotdevicesincrease Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="259"
+data-flex-basis="622px"
+>&lt;/p>
+&lt;p>While a lot of these devices can be connected to the Internet, most of them are &amp;ldquo;dumb&amp;rdquo; devices right now.  To turn these &amp;ldquo;dumb&amp;rdquo; devices into smart devices you can use the &lt;a class="link" href="http://internetofthings.ibmcloud.com" target="_blank" rel="noopener"
+>Internet of Things&lt;/a> to connect them to the cloud.  Simple things such as a washing machine or a coffee pot can be connected to the Internet.  More practical systems can be connected also, such as a home automation system or a thermostat.  Going even further a mine could connect safety sensors to the Internet of Things as well.&lt;/p>
+&lt;!-- more -->
+&lt;p>The Internet of Things allows for these devices to either be controlled or act as sensors and provides a means for them to communicate.  This is done over a protocol called MQTT. According to &lt;a class="link" href="http://mqtt.org/" target="_blank" rel="noopener"
+>mqtt.org&lt;/a>, &amp;ldquo;MQTT is a machine-to-machine (M2M)/Internet of Things connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport.&amp;rdquo;  This works great for many devices as-is, doesn’t have many dependencies, it is very lightweight, and doesn’t require tremendous amounts of processing power.&lt;/p>
+&lt;p>IBM Bluemix provides a platform for creating these apps that utilize all these sensors.  You can basically almost use any programming language you want, Bring Your Own Language (BYOL) and utilize services that do the heavy lifting for you.  This heavy lifting is the Internet of Things (IoT) service in Bluemix.  It implements that MQTT protocol and allows you to control and receive data from these devices.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1.jpg"
+width="1024"
+height="458"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1_hu_f8ea79abbff80153.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1_hu_319a811cc1084942.jpg 1024w"
+loading="lazy"
+alt="robots blog post header1 1024x665 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="223"
+data-flex-basis="536px"
+>&lt;/p>
+&lt;p>Do you have a bunch of left over Christmas lights sitting around that will be collecting dust till next year? Until now Christmas lights are a once a year thing, that isn’t true anymore.  Time to get the dust off of your lights and use them for something fun! Enter Christmas Lights controlled by a Raspberry Pi via IoT in Bluemix!&lt;/p>
+&lt;p>You can control these Christmas Lights using the Internet of Things and IBM Bluemix. Who &lt;em>doesn’t&lt;/em> love large amounts of Christmas lights?  I sure love them.  Add on to that syncing lights to music and the ability to control lights from your phone and giving passersbys the ability to vote for songs they wanna see the lights synced to by texting.  How cool is that?&lt;/p>
+&lt;h2 id="introduction">Introduction:
+&lt;/h2>&lt;p>This is going to be a three part series: The first part (this post) will focus on the hardware setup, all the wiring and connecting things up to the Raspberry Pi.  The second part will focus on the software configuration of the Raspberry Pi, and the final part will focus on the Bluemix app that allows people to vote on songs to play and the integration to control the Raspberry Pi with the IoT service in Bluemix.&lt;/p>
+&lt;p>So some of our goals that we are going to accomplish are the following.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Part 1&lt;/strong> – Setup and wire together relays, outlets, and the Raspberry Pi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/" >&lt;strong>Part 2&lt;/strong>&lt;/a> – Power on the Raspberry Pi, installed Raspbian (OS for the Pi), install and configure the lighting control software&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Part 3&lt;/strong> – Deploy a Bluemix app with the IoT, Twilio, and Cloudant services to interact with users and the Raspberry Pi (an example of the app is &lt;a class="link" href="http://lights.mybluemix.net/" target="_blank" rel="noopener"
+>http://lights.mybluemix.net/&lt;/a>; please note this is not connected to my Raspberry Pi right now, so clicking the play button won’t do anything.)&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Here is a little teaser of the expected outcome:&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/_nWcIvOSNJE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>Let’s jump into it…&lt;/p>
+&lt;h2 id="part-1-setting-up-the-hardware">Part 1: Setting up the hardware
+&lt;/h2>&lt;p>These instructions have been adapted from the following sites.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/" target="_blank" rel="noopener"
+>https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI" target="_blank" rel="noopener"
+>https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/download-and-install" target="_blank" rel="noopener"
+>http://lightshowpi.org/download-and-install&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/configuring-and-testing-your-hardware" target="_blank" rel="noopener"
+>http://lightshowpi.org/configuring-and-testing-your-hardware&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/play-music" target="_blank" rel="noopener"
+>http://lightshowpi.org/play-music&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The first step is getting a Raspberry Pi, I highly recommend getting the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>CanaKit on Amazon&lt;/a>.  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.&lt;/p>
+&lt;p>The first step is deciding how many individual light channels you want—you can do up to 48 actually, but for this post we will doing 16 channels.  What that means is 16 individual strands of lights that can be controlled.  So let’s make a shopping list.&lt;/p>
+&lt;p>Shopping List:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>8 &lt;a class="link" href="http://amzn.to/2CamxBW" target="_blank" rel="noopener"
+>two gang outlets&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 &lt;a class="link" href="http://amzn.to/2DLctzJ" target="_blank" rel="noopener"
+>4 gang blue plastic outlet boxes&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2zYuQyW" target="_blank" rel="noopener"
+>50 feet of 12 gauge electrical wire&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CCI8UP" target="_blank" rel="noopener"
+>2 bags of assorted wire nuts&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 relays (1 relay per each 8 light channels, available &lt;a class="link" href="http://amzn.to/2C7lx1E" target="_blank" rel="noopener"
+>on Amazon&lt;/a>)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>1 &lt;a class="link" href="http://amzn.to/2DLo6qF" target="_blank" rel="noopener"
+>powerstrip&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2Cv8WsJ" target="_blank" rel="noopener"
+>2 electrical extension cords&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CzX99O" target="_blank" rel="noopener"
+>16 strands of Christmas lights&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Tools Required:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2EsJH8e" target="_blank" rel="noopener"
+>Wire Stripper&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CBl8Wi" target="_blank" rel="noopener"
+>Screw Drivers, phillips and flat&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CapKBL" target="_blank" rel="noopener"
+>Multimeter -optional&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>My brother (&lt;a class="link" href="https://twitter.com/esloyer" target="_blank" rel="noopener"
+>@esloyer&lt;/a>) helped me wire this whole thing up and came up with an adapted wiring schema based off the sites above, thanks bro!&lt;/p>
+&lt;p>Once you get all the items on the shopping list we need to start taking apart the 50 feet of wire, there is 2 wires inside of the casing, a black and then a white one.  We need to get them out of the casing, take a pocket knife or utility knife and make a cut into the casing at one end, you can basically then peal back the casing on the whole 50 feet of wire then.&lt;/p>
+&lt;p>Below is a wiring diagram that we need to complete.  You can do this multiple ways but below is a suggestion.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture.png"
+width="1024"
+height="642"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture_hu_8f326f9d29449440.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture_hu_ad72e496ac82a628.png 1024w"
+loading="lazy"
+alt="Capture 1024x642 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="382px"
+>&lt;/p>
+&lt;p>What we need to do is basically daisy chain all the &amp;ldquo;hot&amp;rdquo; wires together between each set of 4 gang double gang outlets.  We do this so we don’t overload a particular circuit.  So to do this we need to cut the end off of our cheap extension cord that has a plug on it, we need to then strip the wires, and then identity which wire is the hot/positive wire.  Below is a picture of a wire, the hot/positive wire will have dashes or stripes on it, the cold/neutral wire will NOT have any dashes or stripes:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord.jpg"
+width="1024"
+height="764"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord_hu_a3f7cc50205f5fa6.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord_hu_f8939067b1c62fc6.jpg 1024w"
+loading="lazy"
+alt="electrical cord 1024x764 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="321px"
+>&lt;/p>
+&lt;p>We need to take the hot wire and put it into a wire nut.  We will then take some wire from our 50 feet, strip one of the ends and twist it into the wire nut.  This will get attached to positive input on the relay.  We need to repeat this for each channel.  In the picture below I have an additional wire going from the first wire nut to another wire nut because all the wires going to the relay wouldn’t fit into one wire nut.  We are just effectively connecting two wires together here.&lt;/p>
+&lt;p>The next step is running a wire from each channel on the relay to electrical outlet.  This is the hot wire to each outlet but this wire is being controlled by the relay.  Think of the relay as a simple on/off switch that you would find at home to control a light.  On most double electrical outlets there is a tab on the side that comes enabled that makes most receptacles operate as one, this is desirable in a house so an electrician only has to run one wire to the outlet but in our case we want to take advantage of controlling both receptacles.  We need to break this tab on both sides of the outlet.  Take a pair of needle nodes pliers and bend the tab back and forth and eventually it will come off.  See the photos below.&lt;/p>
+&lt;p>Before:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14.jpg"
+width="450"
+height="355"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14_hu_547eb42780bdc852.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14_hu_105e14da772baaf9.jpg 1024w"
+loading="lazy"
+alt="FH13MAR SWIOUT 14 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="304px"
+>&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5.jpg"
+width="249"
+height="187"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5_hu_9ce89f38c60a8b19.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5_hu_8fe19ac7cb63afdb.jpg 1024w"
+loading="lazy"
+alt="electrical outlet garbage disposal 5 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;p>After:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4.jpg"
+width="249"
+height="187"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4_hu_4b377a2f222e5725.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4_hu_3342bd0a5a01f063.jpg 1024w"
+loading="lazy"
+alt="electrical outlet garbage disposal 4 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;p>So next we need to connect our cold/negative wires to each of the outlets.  If you look at the wiring diagram (above) I have one cold/neutral wire going to the first outlet and each additional outlet is daisy chained to it.  This is just to complete the circuit.  Below is the finished product.  We basically have our outlets daisy chained together with our cold/neutral wires and then hold/positive wires have individual channels to the relay.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57.jpg"
+width="3264"
+height="2448"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57_hu_2aaeaa2e26da998a.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57_hu_be5268a26fba3efb.jpg 1024w"
+loading="lazy"
+alt="2014 12 02 15.16.57 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>Congratulations the hard part is over! Well, at least for me, since electrical stuff isn’t my forte.&lt;/p>
+&lt;h2 id="parts-in-the-series">Parts in the Series
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/" >Part 2&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

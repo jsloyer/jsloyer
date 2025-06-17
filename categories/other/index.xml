@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Other on Jeff Sloyer</title><link>https://www.jeffsloyer.io/categories/other/</link><description>Recent content in Other on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 18 Dec 2016 14:11:14 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/categories/other/index.xml" rel="self" type="application/rss+xml"/><item><title>Why I Chose Hugo over Wordpress - Part 2</title><link>https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</link><pubDate>Sun, 18 Dec 2016 14:11:14 -0500</pubDate><guid>https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/migrate.jpg" alt="Featured image of post Why I Chose Hugo over Wordpress - Part 2" />&lt;p>This post has been a long time going and much overdue, it has almost been 12 months
+since publishing the follow up to my previous post &lt;a class="link" href="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/" >Why I Chose Hugo Over Wordpress.&lt;/a> But I am finally going to take the time and explain all the technical parts about how I made this blog work with Hugo.&lt;/p>
+&lt;h2 id="setting-up-the-site">Setting up the site
+&lt;/h2>&lt;p>First to get started you need to install Hugo.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">brew update &amp;amp;&amp;amp; brew install hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next you need to create a basic Hugo site.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">hugo new site jsloyer
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>With Hugo you you can use themes, I am using a modified version of &lt;a class="link" href="https://github.com/humboldtux/startbootstrap-clean-blog" target="_blank" rel="noopener"
+>StartBootstrap Clean Blog&lt;/a>.&lt;/p>
+&lt;p>I embedded the theme into my &lt;a class="link" href="https://github.com/jsloyer/jsloyer/tree/master/themes/startbootstrap-clean-blog" target="_blank" rel="noopener"
+>GitHub project&lt;/a>.&lt;/p>
+&lt;p>Once you embed the theme you need to tell Hugo to use the theme.&lt;/p>
+&lt;p>You do this in &lt;a class="link" href="https://github.com/jsloyer/jsloyer/blob/master/config.toml#L6" target="_blank" rel="noopener"
+>config.toml&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">theme = &amp;#34;startbootstrap-clean-blog&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Speaking of git you need to setup a GitHub project, the name is really important&amp;hellip; If you are publishing the Hugo site under your own GitHub org, ie your username, the git project needs to match that. For me my GitHub username is &lt;code>jsloyer&lt;/code> so my git project name is &lt;code>jsloyer&lt;/code> as well. The reason for this is how GitHub pages works in picking up the build and publishing for a GitHub pages site.&lt;/p>
+&lt;p>You will be doing all of your work on the &lt;code>master&lt;/code> branch. Think of the &lt;code>master&lt;/code> branch as you would with any of piece of software, the &lt;code>master&lt;/code> branch is the raw code, in this case just markdown. There is another special magic branch called &lt;code>gh-pages&lt;/code> that we will go through later that makes your repo into a GitHub pages site.&lt;/p>
+&lt;h3 id="creating-a-post">Creating a post
+&lt;/h3>&lt;p>So next we need to create our first post! To do this its pretty simple&amp;hellip;&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">hugo new post/good-to-great.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next I start up Hugo to see how the site will look.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">hugo server --buildDrafts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This starts Hugo in dev mode where you can see a post while you are working on it. The beauty is you can even check the unfinished post into git but until you flip the magic &lt;code>draft&lt;/code> setting on a post it won&amp;rsquo;t be live on the Internet.&lt;/p>
+&lt;p>As you make changes to your post and save it Hugo will automatically reload in the browser what the post will look like.&lt;/p>
+&lt;p>Before we jump into how to take a post live lets look at some of the metadata in the post&amp;hellip; Here is some metadata for a &lt;a class="link" href="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/" >previous post of mine.&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">+++
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">categories = [&amp;#34;Other&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">date = &amp;#34;2016-01-08T14:11:14-05:00&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">description = &amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">draft = false
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">image = &amp;#34;/original-images/migrate.jpg&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tags = [&amp;#34;wordpress&amp;#34;, &amp;#34;migrate&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">title = &amp;#34;Why I Chose Hugo over Wordpress&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">+++
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You can set some various pieces of information for a post. For my particular theme each post has a Jumbotron image, that is set via the &lt;code>image&lt;/code> attribute. More on images later&amp;hellip; You can also set tags as well as the title of the post. The most interesting bit here is the &lt;code>draft = false&lt;/code> line. This is what I was referring to above in controlling when a post gets published. Once you feel like your post is ready just change it to &lt;code>draft = true&lt;/code>.&lt;/p>
+&lt;h3 id="publishing">Publishing
+&lt;/h3>&lt;p>The next step is publishing your post, once you set the &lt;code>draft = true&lt;/code> for a post you need to check this file into Git.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &amp;#34;my awesome post&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push origin master
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>At this point you think you might be done but you aren&amp;rsquo;t you need to setup GitHub Pages and a pipeline&amp;hellip;&lt;/p>
+&lt;p>I chose &lt;a class="link" href="http://wercker.com" target="_blank" rel="noopener"
+>Wercker&lt;/a> as my continuous delivery (CD) engine for this. It was incredibly easy to setup a pipeline to build the site as well as deploy the site back to GitHub.&lt;/p>
+&lt;p>Before we get into the pipeline we need to setup the git project as a GitHub pages site.&lt;/p>
+&lt;p>Goto the settings page for your project, for me its &lt;code>https://github.com/jsloyer/jsloyer/settings&lt;/code>.&lt;/p>
+&lt;p>Scroll down to the bottom&amp;hellip;&lt;/p>
+&lt;p>Click &amp;ldquo;Launch automatic page generator&amp;rdquo;, see below. Go through the wizard, it really doesn&amp;rsquo;t matter what you choose here, you are going to replace the content anyways&amp;hellip;&lt;/p>
+&lt;p>&lt;a class="link" href="gh-pages-generation.jpg" >&lt;img src="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/gh-pages-generation.jpg"
+width="1644"
+height="602"
+srcset="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/gh-pages-generation_hu_7d3cb3f27c9fc547.jpg 480w, https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/gh-pages-generation_hu_b9b390be79192913.jpg 1024w"
+loading="lazy"
+alt="automatic page generator"
+class="gallery-image"
+data-flex-grow="273"
+data-flex-basis="655px"
+>&lt;/a>&lt;/p>
+&lt;p>Once you have this setup it might take a little bit but your site will be available. For example my site without the custom domain name is &lt;code>http://jsloyer.github.io/jsloyer&lt;/code>. Replace your GitHub username with mine and you will be able to access the default site.&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> If you want to use a custom domain name I&amp;rsquo;ll include the instructions below, for example my site is hosted on &lt;code>www.jeffsloyer.io&lt;/code>.&lt;/p>
+&lt;h3 id="automatic-pipelinepublishing">Automatic Pipeline/Publishing
+&lt;/h3>&lt;p>The next step is to to get automatic publishing setup. So what happens for me is when I check in a new commit to the master branch, Wercker builds my images and builds the site and publishes it back to the &lt;code>gh-pages&lt;/code> branch automatically.&lt;/p>
+&lt;p>To do this you need a file called &lt;code>werkcer.yml&lt;/code> in your project. Below is a copy of mine.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">box: nodesource/node
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">build:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - install-packages:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> packages: graphicsmagick
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - npm-install
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - grunt:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> tasks: processimages
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - arjen/hugo-build:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> version: &amp;#34;0.14&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> theme: startbootstrap-clean-blog
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deploy:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> steps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - install-packages:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> packages: git ssh-client
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - lukevivier/gh-pages@0.2.1:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> token: $GIT_TOKEN
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> domain: www.jeffsloyer.io
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> basedir: public
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The above yaml file will build my Hugo site for me as well as build my images in an optimized format as well. The only bit you need to change is if you want to use a specific theme, if you don&amp;rsquo;t want to use the one that I am using change the following to the values you need.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">theme: startbootstrap-clean-blog
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Let&amp;rsquo;s take a bit and talk through my automatic image minimization and rendering. During build time my images are compressed and minimized to different sizes. I only check in high quality original images and the build process optimizes them for me. To do that you need two files. They are below. I am not going to go through how it works but basically all you have to do is run &lt;code>grunt processimages&lt;/code> and the tasks will optimize your images&amp;hellip;&lt;/p>
+&lt;p>&lt;strong>package.json&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;name&amp;#34;: &amp;#34;blog&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;version&amp;#34;: &amp;#34;0.0.1&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;repository&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;git&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;url&amp;#34;: &amp;#34;https://github.com/jsloyer/jsloyer.git&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;author&amp;#34;: &amp;#34;Jeff Sloyer&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;dependencies&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;glob&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-cli&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-contrib-concat&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-contrib-connect&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-contrib-copy&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-contrib-jshint&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-contrib-sass&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-contrib-uglify&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-contrib-watch&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-jekyll&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-responsive-images&amp;#34;: &amp;#34;^0.1.7&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;grunt-shell&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;image-size&amp;#34;: &amp;#34;*&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;yamljs&amp;#34;: &amp;#34;*&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Gruntfile.js&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;span class="lnt">67
+&lt;/span>&lt;span class="lnt">68
+&lt;/span>&lt;span class="lnt">69
+&lt;/span>&lt;span class="lnt">70
+&lt;/span>&lt;span class="lnt">71
+&lt;/span>&lt;span class="lnt">72
+&lt;/span>&lt;span class="lnt">73
+&lt;/span>&lt;span class="lnt">74
+&lt;/span>&lt;span class="lnt">75
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="k">var&lt;/span> &lt;span class="n">grunt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;fs&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">glob&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;glob&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sizeOf&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;image-size&amp;#39;&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">YAML&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">require&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;yamljs&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-contrib-concat&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-contrib-connect&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-contrib-copy&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-contrib-jshint&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-contrib-sass&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-contrib-uglify&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-contrib-watch&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-responsive-images&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-jekyll&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">loadNpmTasks&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;grunt-shell&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">initConfig&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">responsive_images&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">myTask&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">options&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">sizes&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;thumb&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">400&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;medium&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">800&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;large&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1200&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">files&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">expand&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="bp">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">src&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;**/*.{jpg,gif,png,jpeg}&amp;#39;&lt;/span>&lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cwd&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;static/original-images&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dest&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;static/images&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">registerTask&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;resize&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;responsive_images&amp;#34;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">registerTask&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;imageinfo&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">function&lt;/span>&lt;span class="p">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">done&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">async&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">glob&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;static/images/**/*.{jpg,gif,png}&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{},&lt;/span> &lt;span class="n">function&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">err&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">files&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">existingYml&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">readFileSync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;static/images.yml&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">toString&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">existingYml&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;#!#!#!#!#&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">existingYml&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">trim&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">files&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">forEach&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">function&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file&lt;/span>&lt;span class="p">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">dimensions&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">sizeOf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">width&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">dimensions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">width&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">height&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">dimensions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">height&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">aspect&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">dimensions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">width&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">dimensions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">height&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">data&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">file&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">})&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">yamlString&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YAML&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stringify&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">var&lt;/span> &lt;span class="n">yamlHeading&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="se">\n\n\n&lt;/span>&lt;span class="s2">#!#!#!#!# Do not edit below this line.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">yamlHeading&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="s2">&amp;#34;# Generated automatically using `grunt imageinfo`&lt;/span>&lt;span class="se">\n\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">writeFileSync&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;static/images.yml&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">existingYml&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">yamlHeading&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">yamlString&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">console&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">log&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;done&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">done&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">registerTask&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;processimages&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;resize&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;imageinfo&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">grunt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">registerTask&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;default&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;processimages&amp;#39;&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Check in the above files to GitHub, the files are the following.&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>wercker.yml&lt;/code>&lt;/li>
+&lt;li>&lt;code>Gruntfile.js&lt;/code>&lt;/li>
+&lt;li>&lt;code>package.json&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>The next step is getting a token from GitHub. To generate a token goto &lt;a class="link" href="https://github.com/settings/tokens" target="_blank" rel="noopener"
+>https://github.com/settings/tokens&lt;/a>.&lt;/p>
+&lt;p>You will want a token with the following permissions. &lt;strong>Note once you generate the token copy it because GitHub won&amp;rsquo;t display it to you again&amp;hellip;&lt;/strong>&lt;/p>
+&lt;p>&lt;a class="link" href="GitHub-token.jpg" >&lt;img src="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/GitHub-token.jpg"
+width="1264"
+height="1560"
+srcset="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/GitHub-token_hu_f7b0e15475d9d41b.jpg 480w, https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress-part2/GitHub-token_hu_3ef961f7e18d6475.jpg 1024w"
+loading="lazy"
+alt="GitHub token"
+class="gallery-image"
+data-flex-grow="81"
+data-flex-basis="194px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we need to goto &lt;a class="link" href="https://wercker.com" target="_blank" rel="noopener"
+>Wercker&lt;/a> and login with our GitHub credentials. Once you have logged in click &amp;ldquo;Create&amp;rdquo; at the top and choose application or just click &lt;a class="link" href="https://app.wercker.com/applications/create" target="_blank" rel="noopener"
+>here&lt;/a>. You will need to choose your your repo and I chose to make my pipeline private, it is up to you. Once you have finished that you need enter in yout Gitub token so Wercker and deploy your built Hugo site back to GitHub.&lt;/p>
+&lt;p>Next we need to edit the pipeline to deploy to GitHub. To do this click on the workflows tab. For example my link is &lt;a class="link" href="https://app.wercker.com/jsloyer/jsloyer/workflows" target="_blank" rel="noopener"
+>https://app.wercker.com/jsloyer/jsloyer/workflows&lt;/a>.&lt;/p>
+&lt;p>Under pipeline there should already be one called &lt;code>build&lt;/code>. Click on &lt;code>build&lt;/code>. Scroll down to &amp;ldquo;Ignore Branches&amp;rdquo;, type in &lt;code>gh-pages&lt;/code>. We are ignoring the &lt;code>gh-pages&lt;/code> branch as we don&amp;rsquo;t ever want to build that, we just build master. Click &amp;ldquo;Update&amp;rdquo;. Go back in your browser. We need to add another pipeline called &lt;code>GitHubPages&lt;/code>. We need to set an environment variable called &lt;code>GIT_TOKEN&lt;/code>, paste in your GitHub token from earlier, click &amp;ldquo;Protected&amp;rdquo;. Don&amp;rsquo;t worry Wercker won&amp;rsquo;t expose this to the public. For the name enter in &lt;code>GitHubPages&lt;/code>. For &amp;ldquo;YML Pipeline name&amp;rdquo; enter in &lt;code>deploy&lt;/code>. Save this and you are now finished.&lt;/p>
+&lt;p>To trigger a build check in a file into the master branch, the pipeline should execute and deploy your site back to GitHub Pages. If it doesn&amp;rsquo;t post a comment below and I will help you through it.&lt;/p>
+&lt;h3 id="advanced-stuff">Advanced Stuff
+&lt;/h3>&lt;p>Below I am going to go through some advanced stuff that you probably want&amp;hellip;&lt;/p>
+&lt;h4 id="custom-domain-name">Custom Domain Name
+&lt;/h4>&lt;p>For my site my site is available at &lt;code>www.jeffsloyer.io&lt;/code>. To do this you need to have the domain name in your &lt;code>config.toml&lt;/code>, mine is &lt;a class="link" href="https://github.com/jsloyer/jsloyer/blob/master/config.toml#L1" target="_blank" rel="noopener"
+>available here&lt;/a>. Additionally you need your domain name in your &lt;code>wercker.yml&lt;/code> as well, mine is posted above.&lt;/p>
+&lt;p>Lastly you need a CNAME entry with your registrar to point to GitHub. For more information go &lt;a class="link" href="https://help.github.com/articles/setting-up-a-www-subdomain/" target="_blank" rel="noopener"
+>here&lt;/a>. The CNAME record should point to &lt;code>your-username.GitHub.io&lt;/code>. For example my site &lt;code>www.jeffsloyer.io&lt;/code> has a CNAME record that points to &lt;code>jsloyer.GitHub.io&lt;/code>. It migh take a bit for DNS to update, depends on how long of a TTL you have&amp;hellip;&lt;/p>
+&lt;p>Follow the instructions &lt;a class="link" href="https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-GitHub-pages-site/" target="_blank" rel="noopener"
+>here&lt;/a> to add the domain name to the GitHub project as well.&lt;/p>
+&lt;h3 id="add-ons">Add-ons
+&lt;/h3>&lt;p>Hugo has a lot of addons, some are even built right in. For example Google Analytics and Disqus.&lt;/p>
+&lt;p>To Google Analytics I just had to add one line to &lt;code>config.toml&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Ganalytics = &amp;#34;UA-xxxx-xxx&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To add Disqus integration I just had to also add one line to &lt;code>config.toml&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">disqusShortname = &amp;#34;xxxx&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Pretty simple&amp;hellip; For a full list of add-ons goto &lt;code>https://gohugo.io/extras&lt;/code>.&lt;/p>
+&lt;p>Also please follow me on Twitter at &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a> and follow me on &lt;a class="link" href="https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng" target="_blank" rel="noopener"
+>Youtube&lt;/a>!&lt;/p></description></item><item><title>Why I Chose Hugo over Wordpress</title><link>https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</link><pubDate>Fri, 08 Jan 2016 14:11:14 -0500</pubDate><guid>https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/migrate.jpg" alt="Featured image of post Why I Chose Hugo over Wordpress" />&lt;p>I am finally back with my blog, sorry it has been quite awhile. I just recently finished a migration of my blog my running on Wordpress, which was hosted on &lt;a class="link" href="http://wpengine.com" target="_blank" rel="noopener"
+>WPEngine&lt;/a> and is a really awesome service, to Github pages. I got tired of using Wordpress and WPEngine cost me about $30/month&amp;hellip; So I decided to migrate the site to Github pages where I can run the site for free.&lt;/p>
+&lt;h2 id="wordpress-vs-jekyll">Wordpress vs. Jekyll
+&lt;/h2>&lt;p>So let&amp;rsquo;s back up a bit and talk about why I first went with Wordpress. It mostly came down to speed of getting my site up. I took the easy way out, I didn&amp;rsquo;t want have to deal with managing a VM and maintaing Wordpress so spent a decent amount of time reading about different hosting providers for Wordpress. WPEngine consistently rose to the top mainly for its use of use and speed. At this point I was also dabbling with Github pages but was using Jekyll and didn&amp;rsquo;t have much luck with it. When I was looking at using Jekyll it was being re-written, there was a version with a bunch of Ruby Gems and then a new version. The Ruby Gems version had way more plugins and flexibility but the new version was much simplier to get up and running. I honestly gave it a good try, I spent a couple hours trying to get things working and I couldn&amp;rsquo;t. I am someone who usually never gives up on something, by gosh I&amp;rsquo;ll get that squre to fit into a circle&amp;hellip;&lt;/p>
+&lt;p>&lt;a class="link" href="circle-into-square.png" >&lt;img src="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/circle-into-square.png"
+width="2000"
+height="2000"
+srcset="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/circle-into-square_hu_c2780db7ed492cf1.png 480w, https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/circle-into-square_hu_8598e62041f45f5b.png 1024w"
+loading="lazy"
+alt="square into a cirlc"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/a>&lt;/p>
+&lt;p>But this time, I had to throw up the white flag&amp;hellip; I just couldn&amp;rsquo;t deal with Jekyll anymore, this is when I decided to jump in feet first with WPEngine.&lt;/p>
+&lt;p>&lt;a class="link" href="white-flag.jpg" >&lt;img src="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/white-flag.jpg"
+width="1232"
+height="924"
+srcset="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/white-flag_hu_de46f02131a9b0e.jpg 480w, https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/white-flag_hu_6669cbb5cf854f8.jpg 1024w"
+loading="lazy"
+alt="white flag"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;h2 id="life-with-wpengine">Life with WPEngine
+&lt;/h2>&lt;p>Life was good with WPEngine. It was really easy to crank out a bunch of blog posts, I mean Wordpress has a great &lt;a class="link" href="https://en.wikipedia.org/wiki/WYSIWYG" target="_blank" rel="noopener"
+>WYSIWYG editor&lt;/a>. I eventually got my site up and running an launched the site!&lt;/p>
+&lt;p>I then realized I needed to optimize the site for speed and SEO. My first task was enabling SSL. This was incredibly easy with WPEngine, just pay them $53 bucks for a year and you get an SSL cert, that was easy&amp;hellip;&lt;/p>
+&lt;p>&lt;a class="link" href="easy.jpg" >&lt;img src="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/easy.jpg"
+width="1280"
+height="1280"
+srcset="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/easy_hu_deb44a6a76fcd052.jpg 480w, https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/easy_hu_96946b8f79d409cf.jpg 1024w"
+loading="lazy"
+alt="easy"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/a>&lt;/p>
+&lt;p>My next order of business was increasing the speed of Wordpress, WPEngine already does a lot and their infrastructure is top notch but Wordpress needs some help to speed itself up. I followed some stepson speeding up Wordpress, most of it involved caching, minifying, and uglfying assets.&lt;/p>
+&lt;p>Life was pretty good at this point but as the site continued to grow it became slower and slower&amp;hellip;&lt;/p>
+&lt;h2 id="time-for-a-change">Time for a change
+&lt;/h2>&lt;p>I was talking to a &lt;a class="link" href="https://twitter.com/raymondcamden" target="_blank" rel="noopener"
+>colleague from work, Raymond Camden&lt;/a> about our blogs and he mentioned I should check out Hugo. Basically I kind of stopped blogging because WPEngine was too easy, plus I needed a Holiday project as well over Christmas. I started looking into Hugo and could of not been more happy!!!&lt;/p>
+&lt;p>Basically Hugo is a static site generator liked Jekyll but way more simplier. Plus Hugo is written in Go and I have been recently learning Go so I was sold!&lt;/p>
+&lt;h2 id="hugo-vs-wordpress">Hugo vs. Wordpress
+&lt;/h2>&lt;p>So honestly you really can not beat the speed of a static site. Wordpress no matter what has to query a database for every request and that adds up. I decided to run my Hugo generated blog on Github Pages for even more speed. Github fronts themselves with &lt;a class="link" href="http://fastly.com" target="_blank" rel="noopener"
+>Fastly&lt;/a>, which is probably the coolest and most pimp CDN out there. Its super fast, like no one can beat them on time to first byte. Fastly uses SSD&amp;rsquo;s in the cache machines so delivering content is blazing fast. Additionally Fastly has an API to configure your site and basically allows you to do everything programatically, plus they have self on-boarding, a big plus that you don&amp;rsquo;t have to call some sales person&amp;hellip;&lt;/p>
+&lt;p>I have been using markdown a bit more recently and I felt like this time I was more prepared to jump into markdown. My Hugo site uses marketdown for the content files then HTML for the theme. Its really nice that you can keep your content stored in markdown and its agnostic of the presentation layer (the theme). If you don&amp;rsquo;t want to use markdown thats ok, you can create your content in HTML as well.&lt;/p>
+&lt;p>Additionally, with Hugo I am storing my site on &lt;a class="link" href="http://github.com/jsloyer/jsloyer" target="_blank" rel="noopener"
+>Github&lt;/a> and I check in source content and source files such as images. My build process uses &lt;a class="link" href="http://wercker.com" target="_blank" rel="noopener"
+>Wercker&lt;/a> to build my static site and to generate the correctly sized images for my blog as well. Plus Wercker auto-deploys my site to Github Pages whenever there is a checkin!&lt;/p>
+&lt;h2 id="migrating-the-site">Migrating the site
+&lt;/h2>&lt;p>In my &lt;a class="link" href="https://www.jeffsloyer.io/post/why-i-chose-hugo-over-wordpress/" >next post&lt;/a> I will go through how I migrated my site from Wordpress to Hugo. Hope this has been informative and hopefully interesting. Please leave some comments below!&lt;/p>
+&lt;p>Also please follow me on Twitter at &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a> and follow me on &lt;a class="link" href="https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng" target="_blank" rel="noopener"
+>Youtube&lt;/a>!&lt;/p></description></item><item><title>Common Deploy Errors with Community Buildpacks in Bluemix</title><link>https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</link><pubDate>Wed, 29 Jul 2015 10:58:25 -0500</pubDate><guid>https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/fedup.jpg" alt="Featured image of post Common Deploy Errors with Community Buildpacks in Bluemix" />&lt;p>Recently the company that owns development for Ubuntu (Canonical) just announced it is dropping support for lucid 64 which is Ubuntu 10.04 LTS.  What does this mean for Cloud Foundry and the community buildpacks?&lt;/p>
+&lt;p>Well nothing really but there is a couple gotcha&amp;rsquo;s you should know about.&lt;/p>
+&lt;p>I have seen issues with the following buildpacks, this is not a comprehensive list but the ones I at least know about.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>PHP - https://github.com/cloudfoundry/php-buildpack.git&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Static Build Pack - https://github.com/cloudfoundry/staticfile-buildpack.git&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>These issues are documented in a couple StackOverflow posts but we are going to go through what is causing it and how to fix it.&lt;/p>
+&lt;!-- more -->
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://stackoverflow.com/questions/31057357/static-buildpack-deploy-now-failing-due-to-unsupported-stack/31058075#31058075" target="_blank" rel="noopener"
+>Static Buildpack&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://stackoverflow.com/questions/31057357/static-buildpack-deploy-now-failing-due-to-unsupported-stack/31062482#31062482" target="_blank" rel="noopener"
+>Static Buildpack&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>If you are pushing an app to Cloud Foundry and getting an error message like the following there is a workaround you need to do to get the community buildpack&amp;rsquo;s to work.&lt;/p>
+&lt;p>For example I have a super simple PHP app on Github I use for debugging, it is located here. For this blog post we are going to use that app.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/jsloyer/phpinfo.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd phpinfo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf push phpinfo-jbs2 -b https://github.com/cloudfoundry/php-buildpack.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.....
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It looks like you&amp;#39;re deploying on a stack (currently set to *lucid64*) that&amp;#39;s not supported by this buildpack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">That could be because you&amp;#39;re using a recent buildpack release on a deprecated stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you&amp;#39;re using the buildpack installed by your CF admin, please let your admin know you saw this error message.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you at one point specified a buildpack that&amp;#39;s at git URL, please make sure you&amp;#39;re pointed at a version that supports this stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Staging failed: Buildpack compilation step failed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FAILED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BuildpackCompileFailed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>What this is saying is the instance of Cloud Foundry that you are running on the default stack you get is an old version of Ubuntu. The PHP buildpack excepts the newer version of linux. This stack is called &lt;code>cflinuxfs2&lt;/code> also known as &lt;code>Ubuntu 14.04&lt;/code>.&lt;/p>
+&lt;p>To work around this you just need to specify the stack you want to use.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push phpinfo-jbs2 -b https://github.com/cloudfoundry/php-buildpack.git -s cflinuxfs2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>More information can be found on this issue on &lt;a class="link" href="https://github.com/cloudfoundry/php-buildpack/issues/87" target="_blank" rel="noopener"
+>Github&lt;/a>.&lt;/p></description></item><item><title>Get Pumped for the Cloud Foundry Summit</title><link>https://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</link><pubDate>Thu, 30 Apr 2015 10:38:05 -0500</pubDate><guid>https://www.jeffsloyer.io/post/get-pumped-for-the-cloud-foundry-summit/</guid><description>&lt;img src="https://www.jeffsloyer.io/original-images/2015/06/8568353810_30fa30c147_o.jpg" alt="Featured image of post Get Pumped for the Cloud Foundry Summit" />&lt;p>I’m pumped for the Cloud Foundry Summit! Are you??? Well if you aren’t yet hopefully you will be after reading this!&lt;/p>
+&lt;p>If you attended the conference last year there was an awesome presentation on the future of Diego.  What is Diego you ask?  It is the new DEA that is coming for Cloud Foundry.  It is a complete re-write in Go and will add some new features such as the ability to swap out the underlaying linux containers for things like Docker.  Additionally another huge win is adding in plugins, this will be awesome as well!&lt;/p>
+&lt;!-- more -->
+&lt;p>Additionally, there is always a cast of characters there…  &lt;a class="link" href="https://twitter.com/angelluisdiaz" target="_blank" rel="noopener"
+>Angel Diaz&lt;/a> (from IBM) is a great speaker and always pumps people up (literally).  You should ask him to arm wrestle you, I would lose…&lt;/p>
+&lt;p>Ok so for reals, what am I really excited about, well the tech, duh…  Here is a list of some of the sessions I am really pumped about and why.&lt;/p>
+&lt;h3 id="sessions">Sessions
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://cfsummit2015.sched.org/event/b9a2c4ad617e38167044bb9c42801438?iframe=no&amp;amp;w=&amp;amp;sidebar=yes&amp;amp;bg=no#.VUEDeK1Viko" target="_blank" rel="noopener"
+>A Developer’s Perspective on Cloud Foundry Operations: One Month in the Trenches&lt;/a> by Cornelia Davis — Well this one is pretty obvious why, Cornelia is an awesome speaker and I am never let down by her talks, must see just for her.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://cfsummit2015.sched.org/event/73242303138c19c0bacac3e71cf62a12#.VUIwGq1VhBc" target="_blank" rel="noopener"
+>Rocking the Lattice: A New Path for Cloud Foundry Applications&lt;/a> by James Bayer — Again probably the same reason as above, James is an awesome speaker and a must see&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://cfsummit2015.sched.org/event/c8c7462b7d0e3775c14aec71bcdb75db?iframe=no&amp;amp;w=&amp;amp;sidebar=yes&amp;amp;bg=no#.VUEDqa1Viko" target="_blank" rel="noopener"
+>Case Study: Lessons learned hosting a large, global Cloud Foundry deployments&lt;/a> by Adam Gunther — This should be a good one, hosting and running a large scale Cloud Foundry deployment isn’t easy it will be interesting to learn some lessons learned.  Plus Adam is my new manager so I should probably show up so he has a plant in the audience…&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://cfsummit2015.sched.org/event/bb7647207209ec5d410011d67055d615?iframe=no&amp;amp;w=&amp;amp;sidebar=yes&amp;amp;bg=no#.VUEDtK1Viko" target="_blank" rel="noopener"
+>A glimpse at Runtime&lt;/a> by Zachary Auerbach and Daniel Lavine — The runtime is probably the most important part of Cloud Foundry and its always nice to hear and see some of the inner workings of the runtime team, a must see…&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://cfsummit2015.sched.org/event/f81390f973280b917bf5833a808a3fe5?iframe=no&amp;amp;w=&amp;amp;sidebar=yes&amp;amp;bg=no#.VUEDwq1Viko" target="_blank" rel="noopener"
+>The Road to Persistence on Cloud Foundry Diego&lt;/a> by Caleb Miles and Ted Young — This will be a good one, this talk is going to talk about a new model for the 12 factor app and more specifically some cool cluster scheduling systems like Apache Mesos.  I have friends at Twitter and the swear up and down on Mesos and how awesome is it.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://cfsummit2015.sched.org/event/ba341002c205509deb3e6afe36df3da0?iframe=no&amp;amp;w=&amp;amp;sidebar=yes&amp;amp;bg=no#.VUHwD61Vikp" target="_blank" rel="noopener"
+>Finding and Organizing a Great Cloud Foundry User Group&lt;/a> by Daniel Krook, Manuel Silveyra and Animesh Singh — Cloud Foundry wouldn’t be successful without its community.  These guys are going to be talking about how they have run and organized some of the most successful Cloud Foundry meetups in the Bay Area and NYC.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Again, get PUMPED!!!  I am all jacked up and ready to head to the CF Summit, better see you there.  If you come up to me at the Summit and yell out get pumped in front of me, I’ll buy you a beer or something…&lt;/p></description></item></channel></rss>

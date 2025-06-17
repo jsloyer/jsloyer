@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ruby on Rails on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/ruby-on-rails/</link><description>Recent content in Ruby on Rails on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 05 Mar 2015 10:09:31 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/ruby-on-rails/index.xml" rel="self" type="application/rss+xml"/><item><title>Tips for Migrating Ruby on Rails Applications to Bluemix</title><link>https://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/</link><pubDate>Thu, 05 Mar 2015 10:09:31 -0500</pubDate><guid>https://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/migrate.jpg" alt="Featured image of post Tips for Migrating Ruby on Rails Applications to Bluemix" />&lt;p>&lt;img src="https://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/Ruby_on_Rails-logo.png"
+width="316"
+height="376"
+srcset="https://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/Ruby_on_Rails-logo_hu_c0baf2a74f99fe6.png 480w, https://www.jeffsloyer.io/post/tips-for-migrating-ruby-on-rails-applications-to-bluemix/Ruby_on_Rails-logo_hu_9616540ae7f03bb2.png 1024w"
+loading="lazy"
+alt="Ruby on Rails.svg 231x300 Tips for Migrating Ruby on Rails Applications to Bluemix"
+class="gallery-image"
+data-flex-grow="84"
+data-flex-basis="201px"
+>Who doesn’t love some Ruby?  Bluemix definitely loves Ruby on Rails!  Sometimes running a Ruby on Rails app can be a little tricky, so I have included some tips and tricks for migrating your Ruby on Rails app to Bluemix. They will include:&lt;/p>
+&lt;ul>
+&lt;li>Required gems&lt;/li>
+&lt;li>Code tweaks&lt;/li>
+&lt;li>Accessing external databases&lt;/li>
+&lt;li>Deploying your app&lt;/li>
+&lt;/ul>
+&lt;!-- more -->
+&lt;h3 id="required-gems">Required gems
+&lt;/h3>&lt;p>If you are using PostgreSQL you need to include &lt;code>pg&lt;/code>. Sqlite3 is included to get local development working as well.  Add the following line to your Gemfile.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">gem &amp;#39;pg&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gem &amp;#39;sqlite3&amp;#39;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Additionally there are two more gems you should include as well.  These gems will be included by some Ruby buildpacks but we should include them just in case.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">gem &amp;#34;cf-autoconfig&amp;#34;, &amp;#34;~&amp;gt; 0.2.1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gem &amp;#39;rails_12factor&amp;#39;, group: :production
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="code-tweaks--external-databases">Code tweaks &amp;amp; external databases
+&lt;/h3>&lt;p>When you deploy your app to Bluemix, the Ruby buildpack will overwrite your database.yml file to pull in the attached DB service.  You should have a &lt;code>database.yml&lt;/code> file if you are running locally.  Below is a pretty standard one:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># SQLite version 3.x
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># gem install sqlite3-ruby (not necessary on OS X Leopard)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">development:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> adapter: sqlite3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> database: db/development.sqlite3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool: 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> timeout: 5000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Warning: The database defined as &amp;#34;test&amp;#34; will be erased and
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># re-generated from your development database when you run &amp;#34;rake&amp;#34;.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Do not set this db to the same as development or production.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">test:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> adapter: sqlite3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> database: db/test.sqlite3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool: 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> timeout: 5000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">production:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> adapter: sqlite3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> database: db/production.sqlite3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> pool: 5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> timeout: 5000
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you are using Redis and PostgreSQL, it can be a little tricky to use two databases.  Here is the config for using Redis with &lt;a class="link" href="https://github.com/resque/resque" target="_blank" rel="noopener"
+>Resque&lt;/a> (a task scheduler that is backed by Redis).  This file is specific to resque and its located at &lt;code>config/initializers/resque.yml&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">require&lt;/span> &lt;span class="s1">&amp;#39;resque/status_server&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">require&lt;/span> &lt;span class="s1">&amp;#39;json&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">rails_root&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ENV&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;RAILS_ROOT&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="ne">File&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dirname&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">__FILE__&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s1">&amp;#39;/../..&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">rails_env&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ENV&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;RAILS_ENV&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="s1">&amp;#39;development&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">resque_config&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YAML&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">rails_root&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s1">&amp;#39;/config/resque.yml&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="n">rails_env&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="s2">&amp;#34;production&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Resque&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">redis&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">resque_config&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">rails_env&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">vcap_services&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">JSON&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">parse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ENV&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;VCAP_SERVICES&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">credentials&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">vcap_services&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;rediscloud&amp;#34;&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">][&lt;/span>&lt;span class="s2">&amp;#34;credentials&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Resque&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">redis&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;:&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">credentials&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;password&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;@&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">credentials&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;hostname&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;:&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">credentials&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;port&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="deploy-your-app">Deploy your app!
+&lt;/h3>&lt;p>To deploy your app, you need to create some services in Bluemix for your app.  We will do this with the Cloud Foundry command line.&lt;/p>
+&lt;p>&lt;em>PostgreSQL:&lt;/em>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf create-service elephantsql turtle postgres-myapp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#postgres-myapp is the name of your service, you can name this whatever you want
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Redis:&lt;/em>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf create-service rediscloud 25mb redis-myapp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#redis-myapp is the name of your service, you can name this whatever you want
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="prepare-your-app">Prepare your app
+&lt;/h3>&lt;p>Cloud Foundry requires a file called &lt;code>manifest.yml&lt;/code> to help bind services to your app and defining memory limits, CPU limits, and the number of instances required.  Belows is an example file I used.  The name of the app is the unique identifier of your app that will be in your account.  Hostname is the hostname of the app, it will be &lt;em>yourhostname&lt;/em>.mybluemix.net or if you are running in London it will be &lt;em>yourhostname&lt;/em>.eu-gb.mybluemix.net.  The &lt;code>command&lt;/code> is pretty important, it says it will run the &lt;code>db:setup&lt;/code> everytime the app is deployed, this should probably be changed to &lt;code>db:migrate&lt;/code> instead though.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">applications:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#swap out myapp-jbs for your own app name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">- name: myapp-jbs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> memory: 1GB
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> instances: 1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> path: .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> command: bundle exec rake db:setup &amp;amp;&amp;amp; bundle exec rails s -p $PORT
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> services:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #swap out the below for your own
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #cf cs elephantsql turtle yourownname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #cf cs rediscloud 25mb yourownname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #redis cloud has different plans, check out cf marketplace for the plans
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - postgres-myapp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - redis-myapp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="push-your-app">Push your app
+&lt;/h3>&lt;p>So we are on the final step, time to push our app!  If you are using Ruby 2.2.0, it’s not officially supported by Cloud Foundry, but there is a buildpack that is part of the Cloud Foundry community github that we can use.  It tracks pretty close to the latest Ruby and Rails.  For my app I used Ruby 2.2.0 and Rails 4.2.0:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push -b https://github.com/cloudfoundry/ruby-buildpack.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="one-last-little-tip">One last little tip…
+&lt;/h3>&lt;p>One last little tweak if you are familiar with Git it will make your life in Cloud Foundry land a little better.  There is a file called &lt;code>.cfignore&lt;/code> that goes in the root of your project, it basically acts like &lt;code>.gitgnore&lt;/code> and prevents files being updated to Cloud Foundry.  So for Ruby on Rails you probably would want your vendor folder here and etc.  I have put one below that I use.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.DS_STORE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Ignore bundler config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/.bundle
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Ignore the default SQLite database.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/db/*.sqlite3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Ignore all logfiles and tempfiles.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/log/*.log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/tmp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Ignore coverage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">/coverage
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Tag file
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">tags
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.idea/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.swo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.swp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.envrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cscope*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">doc/*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.jira-url
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vendor/*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you have any issues please reach out to us on &lt;a class="link" href="http://stackoverflow.com/questions/tagged/bluemix" target="_blank" rel="noopener"
+>StackOverflow&lt;/a>!  In the top righthand corner click “Ask Question”.&lt;/p></description></item></channel></rss>

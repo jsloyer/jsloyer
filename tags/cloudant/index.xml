@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloudant on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/cloudant/</link><description>Recent content in Cloudant on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 17 Feb 2015 10:02:18 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/cloudant/index.xml" rel="self" type="application/rss+xml"/><item><title>Control home devices with Bluemix Internet of Things (Part 2)</title><link>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</link><pubDate>Tue, 17 Feb 2015 10:02:18 -0500</pubDate><guid>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/robots-blog-post-header1.jpg" alt="Featured image of post Control home devices with Bluemix Internet of Things (Part 2)" />&lt;h2 id="part-2-configuring-the-raspberry-pi">Part 2: Configuring the Raspberry Pi
+&lt;/h2>&lt;p>This is a continuation of Part 1 of Controlling home devices with Bluemix Internet Of Things  If you haven’t read &lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/" >Part 1&lt;/a>, please do that first…&lt;/p>
+&lt;p>In Part 1 we got the electrical work out of the way.  We wired up the relay’s and connected the circuit’s.  In this part of the 3 part series we will configure the Raspberry Pi to control the relay’s that we wired up in part 1.&lt;/p>
+&lt;p>So without delay let’s jump into the next part.&lt;/p>
+&lt;!-- more -->
+&lt;h2 id="install-software-on-the-raspberry-pi">Install software on the Raspberry Pi
+&lt;/h2>&lt;p>The first step of getting your Raspberry Pi setup is installing Raspbian.  If you have the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a> its pretty easy, just plug in the wifi dongle and insert the SD card and plug in power.  If you don’t have the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a> follow the instructions from &lt;a class="link" href="http://www.raspberrypi.org/help/noobs-setup" target="_blank" rel="noopener"
+>here&lt;/a>.  Once you get Raspbian installed open up a terminal.&lt;/p>
+&lt;p>Next, we will need to update Raspbian to the latest.  To do this run the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo apt-get update
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get upgrade
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next, we will need to download  &lt;a class="link" href="http://lightshowpi.org" target="_blank" rel="noopener"
+>LightShowPi&lt;/a>.  &lt;a class="link" href="http://lightshowpi.org" target="_blank" rel="noopener"
+>LightShowPi&lt;/a> is the foundation for syncing the lights to the music.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># Install git (if you don&amp;#39;t already have it)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt-get install git-core
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Clone the repository to /home/pi/lightshowpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd ~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone https://togiles@bitbucket.org/togiles/lightshowpi.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Grab the stable branch
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd lightshowpi git fetch &amp;amp;&amp;amp; git checkout stable
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Next, we need to install LightShowPi, run the following.  Please not the install step will take some time, be patient…&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd /home/pi/lightshowpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo ./install.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Once the install is complete we need to reboot the Raspberry Pi to pickup some new environment variables. To reboot run the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">sudo reboot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="wire-up-the-raspberry-pis-breadboard">Wire up the Raspberry Pi’s breadboard
+&lt;/h2>&lt;p>Once we have rebooted we need to connect the bread board to the Raspberry Pi and connect the bread board to the relays.  This took some tinkering to figure out the GPIO ports but below I have posted a picture of mybread board on how it was constructed.   For me I set everything up with 8 channels first and using LED’s provided in the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a> to make sure everything was working then I moved over to the real relays.  So let’s do that.&lt;/p>
+&lt;p>I would highly recommend following the steps in &lt;a class="link" href="https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI" target="_blank" rel="noopener"
+>this page&lt;/a> on getting your bread board working.&lt;/p>
+&lt;p>Below is a picture of my finished bread board with 16 channels.  I have included a wiring diagram as well.  Basically each GPIO port goes to the input side of the relay controller.  If you notice I have a couple left over LED’s on the bread board, this was done via the tutorial list above.&lt;/p>
+&lt;p>&lt;a class="link" href="2015-02-16-11.31.19.jpg" >&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/2015-02-16-11.31.19.jpg"
+width="768"
+height="1024"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/2015-02-16-11.31.19_hu_8e3a3585f737ad83.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/2015-02-16-11.31.19_hu_83f5355663a712a4.jpg 1024w"
+loading="lazy"
+alt="2015 02 16 11.31.19 768x1024 Control home devices with Bluemix Internet of Things (Part 2)"
+class="gallery-image"
+data-flex-grow="75"
+data-flex-basis="180px"
+>&lt;/a>&lt;/p>
+&lt;p>What is going on above is each of the delays is plugged into a GPIO port and then plugged into the ground rail and connected by a resistor.  The particular resistor I am using is a 220 Ohm resistor.&lt;/p>
+&lt;p>&lt;a class="link" href="raspberry-pi-lights-wiring-diagram.png" >&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/raspberry-pi-lights-wiring-diagram.png"
+width="889"
+height="642"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/raspberry-pi-lights-wiring-diagram_hu_577fe0bce0400bc4.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/raspberry-pi-lights-wiring-diagram_hu_ee9d4c62e896f7ce.png 1024w"
+loading="lazy"
+alt="raspberry pi lights wiring diagram Control home devices with Bluemix Internet of Things (Part 2)"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+>&lt;/a>&lt;/p>
+&lt;p>So let’s test some things out.  Let’s play a pre-loaded song.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd ~/lightshowpi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo python py/synchronized_lights.py --file=/home/pi/lightshowpi/music/sample/ovenrake_deck-the-halls.mp3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>All the relays should be flashing.  At this point you can plug the lights into the outlets as well.  If you notice the lights go on solid for 30 seconds before the songs play, we can override this.  Additionally this file has the GPIO pins mapping as well.  This mapping is for using the full 16 channels, if you are using less just remove some of the mappings from the end of the gpio_pins line.  To do this we need to place a config file in our home directory.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cd ~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">touch .lights.cfg
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Choose your favorite text editor and put the following contents in the file.  We change the time it waits from 30 seconds to 1.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[hardware]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">gpio_pins = 0,1,2,3,4,5,6,7,21,22,23,24,25,26,28,29
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[lightshow]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">preshow_configuration =
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;transitions&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;on&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;duration&amp;#34;: 1,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;channel_control&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;type&amp;#34;: &amp;#34;off&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;duration&amp;#34;: 1,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;channel_control&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>That is it for this part.  In the next part of this series we will configure the Bluemix app to respond to text message votes and then the app to interface with the python code that controls the lights.&lt;/p>
+&lt;h2 id="parts-in-the-series">Parts in the Series
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/" >Part 1&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Control home devices with Bluemix Internet of Things</title><link>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</link><pubDate>Fri, 06 Feb 2015 09:49:21 -0500</pubDate><guid>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1.jpg" alt="Featured image of post Control home devices with Bluemix Internet of Things" />&lt;p>The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020.  These devices make up something called the Internet of Things.  These devices can be controlled remotely and interconnected.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease.png"
+width="700"
+height="270"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease_hu_6d11359f8f64425e.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease_hu_28b1f8b3db160b62.png 1024w"
+loading="lazy"
+alt="iotdevicesincrease Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="259"
+data-flex-basis="622px"
+>&lt;/p>
+&lt;p>While a lot of these devices can be connected to the Internet, most of them are &amp;ldquo;dumb&amp;rdquo; devices right now.  To turn these &amp;ldquo;dumb&amp;rdquo; devices into smart devices you can use the &lt;a class="link" href="http://internetofthings.ibmcloud.com" target="_blank" rel="noopener"
+>Internet of Things&lt;/a> to connect them to the cloud.  Simple things such as a washing machine or a coffee pot can be connected to the Internet.  More practical systems can be connected also, such as a home automation system or a thermostat.  Going even further a mine could connect safety sensors to the Internet of Things as well.&lt;/p>
+&lt;!-- more -->
+&lt;p>The Internet of Things allows for these devices to either be controlled or act as sensors and provides a means for them to communicate.  This is done over a protocol called MQTT. According to &lt;a class="link" href="http://mqtt.org/" target="_blank" rel="noopener"
+>mqtt.org&lt;/a>, &amp;ldquo;MQTT is a machine-to-machine (M2M)/Internet of Things connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport.&amp;rdquo;  This works great for many devices as-is, doesn’t have many dependencies, it is very lightweight, and doesn’t require tremendous amounts of processing power.&lt;/p>
+&lt;p>IBM Bluemix provides a platform for creating these apps that utilize all these sensors.  You can basically almost use any programming language you want, Bring Your Own Language (BYOL) and utilize services that do the heavy lifting for you.  This heavy lifting is the Internet of Things (IoT) service in Bluemix.  It implements that MQTT protocol and allows you to control and receive data from these devices.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1.jpg"
+width="1024"
+height="458"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1_hu_f8ea79abbff80153.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1_hu_319a811cc1084942.jpg 1024w"
+loading="lazy"
+alt="robots blog post header1 1024x665 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="223"
+data-flex-basis="536px"
+>&lt;/p>
+&lt;p>Do you have a bunch of left over Christmas lights sitting around that will be collecting dust till next year? Until now Christmas lights are a once a year thing, that isn’t true anymore.  Time to get the dust off of your lights and use them for something fun! Enter Christmas Lights controlled by a Raspberry Pi via IoT in Bluemix!&lt;/p>
+&lt;p>You can control these Christmas Lights using the Internet of Things and IBM Bluemix. Who &lt;em>doesn’t&lt;/em> love large amounts of Christmas lights?  I sure love them.  Add on to that syncing lights to music and the ability to control lights from your phone and giving passersbys the ability to vote for songs they wanna see the lights synced to by texting.  How cool is that?&lt;/p>
+&lt;h2 id="introduction">Introduction:
+&lt;/h2>&lt;p>This is going to be a three part series: The first part (this post) will focus on the hardware setup, all the wiring and connecting things up to the Raspberry Pi.  The second part will focus on the software configuration of the Raspberry Pi, and the final part will focus on the Bluemix app that allows people to vote on songs to play and the integration to control the Raspberry Pi with the IoT service in Bluemix.&lt;/p>
+&lt;p>So some of our goals that we are going to accomplish are the following.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Part 1&lt;/strong> – Setup and wire together relays, outlets, and the Raspberry Pi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/" >&lt;strong>Part 2&lt;/strong>&lt;/a> – Power on the Raspberry Pi, installed Raspbian (OS for the Pi), install and configure the lighting control software&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Part 3&lt;/strong> – Deploy a Bluemix app with the IoT, Twilio, and Cloudant services to interact with users and the Raspberry Pi (an example of the app is &lt;a class="link" href="http://lights.mybluemix.net/" target="_blank" rel="noopener"
+>http://lights.mybluemix.net/&lt;/a>; please note this is not connected to my Raspberry Pi right now, so clicking the play button won’t do anything.)&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Here is a little teaser of the expected outcome:&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/_nWcIvOSNJE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>Let’s jump into it…&lt;/p>
+&lt;h2 id="part-1-setting-up-the-hardware">Part 1: Setting up the hardware
+&lt;/h2>&lt;p>These instructions have been adapted from the following sites.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/" target="_blank" rel="noopener"
+>https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI" target="_blank" rel="noopener"
+>https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/download-and-install" target="_blank" rel="noopener"
+>http://lightshowpi.org/download-and-install&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/configuring-and-testing-your-hardware" target="_blank" rel="noopener"
+>http://lightshowpi.org/configuring-and-testing-your-hardware&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/play-music" target="_blank" rel="noopener"
+>http://lightshowpi.org/play-music&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The first step is getting a Raspberry Pi, I highly recommend getting the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>CanaKit on Amazon&lt;/a>.  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.&lt;/p>
+&lt;p>The first step is deciding how many individual light channels you want—you can do up to 48 actually, but for this post we will doing 16 channels.  What that means is 16 individual strands of lights that can be controlled.  So let’s make a shopping list.&lt;/p>
+&lt;p>Shopping List:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>8 &lt;a class="link" href="http://amzn.to/2CamxBW" target="_blank" rel="noopener"
+>two gang outlets&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 &lt;a class="link" href="http://amzn.to/2DLctzJ" target="_blank" rel="noopener"
+>4 gang blue plastic outlet boxes&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2zYuQyW" target="_blank" rel="noopener"
+>50 feet of 12 gauge electrical wire&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CCI8UP" target="_blank" rel="noopener"
+>2 bags of assorted wire nuts&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 relays (1 relay per each 8 light channels, available &lt;a class="link" href="http://amzn.to/2C7lx1E" target="_blank" rel="noopener"
+>on Amazon&lt;/a>)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>1 &lt;a class="link" href="http://amzn.to/2DLo6qF" target="_blank" rel="noopener"
+>powerstrip&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2Cv8WsJ" target="_blank" rel="noopener"
+>2 electrical extension cords&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CzX99O" target="_blank" rel="noopener"
+>16 strands of Christmas lights&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Tools Required:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2EsJH8e" target="_blank" rel="noopener"
+>Wire Stripper&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CBl8Wi" target="_blank" rel="noopener"
+>Screw Drivers, phillips and flat&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CapKBL" target="_blank" rel="noopener"
+>Multimeter -optional&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>My brother (&lt;a class="link" href="https://twitter.com/esloyer" target="_blank" rel="noopener"
+>@esloyer&lt;/a>) helped me wire this whole thing up and came up with an adapted wiring schema based off the sites above, thanks bro!&lt;/p>
+&lt;p>Once you get all the items on the shopping list we need to start taking apart the 50 feet of wire, there is 2 wires inside of the casing, a black and then a white one.  We need to get them out of the casing, take a pocket knife or utility knife and make a cut into the casing at one end, you can basically then peal back the casing on the whole 50 feet of wire then.&lt;/p>
+&lt;p>Below is a wiring diagram that we need to complete.  You can do this multiple ways but below is a suggestion.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture.png"
+width="1024"
+height="642"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture_hu_8f326f9d29449440.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture_hu_ad72e496ac82a628.png 1024w"
+loading="lazy"
+alt="Capture 1024x642 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="382px"
+>&lt;/p>
+&lt;p>What we need to do is basically daisy chain all the &amp;ldquo;hot&amp;rdquo; wires together between each set of 4 gang double gang outlets.  We do this so we don’t overload a particular circuit.  So to do this we need to cut the end off of our cheap extension cord that has a plug on it, we need to then strip the wires, and then identity which wire is the hot/positive wire.  Below is a picture of a wire, the hot/positive wire will have dashes or stripes on it, the cold/neutral wire will NOT have any dashes or stripes:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord.jpg"
+width="1024"
+height="764"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord_hu_a3f7cc50205f5fa6.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord_hu_f8939067b1c62fc6.jpg 1024w"
+loading="lazy"
+alt="electrical cord 1024x764 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="321px"
+>&lt;/p>
+&lt;p>We need to take the hot wire and put it into a wire nut.  We will then take some wire from our 50 feet, strip one of the ends and twist it into the wire nut.  This will get attached to positive input on the relay.  We need to repeat this for each channel.  In the picture below I have an additional wire going from the first wire nut to another wire nut because all the wires going to the relay wouldn’t fit into one wire nut.  We are just effectively connecting two wires together here.&lt;/p>
+&lt;p>The next step is running a wire from each channel on the relay to electrical outlet.  This is the hot wire to each outlet but this wire is being controlled by the relay.  Think of the relay as a simple on/off switch that you would find at home to control a light.  On most double electrical outlets there is a tab on the side that comes enabled that makes most receptacles operate as one, this is desirable in a house so an electrician only has to run one wire to the outlet but in our case we want to take advantage of controlling both receptacles.  We need to break this tab on both sides of the outlet.  Take a pair of needle nodes pliers and bend the tab back and forth and eventually it will come off.  See the photos below.&lt;/p>
+&lt;p>Before:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14.jpg"
+width="450"
+height="355"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14_hu_547eb42780bdc852.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14_hu_105e14da772baaf9.jpg 1024w"
+loading="lazy"
+alt="FH13MAR SWIOUT 14 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="304px"
+>&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5.jpg"
+width="249"
+height="187"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5_hu_9ce89f38c60a8b19.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5_hu_8fe19ac7cb63afdb.jpg 1024w"
+loading="lazy"
+alt="electrical outlet garbage disposal 5 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;p>After:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4.jpg"
+width="249"
+height="187"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4_hu_4b377a2f222e5725.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4_hu_3342bd0a5a01f063.jpg 1024w"
+loading="lazy"
+alt="electrical outlet garbage disposal 4 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;p>So next we need to connect our cold/negative wires to each of the outlets.  If you look at the wiring diagram (above) I have one cold/neutral wire going to the first outlet and each additional outlet is daisy chained to it.  This is just to complete the circuit.  Below is the finished product.  We basically have our outlets daisy chained together with our cold/neutral wires and then hold/positive wires have individual channels to the relay.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57.jpg"
+width="3264"
+height="2448"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57_hu_2aaeaa2e26da998a.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57_hu_be5268a26fba3efb.jpg 1024w"
+loading="lazy"
+alt="2014 12 02 15.16.57 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>Congratulations the hard part is over! Well, at least for me, since electrical stuff isn’t my forte.&lt;/p>
+&lt;h2 id="parts-in-the-series">Parts in the Series
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/" >Part 2&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Twitter Personality Comparisons Using Watson</title><link>https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</link><pubDate>Mon, 24 Nov 2014 22:06:16 -0500</pubDate><guid>https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/personality.jpg" alt="Featured image of post Twitter Personality Comparisons Using Watson" />&lt;p>Hey Yall!&lt;/p>
+&lt;p>We are back at it again with some demos!!!&lt;/p>
+&lt;p>Did you ever wonder if you and your favorite celebrity would be compatible if you met?? I sure do! Or did you ever wonder how you could become a better leader, I sure do. Today you would have to go Google the person and analyze posts and articles about them and be a personality expert to see if you have personality traits in common.&lt;/p>
+&lt;p>Gone are those days now!&lt;/p>
+&lt;p>Enter &lt;a class="link" href="http://friendme.mybluemix.net/" target="_blank" rel="noopener"
+>FriendMe&lt;/a>!  Your trusted personality comparison using IBM Watson. The answer to the above questions are easy now.  For example,  if I compared myself to the IBM Design Twitter account, I can see my personality is very much alike with the IBM Design team.  Thats good news for me because I never considered myself a designer…
+&lt;a class="link" href="jeff-and-ibm-design.jpg" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-ibm-design.jpg"
+width="735"
+height="176"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-ibm-design_hu_28f61e73a8f04dee.jpg 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-ibm-design_hu_c826fa204f45822b.jpg 1024w"
+loading="lazy"
+alt="jeff and ibm design Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="417"
+data-flex-basis="1002px"
+>&lt;/a>&lt;/p>
+&lt;!-- more -->
+&lt;p>For the leadership, personal, and professional case, Jerry Cuomo is a very successful leader at IBM. I can see that myself and Jerry share 5 out of the top 5 personality traits in common.  In my career development I can see I need to develop myself more as a transformational leader.&lt;/p>
+&lt;p>&lt;a class="link" href="jeff-and-jerry.jpg" >&lt;img src="https://www.jeffsloyer.io/jeff-and-jerry.jpg"
+loading="lazy"
+alt="jeff and jerry Twitter Personality Comparisons Using Watson"
+>&lt;/a>&lt;/p>
+&lt;p>Lastly, I am going to do one more comparison, between myself and Blake McGregor (a product manager for Bluemix).&lt;/p>
+&lt;p>&lt;a class="link" href="jeff-and-blake.jpg" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-blake.jpg"
+width="696"
+height="169"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-blake_hu_fc4bfa4c430e1762.jpg 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/jeff-and-blake_hu_61c2772ae7c64668.jpg 1024w"
+loading="lazy"
+alt="jeff and blake Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="411"
+data-flex-basis="988px"
+>&lt;/a>&lt;/p>
+&lt;p>So let’s jump right into it.&lt;/p>
+&lt;p>This app was written in about 6 hours, its built using obviously IBM Bluemix, Node.JS, Angular.JS, Bootstrap, JQuery, IBM Watson, Cloudant, and Twilio.&lt;/p>
+&lt;p>If you went to the link above, &lt;a class="link" href="http://friendme.mybluemix.net/" target="_blank" rel="noopener"
+>here it is again&lt;/a>.  You can actually text the app.  If you text the app two Twitter handles it will tell you the compatibility between two people.&lt;/p>
+&lt;p>So the source code is available &lt;a class="link" href="https://github.com/IBM-bluemix/friendme" target="_blank" rel="noopener"
+>on Github&lt;/a>.&lt;/p>
+&lt;p>First, we are going to walk through on how to deploy this app and get it working in Bluemix.  Secondly, we are going to walk through how to use the command line to deploy this app as well.&lt;/p>
+&lt;p>If you haven’t already sign up for a &lt;a class="link" href="http://bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp" target="_blank" rel="noopener"
+>Bluemix account&lt;/a>.  Once you have done that head over to&lt;a class="link" href="http://jazzhub.com" target="_blank" rel="noopener"
+> jazzhub.com&lt;/a>.  Login there with the username and password you created from your Bluemix account.  If you haven’t logged in yet to jazzhub it will ask you to create an id.  For example if my email is &lt;a class="link" href="mailto:jsmith@co.com" >jsmith@co.com&lt;/a>, I would create a username of jsmith.&lt;/p>
+&lt;p>First, let’s open a web browser and goto &lt;a class="link" href="https://github.com/IBM-bluemix/friendme" target="_blank" rel="noopener"
+>https://github.com/IBM-bluemix/friendme&lt;/a>.  Since we already created an account or logged in jazzhub above we should be logged in.  On the right hand side near the top there should be a big button that says &amp;ldquo;Fork Project&amp;rdquo;.  Let’s click that.&lt;/p>
+&lt;p>&lt;a class="link" href="fork.png" >
+&lt;/a>&lt;a class="link" href="fork.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork.png"
+width="300"
+height="83"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork_hu_e5dda40ee0488710.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork_hu_92803f85830f436a.png 1024w"
+loading="lazy"
+alt="fork 300x83 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="361"
+data-flex-basis="867px"
+>&lt;/a>&lt;/p>
+&lt;p>Let’s go ahead and enter a project name, for example friendme, you can name it anything you want though.  Next place a check mark next to &amp;ldquo;Make it Private&amp;rdquo;, more on this later…  Next make sure an organization and space is shown, it should should your email address as the organization and the space should be dev.  Lastly, click &amp;ldquo;Save&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="fork2.png" >
+&lt;/a>&lt;a class="link" href="fork2.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork2.png"
+width="300"
+height="239"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork2_hu_fbd70f899f8fb918.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/fork2_hu_ba1847246db0f6e7.png 1024w"
+loading="lazy"
+alt="fork2 300x239 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="301px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we need to create the app in Bluemix and setup some services.  So in a new browser window navigate to&lt;a class="link" href="http://bluemix.net/" target="_blank" rel="noopener"
+> http://bluemix.net&lt;/a>.  In the top right click login.&lt;/p>
+&lt;p>Once you login click on catalog and find SDK for Node.JS.  Go ahead and click on it.&lt;/p>
+&lt;p>&lt;a class="link" href="node.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/node.png"
+width="269"
+height="300"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/node_hu_664ec7bd40c775fa.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/node_hu_b92ebc228a62d01c.png 1024w"
+loading="lazy"
+alt="node 269x300 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="89"
+data-flex-basis="215px"
+>&lt;/a>&lt;/p>
+&lt;p>Type in a name for your app, this will also be the URL for your app, remember this as we will need it later…  Then click &amp;ldquo;Create&amp;rdquo;.&lt;/p>
+&lt;p>Behind the scenes Bluemix is spinning up a container for our app, setting up SSL, and setting up load balancing. In a traditional IaaS, you would have to do all this manually and it can take hours or days…&lt;/p>
+&lt;p>&lt;a class="link" href="createapp.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/createapp.png"
+width="228"
+height="300"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/createapp_hu_ca3d17f5544aea86.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/createapp_hu_4f2e2fa607e1fc2.png 1024w"
+loading="lazy"
+alt="createapp 228x300 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="76"
+data-flex-basis="182px"
+>&lt;/a>&lt;/p>
+&lt;p>Next, we need to add some services to our app.  We need Watson and Cloudant.  Let’s do Watson first.  The Watson service that we want is User Modeling.  It will analyze text and determine someone’s personality.  So to do this let’s click &amp;ldquo;Add A Service&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="addservice.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addservice.png"
+width="300"
+height="76"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addservice_hu_c62a1aea4e3d8aaf.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addservice_hu_eb9eb4498b2765e5.png 1024w"
+loading="lazy"
+alt="addservice 300x76 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="394"
+data-flex-basis="947px"
+>&lt;/a>&lt;/p>
+&lt;p>Let’s go to the Watson section and click on &amp;ldquo;User Modeling&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="usermodeling.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling.png"
+width="300"
+height="115"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling_hu_2f8c7001bd53ffab.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling_hu_84422fde67a5add8.png 1024w"
+loading="lazy"
+alt="usermodeling 300x115 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="260"
+data-flex-basis="626px"
+>&lt;/a>&lt;/p>
+&lt;p>It will bring up a dialog asking us to bind the service to our app, on the right hand side, click &amp;ldquo;Create&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="usermodeling2.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling2.png"
+width="224"
+height="300"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling2_hu_de1ce743213412d5.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/usermodeling2_hu_6cd2119b9367372.png 1024w"
+loading="lazy"
+alt="usermodeling2 224x300 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="74"
+data-flex-basis="179px"
+>&lt;/a>&lt;/p>
+&lt;p>It will ask us if we want to restage the app, go ahead and click ok.  What this means is it needs to bind the service to the app and to do this it needs to restart it.&lt;/p>
+&lt;p>Next, we need to create a database, to do this let’s click on the Cloudant tile.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantclick.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantclick.png"
+width="783"
+height="578"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantclick_hu_2627f191c7a6ddaf.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantclick_hu_37d962d33d1939e4.png 1024w"
+loading="lazy"
+alt="cloudantclick 300x221 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="325px"
+>&lt;/a>&lt;/p>
+&lt;p>Then let’s click on the launch button.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantlaunch.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantlaunch.png"
+width="1024"
+height="351"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantlaunch_hu_ae86217a151a7505.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/cloudantlaunch_hu_7ea855d9f0f4cd14.png 1024w"
+loading="lazy"
+alt="cloudantlaunch 300x103 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="291"
+data-flex-basis="700px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we need to create a database, click on &amp;ldquo;Add New Database&amp;rdquo; in the top right.&lt;/p>
+&lt;p>&lt;a class="link" href="addnewdb.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addnewdb.png"
+width="600"
+height="96"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addnewdb_hu_62b66c1c41ad5902.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addnewdb_hu_21993a5ddbe44cf2.png 1024w"
+loading="lazy"
+alt="addnewdb 300x48 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="625"
+data-flex-basis="1500px"
+>&lt;/a>&lt;/p>
+&lt;p>Then enter a name for the database, let’s use friendme, if you use something else we will have to edit the code…  Go ahead and click &amp;ldquo;Create&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="db.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/db.png"
+width="300"
+height="150"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/db_hu_7cbfe672df7b457.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/db_hu_da681d3bd90c9a6c.png 1024w"
+loading="lazy"
+alt="db 300x150 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="480px"
+>&lt;/a>&lt;/p>
+&lt;p>We can close out of Cloudant now.&lt;/p>
+&lt;p>So, since we are making API calls to Twilio and Twitter we need to register for API key’s.&lt;/p>
+&lt;p>Let’s do Twitter first, head on over to &lt;a class="link" href="http://apps.twitter.com" target="_blank" rel="noopener"
+>http://apps.twitter.com&lt;/a> and login with your Twitter username and password.&lt;/p>
+&lt;p>In the top right let’s click on &amp;ldquo;Create New App&amp;rdquo;.  Type in a name and description for the app, the URL actually doesn’t matter but let’s type in something real.  Remember above the name you created for your app in Bluemix, let’s type that in.  For example &lt;a class="link" href="http://friendme.mybluemix.net" target="_blank" rel="noopener"
+>http://friendme.mybluemix.net&lt;/a>.  Replace friendme with the name of your app.&lt;/p>
+&lt;p>Click on the &amp;ldquo;Keys and Access Tokens&amp;rdquo; tab.  Under Access Tokens click &amp;ldquo;Create my access token&amp;rdquo;.  Leave this tab open, we will need these API’s keys in a bit…&lt;/p>
+&lt;p>Next we need a Twilio phone number if you would like to be able to text your app.  If you don’t want to be able to text the app skip this section, you can use the UI of the app to interact with it.  Head on over to &lt;a class="link" href="https://www.twilio.com/try-twilio?promo=bluemix" target="_blank" rel="noopener"
+>https://www.twilio.com/try-twilio&lt;/a> and create an account.  If you already have an account go ahead and goto &lt;a class="link" href="https://www.twilio.com/user/account/phone-numbers/incoming" target="_blank" rel="noopener"
+>https://www.twilio.com/user/account/phone-numbers/incoming&lt;/a> or if you just created an account go there as well.&lt;/p>
+&lt;p>We need to buy a number, to do this click on &amp;ldquo;Buy Number&amp;rdquo; in the top right.  Make sure the number has texting capabilities.&lt;/p>
+&lt;p>&lt;a class="link" href="twilio.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/twilio.png"
+width="300"
+height="137"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/twilio_hu_68c2e6fd2edf5620.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/twilio_hu_4ed3b0a354196785.png 1024w"
+loading="lazy"
+alt="twilio 300x137 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="525px"
+>&lt;/a>&lt;/p>
+&lt;p>Try to find one of the cheaper ones, the cheapest you can find is $1/month, not bad…&lt;/p>
+&lt;p>So once we buy the number we will need our API key’s.  They can be found at &lt;a class="link" href="https://www.twilio.com/user/account/settings" target="_blank" rel="noopener"
+>https://www.twilio.com/user/account/settings&lt;/a>.  Leave this tab open like we did for Twitter, we will come back to this…&lt;/p>
+&lt;p>Ok so finally time to deploy our app.  To do this switch back to Jazzhub, click the &amp;ldquo;Build &amp;amp; Deploy&amp;rdquo; button in the top right.&lt;/p>
+&lt;p>&lt;a class="link" href="buildanddeploy.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildanddeploy.png"
+width="300"
+height="53"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildanddeploy_hu_2e7dc4ebc6f1abe9.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildanddeploy_hu_74a25e9bdc69aa6d.png 1024w"
+loading="lazy"
+alt="buildanddeploy 300x53 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="566"
+data-flex-basis="1358px"
+>&lt;/a>&lt;/p>
+&lt;p>Go ahead and click on &amp;ldquo;Advanced&amp;rdquo; to turn on deployments.&lt;/p>
+&lt;p>&lt;a class="link" href="advanced.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/advanced.png"
+width="300"
+height="54"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/advanced_hu_f46371b0d943eb.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/advanced_hu_a28873a289b8f3be.png 1024w"
+loading="lazy"
+alt="advanced 300x54 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="555"
+data-flex-basis="1333px"
+>&lt;/a>&lt;/p>
+&lt;p>Click on &amp;ldquo;add a builder&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="addabuilder.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addabuilder.png"
+width="300"
+height="293"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addabuilder_hu_b1577ed54355959a.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addabuilder_hu_ef4ceea7d73d3708.png 1024w"
+loading="lazy"
+alt="addabuilder 300x293 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="245px"
+>&lt;/a>&lt;/p>
+&lt;p>For builder type choose &amp;ldquo;Shell Script&amp;rdquo;.&lt;/p>
+&lt;p>For the build script text area enter the following.&lt;/p>
+&lt;pre>&lt;code>#!/bin/bash
+echo &amp;quot;do nothing&amp;quot;
+&lt;/code>&lt;/pre>
+&lt;p>Since it is node we really don’t need a build here…  If this wasn’t a demo and real app we would probably run some unit tests and do some linting here…&lt;/p>
+&lt;p>Click on Save.&lt;/p>
+&lt;p>&lt;a class="link" href="builderdone.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/builderdone.png"
+width="300"
+height="228"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/builderdone_hu_33480b611b0bc61b.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/builderdone_hu_62167e7eb1adad00.png 1024w"
+loading="lazy"
+alt="builderdone 300x228 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="131"
+data-flex-basis="315px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we need to set up the deployment.  Click on &amp;ldquo;add a stage&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="addstage.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addstage.png"
+width="300"
+height="242"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addstage_hu_e6e842bb605214ba.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/addstage_hu_6a6b0c085cfe59c.png 1024w"
+loading="lazy"
+alt="addstage 300x242 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="297px"
+>&lt;/a>&lt;/p>
+&lt;p>Make sure the app name matches the app name we created in Bluemix.&lt;/p>
+&lt;p>Last thing we need to do is modify the build script.  This is the only really confusing bit, you need to make sure you set this up correct or the app won’t work…&lt;/p>
+&lt;p>When you first click on &amp;ldquo;add a stage&amp;rdquo; it will look like the following&amp;hellip;&lt;/p>
+&lt;p>&lt;a class="link" href="deploybefore.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/deploybefore.png"
+width="300"
+height="239"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/deploybefore_hu_c70508966d67118c.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/deploybefore_hu_5de1bf44ae6c9d35.png 1024w"
+loading="lazy"
+alt="deploybefore 300x239 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="301px"
+>&lt;/a>&lt;/p>
+&lt;p>The script will look like the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push &amp;#34;${CF_APP}&amp;#34; -n &amp;#34;${CF_APP}-${CF_SPACE}&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># View logs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXIT_CODE=$?
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if [ $EXIT_CODE -ne 0 ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cf logs &amp;#34;${CF_APP}&amp;#34; --recent
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> exit $EXIT_CODE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>We will need to update it to the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWILIO_PHONENUMBER &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWILIO_SID &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWILIO_TOKEN &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_ACCESSTOKEN_KEY &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_ACCESSTOKEN_SECRET &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_CONSUMER_KEY &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf set-env &amp;#34;${CF_APP}&amp;#34; TWITTER_CONSUMER_SECRET &amp;#34;replaceme&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf push &amp;#34;${CF_APP}&amp;#34; -c &amp;#34;node lib/app.js&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># View logs
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXIT_CODE=$?
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if [ $EXIT_CODE -ne 0 ]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cf logs &amp;#34;${CF_APP}&amp;#34; --recent
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> exit $EXIT_CODE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>For each of these values we need to substitute in the the correct values from the tab’s we kept open earlier from Twitter and Twilio.&lt;/p>
+&lt;p>If you remember earlier we made the project private, this was to prevent other people from seeing our secret access key’s.  DevOps Service will be rolling out a new over the coming weeks where you can find information for a public project.&lt;/p>
+&lt;p>Once you replace the values go ahead and click &amp;ldquo;Save&amp;rdquo;.&lt;/p>
+&lt;p>Last thing to do is click &amp;ldquo;Request Build&amp;rdquo;.  That should successfully complete and that will trigger a deployment of your app.&lt;/p>
+&lt;p>You can see the deployment is being performed by the following screen shot.&lt;/p>
+&lt;p>&lt;a class="link" href="buildrunning.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildrunning.png"
+width="300"
+height="195"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildrunning_hu_237b35032d571328.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/buildrunning_hu_4e4f5742827993e7.png 1024w"
+loading="lazy"
+alt="buildrunning 300x195 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="369px"
+>&lt;/a>&lt;/p>
+&lt;p>Once the deployment finishes you can click the link (name of your app) to your app to use it!&lt;/p>
+&lt;p>&lt;a class="link" href="done.png" >&lt;img src="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/done.png"
+width="300"
+height="207"
+srcset="https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/done_hu_9354d5d3fcc4520a.png 480w, https://www.jeffsloyer.io/post/twitter-personality-comparisons-using-watson/done_hu_df2683bdbd9f874d.png 1024w"
+loading="lazy"
+alt="done 300x207 Twitter Personality Comparisons Using Watson"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/a>&lt;/p>
+&lt;p>Please reach out to me on Twitter (&lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a>) if you have any issues or post a comment below.&lt;/p></description></item><item><title>Deploying a Watson and Cloudant App with DevOps Services</title><link>https://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</link><pubDate>Mon, 24 Nov 2014 21:54:23 -0500</pubDate><guid>https://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/devops.jpg" alt="Featured image of post Deploying a Watson and Cloudant App with DevOps Services" />&lt;p>Backed by popular demand this is a continuation of the post &lt;a class="link" href="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/" >Building a Java EE app on IBM Bluemix Using Watson and Cloudant&lt;/a>.&lt;/p>
+&lt;p>This post will detail how to build and deploy the app using &lt;a class="link" href="http://jazzhub.com" target="_blank" rel="noopener"
+>IBM DevOps Services.&lt;/a>&lt;/p>
+&lt;p>There is a bit of magic behind this, its called &amp;ldquo;The Deploy to Bluemix Button&amp;rdquo;&amp;hellip;&lt;/p>
+&lt;p>Clicking the magic button below will setup the app using IBM DevOps services and deploy the whole application for you.&lt;/p>
+&lt;p>&lt;a class="link" href="https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/talent-manager.git" target="_blank" rel="noopener"
+>&lt;img src="https://deployment-tracker.mybluemix.net/stats/500deb1cbae77105c6d2ae42b50120cd/button.svg"
+loading="lazy"
+alt="Deploy to Bluemix"
+>&lt;/a>&lt;/p>
+&lt;p>So let&amp;rsquo;s talk about what this magic button does. The button is actually just a shortcut to setting up the deployment pipeline for you. What it does behind the covers is the following.&lt;/p>
+&lt;ol>
+&lt;li>Clones the git project&lt;/li>
+&lt;li>Configures the devops pipeline&lt;/li>
+&lt;li>Triggers the pipeline
+&lt;ol>
+&lt;li>Compiles the &lt;code>.war&lt;/code> file&lt;/li>
+&lt;li>Deploys the application To Bluemix&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>Isn&amp;rsquo;t that pretty cool? Well what are you waiting for, click the button above!&lt;/p></description></item><item><title>Building a Java EE app on IBM Bluemix Using Watson, Cloudant</title><link>https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</link><pubDate>Tue, 14 Oct 2014 22:36:53 -0500</pubDate><guid>https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/hiring.png" alt="Featured image of post Building a Java EE app on IBM Bluemix Using Watson, Cloudant" />&lt;p>Hey Y’all!&lt;/p>
+&lt;p>Jeff here again and something I am really excited about is Watson is &lt;a class="link" href="https://developer.ibm.com/bluemix/2014/10/08/watson-on-bluemix" target="_blank" rel="noopener"
+>now available for anyone to use in Bluemix!&lt;/a>&lt;/p>
+&lt;p>Today we are going to be building an example app using Java, Cloudant, and Watson.&lt;/p>
+&lt;p>Ok let’s talk through what this app is going to do before we build it.&lt;/p>
+&lt;p>Meet Ivy (hello!)&lt;/p>
+&lt;p>She’s a talent manager at a growing tech startup.&lt;/p>
+&lt;p>She’s looking for a new hire that would be a good fit on her team but the company is so popular that she has a huge inventory of resumes to sort through. She’s looking for tools to help her, and tools beyond just simple tag filters.&lt;/p>
+&lt;p>With Watson services she can also start to solve for a problem like, &amp;ldquo;I’m looking for another developer like &amp;ldquo;[insert cool employee].&amp;rdquo;&lt;/p>
+&lt;p>So in this case, the application can issue queries such as,&lt;/p>
+&lt;blockquote>
+&lt;p>Find me a Developer like Craig Smith.Then search through all possible candidate and return a ranked list of candidates sorted by highest-to-lowest percentage of personality resemblance. From here, searches can be refined by including technical skills. Find me a Developer like Craig Smith, and knows Java, C and Python.&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&amp;ndash; &lt;cite>Ivy (HR Manager)&lt;/cite>&lt;/p>&lt;/blockquote>
+&lt;p>Make sense??&lt;/p>
+&lt;p>Ok let’s jump right in.&lt;/p>
+&lt;h2 id="pre-reqs">Pre-req&amp;rsquo;s
+&lt;/h2>&lt;p>First thing you need to do is clone the github project with some starter code.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/IBM-Bluemix/talent-manager.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Or &lt;a class="link" href="https://github.com/IBM-Bluemix/talent-manager/archive/master.zip" target="_blank" rel="noopener"
+>download a zip file&lt;/a> if you don’t have git installed.&lt;/p>
+&lt;p>Next we need to complete a couple pre-req steps.&lt;/p>
+&lt;ol>
+&lt;li>&lt;a class="link" href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers" target="_blank" rel="noopener"
+>Download Eclipse EE&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="noopener"
+>Download and install Java 1.7 JDK&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.ng.bluemix.net/docs/#starters/install_cli.html?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Download and install the Cloud Foundry CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Sign up for a FREE IBM Bluemix account if you don’t have one yet&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>Ok once we have all that setup we can start creating our app.&lt;/p>
+&lt;h2 id="create-the-application">Create the application
+&lt;/h2>&lt;p>First we need to sign into Bluemix, so open your browser and head on over to &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a>. We need to login.  Up at the top lets go ahead and click on Catalog.&lt;/p>
+&lt;p>&lt;a class="link" href="catalog.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/catalog.png"
+width="300"
+height="99"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/catalog_hu_9c32f09da96b06f7.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/catalog_hu_bf35c35b7132c79e.png 1024w"
+loading="lazy"
+alt="catalog 300x99 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="303"
+data-flex-basis="727px"
+>&lt;/a>&lt;/p>
+&lt;p>Scroll down a little and click on Liberty&lt;/p>
+&lt;p>&lt;a class="link" href="liberty.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/liberty.png"
+width="1184"
+height="677"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/liberty_hu_69f5681cdd04b467.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/liberty_hu_dfe48690f80291f3.png 1024w"
+loading="lazy"
+alt="liberty 1024x585 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="419px"
+>&lt;/a>&lt;/p>
+&lt;p>On the right hand side we need to give our app a name.  Please note that this name must be unique.  Also remember this name as we will need it later…&lt;/p>
+&lt;p>Click create.&lt;/p>
+&lt;p>&lt;a class="link" href="new-app.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/new-app.png"
+width="351"
+height="460"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/new-app_hu_ce910f6b88e8a9d7.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/new-app_hu_b20e302331bdeb19.png 1024w"
+loading="lazy"
+alt="new app Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="76"
+data-flex-basis="183px"
+>&lt;/a>&lt;/p>
+&lt;p>Bluemix will start deploying our app and Bluemix will start our app.&lt;/p>
+&lt;p>So next we need to add Cloudant and Watson to our app!&lt;/p>
+&lt;p>So do you that make sure you are in the dashboard and have your app open like the screencap below.  We will then click the &amp;ldquo;Add A Service&amp;rdquo; button.&lt;/p>
+&lt;p>&lt;a class="link" href="add-service.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/add-service.png"
+width="1131"
+height="755"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/add-service_hu_a9f75daa7297ceae.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/add-service_hu_19e0977290ccee4a.png 1024w"
+loading="lazy"
+alt="add service 1024x683 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="359px"
+>&lt;/a>&lt;/p>
+&lt;p>First let’s add Watson.  Scroll down until you find the &amp;ldquo;User Modeling&amp;rdquo; Service.  Go ahead and click that.&lt;/p>
+&lt;p>&lt;a class="link" href="user-modeling.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/user-modeling.png"
+width="1217"
+height="407"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/user-modeling_hu_24760765c57fd2b6.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/user-modeling_hu_c5fdcb66a61d01f3.png 1024w"
+loading="lazy"
+alt="user modeling 1024x342 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="299"
+data-flex-basis="717px"
+>&lt;/a>&lt;/p>
+&lt;p>Again, all we have to do is click &amp;ldquo;Create&amp;rdquo; on the right hand side.&lt;/p>
+&lt;p>&lt;a class="link" href="watson-create.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/watson-create.png"
+width="373"
+height="468"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/watson-create_hu_547b85c9f66e9641.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/watson-create_hu_d4d17f5b0f67dd6b.png 1024w"
+loading="lazy"
+alt="watson create Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="191px"
+>&lt;/a>&lt;/p>
+&lt;p>Bluemix is going to ask us if we want to restage our app, we should click the &amp;ldquo;OK&amp;rdquo; button.  What Bluemix is asking us here is since we made a change to our app, the app needs to be restarted to bind in Watson.&lt;/p>
+&lt;p>&lt;a class="link" href="restage.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/restage.png"
+width="706"
+height="567"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/restage_hu_65a484fdfc866f5f.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/restage_hu_8cacf6d7d0da81a4.png 1024w"
+loading="lazy"
+alt="restage Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="124"
+data-flex-basis="298px"
+>&lt;/a>&lt;/p>
+&lt;p>Next, let’s click &amp;ldquo;Add A Service&amp;rdquo; again.&lt;/p>
+&lt;p>&lt;a class="link" href="addserviceagain.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/addserviceagain.png"
+width="846"
+height="695"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/addserviceagain_hu_b2e892183cc41ef2.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/addserviceagain_hu_9b8205ccb7586e6d.png 1024w"
+loading="lazy"
+alt="addserviceagain Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="121"
+data-flex-basis="292px"
+>&lt;/a>
+This time scroll down to the bottom and choose &amp;ldquo;Cloudant&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudant.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudant.png"
+width="1135"
+height="272"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudant_hu_833bad00e5e09cbb.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudant_hu_471b9bd838d201eb.png 1024w"
+loading="lazy"
+alt="cloudant 1024x245 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="417"
+data-flex-basis="1001px"
+>&lt;/a>&lt;/p>
+&lt;p>Then click &amp;ldquo;Create&amp;rdquo; on the right hand side.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantcreate.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantcreate.png"
+width="360"
+height="464"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantcreate_hu_f876d9ea7020501d.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantcreate_hu_2a504aa349ba519b.png 1024w"
+loading="lazy"
+alt="cloudantcreate Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="77"
+data-flex-basis="186px"
+>&lt;/a>&lt;/p>
+&lt;p>It is going to ask us to restage our app again, go ahead and click &amp;ldquo;OK&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantrestage.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantrestage.png"
+width="852"
+height="721"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantrestage_hu_f96fb1765a9ff2f5.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantrestage_hu_9812034e13d8c489.png 1024w"
+loading="lazy"
+alt="cloudantrestage Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="118"
+data-flex-basis="283px"
+>&lt;/a>&lt;/p>
+&lt;p>Now we have all our services added.  Let’s go ahead and start getting some data imported.&lt;/p>
+&lt;p>On the dashboard for the app let’s go ahead and click on Cloudant.&lt;/p>
+&lt;h2 id="explanation-of-cloudant">Explanation of Cloudant
+&lt;/h2>&lt;p>So let’s pause and explain what Cloudant is.  Cloudant is a No-SQL database that is based on CouchDB.  The big difference between a relationship database and No-SQL database is illustrated below.  In the relationship database you have to have multiple tables to represent the data and have to use SQL and JOIN statements to get data from both tables.  In a No-SQL database which is commonly referred to as a document store database you stores JSON documents/data (as illustrated on the left below).&lt;/p>
+&lt;p>&lt;a class="link" href="Figure5a.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/Figure5a.png"
+width="600"
+height="211"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/Figure5a_hu_9ef1cb5e59c49edb.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/Figure5a_hu_6f9aeda7a4c3eeeb.png 1024w"
+loading="lazy"
+alt="Figure5a Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="284"
+data-flex-basis="682px"
+>&lt;/a>&lt;/p>
+&lt;p>So back to the demo&amp;hellip;&lt;/p>
+&lt;h2 id="eclipse-steps">Eclipse Steps
+&lt;/h2>&lt;p>In Eclipse, right click on the project’s area on the left.&lt;/p>
+&lt;p>&lt;a class="link" href="import.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/import.png"
+width="905"
+height="652"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/import_hu_e60e1a7ec36ddb17.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/import_hu_f6daea3eaa47ac74.png 1024w"
+loading="lazy"
+alt="import Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="333px"
+>&lt;/a>&lt;/p>
+&lt;p>Under General click existing project into workspace and click next&lt;/p>
+&lt;p>&lt;a class="link" href="existingproject.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/existingproject.png"
+width="535"
+height="543"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/existingproject_hu_c9af4a74e0a63ce3.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/existingproject_hu_6816ce389b815d42.png 1024w"
+loading="lazy"
+alt="existingproject Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="98"
+data-flex-basis="236px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we want to find our project we downloaded from github.  We need to browse to the directory where it is.  Once you find the talent-manager folder, go one more level down into that into a folder called personafusion (as shown below). Click finish.&lt;/p>
+&lt;p>&lt;a class="link" href="finishimport.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/finishimport.png"
+width="773"
+height="692"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/finishimport_hu_e31e2f42ea16787e.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/finishimport_hu_f343d300e55d0e7.png 1024w"
+loading="lazy"
+alt="finishimport Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="111"
+data-flex-basis="268px"
+>&lt;/a>&lt;/p>
+&lt;p>Next, we need to make a couple code edits…&lt;/p>
+&lt;p>In &lt;code>src/com.ibm.personafusion/Config.java&lt;/code>.&lt;/p>
+&lt;p>Line 10 currently reads like below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public static final String CLOUDANT_NAME = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It needs to be changed to what is below.  This is our Cloudant database name we created.  If you used something other than &amp;ldquo;talent-manager here&amp;rdquo; type that in.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public static final String CLOUDANT_NAME = &amp;#34;talent-manager&amp;#34;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Go ahead and save that file and close it.&lt;/p>
+&lt;p>Next open &lt;code>src/com.ibm.personafusion/CloudantClient.java&lt;/code>&lt;/p>
+&lt;p>We need to update our constructor from what is below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public CloudantClient()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.httpClient = null;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //TODO read env VCAP_SERVICES and parse it into JSON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.port = Config.CLOUDANT_PORT;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.host = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.name = Config.CLOUDANT_NAME;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.dbc = this.createDBConnector();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To this.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private JSONArray cloudant;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private JSONObject cloudantInstance;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private JSONObject cloudantCredentials;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public CloudantClient()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.httpClient = null;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> String VCAP_SERVICES = System.getenv(&amp;#34;VCAP_SERVICES&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> JSONObject vcap;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vcap = (JSONObject) JSONObject.parse(VCAP_SERVICES);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cloudant = (JSONArray) vcap.get(&amp;#34;cloudantNoSQLDB&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cloudantInstance = (JSONObject) cloudant.get(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cloudantCredentials = (JSONObject) cloudantInstance.get(&amp;#34;credentials&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> } catch (IOException e) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> e.printStackTrace();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.port = Config.CLOUDANT_PORT;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.host = (String) cloudantCredentials.get(&amp;#34;host&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = (String) cloudantCredentials.get(&amp;#34;username&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = (String) cloudantCredentials.get(&amp;#34;password&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.name = Config.CLOUDANT_NAME;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.dbc = this.createDBConnector();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you notice we also added 3 global variables as well.&lt;/p>
+&lt;p>Next we need to update the Watson code as well.  This is located in &lt;code>src/com.ibm.personafusion/services/WatonUserModeler.java&lt;/code>&lt;/p>
+&lt;p>Before:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public WatsonUserModeller() {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //TODO read env VCAP_SERVICES and parse it into JSON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.base_url = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.profile_api = Config.WATSON_PROF_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.visual_api = Config.WATSON_VIZ_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.executor = Executor.newInstance().auth(username, password);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (this.executor == null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> System.err.println(&amp;#34;Authentication failed in WatsonUserModeller.&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private static JSONArray watson;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private static JSONObject watsonInstance;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private static JSONObject watsonCredentials;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private Executor executor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public WatsonUserModeller()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> String VCAP_SERVICES = System.getenv(&amp;#34;VCAP_SERVICES&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> JSONObject vcap;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vcap = (JSONObject) JSONObject.parse(VCAP_SERVICES);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> watson = (JSONArray) vcap.get(&amp;#34;user_modeling&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> watsonInstance = (JSONObject) watson.get(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> watsonCredentials = (JSONObject) watsonInstance.get(&amp;#34;credentials&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> } catch (IOException e) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> e.printStackTrace();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = (String) watsonCredentials.get(&amp;#34;username&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = (String) watsonCredentials.get(&amp;#34;password&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.base_url = (String) watsonCredentials.get(&amp;#34;url&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.profile_api = Config.WATSON_PROF_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.visual_api = Config.WATSON_VIZ_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.executor = Executor.newInstance().auth(username, password);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (this.executor == null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> System.err.println(&amp;#34;Authentication failed in WatsonUserModeller.&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Ok, so the app is basically done, we need to build our war file now, on the left side in Eclipse, open build.xml.  On the right hand side right click build [default] and then &amp;ldquo;Run As&amp;rdquo; and then &amp;ldquo;Ant Build&amp;rdquo;.  This will generate our WAR file for us that we will deploy.&lt;/p>
+&lt;p>&lt;a class="link" href="antbuild.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/antbuild.png"
+width="1024"
+height="528"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/antbuild_hu_1181f477b7845ab0.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/antbuild_hu_a070cceed3b51585.png 1024w"
+loading="lazy"
+alt="antbuild 1024x528 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="465px"
+>&lt;/a>&lt;/p>
+&lt;p>In the bottom it should say &amp;ldquo;BUILD SUCESSFULL&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="buildfinished.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/buildfinished.png"
+width="852"
+height="220"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/buildfinished_hu_d45c956c2583dfaf.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/buildfinished_hu_f69885e13d86a42c.png 1024w"
+loading="lazy"
+alt="buildfinished Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="387"
+data-flex-basis="929px"
+>&lt;/a>&lt;/p>
+&lt;p>The next and last step involves deploy your app to bluemix.  This step requires the Cloud Foundry CLI to be installed (if you haven’t done this yet scroll back up the pre-req’s section above).&lt;/p>
+&lt;p>If you are on Windows open up the command prompt, if you are on a Mac or Linux open up the terminal.&lt;/p>
+&lt;p>Type the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf login -a https://api.ng.bluemix.net
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It will then ask for your username and password that you registered with for Bluemix. There are two important files in this directory.&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>manifest.yml&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>webStarterApp.war&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;p>We need to edit the &lt;code>manifest.yml&lt;/code> file and then we can deploy the app.
+Open the file in your favorite text editor or you can use Eclipse as well. The contents of the file are below.
+There are two important lines in here, host and name. These values need to be unique and match the app we deployed earlier. In my case the app name is talent-manager-awesome, so my file would then become what is below.&lt;/p>
+&lt;p>This value comes from Bluemix, lets open the Bluemix dashboard in our web browser again.  In the screenshot below we can just copy the name of the app and paste this into the &lt;code>manifest.yml&lt;/code> file.  So don’t copy my apps name exactly as it won’t work, it needs to be your app’s unique name.&lt;/p>
+&lt;p>&lt;a class="link" href="appname.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/appname.png"
+width="783"
+height="171"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/appname_hu_4d4ac9460e6b1651.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/appname_hu_e09d7c71e3cad602.png 1024w"
+loading="lazy"
+alt="appname Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="457"
+data-flex-basis="1098px"
+>&lt;/a>&lt;/p>
+&lt;p>Now the final step we need to cd (change directory) in our command prompt or terminal to where the &lt;code>manifest.yml&lt;/code> and webStarterApp.war are located.  For me its located at &lt;code>/Users/jsloyer/Downloads/talent-manager-master/personafusion&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">cd&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">Users&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">jsloyer&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">Downloads&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">talent&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">manager&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">master&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">personafusion&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">cf&lt;/span> &lt;span class="n">push&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The cf push command pushes our app to Bluemix, a bunch of text will fly bay saying its deploying and eventually it will say the app is starting and then it is up and running.  Bluemix will give you a URL you can access your app at.&lt;/p>
+&lt;p>&lt;a class="link" href="apprunning.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/apprunning.png"
+width="715"
+height="306"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/apprunning_hu_94a562d9fde6383e.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/apprunning_hu_a463b295b56f7a6.png 1024w"
+loading="lazy"
+alt="apprunning Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="233"
+data-flex-basis="560px"
+>&lt;/a>&lt;/p>
+&lt;p>Voila!!!!  We created a Java web app using Cloudant and Watson on IBM Bluemix!&lt;/p>
+&lt;p>Source Code:
+&lt;a class="link" href="https://ibm.biz/talent-manager" target="_blank" rel="noopener"
+>https://ibm.biz/talent-manager&lt;/a>&lt;/p>
+&lt;p>Feedback is welcome, please contact me on Twitter @jsloyer – &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>http://twitter.com/jsloyer&lt;/a>&lt;/p>
+&lt;p>For a video walkthrough of this demo please visit &lt;a class="link" href="http://ibm.biz/talent-manager-demo" target="_blank" rel="noopener"
+>http://ibm.biz/talent-manager-demo&lt;/a> or watch the video below!&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/9AFMY6m0LIU" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>This app was developed over the course of 48 hours at an internal hackathon. The developers and designers that worked on this are the following.&lt;/p>
+&lt;ul>
+&lt;li>Eva XIAOHUI LUO&lt;/li>
+&lt;li>MICHAEL J. YOUNG&lt;/li>
+&lt;li>SEAN J. WELLECK&lt;/li>
+&lt;li>BRIAN T. HAN&lt;/li>
+&lt;li>MICHAEL POPLAVSKI&lt;/li>
+&lt;li>ALAN XIA&lt;/li>
+&lt;li>Jeff Sloyer&lt;/li>
+&lt;/ul></description></item></channel></rss>
