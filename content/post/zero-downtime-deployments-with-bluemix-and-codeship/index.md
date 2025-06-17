@@ -89,7 +89,7 @@ Recently the Cloud Foundry CLI started supporting plugins.  This is the holy gr
 
 [The plugin](https://github.com/concourse/autopilot) performs the above steps for you for performing the zero downtime deployment.
 
-In [part 1](http://jeffsloyer.io/2015/06/19/zero-down-time-deploys-with-the-cf-autopilot-plugin/) we deployed our application manually to Bluemix using the autopilot plugin locally, in this tutorial we are going to use [Codeship to automate our continuous delivery pipeline](http://codeship.com/?utm_campaign=jeffsloyer.io) to use the plugin to perform the zero downtime deployments.
+In [part 1](http://jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/) we deployed our application manually to Bluemix using the autopilot plugin locally, in this tutorial we are going to use [Codeship to automate our continuous delivery pipeline](http://codeship.com/?utm_campaign=jeffsloyer.io) to use the plugin to perform the zero downtime deployments.
 
 
 ## Codeship setup

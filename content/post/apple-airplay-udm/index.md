@@ -10,12 +10,12 @@ slug = "apple-airplay-udm/"
 +++
 
 # Background
-As a follow on from a [previous post](/apple-airplay-usg) I discussed how to enable the IGMP Proxy in the USG product line to permit cross VLAN mDNS traffic.  In the UDM/UDM-Pro line its a bit different.  There is `config.gateway.json` file anymore.  There are multiple workarounds out there to run Docker containers to add in extra functionality, however this is not one of them.
+As a follow on from a [previous post](/post/apple-airplay-usg) I discussed how to enable the IGMP Proxy in the USG product line to permit cross VLAN mDNS traffic.  In the UDM/UDM-Pro line its a bit different.  There is `config.gateway.json` file anymore.  There are multiple workarounds out there to run Docker containers to add in extra functionality, however this is not one of them.
 
 If you are looking to bypass your AT&T gateway then you will need to head down the Docker path, but if you are looking for just Airplay across VLAN's you have arrived at the correct article.
 
 # Instructions
-If you followed my [previous blog post about cross VLAN traffic with Sonos and the USG](/sonos-usg-firewall-ports) it talked about how to lock down communications from the IoT VLAN to the data VLAN and allow pinholes through for Sonos.  To get things working for Apple Airplay it was actually pretty easy.  First you need to make sure you have mDNS turned on.  To check this do the following.
+If you followed my [previous blog post about cross VLAN traffic with Sonos and the USG](/post/sonos-usg-firewall-ports) it talked about how to lock down communications from the IoT VLAN to the data VLAN and allow pinholes through for Sonos.  To get things working for Apple Airplay it was actually pretty easy.  First you need to make sure you have mDNS turned on.  To check this do the following.
 
 1. Enable mDNS
     1. Goto settings in your controller

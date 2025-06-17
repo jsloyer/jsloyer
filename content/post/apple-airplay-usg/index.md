@@ -10,10 +10,10 @@ slug = "/apple-airplay-usg"
 +++
 
 # Background
-As a follow on from a [previous post](/sonos-usg-firewall-ports) I discussed how I locked down VLAN's from a IoT VLAN to my core data VLAN.  In that post I described how I got my Sonos speakers and Sonos controller to work over locked down VLAN's.  I recently hooked up an old Apple Airport Express and music wouldn't flow when I was on the data VLAN to the IoT VLAN where the Airport Express resided.
+As a follow on from a [previous post](/post/sonos-usg-firewall-ports) I discussed how I locked down VLAN's from a IoT VLAN to my core data VLAN.  In that post I described how I got my Sonos speakers and Sonos controller to work over locked down VLAN's.  I recently hooked up an old Apple Airport Express and music wouldn't flow when I was on the data VLAN to the IoT VLAN where the Airport Express resided.
 
 # Instructions
-If you followed my [previous blog post](/sonos-usg-firewall-ports) it talked about how to lock down communications from the IoT VLAN to the data VLAN and allow pinholes through for Sonos.  To get things working for Apple Airplay it was actually pretty easy.  First you need to make sure you have mDNS turned on.  To check this do the following.
+If you followed my [previous blog post](/post/sonos-usg-firewall-ports) it talked about how to lock down communications from the IoT VLAN to the data VLAN and allow pinholes through for Sonos.  To get things working for Apple Airplay it was actually pretty easy.  First you need to make sure you have mDNS turned on.  To check this do the following.
 
 1. Goto settings in your controller
 2. Goto the services tab on the left

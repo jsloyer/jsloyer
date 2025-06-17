@@ -130,7 +130,7 @@ So if we visit the url it gave us, Etherpad should be up and running.  If you 
 ### SSL
 
 
-Bluemix provides SSL out of the box for your app.  If your app is running at **http**://jbs-etherpad3.mybluemix.net you are given SSL for free.  To use SSL, just access your app over https, for my example it would be **https**://jbs-etherpad3.mybluemix.net.  If you want to use SSL with your own domain name and certificate, you can do this also!  See [SSL Certificates and Bluemix Custom Domains](https://jeffsloyer.io/2014/08/18/inbound-ssl-in-bluemix/) on how to do it.
+Bluemix provides SSL out of the box for your app.  If your app is running at **http**://jbs-etherpad3.mybluemix.net you are given SSL for free.  To use SSL, just access your app over https, for my example it would be **https**://jbs-etherpad3.mybluemix.net.  If you want to use SSL with your own domain name and certificate, you can do this also!  See [SSL Certificates and Bluemix Custom Domains](/post/inbound-ssl-in-bluemix/) on how to do it.
 
 For more info about SSL in for free in Bluemix check out the following video.
 
