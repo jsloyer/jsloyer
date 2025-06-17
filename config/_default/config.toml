@@ -16,7 +16,7 @@ disqusShortname = "jeffsloyerio"
 
 [services]
   [services.googleAnalytics]
-    id = 'UA-404795-24'
+    id = 'G-1SGYYQEYE5'
 
 [pagination]
 pagerSize = 5
