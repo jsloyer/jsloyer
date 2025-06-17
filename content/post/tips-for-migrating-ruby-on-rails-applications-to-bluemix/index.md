@@ -3,7 +3,7 @@ categories = ["Sample Code"]
 date = "2015-03-05T10:09:31-05:00"
 description = ""
 draft = false
-image = "/original-images/migrate.jpg"
+image = "/migrate.jpg"
 tags = ["bluemix", "postgresql", "redis", "ror", "ruby", "ruby on rails"]
 title = "Tips for Migrating Ruby on Rails Applications to Bluemix"
 aliases = [
@@ -12,7 +12,7 @@ aliases = [
 slug = "tips-for-migrating-ruby-on-rails-applications-to-bluemix/"
 +++
 
-![Ruby on Rails.svg  231x300 Tips for Migrating Ruby on Rails Applications to Bluemix](/images/2015/06/Ruby_on_Rails-logo-medium.png)Who doesn’t love some Ruby?  Bluemix definitely loves Ruby on Rails!  Sometimes running a Ruby on Rails app can be a little tricky, so I have included some tips and tricks for migrating your Ruby on Rails app to Bluemix. They will include:
+![Ruby on Rails.svg  231x300 Tips for Migrating Ruby on Rails Applications to Bluemix](Ruby_on_Rails-logo.png)Who doesn’t love some Ruby?  Bluemix definitely loves Ruby on Rails!  Sometimes running a Ruby on Rails app can be a little tricky, so I have included some tips and tricks for migrating your Ruby on Rails app to Bluemix. They will include:
 
   * Required gems
   * Code tweaks

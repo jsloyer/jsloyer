@@ -3,7 +3,7 @@ categories = ["Other"]
 date = "2016-12-18T14:11:14-05:00"
 description = ""
 draft = false
-image = "/original-images/migrate.jpg"
+image = "migrate.jpg"
 tags = ["wordpress", "migrate"]
 title = "Why I Chose Hugo over Wordpress - Part 2"
 slug = "why-i-chose-hugo-over-wordpress-part2/"
@@ -99,7 +99,7 @@ Scroll down to the bottom...
 
 Click "Launch automatic page generator", see below.  Go through the wizard, it really doesn't matter what you choose here, you are going to replace the content anyways...
 
-[![automatic page generator](/images/gh-pages-generation-medium.jpg)](/images/gh-pages-generation-medium.jpg)
+[![automatic page generator](gh-pages-generation.jpg)](gh-pages-generation.jpg)
 
 Once you have this setup it might take a little bit but your site will be available.  For example my site without the custom domain name is `http://jsloyer.github.io/jsloyer`.  Replace your GitHub username with mine and you will be able to access the default site.
 
@@ -260,7 +260,7 @@ The next step is getting a token from GitHub.  To generate a token goto https://
 
 You will want a token with the following permissions.  **Note once you generate the token copy it because GitHub won't display it to you again...**
 
-[![GitHub token](/images/GitHub-token-medium.jpg)](/images/GitHub-token-medium.jpg)
+[![GitHub token](GitHub-token.jpg)](GitHub-token.jpg)
 
 Next we need to goto [Wercker](https://wercker.com) and login with our GitHub credentials.  Once you have logged in click "Create" at the top and choose application or just click [here](https://app.wercker.com/applications/create).  You will need to choose your your repo and I chose to make my pipeline private, it is up to you.  Once you have finished that you need enter in yout Gitub token so Wercker and deploy your built Hugo site back to GitHub.
 
