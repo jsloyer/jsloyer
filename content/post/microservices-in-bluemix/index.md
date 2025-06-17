@@ -3,7 +3,7 @@ categories = ["Sample Code", "Tutorial"]
 date = "2015-01-19T09:34:18-05:00"
 description = ""
 draft = false
-image = "/original-images/2015/01/two-pizza.jpg"
+image = "two-pizza.jpg"
 tags = ["amqp", "microservices", "bluemix", "mqtt", "node.js", "websockets"]
 title = "Microservices in Bluemix"
 aliases = [
@@ -45,7 +45,7 @@ Microservices provide a huge advantage for the case we talked about earlier whe
 
 We aren’t talking about skimping on our employees and not feeding them enough at work, but we are instead talking about the size of the team.  Amazon first coined this term back in 2011.  It has been written about extensively and in such publications as the [Wall Street Journal](http://www.wsj.com/articles/SB10001424052970203914304576627102996831200).  Basically what it boils down to is having each team small enough that you can feed them with 2 pizza’s.  So you might be asking what the importance of this is, let’s use our example of our front-end dev Dave again.  By Dave having a small team they can organize themselves efficiently and deliver functionality on their own instead of being tied to a giant release of the application.  A team doesn’t have to multiple people, it can actually be a team of just 1 but be sure to never violate the 2 pizza team rule though.
 
-[![two pizza 300x200 Microservices in Bluemix](/images/2015/01/two-pizza-medium.jpg)](/images/2015/01/two-pizza-medium.jpg)
+[![two pizza 300x200 Microservices in Bluemix](two-pizza.jpg)](two-pizza.jpg)
 
 
 ## I Wanna Go Fast (It’s All About Speed)
@@ -63,7 +63,7 @@ Again as Ricky Bobby from Talladega Nights would say, "if you aint first you’
 ## DevOps DevOps DevOps
 
 
-[![devops borat Microservices in Bluemix](/images/2015/01/devops-borat-medium.jpg)](/images/2015/01/devops-borat-medium.jpg)"To make error is human. To propagate error to all server in automatic way is [#**devops**](https://twitter.com/hashtag/devops?src=hash)." – [DevOps Borat](https://twitter.com/devops_borat).  This [quote](https://twitter.com/devops_borat/status/41587168870797312) sums up why DevOps is important.  With each service being completely different architecture wise and language it is in it would be near impossible for a central "ops" team to manage all the apps.  Instead in microservices world each team is responsible for their own app.  You might be thinking that having dev’s manage a production service is bad and they won’t be responsive.  You are wrong, multiple companies have been doing this for years and it actually creates a sense of empowerment in the dev team.  Dev’s don’t want a call at 3am in the morning notifying them that their service is down.  In turn dev’s start taking more pride in their work and start thinking about decisions they make that will affect the availability of their service.  It creates a new mindset for people.
+[![devops borat Microservices in Bluemix](devops-borat.jpg)](devops-borat.jpg)"To make error is human. To propagate error to all server in automatic way is [#**devops**](https://twitter.com/hashtag/devops?src=hash)." – [DevOps Borat](https://twitter.com/devops_borat).  This [quote](https://twitter.com/devops_borat/status/41587168870797312) sums up why DevOps is important.  With each service being completely different architecture wise and language it is in it would be near impossible for a central "ops" team to manage all the apps.  Instead in microservices world each team is responsible for their own app.  You might be thinking that having dev’s manage a production service is bad and they won’t be responsive.  You are wrong, multiple companies have been doing this for years and it actually creates a sense of empowerment in the dev team.  Dev’s don’t want a call at 3am in the morning notifying them that their service is down.  In turn dev’s start taking more pride in their work and start thinking about decisions they make that will affect the availability of their service.  It creates a new mindset for people.
 
 
 ## Let the Dev’s rule
@@ -104,7 +104,7 @@ For our example let’s say we have a service that is scaled out to 5 nodes (we 
 
 However on the converse side there is cases where we want producer/consumer (pub/sub queuing).  This effectively means all 5 nodes of a service will receive the same message and respond.  Let’s say we have a UI service that is the front-end for a real time chat service.  If our application is scaled out to 5 nodes how can we properly propagate chat messages to all the connected clients.  The answer is allowing each front-end service to receive the same message to relay to all the clients.
 
-[![mqlight Microservices in Bluemix](/images/2015/01/mqlight-medium.jpg)](/images/2015/01/mqlight-medium.jpg)When architecting your microservices you need to keep queuing in mind and how clients and services communicate with each other.  Make sure you choose a queuing technology that supports your desired behavior of pub/sub or round-robin.
+[![mqlight Microservices in Bluemix](mqlight.jpg)](mqlight.jpg)When architecting your microservices you need to keep queuing in mind and how clients and services communicate with each other.  Make sure you choose a queuing technology that supports your desired behavior of pub/sub or round-robin.
 
 So where does this leave us in Bluemix?  MQLight, with MQLight you can easily do pub/sub and round-robin with the same service provider.  This is great because as the developer I don’t have to use two different messaging providers.
 
@@ -118,7 +118,7 @@ A real world example might be  an image processing app that applies a sexy filt
 
 So back to our example app of converting text to uppercase.  The UI is below, our UI doesn’t lock when we submit data and we can keep using it.  As results are finished processing in our "text uppercase" service, results are delivered real time to our front-end service.
 
-[![sample screenshot Microservices in Bluemix](/images/2015/01/sample_screenshot-medium.png)](/images/2015/01/sample_screenshot-medium.png)
+[![sample screenshot Microservices in Bluemix](sample_screenshot.png)](sample_screenshot.png)
 
 To make this seem more world the example code introduces some timeouts/waits to make it seem like some backend processing is going on in a microservice.  To get this running follow the following steps.
 
