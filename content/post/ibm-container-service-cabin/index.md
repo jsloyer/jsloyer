@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2017-03-29T09:45:24-05:00"
 description = ""
 draft = false
-image = "/original-images/cabin.jpg"
+image = "cabin.jpg"
 tags = ["containers", "bluemix", "kubernetes"]
 title = "Using Cabin with the IBM Bluemix Container Service"
 slug = "ibm-container-service-cabin/"
@@ -131,13 +131,13 @@ Open the app enter the `Master URL` from a couple steps above in the URL field, 
 
 Under authentication tap `Token`, paste in the value for the token from the previous step, remember it starts with `ey`, for a configured cluster, see the screenshot below.
 
-![Cabin Setup](/images/cabin1-thumb.jpg)
+![Cabin Setup](cabin1.jpg)
 
 Cabin is pretty cool, you can exec into containers and view logs and almost do anything with your Kube Cluster.  I would love to see the SkipppBox guys open source this...
 
-![Cabin Overview](/images/cabin2-thumb.jpg)
+![Cabin Overview](cabin2.jpg)
 
-![Cabin Pods](/images/cabin3-thumb.jpg)
+![Cabin Pods](cabin3.jpg)
 
 Thats it, you are configured to connect to your Kubernetes cluster on the IBM Bluemix Containers Service.  Please leave any comments or feedback below.  If you are a Windows user I would love some comments on the steps to get this working :).
 

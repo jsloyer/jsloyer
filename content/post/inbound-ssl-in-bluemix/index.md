@@ -3,13 +3,14 @@ categories = ["Tutorial", "Sample Code"]
 date = "2014-08-18T13:24:00-05:00"
 description = ""
 draft = false
-image = "/original-images/secure.jpg"
+image = "secure.jpg"
 tags = ["bluemix", "cloudfoundry", "security", "ssl", "node.js"]
 title = "Inbound Ssl in Bluemix"
 aliases = [
     "2014/08/18/inbound-ssl-in-bluemix/"
 ]
 slug="inbound-ssl-in-bluemix/"
+
 +++
 Did you know in Bluemix you get inbound SSL for free?  It is automatically turned on and enabled for every app.  All you have to do is just access your app over https instead of http.
 
