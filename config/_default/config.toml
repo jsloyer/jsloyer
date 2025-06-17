@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "https://jsloyer.netlify.app/"
+baseurl = "https://www.jeffsloyer.io/"
 languageCode = "en-us"
 title = "Jeff Sloyer"
 
