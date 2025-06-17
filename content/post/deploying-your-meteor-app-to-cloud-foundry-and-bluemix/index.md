@@ -3,7 +3,7 @@ categories = ["Tutorial", "Sample Code"]
 date = "2015-08-05T11:03:35-05:00"
 description = ""
 draft = false
-image = "/original-images/meteor.jpg"
+image = "meteor.jpg"
 tags = ["bluemix", "meteor", "mongodb", "websockets"]
 title = "Deploying your Meteor app to Cloud Foundry and Bluemix"
 aliases = [
@@ -13,7 +13,7 @@ slug = "deploying-your-meteor-app-to-cloud-foundry-and-bluemix/"
 +++
 
 
-[![meteor-logo](/images/2015/07/meteor-logo-medium.png)](/images/2015/07/meteor-logo-medium.png)Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript.  It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.
+[![meteor-logo](meteor-logo.png)](meteor-logo.png)Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript.  It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.
 
 I heard about Meteor mid-2014 but it peaked my interest last week when I was at a customer and a developer at the customer was building a Meteor app and they were asking how to run it on Bluemix.  Of course doing my job I helped the developer get the app running but it took a couple tweaks to the Cloud Foundry buildpack for Meteor.<!-- more -->
 
