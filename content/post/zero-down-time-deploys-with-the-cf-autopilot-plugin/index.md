@@ -3,7 +3,7 @@ categories = ["Sample Code", "Video", "Tutorial"]
 date = "2015-06-19T10:41:59-05:00"
 description = ""
 draft = false
-image = "/original-images/unplug.jpg"
+image = "unplug.jpg"
 tags = ["bluemix", "devops", "zero downtime", "cloudfoundry"]
 title = "Zero Downtime Deployment with the CF Autopilot Plugin"
 alises = [
@@ -61,13 +61,13 @@ So let’s walk through what needs to happen to perform zero downtime deployment
 
   1. Deploy your app or use a currently running app.
 Currently your application is taking traffic on `myapp.mybluemix.net`.
-[![zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.001-medium.png)](/images/2015/06/zero-downtime-graphics.001-medium.png)
+[![zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.001.png)](zero-downtime-graphics.001.png)
 
 
   2. Deploy the new version of your app to `myapp-temp.mybluemix.net`.
 At this time there is currently two versions of your app running.  `myapp.mybluemix.net` is still taking production traffic.
 The new app `myapp-temp.mybluemix.net` is separate, it can be pointed to your production API keys and databases at this point.
-[![zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.002-medium.png)](/images/2015/06/zero-downtime-graphics.002-medium.png)
+[![zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.002.png)](zero-downtime-graphics.002.png)
 
 
   3. Perform smoke tests on the new version of the application.
@@ -76,17 +76,17 @@ Some people say this step is optional, but to me its not.  This is key to make 
 
   4. Map production traffic to the new version of your app.
 At this point the old version of your app and the new version are both taking production traffic.
-[![zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.003-medium.png)](/images/2015/06/zero-downtime-graphics.003-medium.png)
+[![zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.003.png)](zero-downtime-graphics.003.png)
 
 
   5. Unmap production traffic from the old version of the app.  You can optionally delete the old version as well.
 At this point the new version becomes production and ONLY it is taking traffic.
 The new version still has two URL’s though, `myapp.mybluemix.net` and `myapp-temp.mybluemix.net`.
-[![zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.004-medium.png)](/images/2015/06/zero-downtime-graphics.004-medium.png)
+[![zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.004.png)](zero-downtime-graphics.004.png)
 
 
   6. Remove the temporary route `myapp-temp.mybluemix.net` from the new version of your app.
-[![zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.005-medium.png)](/images/2015/06/zero-downtime-graphics.005-medium.png)
+[![zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.005.png)](zero-downtime-graphics.005.png)
 
 
 While this can be scripted there really isn’t a need to do that, there is a Cloud Foundry CLI plugin to do this.

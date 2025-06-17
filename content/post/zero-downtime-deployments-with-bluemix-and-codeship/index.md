@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2015-07-20T10:54:13-05:00"
 description = ""
 draft = false
-image = "/original-images/unplug.jpg"
+image = "unplug.jpg"
 tags = ["bluemix", "devops"]
 title = "Zero downtime deployments with Bluemix and Codeship"
 aliases = [
@@ -51,13 +51,13 @@ So let’s walk through what needs to happen to perform zero downtime deployment
 
   1. Deploy your app or use a currently running app.
 Currently your application is taking traffic on `myapp.mybluemix.net`.
-[![zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.001-medium.png)](/images/2015/06/zero-downtime-graphics.001-medium.png)
+[![zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.001.png)](zero-downtime-graphics.001.png)
 
 
   2. Deploy the new version of your app to `myapp-temp.mybluemix.net`.
 At this time there is currently two versions of your app running.  `myapp.mybluemix.net` is still taking production traffic.
 The new app `myapp-temp.mybluemix.net` is separate, it can be pointed to your production API keys and databases at this point.
-[![zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.002-medium.png)](/images/2015/06/zero-downtime-graphics.002-medium.png)
+[![zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.002.png)](zero-downtime-graphics.002.png)
 
 
   3. Perform smoke tests on the new version of the application.
@@ -66,17 +66,17 @@ Some people say this step is optional, but to me its not.  This is key to make 
 
   4. Map production traffic to the new version of your app.
 At this point the old version of your app and the new version are both taking production traffic.
-[![zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.003-medium.png)](/images/2015/06/zero-downtime-graphics.003-medium.png)
+[![zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.003.png)](zero-downtime-graphics.003.png)
 
 
   5. Unmap production traffic from the old version of the app.  You can optionally delete the old version as well.
 At this point the new version becomes production and ONLY it is taking traffic.
 The new version still has two URL’s though, `myapp.mybluemix.net` and `myapp-temp.mybluemix.net`.
-[![zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.004-medium.png)](/images/2015/06/zero-downtime-graphics.004-medium.png)
+[![zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.004.png)](zero-downtime-graphics.004.png)
 
 
   6. Remove the temporary route `myapp-temp.mybluemix.net` from the new version of your app.
-[![zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin](/images/2015/06/zero-downtime-graphics.005-medium.png)](/images/2015/06/zero-downtime-graphics.005-medium.png)
+[![zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin](zero-downtime-graphics.005.png)](zero-downtime-graphics.005.png)
 
 
 While this can be scripted there really isn’t a need to do that, there is a Cloud Foundry CLI plugin to do this.
@@ -103,7 +103,7 @@ Secondly make sure you have signed up for a Codeship account, to do this head [
 
 Once you are signed in click "Setup new Project", it will bring you a screen like below.
 
-[![connectscm](/images/2015/07/connectscm-medium.png)](/images/2015/07/connectscm-medium.png)
+[![connectscm](connectscm.png)](connectscm.png)
 
 
 
@@ -111,7 +111,7 @@ Click on the button on the left.   If you signed up with your Github account it
 
 Once you have done this you will get a screen like below.  Codeship will show you all the projects you have access to.
 
-[![choose repo](/images/2015/07/choose-repo-medium.png)](/images/2015/07/choose-repo-medium.png)
+[![choose repo](choose-repo.png)](choose-repo.png)
 
 Click on the repo you would like to use.
 
@@ -119,17 +119,17 @@ You will be then brought to a screen that ask you to setup your pipeline.
 
 First, we need to remove the test pipeline, lets click on "Delete". If you had unit tests you could run them here, for example `grunt`.
 
-[![deletepipeline](/images/2015/07/deletepipeline-medium.jpg)](/images/2015/07/deletepipeline-medium.jpg)
+[![deletepipeline](deletepipeline.jpg)](deletepipeline.jpg)
 
 
 
 Next since this example is a Node.Js project, we want to make sure the node modules are correct, we want to run `npm install` here.  We need to clear out the initial starter setup commands that have been highlighed below.
 
-[![clearsetup](/images/2015/07/clearsetup-medium.jpg)](/images/2015/07/clearsetup-medium.jpg)
+[![clearsetup](clearsetup.jpg)](clearsetup.jpg)
 
 It should look like the following now.
 
-[![npminstall](/images/2015/07/npminstall-medium.jpg)](/images/2015/07/npminstall-medium.jpg)
+[![npminstall](npminstall.jpg)](npminstall.jpg)
 
 Note, if you are using a different language you would want to run the appropriate dependency installer here, for example for Java `mvn install`.
 
@@ -137,7 +137,7 @@ Lastly, click "Save and goto dashboard".
 
 Click on "Project settings" in the top right, then click on "Environment variables".  You will be brought to a screen like the following.
 
-[![envars](/images/2015/07/envars-medium.jpg)](/images/2015/07/envars-medium.jpg)
+[![envars](envars.jpg)](envars.jpg)
 
 You need to setup a couple environment variables to make this work.
 
@@ -153,15 +153,15 @@ You need to setup a couple environment variables to make this work.
 
 Below is a screen shot of things setup.
 
-[![envarssetup](/images/2015/07/envarssetup-medium.jpg)](/images/2015/07/envarssetup-medium.jpg)
+[![envarssetup](envarssetup.jpg)](envarssetup.jpg)
 
 Next, click deployment on the left and type in "master" without the quotes for the branch name and click "Save pipeline settings".
 
-[![masterbranch](/images/2015/07/masterbranch-medium.jpg)](/images/2015/07/masterbranch-medium.jpg)
+[![masterbranch](masterbranch.jpg)](masterbranch.jpg)
 
 Click "Custom Script".
 
-[![customscript](/images/2015/07/customscript-medium.jpg)](/images/2015/07/customscript-medium.jpg)
+[![customscript](customscript.jpg)](customscript.jpg)
 
 Paste in the following code, replace `myapp` with the name of your app.
 Note: This requires your app to have a `manifest.yml`
@@ -170,7 +170,7 @@ Note: This requires your app to have a `manifest.yml`
 
 It should look like the following.
 
-[![codesnip](/images/2015/07/codesnip-medium.jpg)](/images/2015/07/codesnip-medium.jpg)
+[![codesnip](codesnip.jpg)](codesnip.jpg)
 
 Click "Create".
 
