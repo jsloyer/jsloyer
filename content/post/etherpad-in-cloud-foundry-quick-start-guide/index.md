@@ -3,7 +3,6 @@ categories = ["Sample Code", "Tutorial", "Video"]
 date = "2015-01-03T22:19:30-05:00"
 description = ""
 draft = false
-image = "/img/about-bg.jpg"
 tags = ["bluemix", "cloudfoundry", "etherpad", "mysql"]
 title = "Etherpad in Cloud Foundry – Quick Start Guide"
 aliases = [
@@ -83,7 +82,7 @@ To add the service Bluemix will provision and bind a service to our app for us. 
 
 It will ask if you want to restage the app, that is fine, so click RESTAGE.
 
-![restage Etherpad in Cloud Foundry – Quick Start Guide](/images/2015/06/restage-medium.jpg)
+![restage Etherpad in Cloud Foundry – Quick Start Guide](restage.jpg)
 
 
 ### Configure the app with ClearDB (MySQL)
@@ -91,11 +90,11 @@ It will ask if you want to restage the app, that is fine, so click RESTAGE.
 
 To switch the app over to MySQL, we need to edit the `settings.json` for the app and then re-upload the app to Bluemix. You will need to replace the value DATABASE on line 9 with the name of your ClearDB service.  To get this info, let’s go back to the Bluemix UI and our app.  If you click on "Show Credentials", it will give you the name of your ClearDB service, copy this.
 
-![showcreds Etherpad in Cloud Foundry – Quick Start Guide](/images/2015/06/showcreds-medium.jpg)
+![showcreds Etherpad in Cloud Foundry – Quick Start Guide](showcreds.jpg)
 
 Copy the name, in this example it is "ClearDB MySQL Database-hu", without quotes.  I have highlighted below what you need to copy, don’t copy the quotes.  I have hidden my connection info to my database so my database can’t be hacked.
 
-![dbname Etherpad in Cloud Foundry – Quick Start Guide](/images/2015/06/dbname-medium.jpg)
+![dbname Etherpad in Cloud Foundry – Quick Start Guide](dbname.jpg)
 
 Open up settings.json with your favorite text editor and on line 9 replace DATABASE with the name of your ClearDB service that we copied from above.  Save the file. Here is my line 9:
 ```
