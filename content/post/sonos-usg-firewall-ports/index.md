@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2019-02-11T13:24:00-05:00"
 description = "Setup a multi-vlan network with sonos and the Unifi USG with Sonos Speakers"
 draft = false
-image = "/original-images/wall.jpg"
+image = "wall.jpg"
 tags = ["sonos", "usg", "firewall", "unifi", "ubiquiti"]
 title = "Firewall Ports for the Unifi USG and Sonos Speakers"
 slug = "sonos-usg-firewall-ports/"
@@ -55,20 +55,20 @@ Since we now have things working again we need to break things again.  We need t
 
 ## Block all untrusted traffic
 
-[![usg screenshot from unifi](/images/usg-sonos-1-medium.jpg)](/images/usg-sonos-1-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-1.jpg)](usg-sonos-1.jpg)
 
-[![usg screenshot from unifi](/images/usg-sonos-2-medium.jpg)](/images/usg-sonos-2-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-2.jpg)](usg-sonos-2.jpg)
 
 I have a group created for my untrusted VLAN's, see below.
 
-[![usg screenshot from unifi](/images/usg-sonos-3-medium.jpg)](/images/usg-sonos-3-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-3.jpg)](usg-sonos-3.jpg)
 
 
 ## Allow ICMP Traffic
 Next we need to allow ICMP traffic from your untrusted VLAN to your trusted VLAN.  See below.
-[![usg screenshot from unifi](/images/usg-sonos-4-medium.jpg)](/images/usg-sonos-4-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-4.jpg)](usg-sonos-4.jpg)
 
-[![usg screenshot from unifi](/images/usg-sonos-5-medium.jpg)](/images/usg-sonos-5-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-5.jpg)](usg-sonos-5.jpg)
 
 ## Allow Sonos Traffic
 Next wee need to allow Sonos traffic.  To do this I created two port groups, one for UDP and one for TCP.  each of them has a corresponding firewall rule.
@@ -81,15 +81,15 @@ TCP-3401
 TCP30000-60000
 ```
 
-[![usg screenshot from unifi](/images/usg-sonos-6-medium.jpg)](/images/usg-sonos-6-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-6.jpg)](usg-sonos-6.jpg)
 
 In the rule below you will notice there is a destination group as well in addition to the ports.  I have added the IP's of my Sonos speakers to a group so I can only open a couple pinholes for traffic instead of the whole VLAN.  See below.
 
-[![usg screenshot from unifi](/images/usg-sonos-8-medium.jpg)](/images/usg-sonos-8-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-8.png)](usg-sonos-8.png)
 
-[![usg screenshot from unifi](/images/usg-sonos-9-medium.jpg)](/images/usg-sonos-9-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-9.jpg)](usg-sonos-9.jpg)
 
-[![usg screenshot from unifi](/images/usg-sonos-10-medium.jpg)](/images/usg-sonos-10-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-10.jpg)](usg-sonos-10.jpg)
 
 
 ### Allow Sonos UDP
@@ -100,13 +100,13 @@ UDP-1901
 UDP30000-60000
 ```
 
-[![usg screenshot from unifi](/images/usg-sonos-7-medium.jpg)](/images/usg-sonos-17medium.jpg)
+[![usg screenshot from unifi](usg-sonos-7.jpg)](usg-sonos-17medium.jpg)
 
 I am using the same port group for the source as I did above for the IP's of the Sonos speakers.
 
-[![usg screenshot from unifi](/images/usg-sonos-11-medium.jpg)](/images/usg-sonos-11-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-11.jpg)](usg-sonos-11.jpg)
 
-[![usg screenshot from unifi](/images/usg-sonos-12-medium.jpg)](/images/usg-sonos-12-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-12.jpg)](usg-sonos-12.jpg)
 
 
 ## Ordering of the rules
@@ -114,7 +114,7 @@ The ordering of the firewall rules is extremely important.  Make sure you have y
 
 See below for my final set of rules.
 
-[![usg screenshot from unifi](/images/usg-sonos-13-medium.jpg)](/images/usg-sonos-13-medium.jpg)
+[![usg screenshot from unifi](usg-sonos-13.jpg)](usg-sonos-13.jpg)
 
 # Credit
 https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950

@@ -3,7 +3,7 @@ categories = ["Tutorial"]
 date = "2019-04-01T13:24:00-05:00"
 description = "Cross VLAN traffic with a USG and Apple Airplay"
 draft = false
-image = "/original-images/wall.jpg"
+image = "wall.jpg"
 tags = ["apple", "usg", "firewall", "unifi", "ubiquiti", "airplay"]
 title = "Cross VLAN traffic with a USG and Apple Airplay"
 slug = "/apple-airplay-usg"
@@ -25,7 +25,7 @@ The next step is creating a single firewall rule.  The rule that needs to be cre
 
 This firewall rule should be created in the LAN_IN category.
 
-[![usg screenshot from unifi](/images/usg-apple-airplay-1-medium.jpg)](/images/usg-apple-airplay-1-medium.jpg)
+[![usg screenshot from unifi](usg-apple-airplay-1.jpg)](/usg-apple-airplay-1.jpg)
 
 **Note:**  As with other allow rules this rule MUST go before your deny rules.
 

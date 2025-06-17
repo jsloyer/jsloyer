@@ -3,7 +3,7 @@ categories = ["Backup"]
 date = "2017-12-06T14:11:14-05:00"
 description = ""
 draft = false
-image = "/original-images/alpine.jpg"
+image = "alpine.jpg"
 tags = ["backup"]
 title = "Backblaze vs Crashplan"
 slug = "backblaze-vs-crashplan/"
@@ -29,7 +29,7 @@ my upload speed.  However, when I moved to my new residence I got AT&T Fiber whi
 2 cameras so Crashplan was able to keep up.  However, at the new place I was running 5 camera's and Crashplan was not able to keep up.
 The backup time keeps increasing.  As of this writing the backup time is now up to 10 days...
 
-![Crashplan Speed](/images/crashplan3-medium.png)
+![Crashplan Speed](crashplan3.png)
 
 I contacted Crashplan's support and they responded pretty quick and I was quite impressed initially.  They sent me a couple blog links
 on how to optimize my backups and allow larger files to be uploaded.  I am uploading photos averaging around 20MB/piece from my DSLR to 4GB video files that come from the security cameras.  Crashplan reccomended that I try to tune the Java JVM and give it more memory to help upload those large files.  Initially I thought it worked but it didn't...  I opened another ticket with them and they gave me a couple more blog
@@ -73,11 +73,11 @@ Besides backing up locally I now Backup to Backblaze with all 3 of my machines. 
 
 For my last machine, my NVR for my security cameras all of the footage backs up to Backblaze now.  The speeds are quite amazing, I have seen over 300Mbps upload speed to Backblaze, so much better than the 3.6Mbps to Crashplan!
 
-![Backblaze Speed](/images/crashplan4-medium.png)
+![Backblaze Speed](crashplan4.png)
 
 To be fair I did tune it quite a bit, see the screenshot below.  I allowed Backblaze to use 20 threads as well as no caps to achieve that speed...
 
-![Backblaze tuning](/images/backblaze-tuning-medium.png)
+![Backblaze tuning](backblaze-tuning.png)
 
 
 ## Conclusion
