@@ -44,21 +44,21 @@ There is two parts to setting this up.  If we take a look at the architecture d
 
   3. Obtain a Raspberry Pi, a bread board, wires, a LED, and a button  (your best bet is getting a starter kit such as the [Canakit](http://amzn.to/2C63713))
 
-  4. Place an LED in the breadboard (place the shorter side to the left)![led IoT Python app with a Raspberry Pi and Bluemix](/led.png)
+  4. Place an LED in the breadboard (place the shorter side to the left)![led IoT Python app with a Raspberry Pi and Bluemix](led.png)
 
-  5. Place a 220 ohm resistor in the breadboard connecting the short side (the left side of the LED) to the ground rail (the rail with the – sign).  Make sure to place the side of the resistor with the red stripes closest to the LED_NOTE:_ The way the breadboard works is connections run vertically not horizontally![resistor IoT Python app with a Raspberry Pi and Bluemix](/resistor.png)
+  5. Place a 220 ohm resistor in the breadboard connecting the short side (the left side of the LED) to the ground rail (the rail with the – sign).  Make sure to place the side of the resistor with the red stripes closest to the LED_NOTE:_ The way the breadboard works is connections run vertically not horizontally![resistor IoT Python app with a Raspberry Pi and Bluemix](resistor.png)
 
-  6. Connect a wire from the ground rail to the GND on the pinout board![ground IoT Python app with a Raspberry Pi and Bluemix](/ground.png)
+  6. Connect a wire from the ground rail to the GND on the pinout board![ground IoT Python app with a Raspberry Pi and Bluemix](ground.png)
 
-  7. On the right side of the LED, connect a wire to the the port labeled 17.**NOTE:** The way the breadboard works is connections run vertically not horizontally.![gpio17 IoT Python app with a Raspberry Pi and Bluemix](/gpio17.png)
+  7. On the right side of the LED, connect a wire to the the port labeled 17.**NOTE:** The way the breadboard works is connections run vertically not horizontally.![gpio17 IoT Python app with a Raspberry Pi and Bluemix](gpio17.png)
 
   8. Place the button in the breadboard, it takes a bit of force to press it in all the way.  It won’t break it.![button IoT Python app with a Raspberry Pi and Bluemix](/button.png)
 
-  9. Connect a wire from the right side of the button to the ground rail.![buttonground IoT Python app with a Raspberry Pi and Bluemix](/buttonground.png)
+  9. Connect a wire from the right side of the button to the ground rail.![buttonground IoT Python app with a Raspberry Pi and Bluemix](buttonground.png)
 
-  10. Connect a wire from the ground rail to a GND port, it doesn’t matter which one it is![buttongroundrail IoT Python app with a Raspberry Pi and Bluemix](/buttongroundrail.png)
+  10. Connect a wire from the ground rail to a GND port, it doesn’t matter which one it is![buttongroundrail IoT Python app with a Raspberry Pi and Bluemix](buttongroundrail.png)
 
-  11. Lastly, connect a wire from the left side of the button to GPIO port 18.![gpio18 IoT Python app with a Raspberry Pi and Bluemix](/gpio18.png)
+  11. Lastly, connect a wire from the left side of the button to GPIO port 18.![gpio18 IoT Python app with a Raspberry Pi and Bluemix](gpio18.png)
 
   12. Next we need to either use the console for our Raspberry Pi and the terminal application on the device itself or use SSH.  I am going to use SSH.
 
@@ -213,7 +213,7 @@ There is a row that says `urls:`, copy that URL and paste it into your browser.
 
 If everything went well you should have a page that looks like the following:
 
-![pythoniotapp IoT Python app with a Raspberry Pi and Bluemix](/pythoniotapp.png)
+![pythoniotapp IoT Python app with a Raspberry Pi and Bluemix](pythoniotapp.png)
 
 An important note here, do not press the button on the Raspberry Pi until you enter a phone number and text message here, if you do the app will crash.  If you do this you can restart you app with `cf restart myappname`, where myappname is the name of the app you chose above.
 

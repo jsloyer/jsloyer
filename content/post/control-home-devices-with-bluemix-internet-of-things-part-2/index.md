@@ -74,7 +74,7 @@ I would highly recommend following the steps in [this page](https://docs.google.
 
 Below is a picture of my finished bread board with 16 channels.  I have included a wiring diagram as well.  Basically each GPIO port goes to the input side of the relay controller.  If you notice I have a couple left over LED’s on the bread board, this was done via the tutorial list above.
 
-[![2015 02 16 11.31.19 768x1024 Control home devices with Bluemix Internet of Things (Part 2)](2015-02-16-11.31.19-medium.jpg)](2015-02-16-11.31.19-medium.jpg)
+[![2015 02 16 11.31.19 768x1024 Control home devices with Bluemix Internet of Things (Part 2)](2015-02-16-11.31.19.jpg)](2015-02-16-11.31.19.jpg)
 
 What is going on above is each of the delays is plugged into a GPIO port and then plugged into the ground rail and connected by a resistor.  The particular resistor I am using is a 220 Ohm resistor.
 
