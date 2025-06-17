@@ -100,7 +100,7 @@ UDP-1901
 UDP30000-60000
 ```
 
-[![usg screenshot from unifi](usg-sonos-7.jpg)](usg-sonos-17.jpg)
+[![usg screenshot from unifi](usg-sonos-7.jpg)](usg-sonos-7.jpg)
 
 I am using the same port group for the source as I did above for the IP's of the Sonos speakers.
 
