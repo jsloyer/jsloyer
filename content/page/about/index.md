@@ -14,21 +14,17 @@ menu:
             icon: user
 ---
 
-Jeff Sloyer is currently a STSM (senior technical staff member) for the IBM Cloud Developer Services Tribe where he leads development and architecture for IBM Cloud Satellite.
+My name is Jeff and I an engineering manager at Airbnb working on Kubernetes.  Before that I worked at Fidelity Investments working on user experience and cloud.  Before Fidelity I worked at IBM where I helped build and scale their hosted version of Kubernetes (like AWS EKS).
 
-He has previously led UX for multiple products including Kubernetes, Logging, Monitoring, Schematics (Terraform), and Functions.
+## Fun Facts:
+- Dad
+- Dog Dad
+- 42U Server Rack in my basement running Kubernetes
+- Love flying, have my pilots license!
 
-Jeff's previous role at IBM was a Developer Advocate.  He promoted IBM’s Platform as a Service (Paas), Bluemix. He’s a Node.JS developer most days, but tinkers in Java and Python. Sloyer is a hacker at heart who loves playing with new tech and cobbling together new demos and projects. He’s an avid traveler, flying around the world and speaking about Bluemix at conferences and events.
+Feel free to reach out and say hi, especially if it’s about Kube or flying! 
 
-On a more personal note Jeff Sloyer loves really anything outside.  Some of his favorite activities include mountain biking, skiing, wake boarding, and hiking.
-
-Jeff is also a home brewer, just a word of caution here, he is still learning…  The last beer was a little bit of a mistake and fermented too long.  The beer was supposed to be 7% and turned into 14%.  Ooopies…
-
-Additionally, Jeff is a foodie.  He loves traveling and eating new food and experiencing different cultures.  Additionally, the travel bug has bitten Jeff hard.  He loves to travel to new places and spends a decent amount of time on airplanes.  He even loves traveling so much he enjoys going through security.  Weird I know right???  One day he hopes to get his own G5.
-
-Lastly, Jeff is a big believer in the 2nd amendment and is a marksman.
-
-Links:
+## Links:
 
 - Twitter: [jsloyer](http://twitter.com/jsloyer)
 - Github: [jsloyer](http://github.com/jsloyer)
@@ -36,5 +32,5 @@ Links:
 - Youtube: [JeffSloyer](http://youtube.com/c/JeffSloyer)
 - DZone: [DZone](https://dzone.com/users/jsloyer)
 
-CNCF Contributor Card:
+## CNCF Contributor Card:
 <iframe src="https://contribcard.cncf.io/jsloyer" width="400" height="700" frameborder="0"></iframe>
