@@ -35,3 +35,6 @@ Links:
 - StackOverflow: [jeff-sloyer](http://stackoverflow.com/users/3817025/jeff-sloyer)
 - Youtube: [JeffSloyer](http://youtube.com/c/JeffSloyer)
 - DZone: [DZone](https://dzone.com/users/jsloyer)
+
+CNCF Contributor Card:
+{{< iframe https://contribcard.cncf.io/jsloyer >}}
