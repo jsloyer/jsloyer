@@ -16,7 +16,7 @@ menu:
 
 My name is Jeff and I an engineering manager at Airbnb working on Kubernetes.  Before that I worked at Fidelity Investments working on user experience and cloud.  Before Fidelity I worked at IBM where I helped build and scale their hosted version of Kubernetes (like AWS EKS).
 
-Fun Facts:
+## Fun Facts:
 - Dad
 - Dog Dad
 - 42U Server Rack in my basement running Kubernetes
@@ -24,10 +24,13 @@ Fun Facts:
 
 Feel free to reach out and say hi, especially if it’s about Kube or flying! 
 
-Links:
+## Links:
 
 - Twitter: [jsloyer](http://twitter.com/jsloyer)
 - Github: [jsloyer](http://github.com/jsloyer)
 - StackOverflow: [jeff-sloyer](http://stackoverflow.com/users/3817025/jeff-sloyer)
 - Youtube: [JeffSloyer](http://youtube.com/c/JeffSloyer)
 - DZone: [DZone](https://dzone.com/users/jsloyer)
+
+## CNCF Contributor Card:
+<iframe src="https://contribcard.cncf.io/jsloyer" width="400" height="700" frameborder="0"></iframe>
