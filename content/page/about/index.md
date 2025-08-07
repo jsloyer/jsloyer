@@ -37,4 +37,4 @@ Links:
 - DZone: [DZone](https://dzone.com/users/jsloyer)
 
 CNCF Contributor Card:
-{{< iframe https://contribcard.cncf.io/jsloyer >}}
+<iframe src="https://contribcard.cncf.io/jsloyer" frameborder="0"></iframe>
