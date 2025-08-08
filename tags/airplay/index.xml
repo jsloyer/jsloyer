@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Airplay on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/airplay/</link><description>Recent content in Airplay on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 30 Aug 2020 23:24:00 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/airplay/index.xml" rel="self" type="application/rss+xml"/><item><title>Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay</title><link>https://www.jeffsloyer.io/post/apple-airplay-udm/</link><pubDate>Sun, 30 Aug 2020 23:24:00 -0500</pubDate><guid>https://www.jeffsloyer.io/post/apple-airplay-udm/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-udm/sound_mixer.jpg" alt="Featured image of post Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay" />&lt;h1 id="background">Background
+&lt;/h1>&lt;p>As a follow on from a &lt;a class="link" href="https://www.jeffsloyer.io/post/apple-airplay-usg" >previous post&lt;/a> I discussed how to enable the IGMP Proxy in the USG product line to permit cross VLAN mDNS traffic. In the UDM/UDM-Pro line its a bit different. There is &lt;code>config.gateway.json&lt;/code> file anymore. There are multiple workarounds out there to run Docker containers to add in extra functionality, however this is not one of them.&lt;/p>
+&lt;p>If you are looking to bypass your AT&amp;amp;T gateway then you will need to head down the Docker path, but if you are looking for just Airplay across VLAN&amp;rsquo;s you have arrived at the correct article.&lt;/p>
+&lt;h1 id="instructions">Instructions
+&lt;/h1>&lt;p>If you followed my &lt;a class="link" href="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports" >previous blog post about cross VLAN traffic with Sonos and the USG&lt;/a> it talked about how to lock down communications from the IoT VLAN to the data VLAN and allow pinholes through for Sonos. To get things working for Apple Airplay it was actually pretty easy. First you need to make sure you have mDNS turned on. To check this do the following.&lt;/p>
+&lt;ol>
+&lt;li>Enable mDNS
+&lt;ol>
+&lt;li>Goto settings in your controller&lt;/li>
+&lt;li>Goto the services tab on the left&lt;/li>
+&lt;li>Click mDNS at the top&lt;/li>
+&lt;li>Make sure the toggle is set to &lt;code>On&lt;/code>&lt;/li>
+&lt;li>Click apply changes&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>Enable multicast enhancement (IGMPv3)
+&lt;ol>
+&lt;li>Goto settings in your controller&lt;/li>
+&lt;li>Goto Wireless Networks&lt;/li>
+&lt;li>For each of the wireless networks that the Airplay devices are on and your source VLAN (ex data -&amp;gt; IoT) VLAN&amp;rsquo;s you will want to
+turn on &lt;code>multicast enhancement (IGMPv3)&lt;/code>. Scroll down the page to find the option for each of your wireless networks.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>The next step is creating a single firewall rule. The rule that needs to be created is an allow rule that allows established/related traffic to flow from any VLAN. I have this as my base rule and then I add more restrictive rules after that. See below for a screenshot.&lt;/p>
+&lt;p>&lt;strong>NOTE:&lt;/strong> You don&amp;rsquo;t have to open things this wide open, you could just create a two rules that allows traffic to flow from the destionation VLAN to the source VLAN and vice versa.&lt;/p>
+&lt;p>This firewall rule should be created in the LAN_IN category.&lt;/p>
+&lt;p>&lt;a class="link" href="airplay-udm-1.jpg" >&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-1.jpg"
+width="2304"
+height="1538"
+srcset="https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-1_hu_c3f8a76894652a3e.jpg 480w, https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-1_hu_c28eab4cf7ad143d.jpg 1024w"
+loading="lazy"
+alt="udm screenshot from unifi"
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="359px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="airplay-udm-2.jpg" >&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-2.jpg"
+width="1650"
+height="1652"
+srcset="https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-2_hu_5b44c0f145098604.jpg 480w, https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-2_hu_ea6e6d9dd4c531e5.jpg 1024w"
+loading="lazy"
+alt="udm screenshot from unifi"
+class="gallery-image"
+data-flex-grow="99"
+data-flex-basis="239px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="airplay-udm-3.jpg" >&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-3.jpg"
+width="1412"
+height="758"
+srcset="https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-3_hu_75eb2a3e1e44db5b.jpg 480w, https://www.jeffsloyer.io/post/apple-airplay-udm/airplay-udm-3_hu_d4a03a038aa81ab.jpg 1024w"
+loading="lazy"
+alt="udm screenshot from unifi"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="447px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> As with other allow rules this rule MUST go before your deny rules.&lt;/p></description></item><item><title>Cross VLAN traffic with a USG and Apple Airplay</title><link>https://www.jeffsloyer.io/post/apple-airplay-usg/</link><pubDate>Mon, 01 Apr 2019 13:24:00 -0500</pubDate><guid>https://www.jeffsloyer.io/post/apple-airplay-usg/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-usg/wall.jpg" alt="Featured image of post Cross VLAN traffic with a USG and Apple Airplay" />&lt;h1 id="background">Background
+&lt;/h1>&lt;p>As a follow on from a &lt;a class="link" href="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports" >previous post&lt;/a> I discussed how I locked down VLAN&amp;rsquo;s from a IoT VLAN to my core data VLAN. In that post I described how I got my Sonos speakers and Sonos controller to work over locked down VLAN&amp;rsquo;s. I recently hooked up an old Apple Airport Express and music wouldn&amp;rsquo;t flow when I was on the data VLAN to the IoT VLAN where the Airport Express resided.&lt;/p>
+&lt;h1 id="instructions">Instructions
+&lt;/h1>&lt;p>If you followed my &lt;a class="link" href="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports" >previous blog post&lt;/a> it talked about how to lock down communications from the IoT VLAN to the data VLAN and allow pinholes through for Sonos. To get things working for Apple Airplay it was actually pretty easy. First you need to make sure you have mDNS turned on. To check this do the following.&lt;/p>
+&lt;ol>
+&lt;li>Goto settings in your controller&lt;/li>
+&lt;li>Goto the services tab on the left&lt;/li>
+&lt;li>Click MDNS at the top&lt;/li>
+&lt;li>Make sure the toggle is set to &lt;code>On&lt;/code>&lt;/li>
+&lt;li>Click apply changes&lt;/li>
+&lt;/ol>
+&lt;p>The next step is creating a single firewall rule. The rule that needs to be created is an allow rule that allows established/related traffic from your IoT VLAN (the VLAN that your Apple Airplay device is on) to the data VLAN (secure VLAN). See below for a screenshot.&lt;/p>
+&lt;p>This firewall rule should be created in the LAN_IN category.&lt;/p>
+&lt;p>&lt;a class="link" href="usg-apple-airplay-1.jpg" >&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-usg/usg-apple-airplay-1.jpg"
+width="1414"
+height="1618"
+srcset="https://www.jeffsloyer.io/post/apple-airplay-usg/usg-apple-airplay-1_hu_ed73045ffef60c16.jpg 480w, https://www.jeffsloyer.io/post/apple-airplay-usg/usg-apple-airplay-1_hu_101d7513ee9e5a83.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="87"
+data-flex-basis="209px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> As with other allow rules this rule MUST go before your deny rules.&lt;/p>
+&lt;h1 id="credit">Credit
+&lt;/h1>&lt;p>&lt;a class="link" href="https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950" target="_blank" rel="noopener"
+>https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://community.ubnt.com/t5/UniFi-Routing-Switching/Airplay-across-VLAN-How-to-do/m-p/1966141/highlight/false#M48087" target="_blank" rel="noopener"
+>https://community.ubnt.com/t5/UniFi-Routing-Switching/Airplay-across-VLAN-How-to-do/m-p/1966141/highlight/false#M48087&lt;/a>&lt;/p></description></item></channel></rss>

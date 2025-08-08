@@ -1,0 +1,563 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Background Ever since I have switched over to Ubiquiti&rsquo;s Unifi setup for my home I have been searching for a way to eliminate AT&amp;T&rsquo;s residential gateway from my setup. I have AT&amp;T Fiber and I detest AT&amp;T&rsquo;s residential gateway. I won&rsquo;t go into the reasons now but just know the list is almost endless. It would be great if AT&amp;T just allowed you not to use that if you have a router of your own. I would love to see AT&amp;T allow residential fiber customers on their PON network to bypass the ONT but that might be too much to ask. I will gladly take a set in the right direction by eliminating the residential gateway in my routing to the Internet.\n"><title>ATT Uverse Modem Bypass - UniFi USG</title><link rel=canonical href=https://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/><link rel=stylesheet href=/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css><meta property='og:title' content="ATT Uverse Modem Bypass - UniFi USG"><meta property='og:description' content="Background Ever since I have switched over to Ubiquiti&rsquo;s Unifi setup for my home I have been searching for a way to eliminate AT&amp;T&rsquo;s residential gateway from my setup. I have AT&amp;T Fiber and I detest AT&amp;T&rsquo;s residential gateway. I won&rsquo;t go into the reasons now but just know the list is almost endless. It would be great if AT&amp;T just allowed you not to use that if you have a router of your own. I would love to see AT&amp;T allow residential fiber customers on their PON network to bypass the ONT but that might be too much to ask. I will gladly take a set in the right direction by eliminating the residential gateway in my routing to the Internet.\n"><meta property='og:url' content='https://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/'><meta property='og:site_name' content='Jeff Sloyer'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='att'><meta property='article:tag' content='unifi'><meta property='article:tag' content='ubiquiti'><meta property='article:published_time' content='2018-04-04T13:24:00-05:00'><meta property='article:modified_time' content='2018-04-04T13:24:00-05:00'><meta property='og:image' content='https://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/secure.jpg'><meta name=twitter:title content="ATT Uverse Modem Bypass - UniFi USG"><meta name=twitter:description content="Background Ever since I have switched over to Ubiquiti&rsquo;s Unifi setup for my home I have been searching for a way to eliminate AT&amp;T&rsquo;s residential gateway from my setup. I have AT&amp;T Fiber and I detest AT&amp;T&rsquo;s residential gateway. I won&rsquo;t go into the reasons now but just know the list is almost endless. It would be great if AT&amp;T just allowed you not to use that if you have a router of your own. I would love to see AT&amp;T allow residential fiber customers on their PON network to bypass the ONT but that might be too much to ask. I will gladly take a set in the right direction by eliminating the residential gateway in my routing to the Internet.\n"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://www.jeffsloyer.io/post/att-uverse-modem-bypass-unifi-usg/secure.jpg'><link rel="shortcut icon" href=/favicon.png><script async src="https://www.googletagmanager.com/gtag/js?id=G-1SGYYQEYE5"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-1SGYYQEYE5")}</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/airplane_hu_b02b01ef7f6fbee8.png width=300 height=225 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍥</span></figure><div class=site-meta><h1 class=site-name><a href=/>Jeff Sloyer</a></h1><h2 class=site-description>Thoughts on Tech and other interests...</h2></div></header><ol class=menu-social><li><a href=https://github.com/jsloyer target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://www.linkedin.com/in/jeffsloyer/ target=_blank title="Linked In" rel=me><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg></a></li><li><a href=https://twitter.com/jsloyer target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/about/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>About</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/speaking/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>Speaking</span></a></li><li><a href=/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#speed-tests>Speed tests</a><ol><li><a href=#att>AT&amp;T</a></li><li><a href=#celito-fiber>Celito Fiber</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/post/att-uverse-modem-bypass-unifi-usg/><img src=/post/att-uverse-modem-bypass-unifi-usg/secure_hu_1382f3e1983e926c.jpg srcset="/post/att-uverse-modem-bypass-unifi-usg/secure_hu_1382f3e1983e926c.jpg 800w, /post/att-uverse-modem-bypass-unifi-usg/secure_hu_ba4aea47eb636954.jpg 1600w" width=800 height=658 loading=lazy alt="Featured image of post ATT Uverse Modem Bypass - UniFi USG"></a></div><div class=article-details><header class=article-category><a href=/categories/tutorial/>Tutorial</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/att-uverse-modem-bypass-unifi-usg/>ATT Uverse Modem Bypass - UniFi USG</a></h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Apr 04, 2018</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>7 minute read</time></div></footer></div></header><section class=article-content><h1 id=background>Background</h1><p>Ever since I have switched over to Ubiquiti&rsquo;s Unifi setup for my home I have been searching for a way to eliminate AT&amp;T&rsquo;s
+residential gateway from my setup. I have AT&amp;T Fiber and I detest AT&amp;T&rsquo;s residential gateway. I won&rsquo;t go into the reasons now but just
+know the list is almost endless. It would be great if AT&amp;T just allowed you not to use that if you have a router of your own. I would love
+to see AT&amp;T allow residential fiber customers on their PON network to bypass the ONT but that might be too much to ask. I will gladly take
+a set in the right direction by eliminating the residential gateway in my routing to the Internet.</p><p>I recently stumbled on some amazing instructions when researching why AT&amp;T uses a public IP that isn&rsquo;t assigned to them, 1.1.1.1. If you
+aren&rsquo;t aware of 1.1.1.1, it&rsquo;s Cloudflare&rsquo;s new DNS servers that promise to be faster than Google&rsquo;s public DNS servers. If you aren&rsquo;t using them I would highly encourage you to do so, check out <a class=link href=http://1.1.1.1/ target=_blank rel=noopener>this</a> for more information. Turns out I found a blog post that
+documented if you remove the AT&amp;T gateway you can then route to 1.1.1.1 on AT&amp;T&rsquo;s network and not get blocked.</p><p>If you don&rsquo;t have your own Unifi USG you can order one on Amazon.</p><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=qf_sp_asin_til&ad_type=product_link&tracking_id=jeffsloyer-io-20&marketplace=amazon&region=US&placement=B00LV8YZLK&asins=B00LV8YZLK&linkId=a6294bfe7ebd3dc2749c57258d5e2c5c&show_border=false&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff"></iframe><p>If you don&rsquo;t have a Unifi Cloud Key you can use the following to get one off of Amazon also.</p><iframe style=width:120px;height:240px marginwidth=0 marginheight=0 scrolling=no frameborder=0 src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&OneJS=1&Operation=GetAdHtml&MarketPlace=US&source=ac&ref=qf_sp_asin_til&ad_type=product_link&tracking_id=jeffsloyer-io-20&marketplace=amazon&region=US&placement=B017T2QB22&asins=B017T2QB22&linkId=95f00631c34a46551eb4cd2d8b3bb828&show_border=false&link_opens_in_new_window=true&price_color=333333&title_color=0066c0&bg_color=ffffff"></iframe><p>Just a note here, I am not taking any credit for any of the instructions, I am just merely adding my custom work I needed to do to get it working. The instructions were great actually, there is just a step at the end that is a little confusing and hard. You have to generate
+a custom config for your USG and its not straightforward on how to do this so I am posting my experience with it.</p><p>The original instructions can be found at <a class=link href=https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/ target=_blank rel=noopener>https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/</a>.</p><h1 id=custom-config>Custom Config</h1><p>In the instructions you will eventually get to a point where you have to generate a custom config file from your USG, the output will be a file called <code>configdump.txt</code>.</p><p>You will need to heavily modify that file to remove information that you can configure in the Unifi UI to avoid issues going forward. The author provided a wonderful example of his config file called <code>config.gateway.json</code>, it can be found below.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;interfaces&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;ethernet&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;eth0&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>					<span class=s2>&#34;dhcp&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>],</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;dhcp-options&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;client-option&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>						<span class=s2>&#34;retry 60;&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>],</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route-distance&#34;</span><span class=p>:</span> <span class=s2>&#34;1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;name-server&#34;</span><span class=p>:</span> <span class=s2>&#34;no-update&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;duplex&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;firewall&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;in&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_IN&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;local&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_LOCAL&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;out&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_OUT&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;speed&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;vif&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;0&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>							<span class=s2>&#34;dhcp&#34;</span>
+</span></span><span class=line><span class=cl>						<span class=p>],</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN VLAN 0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;dhcp-options&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;default-route&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;default-route-distance&#34;</span><span class=p>:</span> <span class=s2>&#34;210&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;name-server&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span>
+</span></span><span class=line><span class=cl>						<span class=p>},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;firewall&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;in&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_IN&#34;</span>
+</span></span><span class=line><span class=cl>							<span class=p>},</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;local&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_LOCAL&#34;</span>
+</span></span><span class=line><span class=cl>							<span class=p>}</span>
+</span></span><span class=line><span class=cl>						<span class=p>},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;mac&#34;</span><span class=p>:</span> <span class=s2>&#34;E0:BB:CC:DD:EE:FF&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>},</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;eth2&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>					<span class=s2>&#34;dhcp&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>],</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;AT&amp;T router&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;dhcp-options&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;client-option&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>						<span class=s2>&#34;retry 60;&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>],</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route-distance&#34;</span><span class=p>:</span> <span class=s2>&#34;220&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;name-server&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;duplex&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;firewall&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;in&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_IN&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;local&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_LOCAL&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;out&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_OUT&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;speed&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;port-forward&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;wan-interface&#34;</span><span class=p>:</span> <span class=s2>&#34;eth0.0&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;service&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;dns&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;dynamic&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;interface&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;eth0.0&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;service&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;custom-cloudflare&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;host-name&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>									<span class=s2>&#34;websiteurl&#34;</span>
+</span></span><span class=line><span class=cl>								<span class=p>],</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;login&#34;</span><span class=p>:</span> <span class=s2>&#34;email&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;options&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>									<span class=s2>&#34;zone=websiteurl use=web ssl=yes&#34;</span>
+</span></span><span class=line><span class=cl>								<span class=p>],</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;password&#34;</span><span class=p>:</span> <span class=s2>&#34;apikey&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;protocol&#34;</span><span class=p>:</span> <span class=s2>&#34;cloudflare&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;server&#34;</span><span class=p>:</span> <span class=s2>&#34;www.cloudflare.com&#34;</span>
+</span></span><span class=line><span class=cl>							<span class=p>}</span>
+</span></span><span class=line><span class=cl>						<span class=p>}</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;nat&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;rule&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;5010&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;masquerade for WAN&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;outbound-interface&#34;</span><span class=p>:</span> <span class=s2>&#34;eth0.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;protocol&#34;</span><span class=p>:</span> <span class=s2>&#34;all&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;masquerade&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;upnp2&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;listen-on&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>				<span class=s2>&#34;eth1&#34;</span>
+</span></span><span class=line><span class=cl>			<span class=p>],</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;nat-pmp&#34;</span><span class=p>:</span> <span class=s2>&#34;enable&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;secure-mode&#34;</span><span class=p>:</span> <span class=s2>&#34;enable&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;wan&#34;</span><span class=p>:</span> <span class=s2>&#34;eth0.0&#34;</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The only problem with the above file is I had a VPN setup and running and after going through the author&rsquo;s instructions everything worked except the VPN so I had to go through and add in the relative bits related to my VPN setup on my USG.</p><p>Below is my config file <code>config.gateway.json</code> with some sensitive information nulled out.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;interfaces&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;ethernet&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;eth0&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>					<span class=s2>&#34;dhcp&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>],</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;dhcp-options&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;client-option&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>						<span class=s2>&#34;retry 60;&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>],</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route-distance&#34;</span><span class=p>:</span> <span class=s2>&#34;1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;name-server&#34;</span><span class=p>:</span> <span class=s2>&#34;no-update&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;duplex&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;firewall&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;in&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_IN&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;local&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_LOCAL&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;out&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_OUT&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;speed&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;vif&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;0&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>							<span class=s2>&#34;dhcp&#34;</span>
+</span></span><span class=line><span class=cl>						<span class=p>],</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN VLAN 0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;dhcp-options&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;default-route&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;default-route-distance&#34;</span><span class=p>:</span> <span class=s2>&#34;210&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;name-server&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span>
+</span></span><span class=line><span class=cl>						<span class=p>},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;firewall&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;in&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_IN&#34;</span>
+</span></span><span class=line><span class=cl>							<span class=p>},</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;local&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_LOCAL&#34;</span>
+</span></span><span class=line><span class=cl>							<span class=p>}</span>
+</span></span><span class=line><span class=cl>						<span class=p>},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;mac&#34;</span><span class=p>:</span> <span class=s2>&#34;ab:cd:ef:12:34:56&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>},</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;eth2&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;address&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>					<span class=s2>&#34;dhcp&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>],</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;AT&amp;T router&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;dhcp-options&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;client-option&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>						<span class=s2>&#34;retry 60;&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>],</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;default-route-distance&#34;</span><span class=p>:</span> <span class=s2>&#34;220&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;name-server&#34;</span><span class=p>:</span> <span class=s2>&#34;update&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;duplex&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;firewall&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;in&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_IN&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;local&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_LOCAL&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>},</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;out&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;WAN_OUT&#34;</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;speed&#34;</span><span class=p>:</span> <span class=s2>&#34;auto&#34;</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;port-forward&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;wan-interface&#34;</span><span class=p>:</span> <span class=s2>&#34;eth0.0&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;service&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;dns&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;dynamic&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;interface&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;eth0.0&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;service&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>							<span class=nt>&#34;dyndns&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;host-name&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>									<span class=s2>&#34;domain.dyndns.org&#34;</span>
+</span></span><span class=line><span class=cl>								<span class=p>],</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;login&#34;</span><span class=p>:</span> <span class=s2>&#34;someuser&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>								<span class=nt>&#34;password&#34;</span><span class=p>:</span> <span class=s2>&#34;xxxxxx&#34;</span>
+</span></span><span class=line><span class=cl>							<span class=p>}</span>
+</span></span><span class=line><span class=cl>						<span class=p>}</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>},</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;forwarding&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;except-interface&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>					<span class=s2>&#34;eth0.0&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>]</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;nat&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;rule&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;5010&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;masquerade for WAN&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;outbound-interface&#34;</span><span class=p>:</span> <span class=s2>&#34;eth0.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;protocol&#34;</span><span class=p>:</span> <span class=s2>&#34;all&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;type&#34;</span><span class=p>:</span> <span class=s2>&#34;masquerade&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;lldp&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;interface&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;eth0.0&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;disable&#34;</span><span class=p>:</span> <span class=s2>&#34;&#39;&#39;&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;vpn&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;ipsec&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;ipsec-interfaces&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;interface&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>					<span class=s2>&#34;eth0.0&#34;</span>
+</span></span><span class=line><span class=cl>				<span class=p>]</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>},</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;l2tp&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nt>&#34;remote-access&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;dhcp-interface&#34;</span><span class=p>:</span> <span class=s2>&#34;eth0.0&#34;</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>The most important thing to note is anywhere you find <code>eth0</code>, you need to replace it with <code>eth0.0</code>. It took some guessing and checking and having to reset my USG a couple times but I eventually got things working.</p><p>Make sure to special attention to the config above. You only need to copy down to an individual key pair in the JSON to get to <code>eth0</code>. However if a key is called <code>eth0</code> you will need to copy everything below it as its the key for that information. A good example of this can be found in the dns section above.</p><p>I would highly encourage you to use the above file as a starting point and modify it as you see fit if you have any other information referencing <code>eth0</code>.</p><h1 id=speed-test-results>Speed Test Results</h1><p>Below are a couple speed tests I captured after. My speeds roughly stayed the same which is amazing as I have seen some instructions that greatly reduce the speed with a bridge running on the USG. I did notice the ping times went down a couple milliseconds, I will take that any day, things feel a lot more snappier now!!!</p><h2 id=speed-tests>Speed tests</h2><h3 id=att>AT&amp;T</h3><p><img src=http://www.speedtest.net/result/7204894482.png loading=lazy alt="att speed test"></p><h3 id=celito-fiber>Celito Fiber</h3><p><img src=http://www.speedtest.net/result/7204900004.png loading=lazy alt="celito fiber speed test"></p><h1 id=credits>Credits</h1><p>Again I don&rsquo;t want to detract from the amazing work that was done at <a class=link href=https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/ target=_blank rel=noopener>https://blog.taylorsmith.xyz/att-uverse-modem-bypass-unifi-usg/</a>.</p><p>Also shout out to <a class=link href=https://github.com/jaysoffian target=_blank rel=noopener>Jay Soffian</a> for writing the EAP Proxy, checkout the <a class=link href=https://github.com/jaysoffian/eap_proxy target=_blank rel=noopener>Github project</a> and give it a star for his awesome work!</p></section><footer class=article-footer><section class=article-tags><a href=/tags/att/>Att</a>
+<a href=/tags/unifi/>Unifi</a>
+<a href=/tags/ubiquiti/>Ubiquiti</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/post/apple-airplay-udm/><div class=article-image><img src=/post/apple-airplay-udm/sound_mixer.bfb8adfedcf1aa17fe9d0fe784396332_hu_d6e50af852bef0f6.jpg width=250 height=150 loading=lazy alt="Featured image of post Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay" data-key=apple-airplay-udm/ data-hash="md5-v7it/tzxqhf+nQ/nhDljMg=="></div><div class=article-details><h2 class=article-title>Cross VLAN traffic with a UDM/UDM-Pro and Apple Airplay</h2></div></a></article><article class=has-image><a href=/post/apple-airplay-usg/><div class=article-image><img src=/post/apple-airplay-usg/wall.295b9d2986181b5d5c420b59d68d8d0d_hu_d2bc04d983717b1e.jpg width=250 height=150 loading=lazy alt="Featured image of post Cross VLAN traffic with a USG and Apple Airplay" data-key=/apple-airplay-usg data-hash="md5-KVudKYYYG11cQgtZ1o2NDQ=="></div><div class=article-details><h2 class=article-title>Cross VLAN traffic with a USG and Apple Airplay</h2></div></a></article><article class=has-image><a href=/post/sonos-usg-firewall-ports/><div class=article-image><img src=/post/sonos-usg-firewall-ports/wall.295b9d2986181b5d5c420b59d68d8d0d_hu_d2bc04d983717b1e.jpg width=250 height=150 loading=lazy alt="Featured image of post Firewall Ports for the Unifi USG and Sonos Speakers" data-key=sonos-usg-firewall-ports/ data-hash="md5-KVudKYYYG11cQgtZ1o2NDQ=="></div><div class=article-details><h2 class=article-title>Firewall Ports for the Unifi USG and Sonos Speakers</h2></div></a></article><article class=has-image><a href=/post/ibm-container-service-cabin/><div class=article-image><img src=/post/ibm-container-service-cabin/cabin.f03eadbb8fefde41e02513c1a4720b02_hu_4957279fd000ac7f.jpg width=250 height=150 loading=lazy alt="Featured image of post Using Cabin with the IBM Bluemix Container Service" data-key=ibm-container-service-cabin/ data-hash="md5-8D6tu4/v3kHgJRPBpHILAg=="></div><div class=article-details><h2 class=article-title>Using Cabin with the IBM Bluemix Container Service</h2></div></a></article><article class=has-image><a href=/post/peering-inside-a-criminals-mind-using-ibm-watson/><div class=article-image><img src=/post/peering-inside-a-criminals-mind-using-ibm-watson/glasses.27d239de06198fae9a949f59a6820f1c_hu_6136c73f1583bc6d.jpg width=250 height=150 loading=lazy alt="Featured image of post Peering Inside a Criminal’s Mind using IBM Watson" data-key=peering-inside-a-criminals-mind-using-ibm-watson/ data-hash="md5-J9I53gYZj66alJ9ZpoIPHA=="></div><div class=article-details><h2 class=article-title>Peering Inside a Criminal’s Mind using IBM Watson</h2></div></a></article></div></div></aside><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//jeffsloyerio.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2025 Jeff Sloyer</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.30.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

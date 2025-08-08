@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docker on Jeff Sloyer</title><link>https://www.jeffsloyer.io/categories/docker/</link><description>Recent content in Docker on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 19 Dec 2016 14:11:14 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/categories/docker/index.xml" rel="self" type="application/rss+xml"/><item><title>Cross Compiling Golang with a Docker Alpine Container</title><link>https://www.jeffsloyer.io/post/cross-compiling-docker-alpine-golang/</link><pubDate>Mon, 19 Dec 2016 14:11:14 -0500</pubDate><guid>https://www.jeffsloyer.io/post/cross-compiling-docker-alpine-golang/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/cross-compiling-docker-alpine-golang/alpine.jpg" alt="Featured image of post Cross Compiling Golang with a Docker Alpine Container" />&lt;p>Recently at work I have been struggling with building a small/minimized Docker container of a Go app I have been working on. I started with &lt;code>busybox&lt;/code> but it has a major short coming&amp;hellip; CA certificates. It isn&amp;rsquo;t trivial to get CA Certs on a &lt;code>busybox&lt;/code> container. This problem effectively prevents you from using SSL or TLS with your app&amp;hellip; This is a non-starter&amp;hellip;&lt;/p>
+&lt;h2 id="enter-alpine">Enter Alpine
+&lt;/h2>&lt;p>I was doing some reading and I have seen a couple articles mention Alpine, its effectively a slimmed down version of &lt;code>busybox&lt;/code> but it makes it trivially easy to install packages, in my case CA Certificates! At this point I was really excited but I ran into some issues trying to compile the binary.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>The solution is actually pretty simple, you need to build your Go app inside of a container and then copy the built container to your &amp;ldquo;production&amp;rdquo; Alpine image.&lt;/p>
+&lt;p>My solution uses the &lt;code>Makefile&lt;/code>, there is different ways of doing this but this is the simplest.&lt;/p>
+&lt;p>The first addition to the &lt;code>Makefile&lt;/code> is the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.PHONY: buildgo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">buildgo:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> CGO_ENABLED=0 GOOS=linux go build -ldflags &amp;#34;-s&amp;#34; -a -installsuffix cgo .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The above is intended to be run inside of a container but you can run it anywhere. What it does is builds a binary that is statically linked with CGO disabled so it uses the statically linked cgo binary on in the container. This is important as Alpine uses a custom lightweight subset of glibc called &lt;a class="link" href="http://www.musl-libc.org/" target="_blank" rel="noopener"
+>&lt;code>libc&lt;/code>&lt;/a>.&lt;/p>
+&lt;p>The next stanza you need for your &lt;code>Makefile&lt;/code> actually builds two containers. One is your build container based on the &lt;code>golang&lt;/code> image and then copies the binary to your &lt;code>Alpine&lt;/code> container.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.PHONY: builddocker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">builddocker:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> docker build -t yourorg/yourproject-build -f ./Dockerfile.build .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> docker run -t yourorg/yourproject-build /bin/true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> docker cp `docker ps -q -n=1`:/go/src/github.com/yourorg/yourproject/yourproject .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> chmod 755 ./yourproject
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> docker build -t yourorg/yourproject .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To make the above work you need two Docker files. They are below&amp;hellip;&lt;/p>
+&lt;p>&lt;strong>Note&lt;/strong> the following is assuming your depencies are already downloaded, I do this with a make task, &lt;code>make deps&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">.PHONY: deps
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">deps:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> glide install
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This is nice/elegant as you don&amp;rsquo;t have to run this in the container so if you have private repo&amp;rsquo;s you don&amp;rsquo;t need to copy in ssh keys or GitHub tokens to download source code. Just make sure your don&amp;rsquo;t have a &lt;code>.dockerignore&lt;/code> file as things in that file won&amp;rsquo;t be copied over&amp;hellip;&lt;/p>
+&lt;p>&lt;strong>Dockerfile.build&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">FROM golang:1.7.1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">WORKDIR /go/src/github.com/yourorg/yourproject/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ADD . /go/src/github.com/yourorg/yourproject/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RUN make buildgo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CMD [&amp;#34;/bin/bash&amp;#34;]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Dockerfile&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">FROM alpine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">COPY yourproject /go/bin/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">RUN apk add --update --no-cache ca-certificates
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ENV GOPATH /go
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ENTRYPOINT [&amp;#34;/go/bin/yourproject&amp;#34;]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># Service listens on port 6969.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">EXPOSE 6969
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The above assumes your binary is named the same as your project name.&lt;/p>
+&lt;p>The magic in &lt;code>Dockerfile&lt;/code> is the ability to install the CA certs with a single command.&lt;/p>
+&lt;h2 id="gotchas">Gotchas
+&lt;/h2>&lt;p>The only issue with disabling CGO is that some functionality in go requires it, most notably is from the &lt;code>os/user&lt;/code> package, the function &lt;code>user.Current()&lt;/code> makes use of it to determine a user&amp;rsquo;s home directory. You might get an error like the following&amp;hellip;&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">user: Current not implemented on linux/amd64
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The Apache Mesos project ran into this, &lt;a class="link" href="https://github.com/mesosphere/mesos-dns/commit/4b99d6cc16c2be170525cd572f6564b673ac90d0" target="_blank" rel="noopener"
+>you can see their solution&lt;/a>. Their solution does a shortcoming though with their looping&amp;hellip; Check out &lt;a class="link" href="https://github.com/jsloyer/softlayer-go/blob/af445630c2c18a51aebd3f9b0158a162310699db/session/session.go#L141-L152" target="_blank" rel="noopener"
+>my change&lt;/a> in the Go library for IBM Softlayer. The pull PR is available &lt;a class="link" href="https://github.com/softlayer/softlayer-go/pull/32" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/p>
+&lt;p>Please follow me on Twitter at &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a> and follow me on &lt;a class="link" href="https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng" target="_blank" rel="noopener"
+>Youtube&lt;/a>!&lt;/p></description></item></channel></rss>

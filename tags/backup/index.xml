@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Backup on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/backup/</link><description>Recent content in Backup on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 06 Dec 2017 14:11:14 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/backup/index.xml" rel="self" type="application/rss+xml"/><item><title>Backblaze vs Crashplan</title><link>https://www.jeffsloyer.io/post/backblaze-vs-crashplan/</link><pubDate>Wed, 06 Dec 2017 14:11:14 -0500</pubDate><guid>https://www.jeffsloyer.io/post/backblaze-vs-crashplan/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/backblaze-vs-crashplan/alpine.jpg" alt="Featured image of post Backblaze vs Crashplan" />&lt;p>Most people do not think about backups or want to take the time to set one up or spend the money.
+Boy is that a mistake&amp;hellip; Most people (myself included) are in that boat and they realize they need to backup
+their data after its too late and they have lost that precious photo of their baby being born.&lt;/p>
+&lt;p>There are multiple methods for backing up your data, they range from a thumb drive to remote backup. The various
+mediums range in price from free all the way up to several hundred dollars a year. For me you can&amp;rsquo;t put a price
+on your precious home videos and photos&amp;hellip; The different backup medium&amp;rsquo;s also range in complexity in terms of ease of use and setup.&lt;/p>
+&lt;h2 id="my-backup-strategy">My backup strategy
+&lt;/h2>&lt;p>For about the last year I have been backing up all of my computers to Crashplan. I was in love with how simple it was use and when the
+day came that I needed to restore something I could go in their application, search for the file, and restore it. I could even restore
+deleted files that were deleted months ago. About 4 months ago I started backing up my Macbook Pro with Time Machine.
+Crashplan was too slow with upload speeds so I decided that if I needed something quickly restored I have it locally.&lt;/p>
+&lt;p>This worked out great until I moved recently&amp;hellip; At my old residence I had Time Warner Cable Internet (now Spectrum), my connection
+speed was 300Mbps down and 20Mbps up. Crashplan was usually close to consuming the full speed of the link with other things sharing
+my upload speed. However, when I moved to my new residence I got AT&amp;amp;T Fiber which offers a full 1Gbps down and 1Gbps up speed. I have security cameras (nanny cam&amp;rsquo;s) at my place and they record motion to a local Windows server I have. At my old place I was only running
+2 cameras so Crashplan was able to keep up. However, at the new place I was running 5 camera&amp;rsquo;s and Crashplan was not able to keep up.
+The backup time keeps increasing. As of this writing the backup time is now up to 10 days&amp;hellip;&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/backblaze-vs-crashplan/crashplan3.png"
+width="1694"
+height="1186"
+srcset="https://www.jeffsloyer.io/post/backblaze-vs-crashplan/crashplan3_hu_ed616acf4c68795f.png 480w, https://www.jeffsloyer.io/post/backblaze-vs-crashplan/crashplan3_hu_3262337eb5303843.png 1024w"
+loading="lazy"
+alt="Crashplan Speed"
+class="gallery-image"
+data-flex-grow="142"
+data-flex-basis="342px"
+>&lt;/p>
+&lt;p>I contacted Crashplan&amp;rsquo;s support and they responded pretty quick and I was quite impressed initially. They sent me a couple blog links
+on how to optimize my backups and allow larger files to be uploaded. I am uploading photos averaging around 20MB/piece from my DSLR to 4GB video files that come from the security cameras. Crashplan reccomended that I try to tune the Java JVM and give it more memory to help upload those large files. Initially I thought it worked but it didn&amp;rsquo;t&amp;hellip; I opened another ticket with them and they gave me a couple more blog
+posts to try. This time they reccomended tuning some of the parameters around how much CPU Crashplan can use. I tried that again I was only getting best case 3.6Mbps upload speed to Crashplan on a 1Gbps link&amp;hellip;&lt;/p>
+&lt;p>To add insult to injury throughout this back and forth with support &lt;a class="link" href="https://www.crashplan.com/en-us/consumer/nextsteps/?mkt_tok=eyJpIjoiWlRNME5qZGhZek5oTkRjeSIsInQiOiJpOEtsMWhcL0d2TXQ5TFFVYmkwSXJqVTB4TGFiR2I4a0NlVFlNYkZOUzR2eGl5U3NMSERHQmpNZUtyaHMrOWpUaU9VM09rYnFmUGFGUDRsYmNPNTdpWXFveEwwa2hudzNhdDlsOEJFZkIyUXhTczdJeklcL3FZbjdpUkR5aG5UNitGIn0%3D" target="_blank" rel="noopener"
+>Crashplan announced they were discontinuing their home backup service&lt;/a>
+and you needed to upgrade to their Pro or Small Business version or move to Carbonite with a discount. I was still somewhat happy with Crashplan and all of my data was backed up there I decided to upgrade to their Small Business plan.&lt;/p>
+&lt;p>At this point I was getting pretty frustrated. I decided to open another ticket with Crashplan and asked again what else to do and I got a less than ideal answer back from them, a snippet is below&amp;hellip;&lt;/p>
+&lt;blockquote>
+&lt;p>Hello Jeff,&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Thank you for contacting Code42 support!&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>CrashPlan normally backs up at a speed of 1-3 mbps or 10-30 GB a day.&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>It&amp;rsquo;s important to remember that like other services that share resources with a pool of users (i.e. cable internet or cellular data), CrashPlan&amp;rsquo;s speed varies depending on the number of simultaneous users and what they are uploading or downloading at the time. Though we do prioritize the downloads from our server, we are still bound by the number of users that are currently uploading or downloading from that server.&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>If you happen to have a very fast internet connection, it is unlikely that backups or restores from CrashPlan Central will be able to match your upload or download limit. This is not a bug - it&amp;rsquo;s the nature of a shared service that is designed to be affordable. We work to ensure that everyone gets sufficient bandwidth for a very reasonable price.&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>We&amp;rsquo;re continually monitoring usage across our data centers and we are strategically adding capacity (servers, storage and bandwidth) to our infrastructure to deliver the best upload speeds we can while preserving our competitive pricing.&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>If you have any further CrashPlan questions or concerns, please do not hesitate to reach out to us&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>Regards,
+Code42&lt;/p>&lt;/blockquote>
+&lt;p>Crashplan are you serious??? I can only backup at speeds at 1-3Mbps???? This isn&amp;rsquo;t the 1990&amp;rsquo;s and I am not running a DSL line&amp;hellip; One of my security camera&amp;rsquo;s alone can produce over 30GB a day, no wonder why my backup time continued to increase to 10 days&amp;hellip; At this point I had to jump ship&amp;hellip;&lt;/p>
+&lt;h2 id="my-new-backup-strategy">My new backup strategy
+&lt;/h2>&lt;p>Fast forward to my current backup strategy. I couldn&amp;rsquo;t be happier now, I have an old Macmini with an external 4TB drive that I let my Macbook Pro use TimeMachine and backup to. I use the Western Digital 4TB external drive, see below for a link to Amazon.&lt;/p>
+&lt;iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&amp;OneJS=1&amp;Operation=GetAdHtml&amp;MarketPlace=US&amp;source=ac&amp;ref=tf_til&amp;ad_type=product_link&amp;tracking_id=jsloyer-20&amp;marketplace=amazon&amp;region=US&amp;placement=B0713WPGLL&amp;asins=B0713WPGLL&amp;linkId=5eb8ed962882d6af667696f1a97adc95&amp;show_border=false&amp;link_opens_in_new_window=true&amp;price_color=333333&amp;title_color=0066c0&amp;bg_color=ffffff">
+&lt;/iframe>
+&lt;p>This is nice if I have complete failure of my primary machine. With this I can completely restore my primary machine in about an hour. Additionally this is nice as well as when you get a new Mac to replace your current one you can restore from a TimeMachine backup and having the backup locally you can be up and running on a new Macbook in a couple hours.&lt;/p>
+&lt;p>Besides backing up locally I now Backup to Backblaze with all 3 of my machines. My primary machine (Macbook Pro) backs up to my Mac Mini and then Backblaze then backs up the Mac Mini as well. This is quite nice as if I have a drive failure where my Time Machine backup resides I can restore it.&lt;/p>
+&lt;p>For my last machine, my NVR for my security cameras all of the footage backs up to Backblaze now. The speeds are quite amazing, I have seen over 300Mbps upload speed to Backblaze, so much better than the 3.6Mbps to Crashplan!&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/backblaze-vs-crashplan/crashplan4.png"
+width="1674"
+height="1960"
+srcset="https://www.jeffsloyer.io/post/backblaze-vs-crashplan/crashplan4_hu_8f080e59d55e1a17.png 480w, https://www.jeffsloyer.io/post/backblaze-vs-crashplan/crashplan4_hu_215b23439516396f.png 1024w"
+loading="lazy"
+alt="Backblaze Speed"
+class="gallery-image"
+data-flex-grow="85"
+data-flex-basis="204px"
+>&lt;/p>
+&lt;p>To be fair I did tune it quite a bit, see the screenshot below. I allowed Backblaze to use 20 threads as well as no caps to achieve that speed&amp;hellip;&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/backblaze-vs-crashplan/backblaze-tuning.png"
+width="1202"
+height="958"
+srcset="https://www.jeffsloyer.io/post/backblaze-vs-crashplan/backblaze-tuning_hu_1d20d8d78af334e3.png 480w, https://www.jeffsloyer.io/post/backblaze-vs-crashplan/backblaze-tuning_hu_86c3c67d60f89e8d.png 1024w"
+loading="lazy"
+alt="Backblaze tuning"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="301px"
+>&lt;/p>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>Based on the quite cheap price and speed of Backblaze I have been incredibly happy! I plan on staying with Backblaze for the foreseeable future!&lt;/p>
+&lt;p>If you want to sign up for Backblaze please use the link below!&lt;/p>
+&lt;p>&lt;a class="link" href="https://www.backblaze.com/cloud-backup.html#af9pku" target="_blank" rel="noopener"
+>Sign up for Backblaze&lt;/a>&lt;/p>
+&lt;p>Additionally Backblaze published a &lt;a class="link" href="https://www.backblaze.com/blog/crashplan-alternative-backup-solution/#af9pku" target="_blank" rel="noopener"
+>blog post&lt;/a> themselves on switching as well. I would encourage you to give that a read as well.&lt;/p>
+&lt;p>Please follow me on Twitter at &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a> and follow me on &lt;a class="link" href="https://www.youtube.com/channel/UCQb6E0NWy6kVglreLNigxng" target="_blank" rel="noopener"
+>Youtube&lt;/a>!&lt;/p></description></item></channel></rss>

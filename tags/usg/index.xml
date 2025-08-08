@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Usg on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/usg/</link><description>Recent content in Usg on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 01 Apr 2019 13:24:00 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/usg/index.xml" rel="self" type="application/rss+xml"/><item><title>Cross VLAN traffic with a USG and Apple Airplay</title><link>https://www.jeffsloyer.io/post/apple-airplay-usg/</link><pubDate>Mon, 01 Apr 2019 13:24:00 -0500</pubDate><guid>https://www.jeffsloyer.io/post/apple-airplay-usg/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-usg/wall.jpg" alt="Featured image of post Cross VLAN traffic with a USG and Apple Airplay" />&lt;h1 id="background">Background
+&lt;/h1>&lt;p>As a follow on from a &lt;a class="link" href="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports" >previous post&lt;/a> I discussed how I locked down VLAN&amp;rsquo;s from a IoT VLAN to my core data VLAN. In that post I described how I got my Sonos speakers and Sonos controller to work over locked down VLAN&amp;rsquo;s. I recently hooked up an old Apple Airport Express and music wouldn&amp;rsquo;t flow when I was on the data VLAN to the IoT VLAN where the Airport Express resided.&lt;/p>
+&lt;h1 id="instructions">Instructions
+&lt;/h1>&lt;p>If you followed my &lt;a class="link" href="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports" >previous blog post&lt;/a> it talked about how to lock down communications from the IoT VLAN to the data VLAN and allow pinholes through for Sonos. To get things working for Apple Airplay it was actually pretty easy. First you need to make sure you have mDNS turned on. To check this do the following.&lt;/p>
+&lt;ol>
+&lt;li>Goto settings in your controller&lt;/li>
+&lt;li>Goto the services tab on the left&lt;/li>
+&lt;li>Click MDNS at the top&lt;/li>
+&lt;li>Make sure the toggle is set to &lt;code>On&lt;/code>&lt;/li>
+&lt;li>Click apply changes&lt;/li>
+&lt;/ol>
+&lt;p>The next step is creating a single firewall rule. The rule that needs to be created is an allow rule that allows established/related traffic from your IoT VLAN (the VLAN that your Apple Airplay device is on) to the data VLAN (secure VLAN). See below for a screenshot.&lt;/p>
+&lt;p>This firewall rule should be created in the LAN_IN category.&lt;/p>
+&lt;p>&lt;a class="link" href="usg-apple-airplay-1.jpg" >&lt;img src="https://www.jeffsloyer.io/post/apple-airplay-usg/usg-apple-airplay-1.jpg"
+width="1414"
+height="1618"
+srcset="https://www.jeffsloyer.io/post/apple-airplay-usg/usg-apple-airplay-1_hu_ed73045ffef60c16.jpg 480w, https://www.jeffsloyer.io/post/apple-airplay-usg/usg-apple-airplay-1_hu_101d7513ee9e5a83.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="87"
+data-flex-basis="209px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;strong>Note:&lt;/strong> As with other allow rules this rule MUST go before your deny rules.&lt;/p>
+&lt;h1 id="credit">Credit
+&lt;/h1>&lt;p>&lt;a class="link" href="https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950" target="_blank" rel="noopener"
+>https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="https://community.ubnt.com/t5/UniFi-Routing-Switching/Airplay-across-VLAN-How-to-do/m-p/1966141/highlight/false#M48087" target="_blank" rel="noopener"
+>https://community.ubnt.com/t5/UniFi-Routing-Switching/Airplay-across-VLAN-How-to-do/m-p/1966141/highlight/false#M48087&lt;/a>&lt;/p></description></item><item><title>Firewall Ports for the Unifi USG and Sonos Speakers</title><link>https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</link><pubDate>Mon, 11 Feb 2019 13:24:00 -0500</pubDate><guid>https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/wall.jpg" alt="Featured image of post Firewall Ports for the Unifi USG and Sonos Speakers" />&lt;h1 id="background">Background
+&lt;/h1>&lt;p>At home I run the 4 port USG router on my Unifi&amp;rsquo;ed network. I have a couple different VLAN&amp;rsquo;s, Data, Management, Security, IoT, and Guest.
+Each of these networks already has some policies that prevent some of the VLAN&amp;rsquo;s talking to each other. For example I have some firewall rules that prevent my security cameras from talking to the IoT network and talking out to the public Internet. For the past couple months I haven&amp;rsquo;t been running a locked down IoT network. What this means for me is not allowing the IoT VLAN to talk to my Data and Management VLAN&amp;rsquo;s. This is a problem as all of my servers, my iPhone, and laptop are on the Data VLAN. When I turned on a firewall rule to block all traffic to the Data VLAN from the IoT VLAN my Sonos speakers stopped working. After lots of research and trial and error I got things working again. To get things working again you need to run a ICMP Proxy on your USG as well as turn on some additional firewall rules.&lt;/p>
+&lt;h1 id="icmp-proxy">ICMP Proxy
+&lt;/h1>&lt;p>The ICMP Proxy is probably the most important bit of all of this. The proxy will forward ICMP packets from one VLAN to another. This is crucial in getting Sonos to work on a multi-VLAN setup. For me the following configuration worked, I will walk through what needs to be changed for your setup.&lt;/p>
+&lt;p>&lt;strong>Notes&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>VLAN 2 is my Data VLAN (trusted)&lt;/li>
+&lt;li>VLAN 4 is my IoT VLAN (untrusted)&lt;/li>
+&lt;li>The config below is for a USG 4 Port. If you are running a 3 Port USG change &lt;code>eth0&lt;/code> to &lt;code>eth1&lt;/code>.&lt;/li>
+&lt;li>You will need to change the VLAN numbers twice below, for example &lt;code>eth0.2&lt;/code> and &lt;code>eth0.4&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;protocols&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;igmp-proxy&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;interface&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;eth0.2&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;alt-subnet&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;0.0.0.0/0&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;role&amp;#34;: &amp;#34;upstream&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;threshold&amp;#34;: &amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> },
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;eth0.4&amp;#34;: {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;alt-subnet&amp;#34;: [
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;0.0.0.0/0&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ],
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;role&amp;#34;: &amp;#34;downstream&amp;#34;,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &amp;#34;threshold&amp;#34;: &amp;#34;1&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The above snippet will need to go on your Unifi Controller. If you are on Linux it is located at &lt;code>/var/lib/unifi/sites&amp;lt;siteid&amp;gt;/config.gateway.json&lt;/code>. To get your site id open your web browser and log into your Unifi controller. The site id will be in the url. Make sure you are targheted to the correct site. For example a possible url could be &lt;code>https://10.1.1.1:8443/manage/site/fozvabde/devices/1/50&lt;/code>. In this case the site id is &lt;code>fozvabde&lt;/code>.&lt;/p>
+&lt;p>Once you have placed your eddited JSON snippet into &lt;code>/var/lib/unifi/sites&amp;lt;siteid&amp;gt;/config.gateway.json&lt;/code> login into your controller and navigate to the Devices tab. On that tab select the USG and then click on Config and then Manage Device. Here you will want to click on force provision. Doing this will write the above &lt;code>config.gateway.json&lt;/code> file to your USG and then turn on the ICMP Proxy. At this point check to make sure having a Sonos controller on your trusted VLAN can talk to your Sonos Speakers on your untrusted VLAN. If it doesn&amp;rsquo;t work check the &lt;code>config.gateway.json&lt;/code> file and make sure you have your interfaces and VLAN&amp;rsquo;s correct. If you can&amp;rsquo;t figure it out leave a comment below.&lt;/p>
+&lt;h1 id="firewall-rules">Firewall Rules
+&lt;/h1>&lt;p>Since we now have things working again we need to break things again. We need to block the traffic from the untrusted VLAN to the trusted VLAN.&lt;/p>
+&lt;h2 id="block-all-untrusted-traffic">Block all untrusted traffic
+&lt;/h2>&lt;p>&lt;a class="link" href="usg-sonos-1.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-1.jpg"
+width="1424"
+height="1628"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-1_hu_5a3e5c3ccdc82f81.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-1_hu_a342360c5b767b79.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="87"
+data-flex-basis="209px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-2.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-2.jpg"
+width="1146"
+height="428"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-2_hu_faf2aef95b46338a.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-2_hu_d8826396c12708f2.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="267"
+data-flex-basis="642px"
+>&lt;/a>&lt;/p>
+&lt;p>I have a group created for my untrusted VLAN&amp;rsquo;s, see below.&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-3.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-3.jpg"
+width="1686"
+height="858"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-3_hu_be2cb18a7ed99000.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-3_hu_6050d0a608c303b.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+>&lt;/a>&lt;/p>
+&lt;h2 id="allow-icmp-traffic">Allow ICMP Traffic
+&lt;/h2>&lt;p>Next we need to allow ICMP traffic from your untrusted VLAN to your trusted VLAN. See below.
+&lt;a class="link" href="usg-sonos-4.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-4.jpg"
+width="1472"
+height="1608"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-4_hu_18600f8fe84dc53f.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-4_hu_2c72de1778fc1fa0.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="91"
+data-flex-basis="219px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-5.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-5.jpg"
+width="1156"
+height="406"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-5_hu_9e80e77f01cd232e.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-5_hu_48904c58e6c56a7e.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="284"
+data-flex-basis="683px"
+>&lt;/a>&lt;/p>
+&lt;h2 id="allow-sonos-traffic">Allow Sonos Traffic
+&lt;/h2>&lt;p>Next wee need to allow Sonos traffic. To do this I created two port groups, one for UDP and one for TCP. each of them has a corresponding firewall rule.&lt;/p>
+&lt;h3 id="allow-sonos-tcp">Allow Sonos TCP
+&lt;/h3>&lt;p>I created a port group for my TCP traffic. See below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">SRC SONOS - DST STREAM-DEVICE - TCP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TCP-3401
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">TCP30000-60000
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="usg-sonos-6.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-6.jpg"
+width="1948"
+height="914"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-6_hu_836def85220756f3.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-6_hu_ea739eb71f3e40da.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="213"
+data-flex-basis="511px"
+>&lt;/a>&lt;/p>
+&lt;p>In the rule below you will notice there is a destination group as well in addition to the ports. I have added the IP&amp;rsquo;s of my Sonos speakers to a group so I can only open a couple pinholes for traffic instead of the whole VLAN. See below.&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-8.png" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-8.png"
+width="2112"
+height="1188"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-8_hu_4bd3aa9121cb70ed.png 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-8_hu_d918f13cac0b94ff.png 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-9.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-9.jpg"
+width="1446"
+height="1636"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-9_hu_37cb79e16912b75a.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-9_hu_bba1008c51c1d013.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="88"
+data-flex-basis="212px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-10.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-10.jpg"
+width="1266"
+height="342"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-10_hu_6a218a90cbc208de.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-10_hu_3ad817f738e46341.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="370"
+data-flex-basis="888px"
+>&lt;/a>&lt;/p>
+&lt;h3 id="allow-sonos-udp">Allow Sonos UDP
+&lt;/h3>&lt;p>I created a port group for my TCP traffic. See below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">SRC SONOS - DST STREAM-DEVICE - UDP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">UDP-1901
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">UDP30000-60000
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="usg-sonos-7.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-7.jpg"
+width="1930"
+height="830"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-7_hu_1636874e2f52e4c9.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-7_hu_d5ac6181bc1f11fa.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="232"
+data-flex-basis="558px"
+>&lt;/a>&lt;/p>
+&lt;p>I am using the same port group for the source as I did above for the IP&amp;rsquo;s of the Sonos speakers.&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-11.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-11.jpg"
+width="1550"
+height="1642"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-11_hu_6afd124fc9f2c478.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-11_hu_8a364c7e9481c6d0.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="94"
+data-flex-basis="226px"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-12.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-12.jpg"
+width="1218"
+height="430"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-12_hu_3df22e91c91c8e1d.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-12_hu_a6ff07484c78391a.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="283"
+data-flex-basis="679px"
+>&lt;/a>&lt;/p>
+&lt;h2 id="ordering-of-the-rules">Ordering of the rules
+&lt;/h2>&lt;p>The ordering of the firewall rules is extremely important. Make sure you have your allow rules before your deny rules. If not things will not work.&lt;/p>
+&lt;p>See below for my final set of rules.&lt;/p>
+&lt;p>&lt;a class="link" href="usg-sonos-13.jpg" >&lt;img src="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-13.jpg"
+width="2376"
+height="1526"
+srcset="https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-13_hu_8cabc6ce3d712f30.jpg 480w, https://www.jeffsloyer.io/post/sonos-usg-firewall-ports/usg-sonos-13_hu_52bf43486d0cc38e.jpg 1024w"
+loading="lazy"
+alt="usg screenshot from unifi"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="373px"
+>&lt;/a>&lt;/p>
+&lt;h1 id="credit">Credit
+&lt;/h1>&lt;p>&lt;a class="link" href="https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950" target="_blank" rel="noopener"
+>https://en.community.sonos.com/troubleshooting-228999/multiple-subnets-vlans-and-sonos-workable-clavister-solution-30950&lt;/a>&lt;/p></description></item></channel></rss>

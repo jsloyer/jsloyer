@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Themes on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/themes/</link><description>Recent content in Themes on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 Aug 2014 22:10:32 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/themes/index.xml" rel="self" type="application/rss+xml"/><item><title>Zero Downtime Deployments with Bluemix</title><link>https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</link><pubDate>Mon, 18 Aug 2014 22:10:32 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix/unplug.jpg" alt="Featured image of post Zero Downtime Deployments with Bluemix" />&lt;p>In Cloud Foundry (the open source technology behind Bluemix), when you do a &lt;code>cf push&lt;/code>, Cloud Foundry will actually stop your app and restart it with the new code that you just uploaded.  This presents an issue for a production app or any app that is actually serving users. There is a shortcoming with the current DEA (the part in Cloud Foundry that runs your app) but the next version of the DEA (&lt;a class="link" href="https://www.youtube.com/watch?v=1OkmVTFhfLY" target="_blank" rel="noopener"
+>Diego&lt;/a>) will help address this.  In the meantime you can do a little scripting to get around this.&lt;/p>
+&lt;p>The basic flow is as follows:&lt;/p>
+&lt;ol>
+&lt;li>App A is running (prod)&lt;/li>
+&lt;li>Deploy App B&lt;/li>
+&lt;li>Do some tests against App B&lt;/li>
+&lt;li>Map prod route to App B&lt;/li>
+&lt;li>Unmap prod route from App A&lt;/li>
+&lt;li>Stop App A&lt;/li>
+&lt;li>Delete App A&lt;/li>
+&lt;/ol>
+&lt;p>Here is some starter shell code to do it:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># deploy.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#!/bin/bash&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf unmap-route blue-app mybluemix.net -n cf-blue-green &lt;span class="c1"># make the app unavailable to requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf push blue-app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># wait for the blue app to start&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">while&lt;/span> true&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">RESP&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>curl -sIL -w &lt;span class="s2">&amp;#34;%{http_code}&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;blue-app.mybluemix.net&amp;#34;&lt;/span> -o /dev/null&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[[&lt;/span> &lt;span class="nv">$RESP&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;200&amp;#34;&lt;/span> &lt;span class="o">]]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">then&lt;/span> &lt;span class="nb">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span> sleep &lt;span class="m">3&lt;/span> &lt;span class="p">&amp;amp;&lt;/span>amp&lt;span class="p">;&amp;amp;&lt;/span>amp&lt;span class="p">;&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Waiting for 200 response&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># make the blue app available to the router&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf map-route blue-app mybluemix.net -n cf-blue-green
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># deploy to the green app&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf unmap-route green-app mybluemix.net -n cf-blue-green
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf push green-app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf app green-app
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf map-route green-app mybluemix.net -n cf-blue-green
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

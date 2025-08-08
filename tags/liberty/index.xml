@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Liberty on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/liberty/</link><description>Recent content in Liberty on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 24 Nov 2014 21:54:23 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/liberty/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying a Watson and Cloudant App with DevOps Services</title><link>https://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</link><pubDate>Mon, 24 Nov 2014 21:54:23 -0500</pubDate><guid>https://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/deploying-a-watson-and-cloudant-app-with-devops-services/devops.jpg" alt="Featured image of post Deploying a Watson and Cloudant App with DevOps Services" />&lt;p>Backed by popular demand this is a continuation of the post &lt;a class="link" href="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/" >Building a Java EE app on IBM Bluemix Using Watson and Cloudant&lt;/a>.&lt;/p>
+&lt;p>This post will detail how to build and deploy the app using &lt;a class="link" href="http://jazzhub.com" target="_blank" rel="noopener"
+>IBM DevOps Services.&lt;/a>&lt;/p>
+&lt;p>There is a bit of magic behind this, its called &amp;ldquo;The Deploy to Bluemix Button&amp;rdquo;&amp;hellip;&lt;/p>
+&lt;p>Clicking the magic button below will setup the app using IBM DevOps services and deploy the whole application for you.&lt;/p>
+&lt;p>&lt;a class="link" href="https://bluemix.net/deploy?repository=https://github.com/IBM-Bluemix/talent-manager.git" target="_blank" rel="noopener"
+>&lt;img src="https://deployment-tracker.mybluemix.net/stats/500deb1cbae77105c6d2ae42b50120cd/button.svg"
+loading="lazy"
+alt="Deploy to Bluemix"
+>&lt;/a>&lt;/p>
+&lt;p>So let&amp;rsquo;s talk about what this magic button does. The button is actually just a shortcut to setting up the deployment pipeline for you. What it does behind the covers is the following.&lt;/p>
+&lt;ol>
+&lt;li>Clones the git project&lt;/li>
+&lt;li>Configures the devops pipeline&lt;/li>
+&lt;li>Triggers the pipeline
+&lt;ol>
+&lt;li>Compiles the &lt;code>.war&lt;/code> file&lt;/li>
+&lt;li>Deploys the application To Bluemix&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>Isn&amp;rsquo;t that pretty cool? Well what are you waiting for, click the button above!&lt;/p></description></item></channel></rss>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Websockets on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/websockets/</link><description>Recent content in Websockets on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 24 Aug 2015 11:03:35 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/websockets/index.xml" rel="self" type="application/rss+xml"/><item><title>(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix</title><link>https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link><pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate><guid>https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor.jpg" alt="Featured image of post (Video) - Deploying your Meteor app to Cloud Foundry and Bluemix" />&lt;p>This is a follow up post to a previous post on &lt;a class="link" href="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/" >Deploying your Meteor app to Cloud Foundry and Bluemix.&lt;/a>  In this post we went through how to deploy a Meteor app to Cloud Foundry and Bluemix.  In this post we will be going through the same thing except in a video format.  Check out the video below.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/dyVmB8vHFaE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=).&lt;/p></description></item><item><title>Deploying your Meteor app to Cloud Foundry and Bluemix</title><link>https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link><pubDate>Wed, 05 Aug 2015 11:03:35 -0500</pubDate><guid>https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor.jpg" alt="Featured image of post Deploying your Meteor app to Cloud Foundry and Bluemix" />&lt;p>&lt;a class="link" href="meteor-logo.png" >&lt;img src="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor-logo.png"
+width="600"
+height="142"
+srcset="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor-logo_hu_d57525fbabf0753f.png 480w, https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor-logo_hu_ae8b5e4f60bf2df4.png 1024w"
+loading="lazy"
+alt="meteor-logo"
+class="gallery-image"
+data-flex-grow="422"
+data-flex-basis="1014px"
+>&lt;/a>Meteor is a pretty powerful and cool framework for developing modern webapps all in Javascript.  It provides some really cool things as a modern UI, responsive code that works on a desktop and a mobile device, and some really slick features with websockets with client and server side rendering.&lt;/p>
+&lt;p>I heard about Meteor mid-2014 but it peaked my interest last week when I was at a customer and a developer at the customer was building a Meteor app and they were asking how to run it on Bluemix.  Of course doing my job I helped the developer get the app running but it took a couple tweaks to the Cloud Foundry buildpack for Meteor.&lt;!-- more -->&lt;/p>
+&lt;p>You might be asking what a buildpack is, that&amp;rsquo;s totally fine.  In Cloud Foundry you can use basically any language you want for your app, all you need is some code to laydown the app server or middleware and compile your code together and install dependencies.  For Meteor there is a buildpack available but it was slighly out of date.&lt;/p>
+&lt;p>Last week and this week I committed some changes to the buildpack to make it more robust and compatible for newer Meteor apps.&lt;/p>
+&lt;p>The buildpack now will allow you to use your existing Meteor app and push it to Cloud Foundry and Bluemix.&lt;/p>
+&lt;p>For the rest of this blog post I am going to walk through on how to build an example Meteor app and push it to Bluemix.&lt;/p>
+&lt;h2 id="pre-reqs">Pre-req&amp;rsquo;s
+&lt;/h2>&lt;ul>
+&lt;li>Sign up for a &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-MeteorSample-_-Node-MongoLab-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> account.  Go &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-MeteorSample-_-Node-MongoLab-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> and click on Sign-up in the top right hand corner.&lt;/li>
+&lt;li>Meteor installed locally, go &lt;a class="link" href="https://www.meteor.com/install" target="_blank" rel="noopener"
+>Meteor install&lt;/a> to install Meteor&lt;/li>
+&lt;li>Cloud Foundry Command Line (CLI) installed, go &lt;a class="link" href="https://www.ng.bluemix.net/docs/#starters/install_cli.html" target="_blank" rel="noopener"
+>install CLI&lt;/a> for instructions&lt;/li>
+&lt;/ul>
+&lt;h2 id="steps">Steps
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Create a sample Meteor app, we are going to use the leaderboard example&lt;/p>
+&lt;pre>&lt;code> meteor create --example leaderboard
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Push the sample app to Bluemix. &lt;strong>Note&lt;/strong>, this command will not start the app, we will need to choose our database next. Also replace leaderboard with a unique name for your app, for example leaderboard-jbs (my intials).&lt;/p>
+&lt;pre>&lt;code> cf push leaderboard -b https://github.com/cloudfoundry-community/cf-meteor-buildpack.git --no-start
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to choose if we want to use the built on Mongo DB with Cloud Foundry or an external third party MongoLab. It honestly doesn&amp;rsquo;t matter too much but MongoLab is built for scale is more reliable, I would choose MongoLab myself.&lt;/p>
+&lt;p>&lt;strong>Built in MongoDB:&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Create the database.
+cf create-service mongodb 100 leaderboard-mongodb&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect the database to our app. Replace leaderboard with the name of your app (ex. leaderboard-jbs).&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard leaderboard-mongodb
+&lt;/code>&lt;/pre>
+&lt;p>would then become&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard-jbs leaderboard-mongodb
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>MongoLab:&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Create the database.
+cf create-service mongolab sandbox leaderboard-mongolab&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect the database to our app. Replace leaderboard with the name of your app (ex. leaderboard-jbs).&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard leaderboard-mongolab
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>would then become&lt;/p>
+&lt;pre>&lt;code> cf bind-service leaderboard-jbs leaderboard-mongolab
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Start the application. Replace leaderboard with the name of your app&lt;/p>
+&lt;pre>&lt;code> cf start leaderboard
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>Open up two web browsers and goto the same url, for me my URL would be &lt;a class="link" href="http://leaderboard-jbs.mybluemix.net" target="_blank" rel="noopener"
+>http://leaderboard-jbs.mybluemix.net&lt;/a>.  I got this url by putting the name of my app in front of mybluemix.net.&lt;/p>
+&lt;p>In the video below you can see when you choose a player and then click add 5 points the other browser is updated instantly.  The example app is saving this information in the Mongo database then using websockets to notify all the connected clients of the change.  This is one of the really powerful features of Meteor.&lt;/p>
+&lt;p>The work with the developer at the client last week has renewed my interest in Meteor and will have to dig into it more.&lt;/p>
+&lt;p>If you prefer to watch a video of this as well, check out Video – &lt;a class="link" href="https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/" >Deploying your Meteor app to Cloud Foundry and Bluemix&lt;/a>.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=).  There will also be a video forth coming as well.&lt;/p></description></item><item><title>Microservices in Bluemix</title><link>https://www.jeffsloyer.io/post/microservices-in-bluemix/</link><pubDate>Mon, 19 Jan 2015 09:34:18 -0500</pubDate><guid>https://www.jeffsloyer.io/post/microservices-in-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/microservices-in-bluemix/two-pizza.jpg" alt="Featured image of post Microservices in Bluemix" />&lt;p>Monolith apps are no more.  The age of the monolith is over.  It wasn’t that long ago that companies and developers (myself included) were deploying one giant app that did everything.  The app would serve all your static files, front-end HTML and CSS and Javascript, act as your REST API, serve as your data persistance tier, handles sessions, handle logins, and do security for your app.  The list could keep going on and on.  As the age of the code base progresses it gets more and more complicated and tangled and if a new feature needs to be developed or an old piece of code needs to be modified it takes a cross functional team of many different people to make it happen.&lt;/p>
+&lt;p>First we are going to talk about how a monolith app works, some of the positives and negatives and then we will talk about how things work in an app utilizing microserivces and the positivities and negatives associated with it.&lt;/p>
+&lt;!-- more -->
+&lt;h2 id="what-is-a-monolith">What is a Monolith?
+&lt;/h2>&lt;p>In a traditional monolith app you would have your basic three tier app consisting of a persistence layer, middleware tier/business logic, and front end code.  The advantage of this is there is just one application to manage and scale.  However the downside is that any change to any of the three tiers it requires cranking up the giant distributed team and pushing a new release.  For example, if Dave a front-end dev wanted and he wanted to change the color of a button, it would require the whole app to built, tested, and re-deployed for a tiny change.&lt;/p>
+&lt;p>This is quite wasteful over everyone’s time, dev’s from the persistence layer, business logic team, and front end team need to be involved.  This involves cutting a new release, running it through whatever QA/test phases there is and pushing it to production and hoping that nothing else got introduced or anyone else regressed some features.&lt;/p>
+&lt;p>Additionally, by having a monolith app the code base can become quite large and incredibly complex to maintain.  This is compounded exponentially as the age of an app grows.  Eventually, there is so much tangled and twisted code its hard to understand how things link together and work.  This is one of the hidden costs of a monolith app.&lt;/p>
+&lt;h2 id="microserviceadvantages">Microservice Advantages
+&lt;/h2>&lt;p>A microservice can be defined simply as &amp;ldquo;fine grained SOA&amp;rdquo; – Adrian Cockcroft, Netflix.  In a longer description it can be thought of a set of small services with known functionality communicating over a common lightweight API, either HTTP REST API’s or more recently a lightweight messaging protocol (more on this later).&lt;/p>
+&lt;blockquote>"Fine grained SOA" Adrian Cockcroft, Netflix&lt;/blockquote>
+&lt;p>Microservices provide a huge advantage for the case we talked about earlier where Dave our front-end dev wants to change the color of a button, no longer does the giant dev machine need to be involved.  Instead the UI layer is a separate service and changes can be made independent from other parts of the application.  The UI team can crank out as many releases as their heart desires.&lt;/p>
+&lt;h2 id="2-pizza-teams">2 Pizza Teams
+&lt;/h2>&lt;p>We aren’t talking about skimping on our employees and not feeding them enough at work, but we are instead talking about the size of the team.  Amazon first coined this term back in 2011.  It has been written about extensively and in such publications as the &lt;a class="link" href="http://www.wsj.com/articles/SB10001424052970203914304576627102996831200" target="_blank" rel="noopener"
+>Wall Street Journal&lt;/a>.  Basically what it boils down to is having each team small enough that you can feed them with 2 pizza’s.  So you might be asking what the importance of this is, let’s use our example of our front-end dev Dave again.  By Dave having a small team they can organize themselves efficiently and deliver functionality on their own instead of being tied to a giant release of the application.  A team doesn’t have to multiple people, it can actually be a team of just 1 but be sure to never violate the 2 pizza team rule though.&lt;/p>
+&lt;p>&lt;a class="link" href="two-pizza.jpg" >&lt;img src="https://www.jeffsloyer.io/post/microservices-in-bluemix/two-pizza.jpg"
+width="1000"
+height="667"
+srcset="https://www.jeffsloyer.io/post/microservices-in-bluemix/two-pizza_hu_7067633b1c28bdb6.jpg 480w, https://www.jeffsloyer.io/post/microservices-in-bluemix/two-pizza_hu_9e0e32752c41a8cc.jpg 1024w"
+loading="lazy"
+alt="two pizza 300x200 Microservices in Bluemix"
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="359px"
+>&lt;/a>&lt;/p>
+&lt;h2 id="i-wanna-go-fast-its-all-about-speed">I Wanna Go Fast (It’s All About Speed)
+&lt;/h2>&lt;p>As popularized by Talladega Nights, speed is king.  Who doesn’t want to go fast?  If you answered no to that you are probably going to get beaten by your competition and be left in the dust.  As the &lt;a class="link" href="http://www.thomaslfriedman.com/bookshelf/the-world-is-flat" target="_blank" rel="noopener"
+>world is being flattened&lt;/a> there is constantly new competition every day and dev team’s have to constantly be delivering to keep their product and company relevant.&lt;/p>
+&lt;p>So back to our example of  Dave our front-end dev again. Since Dave’s team has their own UI service they can constantly deliver changes and new features without having to wait for other team’s to deliver functionality.  Dave’s team can even deliver new UI code that is gated on some business logic code by using &lt;a class="link" href="https://codeascraft.com/2011/02/04/how-does-etsy-manage-development-and-operations/" target="_blank" rel="noopener"
+>feature flags&lt;/a> and &lt;a class="link" href="http://apptimize.com/blog/2014/01/etsy-continuous-innovation-ab-testing/" target="_blank" rel="noopener"
+>A/B testing&lt;/a> to selectively enable code and test new code out.  This allows Dave’s team to try out new ideas and if they don’t work they fail fast and pivot and change course.  By doing this Dave’s product and company stay relevant.&lt;/p>
+&lt;p>Again as Ricky Bobby from Talladega Nights would say, &amp;ldquo;if you aint first you’re last.&amp;rdquo;  When I saw the movie my mind obviously just went to car racing and sports but it can be extended to the IT industry as well.  If you aren’t first you probably aren’t relevant and someone else is beating you to market.  Eventually you could go out of business.&lt;/p>
+&lt;h2 id="devops-devops-devops">DevOps DevOps DevOps
+&lt;/h2>&lt;p>&lt;a class="link" href="devops-borat.jpg" >&lt;img src="https://www.jeffsloyer.io/post/microservices-in-bluemix/devops-borat.jpg"
+width="347"
+height="335"
+srcset="https://www.jeffsloyer.io/post/microservices-in-bluemix/devops-borat_hu_1346fd97b2ab58b7.jpg 480w, https://www.jeffsloyer.io/post/microservices-in-bluemix/devops-borat_hu_5f4210682ac1cea7.jpg 1024w"
+loading="lazy"
+alt="devops borat Microservices in Bluemix"
+class="gallery-image"
+data-flex-grow="103"
+data-flex-basis="248px"
+>&lt;/a>&amp;ldquo;To make error is human. To propagate error to all server in automatic way is &lt;a class="link" href="https://twitter.com/hashtag/devops?src=hash" target="_blank" rel="noopener"
+>#&lt;strong>devops&lt;/strong>&lt;/a>.&amp;rdquo; – &lt;a class="link" href="https://twitter.com/devops_borat" target="_blank" rel="noopener"
+>DevOps Borat&lt;/a>.  This &lt;a class="link" href="https://twitter.com/devops_borat/status/41587168870797312" target="_blank" rel="noopener"
+>quote&lt;/a> sums up why DevOps is important.  With each service being completely different architecture wise and language it is in it would be near impossible for a central &amp;ldquo;ops&amp;rdquo; team to manage all the apps.  Instead in microservices world each team is responsible for their own app.  You might be thinking that having dev’s manage a production service is bad and they won’t be responsive.  You are wrong, multiple companies have been doing this for years and it actually creates a sense of empowerment in the dev team.  Dev’s don’t want a call at 3am in the morning notifying them that their service is down.  In turn dev’s start taking more pride in their work and start thinking about decisions they make that will affect the availability of their service.  It creates a new mindset for people.&lt;/p>
+&lt;h2 id="let-the-devs-rule">Let the Dev’s rule
+&lt;/h2>&lt;p>Continuing on from above empowering dev’s is super important.  As a developer feels empowered they will make better decisions for their service they work on and thus end up making better decisions for the company.  When someone feels empowered they are putting their stamp of approval behind a product or feature and basically signing it with their name, code to them is a craft.&lt;/p>
+&lt;p>By embracing microservices and the de-centralized architecture it allows dev’s to innovate and come up with cool ideas and test them out.  If they don’t work that is ok, keep innovating and moving forward.  I am a photographer and in college someone once told me for every 10 pictures you take you will only get one good one.  The same can be said here as well, try, test, measure  (repeat). Obviously there is some science and planning put into this but the point is creating an environment to foster innovation.&lt;/p>
+&lt;h2 id="design-for-failure">Design for Failure
+&lt;/h2>&lt;p>When using microservices each service should be able to stand on its own and run by itself.  If it has outside dependencies it isn’t really a microservice.  Netflix is a prime example of this.  For example, if a service goes down that generates recommendations the whole site doesn’t break.  Other services keep functioning without the broken service.  In some cases, other services will know how to operate without the broken service.  Feature degradation or local caching can be used to prevent a break in the user experience.&lt;/p>
+&lt;p>This is designing for failure.  In the monolith world (which remember no longer exists) we would design and develop for the happy path and really never for the sad path.  By having a service based architecture we need to design and develop for the failure cases.  Some guy digging in his front yard could cut a piece of fiber and bring our monolith app to the ground.  By designing for a service not being there and allowing the product to continue to function is at utmost important.  In the monolith app dev’s sometimes would not think this way because everything is self contained by in a decentralized architecture you are forced to think about the failure case and how to handle it in a graceful way that doesn’t affect the user’s experience too much.&lt;/p>
+&lt;h2 id="immutable-code">Immutable Code
+&lt;/h2>&lt;p>Part of this thought of designing for failure is having immutable code.  When introducing new code you MUST not affect the functionality of previous code.  In a product that has a UI this is a little harder to do but can be done with feature flags and A/B testing but with an API based service changing the inputs and outputs of a service is a big no-no.  If you absolutely must do this at least have a deprecation period of N+2 or 3 to give customers and consumers of your service some advanced warning that changes are coming.  Ideally you wouldn’t deprecate an API, just revision your API, for example if you are using HTTP REST API’s just use &lt;code>/api/v1.0/&lt;/code> and for your next version &lt;code>/api/v1.1/&lt;/code> as a prefix.&lt;/p>
+&lt;h2 id="real-world-microservices-architecture">Real world Microservices architecture
+&lt;/h2>&lt;p>In the real world we would probably have a database, some business logic service (probably multiple of these), a UI service, our basic three tier app but this time disjoint from each other.  See below.
+The &amp;ldquo;glue&amp;rdquo; between the services is supposed to be something light-weight, you can use HTTP REST API’s but more recently there has been a move to a messaging based &amp;ldquo;glue&amp;rdquo;.  In particular like MQTT or AMQP.  This is great as it allows a service to be a &amp;ldquo;worker&amp;rdquo; or a client of another service, or in queuing terms, producers and consumers.&lt;/p>
+&lt;h2 id="how-to-use-bluemix-to-create-microservices">How to use Bluemix to create Microservices
+&lt;/h2>&lt;p>To demonstrate this real world example let’s talk about how this would work in Bluemix.  In Bluemix we can create a bunch of services, in case they will be in Node.js and the &amp;ldquo;glue&amp;rdquo; between our services will be MQLight.  An important point we should talk about here is the notion of producer/consumer (pub/sub) vs round-robin queuing.&lt;/p>
+&lt;p>For our example let’s say we have a service that is scaled out to 5 nodes (we must be really popular).  Each of these nodes is a worker for some business process, in this case let’s say sending a registration email.  When someone sign’s up for our site we want to send them a registration email, we don’t want each of the 5 nodes of our service emailing the person.  I would probably walk away from something if I got 5 duplicate registration emails.  In this case we want round-robin queuing.&lt;/p>
+&lt;p>However on the converse side there is cases where we want producer/consumer (pub/sub queuing).  This effectively means all 5 nodes of a service will receive the same message and respond.  Let’s say we have a UI service that is the front-end for a real time chat service.  If our application is scaled out to 5 nodes how can we properly propagate chat messages to all the connected clients.  The answer is allowing each front-end service to receive the same message to relay to all the clients.&lt;/p>
+&lt;p>&lt;a class="link" href="mqlight.jpg" >&lt;img src="https://www.jeffsloyer.io/post/microservices-in-bluemix/mqlight.jpg"
+width="152"
+height="172"
+srcset="https://www.jeffsloyer.io/post/microservices-in-bluemix/mqlight_hu_50572d322f66d781.jpg 480w, https://www.jeffsloyer.io/post/microservices-in-bluemix/mqlight_hu_f9b2d8ee244c2042.jpg 1024w"
+loading="lazy"
+alt="mqlight Microservices in Bluemix"
+class="gallery-image"
+data-flex-grow="88"
+data-flex-basis="212px"
+>&lt;/a>When architecting your microservices you need to keep queuing in mind and how clients and services communicate with each other.  Make sure you choose a queuing technology that supports your desired behavior of pub/sub or round-robin.&lt;/p>
+&lt;p>So where does this leave us in Bluemix?  MQLight, with MQLight you can easily do pub/sub and round-robin with the same service provider.  This is great because as the developer I don’t have to use two different messaging providers.&lt;/p>
+&lt;h2 id="example-app-in-bluemix">Example App in Bluemix
+&lt;/h2>&lt;p>So let’s build something to demonstrate all of this.  The example app we will be building contains a front-end service that allows users to enter text and another service that will convert it to upper case.  While this is not a real world example it demonstrates microservices using backend workers.&lt;/p>
+&lt;p>A real world example might be  an image processing app that applies a sexy filter to an image it and then uploads it to Instagram.  If we did this we could break this up into three services.  A web service that accepts an image over http(s), our sexy filter engine (maybe imagemagick), then a service that uploads the image to our social media network of choice.&lt;/p>
+&lt;p>So back to our example app of converting text to uppercase.  The UI is below, our UI doesn’t lock when we submit data and we can keep using it.  As results are finished processing in our &amp;ldquo;text uppercase&amp;rdquo; service, results are delivered real time to our front-end service.&lt;/p>
+&lt;p>&lt;a class="link" href="sample_screenshot.png" >&lt;img src="https://www.jeffsloyer.io/post/microservices-in-bluemix/sample_screenshot.png"
+width="850"
+height="665"
+srcset="https://www.jeffsloyer.io/post/microservices-in-bluemix/sample_screenshot_hu_1a4a74cf507bffba.png 480w, https://www.jeffsloyer.io/post/microservices-in-bluemix/sample_screenshot_hu_9199b12fd7aeb75d.png 1024w"
+loading="lazy"
+alt="sample screenshot Microservices in Bluemix"
+class="gallery-image"
+data-flex-grow="127"
+data-flex-basis="306px"
+>&lt;/a>&lt;/p>
+&lt;p>To make this seem more world the example code introduces some timeouts/waits to make it seem like some backend processing is going on in a microservice.  To get this running follow the following steps.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl"> &lt;span class="n">git&lt;/span> &lt;span class="n">clone&lt;/span> &lt;span class="n">https&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="o">//&lt;/span>&lt;span class="n">hub&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">jazz&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">net&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">git&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">ibmmq&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mqlight&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">worker&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">offload&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sample&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">node&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cf&lt;/span> &lt;span class="n">create&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">service&lt;/span> &lt;span class="n">MQLight&lt;/span> &lt;span class="n">standard&lt;/span> &lt;span class="n">MQLight&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sampleservice&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cf&lt;/span> &lt;span class="n">push&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>What the above does is checkout some example code that contains a front-end service and a back-end service that does our &amp;ldquo;text uppercasing&amp;rdquo; and creates a QLight to provide the messaging between our two services.&lt;/p>
+&lt;p>Once the cf push command is done running (it might take a bit) we should see something like the following saying our apps are up.&lt;/p>
+&lt;p>Text processing service:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">Showing&lt;/span> &lt;span class="n">health&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">status&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="n">MQL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sample&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">backend&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">org&lt;/span> &lt;span class="n">jbsloyer&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">us&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ibm&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">space&lt;/span> &lt;span class="n">demos&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">jbsloyer&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">us&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ibm&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">OK&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">requested&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">started&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">instances&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">usage&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">256&lt;/span>&lt;span class="n">M&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="mi">2&lt;/span> &lt;span class="n">instances&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">urls&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">last&lt;/span> &lt;span class="n">uploaded&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Mon&lt;/span> &lt;span class="n">Jan&lt;/span> &lt;span class="mi">19&lt;/span> &lt;span class="mi">18&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">52&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">05&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="mi">0000&lt;/span> &lt;span class="mi">2015&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">state&lt;/span> &lt;span class="n">since&lt;/span> &lt;span class="n">cpu&lt;/span> &lt;span class="n">memory&lt;/span> &lt;span class="n">disk&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#0 running 2015-01-19 01:53:08 PM 0.0% 11.8M of 256M 75.8M of 1G&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#1 running 2015-01-19 01:53:05 PM 0.0% 11.5M of 256M 75.8M of 1G&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Front&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">end&lt;/span> &lt;span class="n">service&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Showing&lt;/span> &lt;span class="n">health&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">status&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">app&lt;/span> &lt;span class="n">MQL&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sample&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">frontend&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">org&lt;/span> &lt;span class="n">jbsloyer&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">us&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ibm&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="n">space&lt;/span> &lt;span class="n">demos&lt;/span> &lt;span class="n">as&lt;/span> &lt;span class="n">jbsloyer&lt;/span>&lt;span class="err">@&lt;/span>&lt;span class="n">us&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ibm&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">OK&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">requested&lt;/span> &lt;span class="n">state&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">started&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">instances&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">usage&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mi">512&lt;/span>&lt;span class="n">M&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="n">instances&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">urls&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">mqlightsample&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">undeputed&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">trierarch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mybluemix&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">net&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">last&lt;/span> &lt;span class="n">uploaded&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Mon&lt;/span> &lt;span class="n">Jan&lt;/span> &lt;span class="mi">19&lt;/span> &lt;span class="mi">18&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">53&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="mi">16&lt;/span> &lt;span class="o">+&lt;/span>&lt;span class="mi">0000&lt;/span> &lt;span class="mi">2015&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">state&lt;/span> &lt;span class="n">since&lt;/span> &lt;span class="n">cpu&lt;/span> &lt;span class="n">memory&lt;/span> &lt;span class="n">disk&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#0 running 2015-01-19 01:54:20 PM 0.0% 24.3M of 512M 78.7M of 1G&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>So let’s checkout the app, I have recorded a short video of it working.  If you notice the text service is simulating things like a real world service might respond with results coming back as they finish being processed.&lt;/p>
+&lt;h2 id="stay-tuned">Stay Tuned!!!
+&lt;/h2>&lt;p>There will be some real world examples coming on how to use microservices in Bluemix since now we have a foundation on what microserivces are.  Please stay tuned and follow me on Twitter at &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a> for some real world apps!&lt;/p>
+&lt;h2 id="webcastplayback">Webcast playback
+&lt;/h2>&lt;p>The replay of the webcast is available at &lt;a class="link" href="http://ibm.biz/BlmxMicroservices-Blog" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/p></description></item></channel></rss>

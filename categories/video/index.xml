@@ -1,0 +1,1560 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Video on Jeff Sloyer</title><link>https://www.jeffsloyer.io/categories/video/</link><description>Recent content in Video on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 26 Aug 2015 11:17:31 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/categories/video/index.xml" rel="self" type="application/rss+xml"/><item><title>Fixing common errors with the PHP Buildpack in Bluemix</title><link>https://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</link><pubDate>Wed, 26 Aug 2015 11:17:31 -0500</pubDate><guid>https://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/fedup.jpg" alt="Featured image of post Fixing common errors with the PHP Buildpack in Bluemix" />&lt;p>Following up from my &lt;a class="link" href="https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/" >previous post&lt;/a>, Canonical recently dropped support for &lt;code>lucid64&lt;/code> which is Ubuntu 10.04 LTS. This affects Cloud Foundry as &lt;code>lucid64&lt;/code> is the basis for most buildpacks. In Cloud Foundry &lt;code>lucid64&lt;/code> is being phased out for Ubuntu 14.04 LTS which is known as &lt;code>cflinuxfs2&lt;/code> in Cloud Foundry.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Getting stacks in org jbsloyer@us.ibm.com / space dev as jbsloyer@us.ibm.com...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OK
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">name description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">lucid64 Ubuntu 10.04
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cflinuxfs2 Ubuntu 14.04.2 trusty
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The PHP buildpack will take the default system buildpack and right now in Bluemix it is &lt;code>lucid64&lt;/code>. This will throw some errors when you try to push your PHP app, for example something like below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">It looks like you&amp;#39;re deploying on a stack (currently set to *lucid64*) that&amp;#39;s not supported by this buildpack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">That could be because you&amp;#39;re using a recent buildpack release on a deprecated stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you&amp;#39;re using the buildpack installed by your CF admin, please let your admin know you saw this error message.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you at one point specified a buildpack that&amp;#39;s at git URL, please make sure you&amp;#39;re pointed at a version that supports this stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Staging failed: Buildpack compilation step failed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FAILED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BuildpackCompileFailed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To fix it you just need to use the &lt;code>-s cflinuxfs2&lt;/code> argument for the &lt;code>cf push&lt;/code> command.
+Ex.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push myapp -b https://github.com/cloudfoundry/php-buildpack.git -s cflinuxfs2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Check out this video for a walk through on how to fix the issue and an explanation of it.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/anJ1JUE1tgE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p></description></item><item><title>(Video) - Deploying your Meteor app to Cloud Foundry and Bluemix</title><link>https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</link><pubDate>Mon, 24 Aug 2015 11:03:35 -0500</pubDate><guid>https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/video-deploying-your-meteor-app-to-cloud-foundry-and-bluemix/meteor.jpg" alt="Featured image of post (Video) - Deploying your Meteor app to Cloud Foundry and Bluemix" />&lt;p>This is a follow up post to a previous post on &lt;a class="link" href="https://www.jeffsloyer.io/post/deploying-your-meteor-app-to-cloud-foundry-and-bluemix/" >Deploying your Meteor app to Cloud Foundry and Bluemix.&lt;/a>  In this post we went through how to deploy a Meteor app to Cloud Foundry and Bluemix.  In this post we will be going through the same thing except in a video format.  Check out the video below.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/dyVmB8vHFaE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=).&lt;/p></description></item><item><title>Zero Downtime Deployment with the CF Autopilot Plugin - Video</title><link>https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</link><pubDate>Wed, 01 Jul 2015 10:51:49 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/unplug.jpg" alt="Featured image of post Zero Downtime Deployment with the CF Autopilot Plugin - Video" />&lt;p>I recently wrote a &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >blog post &lt;/a>on what a zero downtime deployment is, why it is important, and how to perform one. I am now posting a video on the same topic so you can learn about a zero downtime deployment by watching a video instead.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/y4zor2y-yck" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>If you prefer the tutorial and text instructions please check out &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/" >Zero Downtime Deployment with the CF Autopilot Plugin&lt;/a>.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p></description></item><item><title>Personality Box – You had me at upload</title><link>https://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</link><pubDate>Mon, 29 Jun 2015 10:46:59 -0500</pubDate><guid>https://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/personality-box-you-had-me-at-upload/box.png" alt="Featured image of post Personality Box – You had me at upload" />&lt;p>As &lt;a class="link" href="http://www-03.ibm.com/press/us/en/pressrelease/47185.wss" target="_blank" rel="noopener"
+>announced yesterday&lt;/a>, IBM has formed a partnership with &lt;a class="link" href="http://Box.com" target="_blank" rel="noopener"
+>Box.com&lt;/a>, a partnership that includes the integration of Box into the Bluemix catalog. With its REST-based Content and View APIs, embedding enterprise-grade file storage into your app and enabling file sharing among your users has never been simpler.&lt;/p>
+&lt;p>To help you on your way to becoming a file-sharing guru, Bluemix developer advocate Jake Peyser and I have built a sample app that you can leverage as you begin to explore the possibilities of the &lt;a class="link" href="http://box.com" target="_blank" rel="noopener"
+>Box.com&lt;/a> APIs.&lt;!-- more --> The video below shows the application and outlines the steps to create it:&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/KPT7ttRRpr4" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>If you want to follow &lt;em>written&lt;/em> step-by-step instructions on how we leveraged the &lt;a class="link" href="http://box.com" target="_blank" rel="noopener"
+>Box.com&lt;/a> and Watson Personality Insights services to create our app, see &lt;a class="link" href="https://developer.ibm.com/bluemix/2015/06/24/intro-to-box/" target="_blank" rel="noopener"
+>Integrate Cloud File Storage and Sharing into your Bluemix App with Box&lt;/a>. We encourage you to pick up where we left off and build on this sample!&lt;/p></description></item><item><title>Zero Downtime Deployment with the CF Autopilot Plugin</title><link>https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</link><pubDate>Fri, 19 Jun 2015 10:41:59 -0500</pubDate><guid>https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/unplug.jpg" alt="Featured image of post Zero Downtime Deployment with the CF Autopilot Plugin" />&lt;p>Zero down time deployments are a must for any Internet app running at scale.  Without the use of zero down time deployments, you would have to take down your application even just for a fraction of a second but in that fraction of a second you could lose a transaction or a purchase from a customer.  This is not acceptable anymore.  Some people like to call these apps cloud based apps, which I think is fine, but I’d rather call them Internet scale or born on the cloud apps.  The companies who create these apps understand the apps’s need to stay up, because their app is their only lifeline and, hopefully, a source of income from the world.&lt;/p>
+&lt;p>Companies such as Facebook, Etsy, and Twitter have been using zero down time deployments for years.  They thrive because they do multiple deployments to production a day.  The number of deployments they do in one day is actually larger than most enterprise companies do in a full year.  Part of the trick is that the code changes are small but they have employed strategies such as zero down time deployments to get code into production as fast as they can.&lt;/p>
+&lt;!-- more -->
+&lt;h2 id="ground-rules">Ground Rules…
+&lt;/h2>&lt;p>There are many names for this, zero down time deployments, obviously, but some people use the term blue/green, while others use the term red/back.  They all mean the same thing.  Instead of having a bias for colors in this post lets use the term “zero down time”.&lt;/p>
+&lt;p>So what is it?&lt;/p>
+&lt;p>Zero Down time deployments are basically what they sound like.  You update production without taking downtime.  It’s not always that simple though.  For the context of this post we are going to be talking about how to do zero down time deployments in Cloud Foundry.&lt;/p>
+&lt;p>Basically it’s a little trick to taking advantage of the way Cloud Foundry runs underneath the covers.  Before we jump into it, there are a couple of caveats that we should discuss first.  To successfully take advantage of zero down time deployments you should have followed the &lt;a class="link" href="http://12factor.net/" target="_blank" rel="noopener"
+>12 Factor App guidelines&lt;/a>. This will ensure that your app is horizontally scalable and can be deployed in a manner that will result in zero down time.  Below are some highlights that you should abide by.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Do not store sessions on disk or in memory.  Store them in some type of shared database or file system.  This could be your favorite database or an in memory database as well.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Do not store configuration information in your application or on disk.  You should store your config info for your app in environment variables.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This is probably the most important, your application needs to be forward and backwards compatible with your database schema…  Say what?  Yes, you need to trust your developers to manage the database schema from your code.If you are using a relational database, you will need some kind of framework to do database migrations for you.  It’s not just that simple with relational databases though…  If you have a big database migration DO NOT PERORM MIGRATIONS THAT WILL INTERRUPT TRAFFIC!  Perform them slowly over time where migrations do not impact users and traffic.  Yahoo had a major application upgrade and it took them 6 months to do the migration to avoid impacting users and taking an outage.  Remember we do not take outages…  If you are in NoSQL land, your life is easier.  Just revision your API’s and educate your developers on forward and backwards data compatibility.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="importance-of-zero-down-time-deployments">Importance of Zero Down Time Deployments
+&lt;/h2>&lt;p>So why are zero down time deployments so important?  The answer is simple, to keep your website/app up so you can make money!  Well that might be over-simplified a bit, but basically it all boils down to keeping your app up so you can continue to do what you do best, and hopefully that involves making money.  If you look at Facebook, for example, they put code into production weeks and months before a feature is exposed to the public.  They extensively test the features on employees first, then slowly enable the features to the rest of the world.&lt;/p>
+&lt;p>This is key, getting features in front of your customers and getting feedback from them.  If it works that’s great, but if it doesn’t at least you know in a short time frame so you can remove it and pivot to go in a different direction.  The current landscape is so fast paced that if you don’t get a feature out, your competition could beat you.&lt;/p>
+&lt;h2 id="how-does-it-work">How does it work?
+&lt;/h2>&lt;p>So let’s walk through what needs to happen to perform zero downtime deployments in Cloud Foundry.  For the use of the walk-through, the application is currently taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Deploy your app or use a currently running app.
+Currently your application is taking traffic on &lt;code>myapp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.001.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001_hu_67a6719a618981e5.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.001_hu_9cf09c6100caf55a.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.001 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Deploy the new version of your app to &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+At this time there is currently two versions of your app running.  &lt;code>myapp.mybluemix.net&lt;/code> is still taking production traffic.
+The new app &lt;code>myapp-temp.mybluemix.net&lt;/code> is separate, it can be pointed to your production API keys and databases at this point.
+&lt;a class="link" href="zero-downtime-graphics.002.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002_hu_eb1fe4ca1db1eba1.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.002_hu_f8db8cd111c0f3e7.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.002 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Perform smoke tests on the new version of the application.
+Some people say this step is optional, but to me its not.  This is key to make sure there wasn’t any weird regressions or merge issues, they CAN happen…&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Map production traffic to the new version of your app.
+At this point the old version of your app and the new version are both taking production traffic.
+&lt;a class="link" href="zero-downtime-graphics.003.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003_hu_63c6b419a410167d.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.003_hu_17ea991aa50404ca.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.003 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unmap production traffic from the old version of the app.  You can optionally delete the old version as well.
+At this point the new version becomes production and ONLY it is taking traffic.
+The new version still has two URL’s though, &lt;code>myapp.mybluemix.net&lt;/code> and &lt;code>myapp-temp.mybluemix.net&lt;/code>.
+&lt;a class="link" href="zero-downtime-graphics.004.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004_hu_19326b037542fa88.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.004_hu_49e08d9f24a6dbc1.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.004 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remove the temporary route &lt;code>myapp-temp.mybluemix.net&lt;/code> from the new version of your app.
+&lt;a class="link" href="zero-downtime-graphics.005.png" >&lt;img src="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005.png"
+width="1024"
+height="768"
+srcset="https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005_hu_679aa03b0584be84.png 480w, https://www.jeffsloyer.io/post/zero-down-time-deploys-with-the-cf-autopilot-plugin/zero-downtime-graphics.005_hu_669e628ff6813144.png 1024w"
+loading="lazy"
+alt="zero downtime graphics.005 Zero Down Time Deploys with the CF Autopilot Plugin"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>While this can be scripted there really isn’t a need to do that, there is a Cloud Foundry CLI plugin to do this.&lt;/p>
+&lt;h2 id="autopilot-plugin">Autopilot plugin
+&lt;/h2>&lt;p>Recently the Cloud Foundry CLI started supporting plugins.  This is the holy grail for CF and you can start doing some fun stuff.  In this case, the fun stuff is automating the complex, possibly human error-prone, steps above.  As a dev, if I can automate something and reduce the chance of something going wrong, I am all in.  If you do this, your IT/operations department will love you.&lt;/p>
+&lt;p>&lt;a class="link" href="https://github.com/concourse/autopilot" target="_blank" rel="noopener"
+>The plugin&lt;/a> performs the above steps for you for performing the zero downtime deployment.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Ensure you have a &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-AutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a> account, if you do not sign up &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-AutoPilotPlugin-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install dependencies.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>1. Golang installed ([instructions](https://golang.org/doc/install))
+2. Version 6.7.0 or greater of the Cloud Foundry CLI
+To check what version you have running, run `cf -v` in your terminal.
+[01:36 PM] jsloyer@jeffs-mbp-2 [~]&amp;gt;cf -v
+cf version 6.8.0-b15c536-2014-12-10T23:34:29+00:00
+To upgrade go [here](https://github.com/cloudfoundry/cli/releases).
+&lt;/code>&lt;/pre>
+&lt;ol start="3">
+&lt;li>
+&lt;p>Ensure you have an app running/already deployed.  The plugin requires that you have an app already deployed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Run the following.  I will describe what each line is doing.&lt;/p>
+&lt;p>go get github.com/concourse/autopilot
+cf install-plugin $GOPATH/bin/autopilot
+cf login -a ${CF_API} -u ${CF_USERNAME} -p ${CF_PASSWORD} -o ${CF_ORG} -s ${CF_SPACE}
+cf zero-downtime-push myapp -f manifest.yml&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>Line 1 fetches the source code for the plugin.
+Line 2 installs the plugin
+Line 3 logins into Bluemix.  I have the sensitive information replace with environment variables.
+Line 4 performs the zero down time deployment.
+&lt;/code>&lt;/pre>
+&lt;p>The plugin does require a &lt;code>manifest.yml&lt;/code>.  The plugin basically views the &lt;code>manifest.yml&lt;/code> files as the truth of the state of the application.&lt;/p>
+&lt;h2 id="extensions-with-ci-pipelines">Extensions with CI Pipelines
+&lt;/h2>&lt;p>This will be forthcoming in an upcoming blog post on how to use some of the most popular CI engines out there.&lt;/p>
+&lt;h2 id="recap">Recap
+&lt;/h2>&lt;p>Just to review what we did here, we learned what zero down time deployments are, why they are crucial to any Internet scale application, and how to perform a zero down time deployment.  Then, we took it a step further on how to use a Cloud Foundry plugin to do the heavy lifting for us and automate the zero down time deployment.&lt;/p>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p>
+&lt;h2 id="video">Video
+&lt;/h2>&lt;p>I have also published a video if you prefer to watch that instead, please check out &lt;a class="link" href="https://www.jeffsloyer.io/post/zero-downtime-deployment-with-the-cf-autopilot-plugin-video/" >Zero Downtime Deployment with the CF Autopilot Plugin – Video.&lt;/a>&lt;/p>
+&lt;h2 id="additional-parts">Additional part&amp;rsquo;s
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/zero-downtime-deployments-with-bluemix-and-codeship/" >Zero downtime deployments with Bluemix and Codeship&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>IoT Python app with a Raspberry Pi and Bluemix</title><link>https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</link><pubDate>Thu, 02 Apr 2015 10:29:53 -0500</pubDate><guid>https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/iot-pi.jpg" alt="Featured image of post IoT Python app with a Raspberry Pi and Bluemix" />&lt;p>This is an extension/continuation from the blog post on how to create a &lt;a class="link" href="https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/" >basic Python webapp&lt;/a>.  In this tutorial we are going to go through how to integrate a Python Flask webapp in Bluemix with the &lt;a class="link" href="https://internetofthings.ibmcloud.com/" target="_blank" rel="noopener"
+>Internet of Things Foundation&lt;/a> in Bluemix with a Raspberry Pi and two sensors on the Raspberry Pi.  The tutorial also uses Twilio to interact with the Raspberry Pi.&lt;/p>
+&lt;p>So what does this look like?  Here is a simple architecture diagram.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/raspberrypidiagram.png"
+width="1733"
+height="1135"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/raspberrypidiagram_hu_b8d126391b66e46f.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/raspberrypidiagram_hu_7ea4d030be7309b.png 1024w"
+loading="lazy"
+alt="raspberrypidiagram IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="152"
+data-flex-basis="366px"
+>&lt;/p>
+&lt;!-- more -->
+&lt;p>In the above diagram there is two flows:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The first flow involves pressing a HTML button in the Python Flask app in Bluemix to either turn on or off an LED on the Raspberry Pi.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The second flow involves pressing a physical button on the breadboard on the Raspberry Pi and using the IoT service in Bluemix and our app in Bluemix it will send a text message of our choosing to a phone number we enter in the Python Flask app in Bluemix using Twilio.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>This all took only about 100 lines of code, pretty cool huh?&lt;/p>
+&lt;p>If you prefer to watch a video of this instead of going through the written steps in this tutorial, check out the video below.&lt;/p>
+&lt;h2 id="setup">Setup
+&lt;/h2>&lt;p>There is two parts to setting this up.  If we take a look at the architecture diagram above we see that there is a Raspberry Pi piece and then a Bluemix piece.  We are going to go through the Raspberry Pi piece first then we will go through the Bluemix piece.&lt;/p>
+&lt;h2 id="raspberry-pi-setup-steps">Raspberry Pi Setup Steps
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Sign up for a Bluemix account, visit &lt;a class="link" href="http://bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp" target="_blank" rel="noopener"
+>http://bluemix.net&lt;/a> in your web browser and click “Sign-up” in the top right.  We require a couple bits of information&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Wait for an email to arrive, it should only take a couple minutes.  There should be a link in the email that says “Click here to complete your registration”, click that.  Sign in with the username and password you created from step 1.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Obtain a Raspberry Pi, a bread board, wires, a LED, and a button  (your best bet is getting a starter kit such as the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>Canakit&lt;/a>)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Place an LED in the breadboard (place the shorter side to the left)&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/led.png"
+width="2554"
+height="1306"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/led_hu_749bc4504e3b5cc6.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/led_hu_4471df89387d8785.png 1024w"
+loading="lazy"
+alt="led IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="469px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Place a 220 ohm resistor in the breadboard connecting the short side (the left side of the LED) to the ground rail (the rail with the – sign).  Make sure to place the side of the resistor with the red stripes closest to the LED_NOTE:_ The way the breadboard works is connections run vertically not horizontally&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/resistor.png"
+width="2560"
+height="1290"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/resistor_hu_120786989cc9512e.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/resistor_hu_24cd22be088cca61.png 1024w"
+loading="lazy"
+alt="resistor IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect a wire from the ground rail to the GND on the pinout board&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/ground.png"
+width="2550"
+height="1249"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/ground_hu_79ad35a9de1a948.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/ground_hu_96202a92d48757b1.png 1024w"
+loading="lazy"
+alt="ground IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="489px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the right side of the LED, connect a wire to the the port labeled 17.&lt;strong>NOTE:&lt;/strong> The way the breadboard works is connections run vertically not horizontally.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio17.png"
+width="2555"
+height="1297"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio17_hu_dc3ca2a2afad3c5e.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio17_hu_a296772ce5d30e4c.png 1024w"
+loading="lazy"
+alt="gpio17 IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="472px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Place the button in the breadboard, it takes a bit of force to press it in all the way.  It won’t break it.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/button.png"
+width="2551"
+height="1309"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/button_hu_a5fd50e46fdcb725.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/button_hu_7ec726de74ff3cce.png 1024w"
+loading="lazy"
+alt="button IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="194"
+data-flex-basis="467px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect a wire from the right side of the button to the ground rail.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttonground.png"
+width="2571"
+height="1308"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttonground_hu_af4c512b0d95dbf3.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttonground_hu_f859855800145f1b.png 1024w"
+loading="lazy"
+alt="buttonground IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Connect a wire from the ground rail to a GND port, it doesn’t matter which one it is&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttongroundrail.png"
+width="2036"
+height="1438"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttongroundrail_hu_7b138b6945318671.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/buttongroundrail_hu_ec70a82753480480.png 1024w"
+loading="lazy"
+alt="buttongroundrail IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="339px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Lastly, connect a wire from the left side of the button to GPIO port 18.&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio18.png"
+width="2036"
+height="1438"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio18_hu_7b138b6945318671.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/gpio18_hu_ec70a82753480480.png 1024w"
+loading="lazy"
+alt="gpio18 IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="339px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to either use the console for our Raspberry Pi and the terminal application on the device itself or use SSH.  I am going to use SSH.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To get the IP address of your Raspberry Pi the easiest thing is to open up the terminal app on the Raspberry Pi, it is under accessories -&amp;gt; Terminal&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Type &lt;code>ifconfig&lt;/code>..  If you are connected over Ethernet the IP address will be under eth0, if you are connected over wifi, the IP address will be under wlan0&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to ssh into the device.—Windows, download Putty and use that to connect to the IP address—Mac and Linux, open the Terminal app, type &lt;code>ssh pi@myipaddress&lt;/code> where myipaddress is the IP address of the Raspberry Pi, ex. &lt;code>192.168.1.65&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The password is raspberrypi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to run some commands to update our Raspberry Pi, run the following.  It will ask you to confirm with the “Y” key&lt;/p>
+&lt;p>sudo apt-get update
+sudo-apt-get upgrade&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to install a helper library for using GPIO&lt;/p>
+&lt;p>git clone git://git.drogon.net/wiringPi
+cd wiringPi
+./build&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to install the IoT library on the Raspberry Pi&lt;/p>
+&lt;p>curl -LO &lt;a class="link" href="https://github.com/ibm-messaging/iot-raspberrypi/releases/download/1.0.2/iot_1.0-1_armhf.deb" target="_blank" rel="noopener"
+>https://github.com/ibm-messaging/iot-raspberrypi/releases/download/1.0.2/iot_1.0-1_armhf.deb&lt;/a>
+sudo dpkg -i iot_1.0-1_armf.deb&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to get the device ID of our raspberry Pi do this run the following and save the output&lt;/p>
+&lt;p>service iot getdeviceid
+#example output
+The device id is b827eba5b236&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>We will want to copy the id `b827eba5b236`, yours obviously will be different
+&lt;/code>&lt;/pre>
+&lt;ol start="21">
+&lt;li>
+&lt;p>Open up a web browser and goto &lt;a class="link" href="http://bluemix.net/" target="_blank" rel="noopener"
+>bluemix.net&lt;/a>, and click on “Catalog” in the top.  Scroll down to the very bottom and click “Internet of Things”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Give the service a name, use iot-python (you must do this exactly or later things won’t work), for App choose “Leave unbound”, click “Create”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the left of the next page click “Launch dashboard”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At the top click on “Devices”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click “Add Device”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For the second field (it says e.g. mydevice type) type in exactly &lt;code>raspberrypi&lt;/code> (you need to have it spelled like this or there will be issues).  For device ID paste in the device ID we got from step 20, mine is &lt;code>b827ba5b236&lt;/code>.  Click continue.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>On the next page it will show something like below, copy this and switch back to terminal on your Raspberry Pi.&lt;/p>
+&lt;p>org=pwftki
+type=raspberrypi
+id=000000000000
+auth-method=token
+auth-token=cXQaGx8o!a9HwxM-ka&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Choose your favorite text editor but I am going to use vi.  Type the following to open the file we want to edit.&lt;/p>
+&lt;p>sudo vi /etc/iotsample-raspberrypi/device.cfg&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To paste the text press the “i” key.  Then paste the text, this will depend on the OS you are on.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To save the file hit the “Esc” key.  Then Type “:wq” and then press “Enter”.  That will save the file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Let’s restart the IoT service on our Raspberry Pi to start sending the data to the IoT service&lt;/p>
+&lt;p>sudo service iot restart&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to download the Python code to run on the Raspberry Pi, run the following:&lt;/p>
+&lt;p>cd ~
+git clone &lt;a class="link" href="https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git" target="_blank" rel="noopener"
+>https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git&lt;/a>
+cd python-iot-raspberry-pi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Now we need to install the package manager for Python:&lt;/p>
+&lt;p>sudo apt-get install python-pip
+sudo pip install -r requirements.txt&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>One last bit, we need a config file for our app before we can start it.  Lets run the following:&lt;/p>
+&lt;p>vi ~/device.cfg&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remember this is vi again, so remember the shortcuts for inserting text and saving it from step 29,30.  The contents of the file should look something like below, replacing yourapikey, yourdeviceid, youriotorg, and yourapitoken with the correct values. To generate the API key and token we can get them from going back to the web browser and going to the Internet of Things Foundation.  At the top  click on API Keys.  Click “New API Key”.  The values that it gives you will be the values you use for the yourapitoken and yourapikey. &lt;code>yourdeviceid&lt;/code> is the value we got from step 20 &lt;code>youriotorg&lt;/code> is from step 27, it is also in your config file; in my case my value is pwftki. Let’s save the file (remember, “Esc”, “:wq”, “Enter”)&lt;/p>
+&lt;p>[application]
+org=youriotorg
+id=yourdeviceid
+auth-method=apikey
+auth-key=yourapikey
+auth-token=yourauthtoken&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>OK, so now we can launch/start the app on the Raspberry Pi.  To do that run the following:&lt;/p>
+&lt;p>cd ~/python-iot-raspberry-pi
+sudo python client.py&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="bluemix-app-setup-steps">Bluemix App Setup Steps
+&lt;/h2>&lt;h6 id="note--the-following-steps-are-to-be-run-on-your-desktop-not-the-raspberry-pi">NOTE: The following steps are to be run on your desktop NOT the Raspberry Pi.
+&lt;/h6>&lt;ol>
+&lt;li>
+&lt;p>We will need to install the Cloud Foundry CLI to deploy our app to Bluemix.  To do this head over to &lt;a class="link" href="https://github.com/cloudfoundry/cli/releases" target="_blank" rel="noopener"
+>https://github.com/cloudfoundry/cli/releases&lt;/a>.  Choose the appropriate installer for your platform, download it and run the installer.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So let’s open up a new terminal Window, we will need to do the rest on our development machine/laptop.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to download the Python code for our app.  Run the following.  If you don’t have git installed follow these instructions &lt;a class="link" href="http://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/p>
+&lt;p>git clone &lt;a class="link" href="https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git" target="_blank" rel="noopener"
+>https://github.com/IBM-Bluemix/python-iot-raspberry-pi.git&lt;/a>
+cd python-iot-raspberry-pi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In your web browser go back to the tab that you have Bluemix open with.  In the top click “Catalog”, scroll down to find “Twilio”.  Click on that.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you already have a Twilio account and want to use that skip to step 6.  If you don’t have a Twilio account on the right hand side click “Register at Twilio”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Twilio will ask you for some information and you will need to verify your phone number.  This is important as only numbers verified with the free plan will work with your app.   If you want to be able to text any number you need to pay for Twilio, its $1/month/phone number.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once you are signed up for your account, head to &lt;a class="link" href="https://www.twilio.com/user/account/voice-messaging" target="_blank" rel="noopener"
+>https://www.twilio.com/user/account/voice-messaging&lt;/a>.  Near the top right there will be a twistie that says “Show API Credentials”, click that.  There is two pieces of information here, the Account SID and Auth Token.  We will need to copy these back to the Bluemix tab we have open with Twilio.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Paste your Account SID in the field in Bluemix that says Account SID, paste your Auth Token in the Auth Token field.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For the Service name you must type in this exactly iot-twilio&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For the App, choose “Leave Unbound”&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click Create.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Switch back to the terminal that you have on your local dev machine, not your Raspberry Pi.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We need to login to Bluemix, to do that, type &lt;code>cf login -a https://api.ng.bluemix.net&lt;/code>. It will ask you for your username and password. This is from step 1 in the Raspberry Pi section above.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To deploy our application all we need to do now is type &lt;code>cf push myappname&lt;/code> where myapp name is a unique name you choose for your app.&lt;em>NOTE:&lt;/em> If you get an error mentioning a route is taken, choose a different name and run &lt;code>cf push&lt;/code> with a new app name.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It will take about a minute or two to deploy your application but eventually you will get some output that looks like the following:&lt;/p>
+&lt;p>requested state: started
+instances: 1/1
+usage: 1G x 1 instances
+urls: testapp-jbs.mybluemix.net
+last uploaded: Fri Jul 31 00:25:17 UTC 2015
+stack: lucid64
+buildpack: SDK for Node.js(TM) (ibm-node.js-0.12.7)&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>There is a row that says &lt;code>urls:&lt;/code>, copy that URL and paste it into your browser.&lt;/p>
+&lt;p>If everything went well you should have a page that looks like the following:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/pythoniotapp.png"
+width="671"
+height="192"
+srcset="https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/pythoniotapp_hu_4e9b23f804cbe845.png 480w, https://www.jeffsloyer.io/post/iot-python-app-with-a-raspberry-pi-and-bluemix/pythoniotapp_hu_2167463e78183380.png 1024w"
+loading="lazy"
+alt="pythoniotapp IoT Python app with a Raspberry Pi and Bluemix"
+class="gallery-image"
+data-flex-grow="349"
+data-flex-basis="838px"
+>&lt;/p>
+&lt;p>An important note here, do not press the button on the Raspberry Pi until you enter a phone number and text message here, if you do the app will crash.  If you do this you can restart you app with &lt;code>cf restart myappname&lt;/code>, where myappname is the name of the app you chose above.&lt;/p>
+&lt;p>When you click the “On” button it should turn the light on for you.  If you press the “Off” button it should turn the light off.&lt;/p>
+&lt;h2 id="feedback">Feedback
+&lt;/h2>&lt;p>Follow us on Twitter at &lt;a class="link" href="https://twitter.com/IBMBluemix" target="_blank" rel="noopener"
+>@IBMBluemix&lt;/a> and follow the author of this blog post (Jeff Sloyer, one of our developer advocates) at &lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a>&lt;/p></description></item><item><title>Simple Hello World Python App using Flask</title><link>https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</link><pubDate>Mon, 30 Mar 2015 10:17:51 -0500</pubDate><guid>https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/helloworld.png" alt="Featured image of post Simple Hello World Python App using Flask" />&lt;p>Hey Y’all!  Jeff here again, today we are going to be going through some really simple steps to get started deploying a simple hello world python app using Flask on Bluemix.&lt;/p>
+&lt;p>&lt;a class="link" href="http://flask.pocoo.org/" target="_blank" rel="noopener"
+>Flask&lt;/a> is an awesome and really lightweight framework in Python to create powerful webapps.  We are going to use it make a really simple hello world app in Python though.&lt;/p>
+&lt;!-- more -->
+&lt;p>In this post we are going to go through the written instructions on how to do it but if you prefer watching a video check out the video below.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/b-SF3bgaQTw" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>In this tutorial we are going to go through two steps to deploy the app.  One is a simple click a button to deploy to your app, we will go through that first.  The second approach is a little more in depth and involves installing a command line tool to upload the application.  This is great and preferred if you will be editing the code or you want to dig into the nuts and bolts of things.&lt;/p>
+&lt;h2 id="simple-getting-started-steps">Simple Getting Started Steps
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Sign up for a Bluemix account, visit &lt;a class="link" href="http://bluemix.net/?cm_mmc=developerWorks-_-dWdevcenter-_-bluemix-_-lp" target="_blank" rel="noopener"
+>http://bluemix.net&lt;/a> in your web browser and click “Sign-up” in the top right.  We require a couple bits of information&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Wait for an email to arrive, it should only take a couple minutes.  There should be a link in the email that says “Click here to complete your registration”, click that.  Sign in with the username and password you created from step 1.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click the button below (this will deploy the app for you).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>You will come to a page that has a button called “Login”.  Go ahead and click that.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next you will be taken to a page that asks you to create an alias.  If my email address was &lt;a class="link" href="mailto:jeff.davis251@gmail.com" >jeff.davis251@gmail.com&lt;/a> I would use jeffdavis251.  Hint it doesn’t like periods &lt;img src="https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/icon_smile.gif"
+width="15"
+height="15"
+srcset="https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/icon_smile_hu_68a78047e27b967b.gif 480w, https://www.jeffsloyer.io/post/simple-hello-world-python-app-using-flask/icon_smile_hu_e6072a0436c6ceff.gif 1024w"
+loading="lazy"
+alt="icon smile Simple Hello World Python App using Flask"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Click Create.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It will take you to another page, click “Continue”.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Now everything is basically setup, it will take us to a page that looks like what is below, just click the “Deploy” button.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Grab a cup of coffee or take a bathroom break, well a quick one!  It will only take a minute or two to deploy the app.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In a hot second you should be taken to a page that looks like what is below.  To view your hello world app just click the button “View your App”.
+[![deploy done 1024x544 Simple Hello World Python App using Flask]&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>Thats it for the quick and easy steps.  Let’s go through the more advanced steps where you can modify the code and upload the app from your own machine.&lt;/p>
+&lt;h2 id="a-little-more-involved-steps">A little more involved steps
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>This will assume you have signed up for an account, steps 1 and 2 from above.  If you haven’t signed up for an account scroll up and do that now.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install Git, follow the instructions from &lt;a class="link" href="http://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Install the Cloud Foundry command line.  Choose the appropriate installer from &lt;a class="link" href="https://github.com/cloudfoundry/cli/releases" target="_blank" rel="noopener"
+>here&lt;/a> and download it and run the installer.  You might be asking what Cloud Foundry is, its the open source Platform as a Service that Bluemix is built on.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Open up the terminal/command prompt
+Mac – Click on the finder icon in the top right, search for terminal and open that
+Linux – Depends on your distro, but you probably know where it is, in the menu look for accessories usually then terminal, open that
+Windows – Click the start button, search for cmd, open that&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Type the following.  The following commands downloads the starter app and puts us into the right directory to deploy the app.&lt;/p>
+&lt;p>git clone &lt;a class="link" href="https://github.com/IBM-Bluemix/python-hello-world-flask.git" target="_blank" rel="noopener"
+>https://github.com/IBM-Bluemix/python-hello-world-flask.git&lt;/a>
+cd python-hello-world-flask&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Next we need to login to Bluemix, we will use the terminal window that we already have open for this.&lt;/p>
+&lt;p>cf login -a &lt;a class="link" href="https://api.ng.bluemix.net" target="_blank" rel="noopener"
+>https://api.ng.bluemix.net&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;pre>&lt;code>__Note__: It will ask for your username and password, this is the one you just created.
+&lt;/code>&lt;/pre>
+&lt;ol start="7">
+&lt;li>
+&lt;p>Last step, we just need to upload the app, run the following replacing myappname with the URL you want your app to be available at.  Bluemix will give you a URL based on this name.  If I chose jeff-is-awesome, my app would be available at &lt;a class="link" href="http://jeff-is-awesome.mybluemix.net" target="_blank" rel="noopener"
+>http://jeff-is-awesome.mybluemix.net&lt;/a>.&lt;/p>
+&lt;p>cf push myappname&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>If you get an error mentioning something like below, that means someone already has an app using that URL, just choose another one and rerun the command&lt;/p>
+&lt;h4 id="error">Error:
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[01:54 PM] jsloyer@Jeffs-MacBook-Pro [python-hello-world-flask]&amp;gt;cf push jeff-is-awesome
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Creating app jeff-is-awesome in org jbsloyer@us.ibm.com / space demos as jbsloyer@us.ibm.com...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OK
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Creating route jeff-is-awesome.mybluemix.net...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FAILED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Server error, status code: 400, error code: 210003, message: The host is taken: jeff-is-awesome
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="fix">Fix:
+&lt;/h4>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push myappname-unique
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You will basically get some output that looks like the following.  It will give you the URL to access your app.  In this case the URL to my app is &lt;code>http://jeff-is-awesome2.mybluemix.net&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[02:05 PM] jsloyer@Jeffs-MacBook-Pro [python-hello-world-flask]&amp;gt;cf push jeff-is-awesome2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Updating app jeff-is-awesome2 in org jbsloyer@us.ibm.com / space demos as jbsloyer@us.ibm.com...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">... snip ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">App jeff-is-awesome2 was started using this command `python hello.py`
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Showing health and status for app jeff-is-awesome2 in org jbsloyer@us.ibm.com / space demos as jbsloyer@us.ibm.com...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="wrapping-up">Wrapping Up
+&lt;/h2>&lt;p>To recap we just went through two different ways to deploy a python app to Bluemix.  The first method is really quick so you can see the power of the platform and get something up and running quick.  The second approach used the command line so you can modify the app and hack on it and customize it.&lt;/p>
+&lt;h2 id="feedback">Feedback
+&lt;/h2>&lt;p>Follow us on Twitter at &lt;a class="link" href="http://twitter.com/IBMBluemix" target="_blank" rel="noopener"
+>@IBMBluemix&lt;/a>.&lt;/p>
+&lt;p>Follow the author of this blog post (Jeff Sloyer, one of our developer advocates) at &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>@jsloyer&lt;/a>&lt;/p></description></item><item><title>Control home devices with Bluemix Internet of Things</title><link>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</link><pubDate>Fri, 06 Feb 2015 09:49:21 -0500</pubDate><guid>https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1.jpg" alt="Featured image of post Control home devices with Bluemix Internet of Things" />&lt;p>The number of Internet connected devices is growing dramatically, it is expected to increase from 15 billon devices in 2015 to 40 billion devices in 2020.  These devices make up something called the Internet of Things.  These devices can be controlled remotely and interconnected.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease.png"
+width="700"
+height="270"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease_hu_6d11359f8f64425e.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/iotdevicesincrease_hu_28b1f8b3db160b62.png 1024w"
+loading="lazy"
+alt="iotdevicesincrease Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="259"
+data-flex-basis="622px"
+>&lt;/p>
+&lt;p>While a lot of these devices can be connected to the Internet, most of them are &amp;ldquo;dumb&amp;rdquo; devices right now.  To turn these &amp;ldquo;dumb&amp;rdquo; devices into smart devices you can use the &lt;a class="link" href="http://internetofthings.ibmcloud.com" target="_blank" rel="noopener"
+>Internet of Things&lt;/a> to connect them to the cloud.  Simple things such as a washing machine or a coffee pot can be connected to the Internet.  More practical systems can be connected also, such as a home automation system or a thermostat.  Going even further a mine could connect safety sensors to the Internet of Things as well.&lt;/p>
+&lt;!-- more -->
+&lt;p>The Internet of Things allows for these devices to either be controlled or act as sensors and provides a means for them to communicate.  This is done over a protocol called MQTT. According to &lt;a class="link" href="http://mqtt.org/" target="_blank" rel="noopener"
+>mqtt.org&lt;/a>, &amp;ldquo;MQTT is a machine-to-machine (M2M)/Internet of Things connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport.&amp;rdquo;  This works great for many devices as-is, doesn’t have many dependencies, it is very lightweight, and doesn’t require tremendous amounts of processing power.&lt;/p>
+&lt;p>IBM Bluemix provides a platform for creating these apps that utilize all these sensors.  You can basically almost use any programming language you want, Bring Your Own Language (BYOL) and utilize services that do the heavy lifting for you.  This heavy lifting is the Internet of Things (IoT) service in Bluemix.  It implements that MQTT protocol and allows you to control and receive data from these devices.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1.jpg"
+width="1024"
+height="458"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1_hu_f8ea79abbff80153.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/robots-blog-post-header1_hu_319a811cc1084942.jpg 1024w"
+loading="lazy"
+alt="robots blog post header1 1024x665 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="223"
+data-flex-basis="536px"
+>&lt;/p>
+&lt;p>Do you have a bunch of left over Christmas lights sitting around that will be collecting dust till next year? Until now Christmas lights are a once a year thing, that isn’t true anymore.  Time to get the dust off of your lights and use them for something fun! Enter Christmas Lights controlled by a Raspberry Pi via IoT in Bluemix!&lt;/p>
+&lt;p>You can control these Christmas Lights using the Internet of Things and IBM Bluemix. Who &lt;em>doesn’t&lt;/em> love large amounts of Christmas lights?  I sure love them.  Add on to that syncing lights to music and the ability to control lights from your phone and giving passersbys the ability to vote for songs they wanna see the lights synced to by texting.  How cool is that?&lt;/p>
+&lt;h2 id="introduction">Introduction:
+&lt;/h2>&lt;p>This is going to be a three part series: The first part (this post) will focus on the hardware setup, all the wiring and connecting things up to the Raspberry Pi.  The second part will focus on the software configuration of the Raspberry Pi, and the final part will focus on the Bluemix app that allows people to vote on songs to play and the integration to control the Raspberry Pi with the IoT service in Bluemix.&lt;/p>
+&lt;p>So some of our goals that we are going to accomplish are the following.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Part 1&lt;/strong> – Setup and wire together relays, outlets, and the Raspberry Pi&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/" >&lt;strong>Part 2&lt;/strong>&lt;/a> – Power on the Raspberry Pi, installed Raspbian (OS for the Pi), install and configure the lighting control software&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Part 3&lt;/strong> – Deploy a Bluemix app with the IoT, Twilio, and Cloudant services to interact with users and the Raspberry Pi (an example of the app is &lt;a class="link" href="http://lights.mybluemix.net/" target="_blank" rel="noopener"
+>http://lights.mybluemix.net/&lt;/a>; please note this is not connected to my Raspberry Pi right now, so clicking the play button won’t do anything.)&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Here is a little teaser of the expected outcome:&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/_nWcIvOSNJE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>Let’s jump into it…&lt;/p>
+&lt;h2 id="part-1-setting-up-the-hardware">Part 1: Setting up the hardware
+&lt;/h2>&lt;p>These instructions have been adapted from the following sites.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/" target="_blank" rel="noopener"
+>https://chivalrytimberz.wordpress.com/2012/12/03/pi-lights/&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI" target="_blank" rel="noopener"
+>https://docs.google.com/document/d/1x97JIu5xVInZMutTNeaHlnQuyoLHjf3h-ugIo64pGfI&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/download-and-install" target="_blank" rel="noopener"
+>http://lightshowpi.org/download-and-install&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/configuring-and-testing-your-hardware" target="_blank" rel="noopener"
+>http://lightshowpi.org/configuring-and-testing-your-hardware&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://lightshowpi.org/play-music" target="_blank" rel="noopener"
+>http://lightshowpi.org/play-music&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>The first step is getting a Raspberry Pi, I highly recommend getting the &lt;a class="link" href="http://amzn.to/2C63713" target="_blank" rel="noopener"
+>CanaKit on Amazon&lt;/a>.  It comes with most of everything you will need.  Depending on how fancy and clean you want your wiring to look you will need to take a trip to your local hardware/electrical store, more on that later.&lt;/p>
+&lt;p>The first step is deciding how many individual light channels you want—you can do up to 48 actually, but for this post we will doing 16 channels.  What that means is 16 individual strands of lights that can be controlled.  So let’s make a shopping list.&lt;/p>
+&lt;p>Shopping List:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>8 &lt;a class="link" href="http://amzn.to/2CamxBW" target="_blank" rel="noopener"
+>two gang outlets&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 &lt;a class="link" href="http://amzn.to/2DLctzJ" target="_blank" rel="noopener"
+>4 gang blue plastic outlet boxes&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2zYuQyW" target="_blank" rel="noopener"
+>50 feet of 12 gauge electrical wire&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CCI8UP" target="_blank" rel="noopener"
+>2 bags of assorted wire nuts&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>2 relays (1 relay per each 8 light channels, available &lt;a class="link" href="http://amzn.to/2C7lx1E" target="_blank" rel="noopener"
+>on Amazon&lt;/a>)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>1 &lt;a class="link" href="http://amzn.to/2DLo6qF" target="_blank" rel="noopener"
+>powerstrip&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2Cv8WsJ" target="_blank" rel="noopener"
+>2 electrical extension cords&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CzX99O" target="_blank" rel="noopener"
+>16 strands of Christmas lights&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Tools Required:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2EsJH8e" target="_blank" rel="noopener"
+>Wire Stripper&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CBl8Wi" target="_blank" rel="noopener"
+>Screw Drivers, phillips and flat&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://amzn.to/2CapKBL" target="_blank" rel="noopener"
+>Multimeter -optional&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>My brother (&lt;a class="link" href="https://twitter.com/esloyer" target="_blank" rel="noopener"
+>@esloyer&lt;/a>) helped me wire this whole thing up and came up with an adapted wiring schema based off the sites above, thanks bro!&lt;/p>
+&lt;p>Once you get all the items on the shopping list we need to start taking apart the 50 feet of wire, there is 2 wires inside of the casing, a black and then a white one.  We need to get them out of the casing, take a pocket knife or utility knife and make a cut into the casing at one end, you can basically then peal back the casing on the whole 50 feet of wire then.&lt;/p>
+&lt;p>Below is a wiring diagram that we need to complete.  You can do this multiple ways but below is a suggestion.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture.png"
+width="1024"
+height="642"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture_hu_8f326f9d29449440.png 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/Capture_hu_ad72e496ac82a628.png 1024w"
+loading="lazy"
+alt="Capture 1024x642 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="382px"
+>&lt;/p>
+&lt;p>What we need to do is basically daisy chain all the &amp;ldquo;hot&amp;rdquo; wires together between each set of 4 gang double gang outlets.  We do this so we don’t overload a particular circuit.  So to do this we need to cut the end off of our cheap extension cord that has a plug on it, we need to then strip the wires, and then identity which wire is the hot/positive wire.  Below is a picture of a wire, the hot/positive wire will have dashes or stripes on it, the cold/neutral wire will NOT have any dashes or stripes:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord.jpg"
+width="1024"
+height="764"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord_hu_a3f7cc50205f5fa6.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-cord_hu_f8939067b1c62fc6.jpg 1024w"
+loading="lazy"
+alt="electrical cord 1024x764 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="321px"
+>&lt;/p>
+&lt;p>We need to take the hot wire and put it into a wire nut.  We will then take some wire from our 50 feet, strip one of the ends and twist it into the wire nut.  This will get attached to positive input on the relay.  We need to repeat this for each channel.  In the picture below I have an additional wire going from the first wire nut to another wire nut because all the wires going to the relay wouldn’t fit into one wire nut.  We are just effectively connecting two wires together here.&lt;/p>
+&lt;p>The next step is running a wire from each channel on the relay to electrical outlet.  This is the hot wire to each outlet but this wire is being controlled by the relay.  Think of the relay as a simple on/off switch that you would find at home to control a light.  On most double electrical outlets there is a tab on the side that comes enabled that makes most receptacles operate as one, this is desirable in a house so an electrician only has to run one wire to the outlet but in our case we want to take advantage of controlling both receptacles.  We need to break this tab on both sides of the outlet.  Take a pair of needle nodes pliers and bend the tab back and forth and eventually it will come off.  See the photos below.&lt;/p>
+&lt;p>Before:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14.jpg"
+width="450"
+height="355"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14_hu_547eb42780bdc852.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/FH13MAR_SWIOUT_14_hu_105e14da772baaf9.jpg 1024w"
+loading="lazy"
+alt="FH13MAR SWIOUT 14 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="304px"
+>&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5.jpg"
+width="249"
+height="187"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5_hu_9ce89f38c60a8b19.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-5_hu_8fe19ac7cb63afdb.jpg 1024w"
+loading="lazy"
+alt="electrical outlet garbage disposal 5 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;p>After:&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4.jpg"
+width="249"
+height="187"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4_hu_4b377a2f222e5725.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/electrical-outlet-garbage-disposal-4_hu_3342bd0a5a01f063.jpg 1024w"
+loading="lazy"
+alt="electrical outlet garbage disposal 4 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="319px"
+>&lt;/p>
+&lt;p>So next we need to connect our cold/negative wires to each of the outlets.  If you look at the wiring diagram (above) I have one cold/neutral wire going to the first outlet and each additional outlet is daisy chained to it.  This is just to complete the circuit.  Below is the finished product.  We basically have our outlets daisy chained together with our cold/neutral wires and then hold/positive wires have individual channels to the relay.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57.jpg"
+width="3264"
+height="2448"
+srcset="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57_hu_2aaeaa2e26da998a.jpg 480w, https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things/2014-12-02-15.16.57_hu_be5268a26fba3efb.jpg 1024w"
+loading="lazy"
+alt="2014 12 02 15.16.57 Control home devices with Bluemix Internet of Things"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>Congratulations the hard part is over! Well, at least for me, since electrical stuff isn’t my forte.&lt;/p>
+&lt;h2 id="parts-in-the-series">Parts in the Series
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.jeffsloyer.io/post/control-home-devices-with-bluemix-internet-of-things-part-2/" >Part 2&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Etherpad in Cloud Foundry – Quick Start Guide</title><link>https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</link><pubDate>Sat, 03 Jan 2015 22:19:30 -0500</pubDate><guid>https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/</guid><description>&lt;p>Etherpad Lite is an awesome online collaboration platform.  Multiple open source projects use it for collaboration.  One of the most notable ones is the Openstack Project &lt;a class="link" href="https://etherpad.openstack.org/" target="_blank" rel="noopener"
+>Openstack Etherpad&lt;/a>. To help you navigate the setup, this post provides step-by-step instructions to get things running. You may have read that Etherpad is complicated to install in a PaaS and there really isn’t a comprehensive quick start guide for running Etherpad-lite in Cloud Foundry. No worries, here is one!&lt;/p>
+&lt;h3 id="loginregister-for-bluemix">Login/Register for Bluemix
+&lt;/h3>&lt;p>The first step is creating a Node.js app in Bluemix.  Let’s login to Bluemix, open a web browser and visit &lt;a class="link" href="http://bluemix.net/" target="_blank" rel="noopener"
+>Bluemix&lt;/a> and click LOG IN.  If you don’t have an account click, SIGN UP.  Since Etherpad-Lite is built using Node.js, we want to start with an empty Node.js app in Bluemix.  We will do this from the command line.&lt;/p>
+&lt;p>If you already have the CLI command line executable, you can skip this step.  If you don’t have it, follow the steps from the &lt;a class="link" href="https://www.ng.bluemix.net/docs/#cli/index.html#cli" target="_blank" rel="noopener"
+>Bluemix docs&lt;/a> on how to install the command line for your platform and how to set it up.  Once you get things setup you should be able to run &lt;code>cf s&lt;/code> and get the following output:&lt;/p>
+&lt;pre>&lt;code>[01:30 PM] jsloyer@jeffs-mbp [blah]&amp;gt;cf s
+cf domains Getting domains in org jbsloyer@us.ibm.com as ...
+name status
+mybluemix.net shared
+&lt;/code>&lt;/pre>
+&lt;p>Your output will be slightly different (this is ok).  This was just a check to make sure things are setup correctly.  If you are getting an auth error or error that you aren’t pointing to Cloud Foundry, refer back to the docs, reply to this post, or post a question to &lt;a class="link" href="http://stackoverflow.com/questions/tagged/bluemix" target="_blank" rel="noopener"
+>Stackoverflow&lt;/a> for help.&lt;/p>
+&lt;h3 id="upload-etherpad-lite-code-to-bluemix">Upload Etherpad-Lite Code to Bluemix
+&lt;/h3>&lt;p>OK, next we need to upload the Etherpad-Lite code to Bluemix. The version of Etherpad-Lite is a forked version of the Etherpad code that has made things easy for us with Cloud Foundry. So head on over to the &lt;a class="link" href="https://github.com/cloudfoundry-community/etherpad-lite-cf/releases" target="_blank" rel="noopener"
+>releases page&lt;/a> for &lt;code>etherpad-lite-cf&lt;/code>.  Choose the latest, as of this writing it was version 1.4.1.  Download the etherpad-lite-cf.zip file.  We need to extract this file to a new folder—do not extract it in the folder it is sitting in.  For example, I extracted it into an empty folder called blah.  Make sure you do not have the zip file you downloaded in the newly created folder, it should just contain the extracted files:&lt;/p>
+&lt;pre>&lt;code>[10:50 AM] jsloyer@jeffs-mbp [blah]&amp;gt;pwd
+/Users/jsloyer/Downloads/blah
+[10:50 AM] jsloyer@jeffs-mbp [blah]&amp;gt;ls
+CHANGELOG.md Procfile node_modules src var
+CONTRIBUTING.md README.md package.json start.bat
+LICENSE bin settings.json tests
+Makefile doc settings.json.template tools
+&lt;/code>&lt;/pre>
+&lt;p>The next step is pushing the app to Bluemix.  Run the following command, replacing yourappname with a unique name for your app.  This name will also be the url to your app as well.  If you get an error mentioning the host is taken, just choose a different name.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push yourappname -m 512M -b https://github.com/cloudfoundry/nodejs-buildpack.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The above is saying we are giving our app 512MB of memory and calling out a specific buildpack to use (in this case Node.js). This step will take awhile but eventually you should get the following output.&lt;/p>
+&lt;pre>&lt;code>0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+App started Showing health and status for app jbs-etherpad3 in org jbsloyer@us.ibm.com / space demos as ...
+OK
+requested state: started
+instances: 1/1
+usage: 512M x 1 instances
+urls: jbs-etherpad3.mybluemix.net
+state since cpu memory disk
+#0 running 2015-01-13 10:36:32 AM 0.0% 87.2M of 512M 242.1M of 1G
+&lt;/code>&lt;/pre>
+&lt;p>If you visit the url from above, Etherpad will be functional, however it is using a built-in database and this isn’t what we want.  We want to back in with MySQL.&lt;/p>
+&lt;h3 id="create-and-bind-a-database-to-our-app">Create and bind a database to our app
+&lt;/h3>&lt;p>Next, we need to create a service to allow Etherpad to connect to our database.  To do that, let’s go back to the Bluemix UI.  In the top click on Dashboard, you should see the app you created.  Let’s go ahead and click on it.&lt;/p>
+&lt;p>To add the service Bluemix will provision and bind a service to our app for us.  Click &amp;ldquo;Add A Service&amp;rdquo; and scroll down to data management.  We want ClearDB for this app.  Click on ClearDB.  ClearDB is a hosted version of MySQL.  Everything on the right should be pre-populated so let’s just click &amp;ldquo;Create&amp;rdquo;.  If things are not pre-populated, choose the appropriate app, the one we just created.&lt;/p>
+&lt;p>It will ask if you want to restage the app, that is fine, so click RESTAGE.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/restage.jpg"
+width="1104"
+height="524"
+srcset="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/restage_hu_ca631c0bc1af6ab7.jpg 480w, https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/restage_hu_692235e83d637c34.jpg 1024w"
+loading="lazy"
+alt="restage Etherpad in Cloud Foundry – Quick Start Guide"
+class="gallery-image"
+data-flex-grow="210"
+data-flex-basis="505px"
+>&lt;/p>
+&lt;h3 id="configure-the-app-with-cleardb-mysql">Configure the app with ClearDB (MySQL)
+&lt;/h3>&lt;p>To switch the app over to MySQL, we need to edit the &lt;code>settings.json&lt;/code> for the app and then re-upload the app to Bluemix. You will need to replace the value DATABASE on line 9 with the name of your ClearDB service.  To get this info, let’s go back to the Bluemix UI and our app.  If you click on &amp;ldquo;Show Credentials&amp;rdquo;, it will give you the name of your ClearDB service, copy this.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/showcreds.jpg"
+width="1578"
+height="1366"
+srcset="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/showcreds_hu_10f0797eafc6c3b0.jpg 480w, https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/showcreds_hu_5cf7d412493f8cf4.jpg 1024w"
+loading="lazy"
+alt="showcreds Etherpad in Cloud Foundry – Quick Start Guide"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="277px"
+>&lt;/p>
+&lt;p>Copy the name, in this example it is &amp;ldquo;ClearDB MySQL Database-hu&amp;rdquo;, without quotes.  I have highlighted below what you need to copy, don’t copy the quotes.  I have hidden my connection info to my database so my database can’t be hacked.&lt;/p>
+&lt;p>&lt;img src="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/dbname.jpg"
+width="455"
+height="559"
+srcset="https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/dbname_hu_7a67a0ef1049138a.jpg 480w, https://www.jeffsloyer.io/post/etherpad-in-cloud-foundry-quick-start-guide/dbname_hu_149ae3ed997d67d.jpg 1024w"
+loading="lazy"
+alt="dbname Etherpad in Cloud Foundry – Quick Start Guide"
+class="gallery-image"
+data-flex-grow="81"
+data-flex-basis="195px"
+>&lt;/p>
+&lt;p>Open up settings.json with your favorite text editor and on line 9 replace DATABASE with the name of your ClearDB service that we copied from above.  Save the file. Here is my line 9:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;#34;dbService&amp;#34;: &amp;#34;ClearDB MySQL Database-hu&amp;#34;,
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The last step is re-pushing our app to Bluemix since we made a change to it.  To do this we need to use the push command we used above:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push yourappname -m 512M -b https://github.com/cloudfoundry/nodejs-buildpack.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Eventually it should show us that our app is running, my output is below:&lt;/p>
+&lt;pre>&lt;code>0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+0 of 1 instances running, 1 starting
+1 of 1 instances running
+App started Showing health and status for app jbs-etherpad3 in org jbsloyer@us.ibm.com / space demos as ...
+OK
+requested state: started
+instances: 1/1
+usage: 512M x 1 instances
+urls: jbs-etherpad3.mybluemix.net
+state since cpu memory disk
+#0 running 2015-01-13 10:36:32 AM 0.0% 87.2M of 512M 242.1M of 1G
+&lt;/code>&lt;/pre>
+&lt;p>So if we visit the url it gave us, Etherpad should be up and running.  If you run into issues please post a comment here or post to &lt;a class="link" href="http://stackoverflow.com/questions/tagged/bluemix" target="_blank" rel="noopener"
+>Stackoverflow&lt;/a>.&lt;/p>
+&lt;h3 id="ssl">SSL
+&lt;/h3>&lt;p>Bluemix provides SSL out of the box for your app.  If your app is running at &lt;strong>http&lt;/strong>://jbs-etherpad3.mybluemix.net you are given SSL for free.  To use SSL, just access your app over https, for my example it would be &lt;strong>https&lt;/strong>://jbs-etherpad3.mybluemix.net.  If you want to use SSL with your own domain name and certificate, you can do this also!  See &lt;a class="link" href="https://www.jeffsloyer.io/post/inbound-ssl-in-bluemix/" >SSL Certificates and Bluemix Custom Domains&lt;/a> on how to do it.&lt;/p>
+&lt;p>For more info about SSL in for free in Bluemix check out the following video.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/3Y0wLQcXbQ0" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;h3 id="caveats">Caveats
+&lt;/h3>&lt;ul>
+&lt;li>The biggest issue to me is that this deployment of Etherpad only allows 1 instance. While this works for development and testing, it is not suitable for production.  This is a limitation right now of Etherpad in the way it uses socket.io and sessions. If you need more capacity, just bump up your RAM for your app.&lt;/li>
+&lt;/ul>
+&lt;h3 id="instructions-adapted-from-these-references">Instructions adapted from these references
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="https://github.com/cloudfoundry-community/etherpad-lite-cf#using-database-from-user-provided-service" target="_blank" rel="noopener"
+>https://github.com/cloudfoundry-community/etherpad-lite-cf#using-database-from-user-provided-service&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://arthurh.fr/blog-Install-etherpad-lite-with-cloudfoundry" target="_blank" rel="noopener"
+>http://arthurh.fr/blog-Install-etherpad-lite-with-cloudfoundry&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul></description></item><item><title>Building a Java EE app on IBM Bluemix Using Watson, Cloudant</title><link>https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</link><pubDate>Tue, 14 Oct 2014 22:36:53 -0500</pubDate><guid>https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/hiring.png" alt="Featured image of post Building a Java EE app on IBM Bluemix Using Watson, Cloudant" />&lt;p>Hey Y’all!&lt;/p>
+&lt;p>Jeff here again and something I am really excited about is Watson is &lt;a class="link" href="https://developer.ibm.com/bluemix/2014/10/08/watson-on-bluemix" target="_blank" rel="noopener"
+>now available for anyone to use in Bluemix!&lt;/a>&lt;/p>
+&lt;p>Today we are going to be building an example app using Java, Cloudant, and Watson.&lt;/p>
+&lt;p>Ok let’s talk through what this app is going to do before we build it.&lt;/p>
+&lt;p>Meet Ivy (hello!)&lt;/p>
+&lt;p>She’s a talent manager at a growing tech startup.&lt;/p>
+&lt;p>She’s looking for a new hire that would be a good fit on her team but the company is so popular that she has a huge inventory of resumes to sort through. She’s looking for tools to help her, and tools beyond just simple tag filters.&lt;/p>
+&lt;p>With Watson services she can also start to solve for a problem like, &amp;ldquo;I’m looking for another developer like &amp;ldquo;[insert cool employee].&amp;rdquo;&lt;/p>
+&lt;p>So in this case, the application can issue queries such as,&lt;/p>
+&lt;blockquote>
+&lt;p>Find me a Developer like Craig Smith.Then search through all possible candidate and return a ranked list of candidates sorted by highest-to-lowest percentage of personality resemblance. From here, searches can be refined by including technical skills. Find me a Developer like Craig Smith, and knows Java, C and Python.&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&amp;ndash; &lt;cite>Ivy (HR Manager)&lt;/cite>&lt;/p>&lt;/blockquote>
+&lt;p>Make sense??&lt;/p>
+&lt;p>Ok let’s jump right in.&lt;/p>
+&lt;h2 id="pre-reqs">Pre-req&amp;rsquo;s
+&lt;/h2>&lt;p>First thing you need to do is clone the github project with some starter code.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/IBM-Bluemix/talent-manager.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Or &lt;a class="link" href="https://github.com/IBM-Bluemix/talent-manager/archive/master.zip" target="_blank" rel="noopener"
+>download a zip file&lt;/a> if you don’t have git installed.&lt;/p>
+&lt;p>Next we need to complete a couple pre-req steps.&lt;/p>
+&lt;ol>
+&lt;li>&lt;a class="link" href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers" target="_blank" rel="noopener"
+>Download Eclipse EE&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="noopener"
+>Download and install Java 1.7 JDK&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.ng.bluemix.net/docs/#starters/install_cli.html?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Download and install the Cloud Foundry CLI&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Sign up for a FREE IBM Bluemix account if you don’t have one yet&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;p>Ok once we have all that setup we can start creating our app.&lt;/p>
+&lt;h2 id="create-the-application">Create the application
+&lt;/h2>&lt;p>First we need to sign into Bluemix, so open your browser and head on over to &lt;a class="link" href="http://bluemix.net/?cm_mmc=Display-JeffSloyer.io-_-BluemixSampleApp-JavaEEWatsonCloudant-_-Node-WatsonPersonalityInsights-_-BM-DevAd" target="_blank" rel="noopener"
+>Bluemix&lt;/a>. We need to login.  Up at the top lets go ahead and click on Catalog.&lt;/p>
+&lt;p>&lt;a class="link" href="catalog.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/catalog.png"
+width="300"
+height="99"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/catalog_hu_9c32f09da96b06f7.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/catalog_hu_bf35c35b7132c79e.png 1024w"
+loading="lazy"
+alt="catalog 300x99 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="303"
+data-flex-basis="727px"
+>&lt;/a>&lt;/p>
+&lt;p>Scroll down a little and click on Liberty&lt;/p>
+&lt;p>&lt;a class="link" href="liberty.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/liberty.png"
+width="1184"
+height="677"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/liberty_hu_69f5681cdd04b467.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/liberty_hu_dfe48690f80291f3.png 1024w"
+loading="lazy"
+alt="liberty 1024x585 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="419px"
+>&lt;/a>&lt;/p>
+&lt;p>On the right hand side we need to give our app a name.  Please note that this name must be unique.  Also remember this name as we will need it later…&lt;/p>
+&lt;p>Click create.&lt;/p>
+&lt;p>&lt;a class="link" href="new-app.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/new-app.png"
+width="351"
+height="460"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/new-app_hu_ce910f6b88e8a9d7.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/new-app_hu_b20e302331bdeb19.png 1024w"
+loading="lazy"
+alt="new app Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="76"
+data-flex-basis="183px"
+>&lt;/a>&lt;/p>
+&lt;p>Bluemix will start deploying our app and Bluemix will start our app.&lt;/p>
+&lt;p>So next we need to add Cloudant and Watson to our app!&lt;/p>
+&lt;p>So do you that make sure you are in the dashboard and have your app open like the screencap below.  We will then click the &amp;ldquo;Add A Service&amp;rdquo; button.&lt;/p>
+&lt;p>&lt;a class="link" href="add-service.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/add-service.png"
+width="1131"
+height="755"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/add-service_hu_a9f75daa7297ceae.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/add-service_hu_19e0977290ccee4a.png 1024w"
+loading="lazy"
+alt="add service 1024x683 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="359px"
+>&lt;/a>&lt;/p>
+&lt;p>First let’s add Watson.  Scroll down until you find the &amp;ldquo;User Modeling&amp;rdquo; Service.  Go ahead and click that.&lt;/p>
+&lt;p>&lt;a class="link" href="user-modeling.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/user-modeling.png"
+width="1217"
+height="407"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/user-modeling_hu_24760765c57fd2b6.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/user-modeling_hu_c5fdcb66a61d01f3.png 1024w"
+loading="lazy"
+alt="user modeling 1024x342 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="299"
+data-flex-basis="717px"
+>&lt;/a>&lt;/p>
+&lt;p>Again, all we have to do is click &amp;ldquo;Create&amp;rdquo; on the right hand side.&lt;/p>
+&lt;p>&lt;a class="link" href="watson-create.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/watson-create.png"
+width="373"
+height="468"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/watson-create_hu_547b85c9f66e9641.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/watson-create_hu_d4d17f5b0f67dd6b.png 1024w"
+loading="lazy"
+alt="watson create Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="191px"
+>&lt;/a>&lt;/p>
+&lt;p>Bluemix is going to ask us if we want to restage our app, we should click the &amp;ldquo;OK&amp;rdquo; button.  What Bluemix is asking us here is since we made a change to our app, the app needs to be restarted to bind in Watson.&lt;/p>
+&lt;p>&lt;a class="link" href="restage.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/restage.png"
+width="706"
+height="567"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/restage_hu_65a484fdfc866f5f.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/restage_hu_8cacf6d7d0da81a4.png 1024w"
+loading="lazy"
+alt="restage Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="124"
+data-flex-basis="298px"
+>&lt;/a>&lt;/p>
+&lt;p>Next, let’s click &amp;ldquo;Add A Service&amp;rdquo; again.&lt;/p>
+&lt;p>&lt;a class="link" href="addserviceagain.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/addserviceagain.png"
+width="846"
+height="695"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/addserviceagain_hu_b2e892183cc41ef2.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/addserviceagain_hu_9b8205ccb7586e6d.png 1024w"
+loading="lazy"
+alt="addserviceagain Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="121"
+data-flex-basis="292px"
+>&lt;/a>
+This time scroll down to the bottom and choose &amp;ldquo;Cloudant&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudant.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudant.png"
+width="1135"
+height="272"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudant_hu_833bad00e5e09cbb.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudant_hu_471b9bd838d201eb.png 1024w"
+loading="lazy"
+alt="cloudant 1024x245 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="417"
+data-flex-basis="1001px"
+>&lt;/a>&lt;/p>
+&lt;p>Then click &amp;ldquo;Create&amp;rdquo; on the right hand side.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantcreate.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantcreate.png"
+width="360"
+height="464"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantcreate_hu_f876d9ea7020501d.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantcreate_hu_2a504aa349ba519b.png 1024w"
+loading="lazy"
+alt="cloudantcreate Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="77"
+data-flex-basis="186px"
+>&lt;/a>&lt;/p>
+&lt;p>It is going to ask us to restage our app again, go ahead and click &amp;ldquo;OK&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="cloudantrestage.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantrestage.png"
+width="852"
+height="721"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantrestage_hu_f96fb1765a9ff2f5.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/cloudantrestage_hu_9812034e13d8c489.png 1024w"
+loading="lazy"
+alt="cloudantrestage Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="118"
+data-flex-basis="283px"
+>&lt;/a>&lt;/p>
+&lt;p>Now we have all our services added.  Let’s go ahead and start getting some data imported.&lt;/p>
+&lt;p>On the dashboard for the app let’s go ahead and click on Cloudant.&lt;/p>
+&lt;h2 id="explanation-of-cloudant">Explanation of Cloudant
+&lt;/h2>&lt;p>So let’s pause and explain what Cloudant is.  Cloudant is a No-SQL database that is based on CouchDB.  The big difference between a relationship database and No-SQL database is illustrated below.  In the relationship database you have to have multiple tables to represent the data and have to use SQL and JOIN statements to get data from both tables.  In a No-SQL database which is commonly referred to as a document store database you stores JSON documents/data (as illustrated on the left below).&lt;/p>
+&lt;p>&lt;a class="link" href="Figure5a.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/Figure5a.png"
+width="600"
+height="211"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/Figure5a_hu_9ef1cb5e59c49edb.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/Figure5a_hu_6f9aeda7a4c3eeeb.png 1024w"
+loading="lazy"
+alt="Figure5a Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="284"
+data-flex-basis="682px"
+>&lt;/a>&lt;/p>
+&lt;p>So back to the demo&amp;hellip;&lt;/p>
+&lt;h2 id="eclipse-steps">Eclipse Steps
+&lt;/h2>&lt;p>In Eclipse, right click on the project’s area on the left.&lt;/p>
+&lt;p>&lt;a class="link" href="import.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/import.png"
+width="905"
+height="652"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/import_hu_e60e1a7ec36ddb17.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/import_hu_f6daea3eaa47ac74.png 1024w"
+loading="lazy"
+alt="import Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="333px"
+>&lt;/a>&lt;/p>
+&lt;p>Under General click existing project into workspace and click next&lt;/p>
+&lt;p>&lt;a class="link" href="existingproject.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/existingproject.png"
+width="535"
+height="543"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/existingproject_hu_c9af4a74e0a63ce3.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/existingproject_hu_6816ce389b815d42.png 1024w"
+loading="lazy"
+alt="existingproject Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="98"
+data-flex-basis="236px"
+>&lt;/a>&lt;/p>
+&lt;p>Next we want to find our project we downloaded from github.  We need to browse to the directory where it is.  Once you find the talent-manager folder, go one more level down into that into a folder called personafusion (as shown below). Click finish.&lt;/p>
+&lt;p>&lt;a class="link" href="finishimport.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/finishimport.png"
+width="773"
+height="692"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/finishimport_hu_e31e2f42ea16787e.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/finishimport_hu_f343d300e55d0e7.png 1024w"
+loading="lazy"
+alt="finishimport Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="111"
+data-flex-basis="268px"
+>&lt;/a>&lt;/p>
+&lt;p>Next, we need to make a couple code edits…&lt;/p>
+&lt;p>In &lt;code>src/com.ibm.personafusion/Config.java&lt;/code>.&lt;/p>
+&lt;p>Line 10 currently reads like below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public static final String CLOUDANT_NAME = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It needs to be changed to what is below.  This is our Cloudant database name we created.  If you used something other than &amp;ldquo;talent-manager here&amp;rdquo; type that in.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public static final String CLOUDANT_NAME = &amp;#34;talent-manager&amp;#34;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Go ahead and save that file and close it.&lt;/p>
+&lt;p>Next open &lt;code>src/com.ibm.personafusion/CloudantClient.java&lt;/code>&lt;/p>
+&lt;p>We need to update our constructor from what is below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public CloudantClient()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.httpClient = null;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //TODO read env VCAP_SERVICES and parse it into JSON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.port = Config.CLOUDANT_PORT;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.host = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.name = Config.CLOUDANT_NAME;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.dbc = this.createDBConnector();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To this.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private JSONArray cloudant;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private JSONObject cloudantInstance;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private JSONObject cloudantCredentials;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public CloudantClient()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.httpClient = null;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> String VCAP_SERVICES = System.getenv(&amp;#34;VCAP_SERVICES&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> JSONObject vcap;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vcap = (JSONObject) JSONObject.parse(VCAP_SERVICES);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cloudant = (JSONArray) vcap.get(&amp;#34;cloudantNoSQLDB&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cloudantInstance = (JSONObject) cloudant.get(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cloudantCredentials = (JSONObject) cloudantInstance.get(&amp;#34;credentials&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> } catch (IOException e) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> e.printStackTrace();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.port = Config.CLOUDANT_PORT;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.host = (String) cloudantCredentials.get(&amp;#34;host&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = (String) cloudantCredentials.get(&amp;#34;username&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = (String) cloudantCredentials.get(&amp;#34;password&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.name = Config.CLOUDANT_NAME;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.dbc = this.createDBConnector();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you notice we also added 3 global variables as well.&lt;/p>
+&lt;p>Next we need to update the Watson code as well.  This is located in &lt;code>src/com.ibm.personafusion/services/WatonUserModeler.java&lt;/code>&lt;/p>
+&lt;p>Before:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">public WatsonUserModeller() {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> //TODO read env VCAP_SERVICES and parse it into JSON
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.base_url = &amp;#34;&amp;#34;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.profile_api = Config.WATSON_PROF_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.visual_api = Config.WATSON_VIZ_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.executor = Executor.newInstance().auth(username, password);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (this.executor == null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> System.err.println(&amp;#34;Authentication failed in WatsonUserModeller.&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">private static JSONArray watson;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private static JSONObject watsonInstance;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">private static JSONObject watsonCredentials;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> private Executor executor;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> public WatsonUserModeller()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> try {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> String VCAP_SERVICES = System.getenv(&amp;#34;VCAP_SERVICES&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> JSONObject vcap;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> vcap = (JSONObject) JSONObject.parse(VCAP_SERVICES);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> watson = (JSONArray) vcap.get(&amp;#34;user_modeling&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> watsonInstance = (JSONObject) watson.get(0);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> watsonCredentials = (JSONObject) watsonInstance.get(&amp;#34;credentials&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> } catch (IOException e) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> e.printStackTrace();
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.username = (String) watsonCredentials.get(&amp;#34;username&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.password = (String) watsonCredentials.get(&amp;#34;password&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.base_url = (String) watsonCredentials.get(&amp;#34;url&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.profile_api = Config.WATSON_PROF_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.visual_api = Config.WATSON_VIZ_API;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> this.executor = Executor.newInstance().auth(username, password);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (this.executor == null)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> System.err.println(&amp;#34;Authentication failed in WatsonUserModeller.&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Ok, so the app is basically done, we need to build our war file now, on the left side in Eclipse, open build.xml.  On the right hand side right click build [default] and then &amp;ldquo;Run As&amp;rdquo; and then &amp;ldquo;Ant Build&amp;rdquo;.  This will generate our WAR file for us that we will deploy.&lt;/p>
+&lt;p>&lt;a class="link" href="antbuild.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/antbuild.png"
+width="1024"
+height="528"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/antbuild_hu_1181f477b7845ab0.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/antbuild_hu_a070cceed3b51585.png 1024w"
+loading="lazy"
+alt="antbuild 1024x528 Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="465px"
+>&lt;/a>&lt;/p>
+&lt;p>In the bottom it should say &amp;ldquo;BUILD SUCESSFULL&amp;rdquo;.&lt;/p>
+&lt;p>&lt;a class="link" href="buildfinished.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/buildfinished.png"
+width="852"
+height="220"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/buildfinished_hu_d45c956c2583dfaf.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/buildfinished_hu_f69885e13d86a42c.png 1024w"
+loading="lazy"
+alt="buildfinished Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="387"
+data-flex-basis="929px"
+>&lt;/a>&lt;/p>
+&lt;p>The next and last step involves deploy your app to bluemix.  This step requires the Cloud Foundry CLI to be installed (if you haven’t done this yet scroll back up the pre-req’s section above).&lt;/p>
+&lt;p>If you are on Windows open up the command prompt, if you are on a Mac or Linux open up the terminal.&lt;/p>
+&lt;p>Type the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf login -a https://api.ng.bluemix.net
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It will then ask for your username and password that you registered with for Bluemix. There are two important files in this directory.&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>manifest.yml&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>webStarterApp.war&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;p>We need to edit the &lt;code>manifest.yml&lt;/code> file and then we can deploy the app.
+Open the file in your favorite text editor or you can use Eclipse as well. The contents of the file are below.
+There are two important lines in here, host and name. These values need to be unique and match the app we deployed earlier. In my case the app name is talent-manager-awesome, so my file would then become what is below.&lt;/p>
+&lt;p>This value comes from Bluemix, lets open the Bluemix dashboard in our web browser again.  In the screenshot below we can just copy the name of the app and paste this into the &lt;code>manifest.yml&lt;/code> file.  So don’t copy my apps name exactly as it won’t work, it needs to be your app’s unique name.&lt;/p>
+&lt;p>&lt;a class="link" href="appname.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/appname.png"
+width="783"
+height="171"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/appname_hu_4d4ac9460e6b1651.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/appname_hu_e09d7c71e3cad602.png 1024w"
+loading="lazy"
+alt="appname Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="457"
+data-flex-basis="1098px"
+>&lt;/a>&lt;/p>
+&lt;p>Now the final step we need to cd (change directory) in our command prompt or terminal to where the &lt;code>manifest.yml&lt;/code> and webStarterApp.war are located.  For me its located at &lt;code>/Users/jsloyer/Downloads/talent-manager-master/personafusion&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">&lt;span class="n">cd&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="n">Users&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">jsloyer&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">Downloads&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">talent&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">manager&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">master&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">personafusion&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">cf&lt;/span> &lt;span class="n">push&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The cf push command pushes our app to Bluemix, a bunch of text will fly bay saying its deploying and eventually it will say the app is starting and then it is up and running.  Bluemix will give you a URL you can access your app at.&lt;/p>
+&lt;p>&lt;a class="link" href="apprunning.png" >&lt;img src="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/apprunning.png"
+width="715"
+height="306"
+srcset="https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/apprunning_hu_94a562d9fde6383e.png 480w, https://www.jeffsloyer.io/post/building-a-java-ee-app-on-ibm-bluemix-using-watson-and-cloudant/apprunning_hu_a463b295b56f7a6.png 1024w"
+loading="lazy"
+alt="apprunning Building a Java EE app on IBM Bluemix Using Watson and Cloudant "
+class="gallery-image"
+data-flex-grow="233"
+data-flex-basis="560px"
+>&lt;/a>&lt;/p>
+&lt;p>Voila!!!!  We created a Java web app using Cloudant and Watson on IBM Bluemix!&lt;/p>
+&lt;p>Source Code:
+&lt;a class="link" href="https://ibm.biz/talent-manager" target="_blank" rel="noopener"
+>https://ibm.biz/talent-manager&lt;/a>&lt;/p>
+&lt;p>Feedback is welcome, please contact me on Twitter @jsloyer – &lt;a class="link" href="http://twitter.com/jsloyer" target="_blank" rel="noopener"
+>http://twitter.com/jsloyer&lt;/a>&lt;/p>
+&lt;p>For a video walkthrough of this demo please visit &lt;a class="link" href="http://ibm.biz/talent-manager-demo" target="_blank" rel="noopener"
+>http://ibm.biz/talent-manager-demo&lt;/a> or watch the video below!&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/9AFMY6m0LIU" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>This app was developed over the course of 48 hours at an internal hackathon. The developers and designers that worked on this are the following.&lt;/p>
+&lt;ul>
+&lt;li>Eva XIAOHUI LUO&lt;/li>
+&lt;li>MICHAEL J. YOUNG&lt;/li>
+&lt;li>SEAN J. WELLECK&lt;/li>
+&lt;li>BRIAN T. HAN&lt;/li>
+&lt;li>MICHAEL POPLAVSKI&lt;/li>
+&lt;li>ALAN XIA&lt;/li>
+&lt;li>Jeff Sloyer&lt;/li>
+&lt;/ul></description></item></channel></rss>

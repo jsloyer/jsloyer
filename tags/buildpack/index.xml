@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Buildpack on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/buildpack/</link><description>Recent content in Buildpack on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 26 Aug 2015 11:17:31 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/buildpack/index.xml" rel="self" type="application/rss+xml"/><item><title>Fixing common errors with the PHP Buildpack in Bluemix</title><link>https://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</link><pubDate>Wed, 26 Aug 2015 11:17:31 -0500</pubDate><guid>https://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/fixing-common-errors-with-the-php-buildpack-in-bluemix/fedup.jpg" alt="Featured image of post Fixing common errors with the PHP Buildpack in Bluemix" />&lt;p>Following up from my &lt;a class="link" href="https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/" >previous post&lt;/a>, Canonical recently dropped support for &lt;code>lucid64&lt;/code> which is Ubuntu 10.04 LTS. This affects Cloud Foundry as &lt;code>lucid64&lt;/code> is the basis for most buildpacks. In Cloud Foundry &lt;code>lucid64&lt;/code> is being phased out for Ubuntu 14.04 LTS which is known as &lt;code>cflinuxfs2&lt;/code> in Cloud Foundry.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Getting stacks in org jbsloyer@us.ibm.com / space dev as jbsloyer@us.ibm.com...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">OK
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">name description
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">lucid64 Ubuntu 10.04
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cflinuxfs2 Ubuntu 14.04.2 trusty
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The PHP buildpack will take the default system buildpack and right now in Bluemix it is &lt;code>lucid64&lt;/code>. This will throw some errors when you try to push your PHP app, for example something like below.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">It looks like you&amp;#39;re deploying on a stack (currently set to *lucid64*) that&amp;#39;s not supported by this buildpack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">That could be because you&amp;#39;re using a recent buildpack release on a deprecated stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you&amp;#39;re using the buildpack installed by your CF admin, please let your admin know you saw this error message.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you at one point specified a buildpack that&amp;#39;s at git URL, please make sure you&amp;#39;re pointed at a version that supports this stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Staging failed: Buildpack compilation step failed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FAILED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BuildpackCompileFailed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>To fix it you just need to use the &lt;code>-s cflinuxfs2&lt;/code> argument for the &lt;code>cf push&lt;/code> command.
+Ex.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push myapp -b https://github.com/cloudfoundry/php-buildpack.git -s cflinuxfs2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Check out this video for a walk through on how to fix the issue and an explanation of it.&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/anJ1JUE1tgE" frameborder="0" allowfullscreen>&lt;/iframe>
+&lt;p>I would love to hear your feedback and any suggestions you have, please reach out to me on Twitter [@jsloyer](&lt;a class="link" href="https://twitter.com/jsloyer" target="_blank" rel="noopener"
+>https://twitter.com/jsloyer&lt;/a> target=)&lt;/p></description></item><item><title>Common Deploy Errors with Community Buildpacks in Bluemix</title><link>https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</link><pubDate>Wed, 29 Jul 2015 10:58:25 -0500</pubDate><guid>https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/cloud-foundry-php-buildpack-doesnt-support-lucid64/fedup.jpg" alt="Featured image of post Common Deploy Errors with Community Buildpacks in Bluemix" />&lt;p>Recently the company that owns development for Ubuntu (Canonical) just announced it is dropping support for lucid 64 which is Ubuntu 10.04 LTS.  What does this mean for Cloud Foundry and the community buildpacks?&lt;/p>
+&lt;p>Well nothing really but there is a couple gotcha&amp;rsquo;s you should know about.&lt;/p>
+&lt;p>I have seen issues with the following buildpacks, this is not a comprehensive list but the ones I at least know about.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>PHP - https://github.com/cloudfoundry/php-buildpack.git&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Static Build Pack - https://github.com/cloudfoundry/staticfile-buildpack.git&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>These issues are documented in a couple StackOverflow posts but we are going to go through what is causing it and how to fix it.&lt;/p>
+&lt;!-- more -->
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://stackoverflow.com/questions/31057357/static-buildpack-deploy-now-failing-due-to-unsupported-stack/31058075#31058075" target="_blank" rel="noopener"
+>Static Buildpack&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a class="link" href="http://stackoverflow.com/questions/31057357/static-buildpack-deploy-now-failing-due-to-unsupported-stack/31062482#31062482" target="_blank" rel="noopener"
+>Static Buildpack&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>If you are pushing an app to Cloud Foundry and getting an error message like the following there is a workaround you need to do to get the community buildpack&amp;rsquo;s to work.&lt;/p>
+&lt;p>For example I have a super simple PHP app on Github I use for debugging, it is located here. For this blog post we are going to use that app.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/jsloyer/phpinfo.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cd phpinfo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cf push phpinfo-jbs2 -b https://github.com/cloudfoundry/php-buildpack.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.....
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">It looks like you&amp;#39;re deploying on a stack (currently set to *lucid64*) that&amp;#39;s not supported by this buildpack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">That could be because you&amp;#39;re using a recent buildpack release on a deprecated stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you&amp;#39;re using the buildpack installed by your CF admin, please let your admin know you saw this error message.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">If you at one point specified a buildpack that&amp;#39;s at git URL, please make sure you&amp;#39;re pointed at a version that supports this stack.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Staging failed: Buildpack compilation step failed
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FAILED
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">BuildpackCompileFailed
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>What this is saying is the instance of Cloud Foundry that you are running on the default stack you get is an old version of Ubuntu. The PHP buildpack excepts the newer version of linux. This stack is called &lt;code>cflinuxfs2&lt;/code> also known as &lt;code>Ubuntu 14.04&lt;/code>.&lt;/p>
+&lt;p>To work around this you just need to specify the stack you want to use.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cf push phpinfo-jbs2 -b https://github.com/cloudfoundry/php-buildpack.git -s cflinuxfs2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>More information can be found on this issue on &lt;a class="link" href="https://github.com/cloudfoundry/php-buildpack/issues/87" target="_blank" rel="noopener"
+>Github&lt;/a>.&lt;/p></description></item></channel></rss>

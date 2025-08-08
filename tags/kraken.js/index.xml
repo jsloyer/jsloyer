@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kraken.js on Jeff Sloyer</title><link>https://www.jeffsloyer.io/tags/kraken.js/</link><description>Recent content in Kraken.js on Jeff Sloyer</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 17 Apr 2014 13:24:00 -0500</lastBuildDate><atom:link href="https://www.jeffsloyer.io/tags/kraken.js/index.xml" rel="self" type="application/rss+xml"/><item><title>Kraken.Js and Bluemix</title><link>https://www.jeffsloyer.io/post/kraken-js-and-bluemix/</link><pubDate>Thu, 17 Apr 2014 13:24:00 -0500</pubDate><guid>https://www.jeffsloyer.io/post/kraken-js-and-bluemix/</guid><description>&lt;img src="https://www.jeffsloyer.io/post/kraken-js-and-bluemix/kraken.jpg" alt="Featured image of post Kraken.Js and Bluemix" />&lt;p>Kraken.JS is a new wonderful framework wrapper around Express for Node.JS.  It includes things such as pre-canned security settings, templating, and internationalization.  While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore.&lt;/p>
+&lt;p>While Express in Node allows you to customize these type of things its not the most fun thing or exciting thing to do.  While security is very important in your app why should you have to write redundant code for this.  The answer is you do not have to anymore. With Kraken.JS it will drastically cut the number of lines down in your Node app.  I currently have an app right now where I am estimating if I converted it to Kraken.JS it would cut my code base by 33%. So let’s jump into Kraken.JS, the instructions below were based on &lt;a class="link" href="http://krakenjs.com/#gettingstarted%22" target="_blank" rel="noopener"
+>Kraken’s documentation&lt;/a>.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Step 1, install Kraken if you do not already have it installed.&lt;/p>
+&lt;pre>&lt;code> sudo npm install -g generator-kraken
+&lt;/code>&lt;/pre>
+&lt;p>Note: If &amp;ldquo;yo&amp;rdquo; yeoman is not installed, the above command will install it.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a basic project (follow the prompts on the screen)&lt;/p>
+&lt;pre>&lt;code> yo kraken
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;li>
+&lt;p>Start your app&lt;/p>
+&lt;pre>&lt;code> npm start
+&lt;/code>&lt;/pre>
+&lt;/li>
+&lt;/ol>
+&lt;p>If you notice the app started on &lt;code>8000&lt;/code>, with Bluemix and other PaaS’ you need to start your app on the port that the PaaS assigns you.  To do this we need to modify the example app slightly. If you open up &lt;code>index.js&lt;/code> down near the bottom you will see the following code snippet. …&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if (require.main === module) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> kraken.create(app).listen(function (err) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (err) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.error(err.stack);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The above code will automatically bind to port &lt;code>8000&lt;/code>, we need to allow it to bind to a port that Bluemix wants.  Modify the code snippet to the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">if (require.main === module) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> kraken.create(app).listen(process.env.VCAP_APP_PORT || 8000, function (err) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if (err) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.error(err.stack);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The whole source of this app is on &lt;a class="link" href="https://github.com/IBM-Bluemix/kraken-example" target="_blank" rel="noopener"
+>Github here&lt;/a>. If you want to pull the code do the following.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">git clone https://github.com/IBM-Bluemix/kraken-example.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
