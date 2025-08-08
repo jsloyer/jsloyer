@@ -28,6 +28,7 @@ Feel free to reach out and say hi, especially if it’s about Kube or flying!
 
 - Twitter: [jsloyer](http://twitter.com/jsloyer)
 - Github: [jsloyer](http://github.com/jsloyer)
+- [Medium](https://jsloyer.medium.com/)
 - StackOverflow: [jeff-sloyer](http://stackoverflow.com/users/3817025/jeff-sloyer)
 - Youtube: [JeffSloyer](http://youtube.com/c/JeffSloyer)
 - DZone: [DZone](https://dzone.com/users/jsloyer)
